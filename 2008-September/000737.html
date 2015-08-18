@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Bugreport: Crash on startup if no space is left on	device
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Bugreport%3A%20Crash%20on%20startup%20if%20no%20space%20is%20left%20on%0A%09device&In-Reply-To=%3Cop.uht91wm9odthq1%40desktop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000733.html">
+   <LINK REL="Next"  HREF="000765.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Bugreport: Crash on startup if no space is left on	device</H1>
+    <B>Andreas Burger</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Bugreport%3A%20Crash%20on%20startup%20if%20no%20space%20is%20left%20on%0A%09device&In-Reply-To=%3Cop.uht91wm9odthq1%40desktop%3E"
+       TITLE="[Sonata-users] Bugreport: Crash on startup if no space is left on	device">a.burger at bin-ich-jesus.de
+       </A><BR>
+    <I>Sun Sep 21 18:14:10 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000733.html">[Sonata-users] The future of Sonata
+</A></li>
+        <LI>Next message: <A HREF="000765.html">[Sonata-users] DND to File Managers (WAS: The future of Sonata)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#737">[ date ]</a>
+              <a href="thread.html#737">[ thread ]</a>
+              <a href="subject.html#737">[ subject ]</a>
+              <a href="author.html#737">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+i'm Using Ubuntu 8.04 Hardy Heron.
+
+I've just installed Sonata from the repositories and wanted to start it  
+for the first time, which didn't work. The problem was my /home beeing  
+100% full.
+
+That's the traceback:
+[<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">andreas at desktop</A>]  
+sonata                                                    [~]
+ZSI not found, fetching lyrics support disabled.
+ZSI not found, fetching lyrics support disabled.
+Traceback (most recent call last):
+   File &quot;/usr/bin/sonata&quot;, line 47, in &lt;module&gt;
+     app = sonata.Base()
+   File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 392, in __init__
+     self.settings_load()
+   File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 1827, in  
+settings_load
+     os.mkdir(os.path.expanduser('~/.config/sonata/'))
+OSError: [Errno 28] No space left on device:  
+'/home/andreas/.config/sonata/'
+
+Even that's not the case for most users, it would help to get some kind of  
+message, if you start sonata from GUI.
+
+Andreas
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000733.html">[Sonata-users] The future of Sonata
+</A></li>
+	<LI>Next message: <A HREF="000765.html">[Sonata-users] DND to File Managers (WAS: The future of Sonata)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#737">[ date ]</a>
+              <a href="thread.html#737">[ thread ]</a>
+              <a href="subject.html#737">[ subject ]</a>
+              <a href="author.html#737">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

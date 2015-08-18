@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] &quot;Play after add&quot; feature
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%22Play%20after%20add%22%20feature&In-Reply-To=%3C4db9cacb0809011209s497eb54reda6d5fe2d2748e8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000690.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] &quot;Play after add&quot; feature</H1>
+    <B>Matthew Wild</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%22Play%20after%20add%22%20feature&In-Reply-To=%3C4db9cacb0809011209s497eb54reda6d5fe2d2748e8%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] &quot;Play after add&quot; feature">mwild1 at gmail.com
+       </A><BR>
+    <I>Mon Sep  1 21:09:19 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000690.html">[Sonata-users] Queue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#689">[ date ]</a>
+              <a href="thread.html#689">[ thread ]</a>
+              <a href="subject.html#689">[ subject ]</a>
+              <a href="author.html#689">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Firstly, thanks for such a beautiful music player :)
+
+As someone who, by habit, doesn't use playlists, but manually adds chosen
+songs now and again, I have a feature request.
+
+I was until this week using Sonata 1.4 from Ubuntu 8.04. It allowed the
+ability to choose whether or not to automatically play a song after
+double-clicking and adding it from the library. I like this behaviour, but
+obviously it is not desirable all of the time. Since updating to Sonata 1.5
+I see that this option has been replaced with the &quot;Play after&quot; sub-menu to
+fix this.
+
+In my opinion it would be in keeping with Sonata's simplicity to remove this
+&quot;Play-after&quot; submenu, and change the behaviour back to auto-play the song
+just added, *but* only if there is no song currently playing. Other music
+players work like this also.
+
+This is the way I have patched my Sonata, and I'm extremely happy with it. I
+thought I would raise the idea here, to see what people think of the
+suggestion.
+
+Matthew.
+
+PS. To get this behaviour simply change &quot;if play_after:&quot; in def on_add_item
+in sonata/main.py to: if play_after and self.status['state'] in ['pause',
+'stop']:
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20080901/e24d6d4e/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20080901/e24d6d4e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000690.html">[Sonata-users] Queue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#689">[ date ]</a>
+              <a href="thread.html#689">[ thread ]</a>
+              <a href="subject.html#689">[ subject ]</a>
+              <a href="author.html#689">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

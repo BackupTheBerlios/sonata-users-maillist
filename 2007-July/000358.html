@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%0A%09while%20to%20respond&In-Reply-To=%3C35a6f8e30707162207v16e5db10od06e9333c1829671%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000356.html">
+   <LINK REL="Next"  HREF="000355.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata loses status updates when mpd takes a	while to respond</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%0A%09while%20to%20respond&In-Reply-To=%3C35a6f8e30707162207v16e5db10od06e9333c1829671%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata loses status updates when mpd takes a	while to respond">stonecrest at gmail.com
+       </A><BR>
+    <I>Tue Jul 17 07:07:14 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000356.html">[Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+</A></li>
+        <LI>Next message: <A HREF="000355.html">[Sonata-users] Sonata 1.2 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#358">[ date ]</a>
+              <a href="thread.html#358">[ thread ]</a>
+              <a href="subject.html#358">[ subject ]</a>
+              <a href="author.html#358">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 7/16/07, Dan McGee &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">dpmcgee at gmail.com</A>&gt; wrote:
+&gt;<i> Scott- finally got some output for you. Running Sonata v1.2. Added
+</I>&gt;<i> some comments in there:
+</I>&gt;<i>
+</I>&gt;<i> &lt;snip&gt;
+</I>
+I was wary of putting this into the 1.2.1 bugfix release since it
+seems like an infrequent problem and I know you would be fine with
+running from svn ;-) But looking at it closer, I think the only
+problem is that the socket timeout causes a traceback, and thus Sonata
+doesn't realize that there is not a valid MPD connection anymore. And
+that propagates into Sonata tracebacks because it's in a weird state
+where it thinks there is a MPD connection but there isn't any
+information available (like self.songinfo, in this case).
+
+So, long story short, see if the (small) latest commit fixes this. And
+the correct behavior that we're looking for is that you shouldn't have
+to even press Alt-C to connect manually, it should automatically
+reconnect when MPD is responding again (as is the case for most
+scenarios currently).
+
+Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000356.html">[Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+</A></li>
+	<LI>Next message: <A HREF="000355.html">[Sonata-users] Sonata 1.2 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#358">[ date ]</a>
+              <a href="thread.html#358">[ thread ]</a>
+              <a href="subject.html#358">[ subject ]</a>
+              <a href="author.html#358">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

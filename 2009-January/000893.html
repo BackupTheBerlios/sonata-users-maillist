@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] external tag editor
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20external%20tag%20editor&In-Reply-To=%3C35a6f8e30901012129p51d29492pc773777fa390c0ad%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000892.html">
+   <LINK REL="Next"  HREF="000894.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] external tag editor</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20external%20tag%20editor&In-Reply-To=%3C35a6f8e30901012129p51d29492pc773777fa390c0ad%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] external tag editor">stonecrest at gmail.com
+       </A><BR>
+    <I>Fri Jan  2 06:29:43 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000892.html">[Sonata-users] external tag editor
+</A></li>
+        <LI>Next message: <A HREF="000894.html">[Sonata-users] Unexpected crashes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#893">[ date ]</a>
+              <a href="thread.html#893">[ thread ]</a>
+              <a href="subject.html#893">[ subject ]</a>
+              <a href="author.html#893">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jan 1, 2009 at 9:55 PM, Jack Tanner &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">ihok at hotmail.com</A>&gt; wrote:
+
+&gt;<i>
+</I>&gt;<i> It'd be great if &quot;edit tags&quot; could call an external tag editor, e.g.,
+</I>&gt;<i> easytag or quodlibet. I find their interfaces to be more powerful than
+</I>&gt;<i> Sonata's built-in editor. It'd be fine with me if this was not a GUI-exposed
+</I>&gt;<i> option, but one that had to be set in some config file.
+</I>
+
+I have no interest in this. Maybe a good candidate for a plugin when the
+system is in place.
+
+Also, if the music directory is not set in the prefs, &quot;edit tags&quot; fails with
+&gt;<i> the traceback below in Sonata 1.5.1 (sorry if that's too old).
+</I>
+
+Indeed this is already fixed in newer releases.
+
+
+&gt;<i> second, can't Sonata get the music directory from mpd's config?
+</I>
+
+Of course not. A mpd client should never read directly from the mpd config -
+the config is for mpd itself and mpd may not even be running on the same
+machine as Sonata is running. I've always thought mpd should expose the
+music_directory to clients, but previous mpd developers didn't like that. So
+mpd clients have to ask for the music_directory, and every client behaves
+like this. Complain to the mpd devs and maybe they'll change their mind
+(there is a new mpd dev as of the last ~month too).
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090101/fa90080a/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090101/fa90080a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000892.html">[Sonata-users] external tag editor
+</A></li>
+	<LI>Next message: <A HREF="000894.html">[Sonata-users] Unexpected crashes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#893">[ date ]</a>
+              <a href="thread.html#893">[ thread ]</a>
+              <a href="subject.html#893">[ subject ]</a>
+              <a href="author.html#893">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

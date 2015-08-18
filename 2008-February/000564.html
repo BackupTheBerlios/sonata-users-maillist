@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Lyrics with ampersands doesn't work
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Lyrics%20with%20ampersands%20doesn%27t%20work&In-Reply-To=%3C802aab940802260957y691bb87epeb613477259af13c%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000561.html">
+   <LINK REL="Next"  HREF="000565.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Lyrics with ampersands doesn't work</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Lyrics%20with%20ampersands%20doesn%27t%20work&In-Reply-To=%3C802aab940802260957y691bb87epeb613477259af13c%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Lyrics with ampersands doesn't work">niechift.vex at gmail.com
+       </A><BR>
+    <I>Tue Feb 26 18:57:12 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000561.html">[Sonata-users] Fix for albums covers
+</A></li>
+        <LI>Next message: <A HREF="000565.html">[Sonata-users] Lyrics with ampersands doesn't work
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#564">[ date ]</a>
+              <a href="thread.html#564">[ thread ]</a>
+              <a href="subject.html#564">[ subject ]</a>
+              <a href="author.html#564">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Using the latest SVN (r765) I've been getting the following errors in
+the console every now and then when I have lyrics enabled:
+
+sonata/main.py:3049: GtkWarning: Failed to set text from markup due to
+error parsing markup: Error on line 2: Character ' ' is not valid at
+the start of an entity name; the &amp; character begins an entity; if this
+ampersand isn't supposed to be an entity, escape it as &amp;
+  self.lyricsText.set_markup(lyrics)
+
+The song playing is &quot;Evergrey - Blinded&quot; (lyrics at [1]) and sure
+enough there is an ampersand there.  The code says not to use markup
+if it fails using try-except, but GtkWarning seems be just that, a
+warning and not a catchable error.
+
+Doing some research I found a method to escape the problematic
+characters (&amp;, &lt;, &gt;) at [2] (just below the figure). The solution is
+easy, import the cgi module and use the cgi.escape() function. Either
+insert a line &quot;lyrics = cgi.escape(lyrics)&quot; before line 3049 or modify
+the line as such: &quot;self.lyricsText.set_markup(cgi.escape(lyrics))&quot;.
+
+Or if you don't want to import the cgi module, writing a small
+function for replacing the problematic characters should be trivial.
+
+It seems to work fine using cgi.escape() here and nothing seems to be
+broken but more testing doesn't hurt.
+
+
+[1] - <A HREF="http://lyricwiki.org/Evergrey:Blinded">http://lyricwiki.org/Evergrey:Blinded</A>
+[2] - <A HREF="http://www.pygtk.org/pygtk2tutorial/sec-CellRenderers.html#celltextmarkupfig">http://www.pygtk.org/pygtk2tutorial/sec-CellRenderers.html#celltextmarkupfig</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000561.html">[Sonata-users] Fix for albums covers
+</A></li>
+	<LI>Next message: <A HREF="000565.html">[Sonata-users] Lyrics with ampersands doesn't work
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#564">[ date ]</a>
+              <a href="thread.html#564">[ thread ]</a>
+              <a href="subject.html#564">[ subject ]</a>
+              <a href="author.html#564">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

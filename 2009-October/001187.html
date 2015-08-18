@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix crashes when files cannot be opened for	reading/writing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20crashes%20when%20files%20cannot%20be%20opened%20for%0A%09reading/writing&In-Reply-To=%3C1256184949-6815-1-git-send-email-bebarino%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001186.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix crashes when files cannot be opened for	reading/writing</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20crashes%20when%20files%20cannot%20be%20opened%20for%0A%09reading/writing&In-Reply-To=%3C1256184949-6815-1-git-send-email-bebarino%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix crashes when files cannot be opened for	reading/writing">bebarino at gmail.com
+       </A><BR>
+    <I>Thu Oct 22 06:15:49 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001186.html">[Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1187">[ date ]</a>
+              <a href="thread.html#1187">[ thread ]</a>
+              <a href="subject.html#1187">[ subject ]</a>
+              <a href="author.html#1187">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Previously, we wouldn't catch IOError's and OSError's when a file
+couldn't be opened for reading or writing. Fix this by surrounding those
+locations in try-except clauses and use the 'with' syntax to properly
+close files when errors occur.
+
+This resolves issues for users with a read-only home or otherwise
+read-only directories. Sadly, the artwork code downloads images directly
+to disk, and if the file cannot be opened there is no artwork shown.
+Fixing this is a larger issue we can resolve later.
+
+Fixes: #16355
+---
+ sonata/artwork.py |   31 ++++++++++++++++++++-----------
+ sonata/config.py  |    7 ++++++-
+ sonata/info.py    |   26 +++++++++++++++++---------
+ sonata/misc.py    |    5 ++++-
+ 4 files changed, 47 insertions(+), 22 deletions(-)
+
+diff --git a/sonata/artwork.py b/sonata/artwork.py
+index 6441fa8..a6fb2a1 100644
+--- a/sonata/artwork.py
++++ b/sonata/artwork.py
+@@ -1,3 +1,4 @@
++from __future__ import with_statement
+ import os
+ import threading # artwork_update starts a thread _artwork_update
+ import urllib, urllib2
+@@ -107,8 +108,11 @@ def on_reset_image(self, _action):
+                 misc.remove_file(self.target_image_filename(consts.ART_LOCATION_HOMECOVERS))
+                 # Use blank cover as the artwork
+                 dest_filename = self.target_image_filename(consts.ART_LOCATION_HOMECOVERS)
+-                emptyfile = open(dest_filename, 'w')
+-                emptyfile.close()
++                try:
++                    emptyfile = open(dest_filename, 'w')
++                    emptyfile.close()
++                except IOError:
++                    pass
+             self.artwork_update(True)
+ 
+     def artwork_set_tooltip_art(self, pix):
+@@ -281,19 +285,19 @@ def get_library_artwork_cached_pb(self, cache_key, origpb):
+     def artwork_save_cache(self):
+         misc.create_dir('~/.config/sonata/')
+         filename = os.path.expanduser(&quot;~/.config/sonata/art_cache&quot;)
+-        f = open(filename, 'w')
+-        f.write(repr(self.cache))
+-        f.close()
++        try:
++            with open(filename, 'w') as f:
++                f.write(repr(self.cache))
++        except IOError:
++            pass
+ 
+     def artwork_load_cache(self):
+         filename = os.path.expanduser(&quot;~/.config/sonata/art_cache&quot;)
+         if os.path.exists(filename):
+             try:
+-                f = open(filename, 'r')
+-                r = f.read()
+-                self.cache = eval(r)
+-                f.close()
+-            except:
++                with open(filename, 'r') as f:
++                        self.cache = eval(f.read())
++            except (IOError, SyntaxError):
+                 self.cache = {}
+         else:
+             self.cache = {}
+@@ -558,7 +562,12 @@ def artwork_download_img_to_file(self, artist, album, dest_filename, all_images=
+             return False
+ 
+         if not all_images:
+-            urllib.urlretrieve(imglist[-1], dest_filename)
++            try:
++                urllib.urlretrieve(imglist[-1], dest_filename)
++            except IOError:
++                self.downloading_image = False
++                return False
++
+             self.downloading_image = False
+             return True
+         else:
+diff --git a/sonata/config.py b/sonata/config.py
+index 519dc15..8423d74 100644
+--- a/sonata/config.py
++++ b/sonata/config.py
+@@ -8,6 +8,7 @@
+ # XXX We shouldn't have the default values contain localised parts:
+ self.config = config.Config(_('Default Profile'), _(&quot;by&quot;) + &quot; %A &quot; + _(&quot;from&quot;) + &quot; %B&quot;)
+ &quot;&quot;&quot;
++from __future__ import with_statement
+ 
+ import os, hashlib
+ import ConfigParser
+@@ -471,4 +472,8 @@ def settings_save_real(self, library_get_data):
+         conf.add_section('tags')
+         conf.set('tags', 'use_mpdpaths', self.tags_use_mpdpath)
+ 
+-        conf.write(file(os.path.expanduser('~/.config/sonata/sonatarc'), 'w'))
++        try:
++            with open(os.path.expanduser('~/.config/sonata/sonatarc'), 'w') as rc:
++                conf.write(rc)
++        except IOError:
++            pass
+diff --git a/sonata/info.py b/sonata/info.py
+index 8eb77c9..067be9f 100644
+--- a/sonata/info.py
++++ b/sonata/info.py
+@@ -1,3 +1,4 @@
++from __future__ import with_statement
+ 
+ import sys, os, locale, urllib
+ import threading # get_lyrics_start starts a thread get_lyrics_thread
+@@ -358,22 +359,27 @@ def get_lyrics_thread(self, search_artist, search_title, filename_artist, filena
+         filename = self.info_check_for_local_lyrics(filename_artist, filename_title, song_dir)
+         search_str = misc.link_markup(_(&quot;search&quot;), True, True, self.linkcolor)
+         edit_str = misc.link_markup(_(&quot;edit&quot;), True, True, self.linkcolor)
++        lyrics = &quot;&quot;
+         if filename:
+             # If the lyrics only contain &quot;not found&quot;, delete the file and try to
+             # fetch new lyrics. If there is a bug in Sonata/SZI/LyricWiki that
+             # prevents lyrics from being found, storing the &quot;not found&quot; will
+             # prevent a future release from correctly fetching the lyrics.
+-            f = open(filename, 'r')
+-            lyrics = f.read()
+-            f.close()
++            try:
++                with open(filename, 'r') as f:
++                    lyrics = f.read()
++            except IOError:
++                pass
+             if lyrics == _(&quot;Lyrics not found&quot;):
+                 misc.remove_file(filename)
+                 filename = self.info_check_for_local_lyrics(filename_artist, filename_title, song_dir)
+         if filename:
+             # Re-use lyrics from file:
+-            f = open(filename, 'r')
+-            lyrics = f.read()
+-            f.close()
++            try:
++                with open(filename, 'r') as f:
++                    lyrics = f.read()
++            except IOError:
++                pass
+             # Strip artist - title line from file if it exists, since we
+             # now have that information visible elsewhere.
+             header = filename_artist + &quot; - &quot; + filename_title + &quot;\n\n&quot;
+@@ -403,9 +409,11 @@ def get_lyrics_thread(self, search_artist, search_title, filename_artist, filena
+                     lyrics = misc.unescape_html(lyrics)
+                     lyrics = misc.wiki_to_html(lyrics)
+                     misc.create_dir('~/.lyrics/')
+-                    f = open(filename, 'w')
+-                    f.write(lyrics)
+-                    f.close()
++                    try:
++                        with open(filename, 'w') as f:
++                            f.write(lyrics)
++                    except IOError:
++                        pass
+                 else:
+                     lyrics = _(&quot;Lyrics not found&quot;)
+                 gobject.idle_add(self.info_show_lyrics, lyrics, filename_artist, filename_title)
+diff --git a/sonata/misc.py b/sonata/misc.py
+index d8adfdb..5bb9464 100644
+--- a/sonata/misc.py
++++ b/sonata/misc.py
+@@ -107,7 +107,10 @@ def lower_no_the(s):
+ 
+ def create_dir(dirname):
+     if not os.path.exists(os.path.expanduser(dirname)):
+-        os.makedirs(os.path.expanduser(dirname))
++        try:
++            os.makedirs(os.path.expanduser(dirname))
++        except (IOError, OSError):
++            pass
+ 
+ def remove_file(filename):
+     if os.path.exists(filename):
+-- 
+1.6.5.1.126.gae4ab
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001186.html">[Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1187">[ date ]</a>
+              <a href="thread.html#1187">[ thread ]</a>
+              <a href="subject.html#1187">[ subject ]</a>
+              <a href="author.html#1187">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

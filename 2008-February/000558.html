@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Feature Request: Stylised album art (mockup)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Feature%20Request%3A%20Stylised%20album%20art%20%28mockup%29&In-Reply-To=%3C89f4d9ca0802170346v4fc354dv983d1f7e1776a7c5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000555.html">
+   <LINK REL="Next"  HREF="000563.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Feature Request: Stylised album art (mockup)</H1>
+    <B>Emmanuel Viaud</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Feature%20Request%3A%20Stylised%20album%20art%20%28mockup%29&In-Reply-To=%3C89f4d9ca0802170346v4fc354dv983d1f7e1776a7c5%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Feature Request: Stylised album art (mockup)">emmanuel.viaud at gmail.com
+       </A><BR>
+    <I>Sun Feb 17 12:46:45 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000555.html">[Sonata-users] Feature Request: Stylised album art (mockup)
+</A></li>
+        <LI>Next message: <A HREF="000563.html">[Sonata-users] Feature Request: Stylised album art (mockup)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#558">[ date ]</a>
+              <a href="thread.html#558">[ thread ]</a>
+              <a href="subject.html#558">[ subject ]</a>
+              <a href="author.html#558">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2/17/08, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> On Feb 16, 2008 10:00 PM, aidan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">aidanreynolds1 at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; I just wrote a small script to go through my music collection and make
+</I>&gt;<i> &gt; the album art a bit better looking and thought it would be a nice
+</I>&gt;<i> &gt; feature for Sonata to have (without modifying the originals). See
+</I>&gt;<i> &gt; StylisedAlbumArt.png attached to see what I'm after. Anyone think they
+</I>&gt;<i> &gt; could do this?
+</I>&gt;<i>
+</I>&gt;<i> I think this is awesome. It was pretty simple to implement too, so
+</I>&gt;<i> it's now in svn. The image compositing is done on the fly so the
+</I>&gt;<i> artwork is not modified.
+</I>
+Hi.
+
+The idea is pretty good indeed but I have a problem with the current
+implementation... As the compositing of the case image is done on the
+whole original cover image, the opaque part of the case image always
+hides the left part of the original cover. While it may not be a
+problem for some images, it gives quite an horrible result if there is
+something to see on the left side (cf.
+<A HREF="http://pix.nofrag.com/b/d/a/b15fb3e9f4a6fc1c890aa2257ba00.html">http://pix.nofrag.com/b/d/a/b15fb3e9f4a6fc1c890aa2257ba00.html</A> for an
+exemple).
+
+Wouldn't it be possible to resize the sonata-case.png image so that it
+mimics the shape of a real CD case (the case is a rectangle, not a
+square and only the transparent part is a square) ? Obviously, this
+means the code may become more complex so it may not be feasible...
+
+Emmanuel
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000555.html">[Sonata-users] Feature Request: Stylised album art (mockup)
+</A></li>
+	<LI>Next message: <A HREF="000563.html">[Sonata-users] Feature Request: Stylised album art (mockup)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#558">[ date ]</a>
+              <a href="thread.html#558">[ thread ]</a>
+              <a href="subject.html#558">[ subject ]</a>
+              <a href="author.html#558">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Album info display with multiple CD albums
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Album%20info%20display%20with%20multiple%20CD%20albums&In-Reply-To=%3C89f4d9ca0708120124o5ade6592v38ecf5341460bc97%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000378.html">
+   <LINK REL="Next"  HREF="000380.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Album info display with multiple CD albums</H1>
+    <B>Emmanuel Viaud</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Album%20info%20display%20with%20multiple%20CD%20albums&In-Reply-To=%3C89f4d9ca0708120124o5ade6592v38ecf5341460bc97%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Album info display with multiple CD albums">emmanuel.viaud at gmail.com
+       </A><BR>
+    <I>Sun Aug 12 10:24:21 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000378.html">[Sonata-users] Album info display with multiple CD albums
+</A></li>
+        <LI>Next message: <A HREF="000380.html">[Sonata-users] Album info display with multiple CD albums
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#379">[ date ]</a>
+              <a href="thread.html#379">[ thread ]</a>
+              <a href="subject.html#379">[ subject ]</a>
+              <a href="author.html#379">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+&gt;<i> By the way, can you do me a favor? There was an additional place where
+</I>&gt;<i> Sonata does track sorting, so I added the disc sorting to that piece
+</I>&gt;<i> of code as well. Can you switch to artist or album view for your
+</I>&gt;<i> library and verify that your albums with disc tags are also sorted
+</I>&gt;<i> correctly there?
+</I>
+It appears ok to me.
+
+By the way, I did a bit of research on that &quot;disc&quot; tag to see if it
+was really a part of some standards. And yes, it is, at least for
+id3v2 (called TPA or TPOS) and a de-facto standard for ogg. But, the
+id3v2 standard says (I haven't found anything describing a &quot;standard&quot;
+way to fill the DISCNUMBER field for ogg files):
+
+The 'Part of a set' frame is a numeric string that describes which
+part of a set the audio came from. This frame is used if the source
+described in the &quot;TALB&quot; frame is divided into several mediums, e.g. a
+double CD. The value may be extended with a &quot;/&quot; character and a
+numeric string containing the total number of parts in the set. E.g.
+&quot;1/2&quot;.
+
+
+So, it seems that my stupid test in sanitize_discnum is not enough and
+it should really be the same python code as the sanitize_tracknum
+method (well, minus the X,Y case but adding it should do no harm).
+
+Sorry for the inconvenience of not having done the research before
+sending the patch...
+
+Emmanuel
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000378.html">[Sonata-users] Album info display with multiple CD albums
+</A></li>
+	<LI>Next message: <A HREF="000380.html">[Sonata-users] Album info display with multiple CD albums
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#379">[ date ]</a>
+              <a href="thread.html#379">[ thread ]</a>
+              <a href="subject.html#379">[ subject ]</a>
+              <a href="author.html#379">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

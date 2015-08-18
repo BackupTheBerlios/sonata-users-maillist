@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Bug #15478
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Bug%20%2315478&In-Reply-To=%3Ccd74309b0904040657n127f3691p4927455605a36995%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001010.html">
+   <LINK REL="Next"  HREF="001003.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Bug #15478</H1>
+    <B>Fomin Denis</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Bug%20%2315478&In-Reply-To=%3Ccd74309b0904040657n127f3691p4927455605a36995%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Bug #15478">fominde at gmail.com
+       </A><BR>
+    <I>Sat Apr  4 15:57:22 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001010.html">[Sonata-users] Sonata didnt start under Ubuntu Jaunty
+</A></li>
+        <LI>Next message: <A HREF="001003.html">[Sonata-users] Bug #15478
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#998">[ date ]</a>
+              <a href="thread.html#998">[ thread ]</a>
+              <a href="subject.html#998">[ subject ]</a>
+              <a href="author.html#998">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>gtk.Entry don't work in russian keyboard layout. I can't edit
+tags,save playlist.searching don't work.
+gtk.Entry.get_text() returns nothing if I switch input language to the Russian.
+
+this patch fix the pb:
+
+Index: sonata/misc.py
+===================================================================
+--- sonata/misc.py (revision 1152)
++++ sonata/misc.py (working copy)
+@@ -220,7 +220,7 @@
+locale.setlocale(locale.LC_ALL, &quot;&quot;)
+# XXX this makes python-mpd correctly return lowercase
+# keys for, e.g., playlistinfo() with a turkish locale:
+- locale.setlocale(locale.LC_CTYPE, &quot;C&quot;)
++ #locale.setlocale(locale.LC_CTYPE, &quot;C&quot;)
+except:
+print &quot;Failed to set locale&quot;
+sys.exit(1)
+
+Somebody has such problem?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001010.html">[Sonata-users] Sonata didnt start under Ubuntu Jaunty
+</A></li>
+	<LI>Next message: <A HREF="001003.html">[Sonata-users] Bug #15478
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#998">[ date ]</a>
+              <a href="thread.html#998">[ thread ]</a>
+              <a href="subject.html#998">[ subject ]</a>
+              <a href="author.html#998">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

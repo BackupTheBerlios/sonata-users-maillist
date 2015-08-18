@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Fetching lyrics fail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C48155CA6.9080906%40no-log.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000632.html">
+   <LINK REL="Next"  HREF="000634.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Fetching lyrics fail</H1>
+    <B>Revan</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C48155CA6.9080906%40no-log.org%3E"
+       TITLE="[Sonata-users] Fetching lyrics fail">revan at no-log.org
+       </A><BR>
+    <I>Mon Apr 28 07:12:06 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000632.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+        <LI>Next message: <A HREF="000634.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#633">[ date ]</a>
+              <a href="thread.html#633">[ thread ]</a>
+              <a href="subject.html#633">[ subject ]</a>
+              <a href="author.html#633">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Scott Horowitz a &#233;crit :
+&gt;<i> On Sun, Apr 27, 2008 at 10:09 AM, Revan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">revan at no-log.org</A>&gt; wrote:
+</I>&gt;<i>   
+</I>&gt;&gt;<i>  The script seems to work ;)
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Well that's a good sign. Since you said you're using svn, can you
+</I>&gt;<i> replace your sonata/main.py with this one?
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://sonata.berlios.de/test/main.py">http://sonata.berlios.de/test/main.py</A>
+</I>&gt;<i>
+</I>&gt;<i> Then run sonata from a terminal and paste all output here when the
+</I>&gt;<i> lyric fetching fails. (There will be some output about 'getSong' not
+</I>&gt;<i> existing that can be safely ignored, that isn't the culprit.)
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>Well,
+------------------
+Exception in thread Thread-6:
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/threading.py&quot;, line 486, in __bootstrap_inner
+    self.run()
+  File &quot;/usr/lib/python2.5/threading.py&quot;, line 446, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File &quot;/usr/lib/python2.5/site-packages/sonata/main.py&quot;, line 3046, in
+info_get_lyrics
+    lyrics =
+self.lyricServer.getSong(artist=urllib.quote(search_artist),
+song=urllib.quote(search_title))['return'][&quot;lyrics&quot;]
+AttributeError: 'bool' object has no attribute 'getSong'
+
+Exception in thread Thread-3:
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/threading.py&quot;, line 486, in __bootstrap_inner
+    self.run()
+  File &quot;/usr/lib/python2.5/threading.py&quot;, line 446, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File &quot;/usr/lib/python2.5/site-packages/sonata/main.py&quot;, line 3046, in
+info_get_lyrics
+    lyrics =
+self.lyricServer.getSong(artist=urllib.quote(search_artist),
+song=urllib.quote(search_title))['return'][&quot;lyrics&quot;]
+  File &quot;/var/lib/python-support/python2.5/ZSI/ServiceProxy.py&quot;, line
+413, in __call__
+    return self.parent()._call(self.__name__, *args, **kwargs)
+  File &quot;/var/lib/python-support/python2.5/ZSI/ServiceProxy.py&quot;, line
+200, in _call
+    encodingStyle=callinfo.encodingStyle)
+  File &quot;/var/lib/python-support/python2.5/ZSI/client.py&quot;, line 427, in
+Receive
+    self.ReceiveSOAP(**kw)
+  File &quot;/var/lib/python-support/python2.5/ZSI/client.py&quot;, line 397, in
+ReceiveSOAP
+    encodingStyle=kw.get('encodingStyle'))
+  File &quot;/var/lib/python-support/python2.5/ZSI/parse.py&quot;, line 55, in
+__init__
+    from xml.dom.ext.reader import PyExpat
+ImportError: No module named ext.reader
+
+-------------------
+
+
+Thx ;)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000632.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+	<LI>Next message: <A HREF="000634.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#633">[ date ]</a>
+              <a href="thread.html#633">[ thread ]</a>
+              <a href="subject.html#633">[ subject ]</a>
+              <a href="author.html#633">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

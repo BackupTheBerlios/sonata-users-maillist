@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Feature request - search in library
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Feature%20request%20-%20search%20in%20library&In-Reply-To=%3C35a6f8e30809232130l767811adk227bc174f61d37c8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000742.html">
+   <LINK REL="Next"  HREF="000744.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Feature request - search in library</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Feature%20request%20-%20search%20in%20library&In-Reply-To=%3C35a6f8e30809232130l767811adk227bc174f61d37c8%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Feature request - search in library">stonecrest at gmail.com
+       </A><BR>
+    <I>Wed Sep 24 06:30:35 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000742.html">[Sonata-users] Feature request - search in library
+</A></li>
+        <LI>Next message: <A HREF="000744.html">[Sonata-users] Feature request - search in library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#743">[ date ]</a>
+              <a href="thread.html#743">[ thread ]</a>
+              <a href="subject.html#743">[ subject ]</a>
+              <a href="author.html#743">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Sep 23, 2008 at 9:54 PM, Dan McGee &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">dpmcgee at gmail.com</A>&gt; wrote:
+
+&gt;<i> Seems to work fine here Scott- nice work. Not too slow over a wireless
+</I>&gt;<i> connection at least. I thought at first I found a bug with some songs
+</I>&gt;<i> being returned twice, but I think my library just needed an update as
+</I>&gt;<i> I can't reproduce it after I did that. Figured I'd mention it thouugh
+</I>&gt;<i> just in case anyone else saw the same and was too timid to speak up.
+</I>&gt;<i> :)
+</I>
+
+Thanks for testing. I'll keep an eye out for that, if it's a bug.
+
+
+&gt;<i> While testing, I did come across a much more severe issue- a long
+</I>&gt;<i> playlist + slow Eee processor + network connection = trouble when
+</I>&gt;<i> adding a single song searched via the above addition. I would guess
+</I>&gt;<i> our culprit lies in one of the many for loops in here:
+</I>&gt;<i>
+</I>&gt;<i>    def library_get_recursive_filenames(self, return_root):
+</I>&gt;<i>
+</I>&gt;<i> It takes 3 or 4 seconds to add a single song at 100% processor usage
+</I>&gt;<i> for my 4100 song playlist- you can see it just grinding away. This is
+</I>&gt;<i> on the client side too- I don't think it is server related as a remote
+</I>&gt;<i> ncmpc connection works absolutely fine doing the same add.
+</I>&gt;<i>
+</I>
+
+It's definitely not a problem with that routine, since it won't be doing any
+recursion in the case of adding a single song (the recursion is for drilling
+down when, say, adding the collection of an artist or a directory). The
+slowdown all essentially happens in the current_update routine when we
+retrieve the current playlist upon noticing that there was a change in the
+playlist. It's easy to pinpoint with a few print statements.
+
+And I had written up a bunch of stuff about how python-mpd is faster than
+the previous mpdclient2 interface but still not very fast blah blah blah,
+until I looked back over the mpd commands and realized there is a command to
+retrieve only changes in the current playlist. I'd seen it in the past, but
+always thought it had to do with saved playlists, not the current one, based
+on its name. I'm going to play with this over the weekend, but I expect that
+using this will drastically speed up adding to a large playlist (although
+not adding a ton of songs to the playlist at once, of course). Man do I feel
+stupid. Ah well, better late than never. In my defense, I don't think pygmy
+ever used it either :P
+
+Rarely having a playlist over 100 songs,
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20080923/72603d05/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20080923/72603d05/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000742.html">[Sonata-users] Feature request - search in library
+</A></li>
+	<LI>Next message: <A HREF="000744.html">[Sonata-users] Feature request - search in library
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#743">[ date ]</a>
+              <a href="thread.html#743">[ thread ]</a>
+              <a href="subject.html#743">[ subject ]</a>
+              <a href="author.html#743">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

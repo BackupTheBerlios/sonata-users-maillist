@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata failed to connect to the D-BUS session bus
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20failed%20to%20connect%20to%20the%20D-BUS%20session%20bus&In-Reply-To=%3C200705080443.38283.sebastian_ml%40gmx.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000271.html">
+   <LINK REL="Next"  HREF="000225.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata failed to connect to the D-BUS session bus</H1>
+    <B>Sebastian Kemper</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20failed%20to%20connect%20to%20the%20D-BUS%20session%20bus&In-Reply-To=%3C200705080443.38283.sebastian_ml%40gmx.net%3E"
+       TITLE="[Sonata-users] Sonata failed to connect to the D-BUS session bus">sebastian_ml at gmx.net
+       </A><BR>
+    <I>Tue May  8 04:43:38 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000271.html">[Sonata-users] Debian etch up-to-date packages
+</A></li>
+        <LI>Next message: <A HREF="000225.html">[Sonata-users] Sonata failed to connect to the D-BUS session bus
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I installed the DBUS software (dbus-1.0.2 and dbus-python-0.80.2) 
+recently. I have dbus-daemon running twice. Once it's started by an 
+init script and the second instance is being started when I execute the 
+alias 'start', which I defined in ~/.bashrc (alias 
+start=&quot;dbus-launch --sh-syntax startx&quot;). So DBUS_SESSION_BUS_ADDRESS is 
+set when X pops up.
+
+When I start a first instance of sonata it seems to register to DBUS. 
+But when I start up a second instance I get the error &quot;Sonata failed to 
+connect to the D-BUS session bus&quot; and the second instance pops up. I 
+had hoped that the use of DBUS would prevent this, e.g. the first 
+instance of sonata would be brought into foreground instead.
+
+Is this a bug or am I missing something?
+
+Regards
+Sebastian
+
+-------------- next part --------------
+signal sender=org.freedesktop.DBus -&gt; dest=:1.21 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string &quot;:1.21&quot;
+method call sender=:1.21 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string &quot;type='method_call'&quot;
+method call sender=:1.21 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string &quot;type='method_return'&quot;
+method call sender=:1.21 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=AddMatch
+   string &quot;type='error'&quot;
+signal sender=org.freedesktop.DBus -&gt; dest=(null destination) path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string &quot;:1.22&quot;
+   string &quot;&quot;
+   string &quot;:1.22&quot;
+method call sender=:1.22 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=Hello
+signal sender=org.freedesktop.DBus -&gt; dest=(null destination) path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string &quot;org.MPD&quot;
+   string &quot;&quot;
+   string &quot;:1.22&quot;
+method call sender=:1.22 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RequestName
+   string &quot;org.MPD&quot;
+   uint32 0
+signal sender=org.freedesktop.DBus -&gt; dest=(null destination) path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string &quot;org.MPD.Sonata&quot;
+   string &quot;&quot;
+   string &quot;:1.22&quot;
+method call sender=:1.22 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RequestName
+   string &quot;org.MPD.Sonata&quot;
+   uint32 4
+signal sender=org.freedesktop.DBus -&gt; dest=(null destination) path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameOwnerChanged
+   string &quot;:1.23&quot;
+   string &quot;&quot;
+   string &quot;:1.23&quot;
+method call sender=:1.23 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=Hello
+method call sender=:1.23 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RequestName
+   string &quot;org.MPD&quot;
+   uint32 0
+method call sender=:1.23 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=RequestName
+   string &quot;org.MPD.Sonata&quot;
+   uint32 4
+method call sender=:1.23 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus.Introspectable; member=Introspect
+method call sender=:1.23 -&gt; dest=org.freedesktop.DBus path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=GetNameOwner
+   string &quot;org.MPD&quot;
+method call sender=:1.23 -&gt; dest=:1.22 path=/org/MPD/Sonata; interface=org.freedesktop.DBus.Introspectable; member=Introspect
+method call sender=:1.23 -&gt; dest=:1.22 path=/org/MPD/Sonata; interface=org.MPD.SonataInterface; member=show
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000271.html">[Sonata-users] Debian etch up-to-date packages
+</A></li>
+	<LI>Next message: <A HREF="000225.html">[Sonata-users] Sonata failed to connect to the D-BUS session bus
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#224">[ date ]</a>
+              <a href="thread.html#224">[ thread ]</a>
+              <a href="subject.html#224">[ subject ]</a>
+              <a href="author.html#224">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

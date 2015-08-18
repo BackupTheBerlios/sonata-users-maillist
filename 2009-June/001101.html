@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Notifications (and the plugin system in general)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C4A28AB65.9070406%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001100.html">
+   <LINK REL="Next"  HREF="001102.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Notifications (and the plugin system in general)</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C4A28AB65.9070406%40gmail.com%3E"
+       TITLE="[Sonata-users] Notifications (and the plugin system in general)">bebarino at gmail.com
+       </A><BR>
+    <I>Fri Jun  5 07:21:41 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001100.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001102.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1101">[ date ]</a>
+              <a href="thread.html#1101">[ thread ]</a>
+              <a href="subject.html#1101">[ subject ]</a>
+              <a href="author.html#1101">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Scott Armitage wrote:
+&gt;<i> Actually the decorator pattern kind of subverts my issue with
+</I>&gt;<i> registering the callback with the core; mainly, that trusting the
+</I>&gt;<i> plugin author to take of that each and every time would be tedious and
+</I>&gt;<i> could introduce errors. If a decorator pattern took care of all that
+</I>&gt;<i> automatically, then you achieve the same thing I was thinking of --
+</I>&gt;<i> mainly, having a single code-base that handles the linking.
+</I>
+There is still some trust here to make sure the authors place the
+decorator, but really who cares? We will maintain most of the plugins in
+our tree so we won't really have a problem.
+
+&gt;<i> Here's a nifty thought -- fresh off the presses in my mind, so I
+</I>&gt;<i> haven't worked through it yet -- but a callback function could specify
+</I>&gt;<i> which data/GUI controls it wants to have access to. When the plugin
+</I>&gt;<i> gets registered with the core (or whatever happens), an object is
+</I>&gt;<i> built that contains references to only those attributes. Then whenever
+</I>&gt;<i> that particular callback is called, it gets passed this object. Hmm,
+</I>&gt;<i> thinking about this a bit more, I think this might also have too much
+</I>&gt;<i> overhead. Something to come back to, definitely.
+</I>
+It sounds interesting, but I'm not sure either. More importantly, there
+isn't a real &quot;core&quot; to Sonata so far. The base class is a mash of code
+which we're slowly picking away at.
+
+&gt;<i>  Attributes might be a bit cleaner, but would be more difficult to
+</I>&gt;<i> handle when missing (i.e. as opposed to plugin.get('key','default')).
+</I>
+Well, missing attributes can be defaulted with getattr(plugin, 'key',
+'default') - so not too tricky.
+
+&gt;<i> Sorry, I was starting to ramble. I tend not to think out what all I
+</I>&gt;<i> want to say in advance, and it just kind of comes as I type. I think I
+</I>&gt;<i> was trying to hammer home two disparate ideas here: first, that each
+</I>&gt;<i> plugin -- if contained within it's own module -- could be imported
+</I>&gt;<i> directly, from anywhere -- e.g. 'from SuperAwesomeGuysPluginPack
+</I>&gt;<i> import WickedCoolPlugin'. This is less of a concern, but it avoids
+</I>&gt;<i> having to bring in and parse the module manually if you could just do
+</I>&gt;<i> a simple import statement.
+</I>
+Ok, thanks for clarifying that. Makes sense to me and it's definitely an
+advantage of leveraging the language. Of course, finding
+SuperAwesomeGuysPluginPack is a bit tricky right?
+
+&gt;<i> Good discussion so far. I think any patches from my end will be quite
+</I>&gt;<i> far away -- I'll be doing my work primarily locally and in Bazaar
+</I>&gt;<i> branches on Launchpad (<A HREF="http://www.launchpad.net/~scott-armitage">http://www.launchpad.net/~scott-armitage</A>
+</I>&gt;<i> &lt;<A HREF="http://www.launchpad.net/%7Escott-armitage">http://www.launchpad.net/%7Escott-armitage</A>&gt;), but I think there's a
+</I>&gt;<i> lot more to hash out first, especially if I'm going to try tackling a
+</I>&gt;<i> plugin revamp.
+</I>
+Great. I look forward to seeing something come out of this discussion.
+There is definitely a lot more to figure out, but it doesn't mean you
+can't hack away at something first and figure out where the next
+roadblock is :-) At the least, I've started thinking more critically
+about this.
+
+&gt;<i> Thank you kindly for the input; I presume that Tuukka is subscribed to
+</I>&gt;<i> this list, so I'll not bother him(?) about it just yet, but certainly
+</I>&gt;<i> as I start getting a clearer picture of where I see this heading.
+</I>
+Yes he is.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001100.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001102.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1101">[ date ]</a>
+              <a href="thread.html#1101">[ thread ]</a>
+              <a href="subject.html#1101">[ subject ]</a>
+              <a href="author.html#1101">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] sonata 1.6.2 stopped scrobbling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20sonata%201.6.2%20stopped%20scrobbling&In-Reply-To=%3C35a6f8e30907041327k5cac8bb0v316525a07d0cbd82%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001120.html">
+   <LINK REL="Next"  HREF="001122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] sonata 1.6.2 stopped scrobbling</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20sonata%201.6.2%20stopped%20scrobbling&In-Reply-To=%3C35a6f8e30907041327k5cac8bb0v316525a07d0cbd82%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] sonata 1.6.2 stopped scrobbling">stonecrest at gmail.com
+       </A><BR>
+    <I>Sat Jul  4 22:27:06 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001120.html">[Sonata-users] Amazon cover fetching plugin locking Sonata
+</A></li>
+        <LI>Next message: <A HREF="001122.html">[Sonata-users] Suggestion: Collapsible view of multiple	lyrics	versions (eg. translations) from LyricWiki
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1121">[ date ]</a>
+              <a href="thread.html#1121">[ thread ]</a>
+              <a href="subject.html#1121">[ subject ]</a>
+              <a href="author.html#1121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 24, 2009 at 2:55 AM, Martin Wegner &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">public at mroot.net</A>&gt; wrote:
+
+&gt;<i> I'm using sonata 1.6.2 but somehow it stopped scrobbling during the last
+</I>&gt;<i> few days ...
+</I>&gt;<i> &lt;snip&gt;
+</I>
+Is there anything how this issue can be solved or how I can debug it in
+&gt;<i> a better way?
+</I>
+
+Hi Martin,
+
+Scrobbling has been working here and I have heard no other reports of people
+having problems. If sonata is correctly sending 'now playing' updates, then
+it is very weird that normal scrobbles aren't working.
+
+If you would like to debug further, you can look at the
+handle_change_status() method in the sonata/self.scrobbler.py file. One of
+the self.post() calls should be occurring - for example, if you play more
+than 4 minutes of a song and then press stop, the self.post() call on the
+last line of the method should be triggered. You can sprinkle some print
+statements in there to debug.
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090704/a7c23b5d/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090704/a7c23b5d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001120.html">[Sonata-users] Amazon cover fetching plugin locking Sonata
+</A></li>
+	<LI>Next message: <A HREF="001122.html">[Sonata-users] Suggestion: Collapsible view of multiple	lyrics	versions (eg. translations) from LyricWiki
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1121">[ date ]</a>
+              <a href="thread.html#1121">[ thread ]</a>
+              <a href="subject.html#1121">[ subject ]</a>
+              <a href="author.html#1121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

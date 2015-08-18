@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] plugin system (Re:  Sonata 1.6 call for testing)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20plugin%20system%20%28Re%3A%20%20Sonata%201.6%20call%20for%20testing%29&In-Reply-To=%3C49DD0834.1070606%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001022.html">
+   <LINK REL="Next"  HREF="001030.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] plugin system (Re:  Sonata 1.6 call for testing)</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20plugin%20system%20%28Re%3A%20%20Sonata%201.6%20call%20for%20testing%29&In-Reply-To=%3C49DD0834.1070606%40iki.fi%3E"
+       TITLE="[Sonata-users] plugin system (Re:  Sonata 1.6 call for testing)">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Wed Apr  8 22:25:24 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001022.html">[Sonata-users] can anyone verify this bug?
+</A></li>
+        <LI>Next message: <A HREF="001030.html">[Sonata-users] plugin system (Re: Sonata 1.6 call for testing)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1026">[ date ]</a>
+              <a href="thread.html#1026">[ thread ]</a>
+              <a href="subject.html#1026">[ subject ]</a>
+              <a href="author.html#1026">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Manuel and all,
+
+Manuel Naranjo wrote:
+&gt;&gt;&gt;<i> The plugin system is temporarily disabled for the release (see commit 
+</I>&gt;&gt;&gt;<i> 1119). Tuukka made a lot of progress on it, but it's not quite ready 
+</I>&gt;&gt;&gt;<i> for prime time.
+</I>
+&gt;<i> Got it back.... GREAT WORK! even though it's not ready for prime time, 
+</I>&gt;<i> it's showing really good improvements from the simple patch I sent a few 
+</I>&gt;<i> months ago.
+</I>
+I enabled the plugin system again in SVN, and did some work on it, 
+although it remains to be seen whether it could be kept enabled for the 
+next release.
+
+Each plugin is now disabled by default and they are not loaded before 
+use. The plugins can be enabled in the tab in the preferences window.
+
+I've included a test plugin that shows the capabilities and how to 
+program to them, plus a Local MPD plugin, &quot;A tab for controlling local 
+MPD&quot; (currently it just displays some info, but I hope to add a button 
+for &quot;gksudo gedit /etc/mpd.conf&quot; and &quot;gksudo service mpd restart&quot; ;-).
+
+The currently implemented capabilities:
+* &quot;tabs&quot;: Before today, this was the only one: it lets the plugin add 
+its tabs.
+* &quot;playing_song_observers&quot;: This lets the plugin react to song change 
+like the album art, lyrics etc. do.
+* &quot;enablables&quot;: This lets the plugin do some setup and teardown work.
+
+If you're writing a plugin and need something more, let me know and 
+we'll see if it's reasonable to implement at this point or if it needs 
+to wait until later.
+
+
+Regards,
+Tuukka
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001022.html">[Sonata-users] can anyone verify this bug?
+</A></li>
+	<LI>Next message: <A HREF="001030.html">[Sonata-users] plugin system (Re: Sonata 1.6 call for testing)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1026">[ date ]</a>
+              <a href="thread.html#1026">[ thread ]</a>
+              <a href="subject.html#1026">[ subject ]</a>
+              <a href="author.html#1026">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

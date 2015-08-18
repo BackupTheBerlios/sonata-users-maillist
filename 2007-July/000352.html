@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] setup.py clean a bit broken + patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20setup.py%20clean%20a%20bit%20broken%20%2B%20patch&In-Reply-To=%3C85k5th4bcp.fsf%40boum.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000351.html">
+   <LINK REL="Next"  HREF="000353.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] setup.py clean a bit broken + patch</H1>
+    <B>intrigeri</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20setup.py%20clean%20a%20bit%20broken%20%2B%20patch&In-Reply-To=%3C85k5th4bcp.fsf%40boum.org%3E"
+       TITLE="[Sonata-users] setup.py clean a bit broken + patch">intrigeri at boum.org
+       </A><BR>
+    <I>Tue Jul  3 19:59:33 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000351.html">[Sonata-users] Album art wrt locale
+</A></li>
+        <LI>Next message: <A HREF="000353.html">[Sonata-users] setup.py clean a bit broken + patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+running &quot;python setup.py clean&quot; on a fresh SVN r466 source tree
+generates the mo/ directory, but fails to delete it, since the
+os.rmdir(&quot;build/&quot;) fails because no such directory exists.
+
+This breaks the Debian build scripts, that try to clean the source
+tree.
+
+The following patch fixes this :
+
+Index: setup.py
+===================================================================
+--- setup.py	(r&#233;vision 466)
++++ setup.py	(copie de travail)
+@@ -84,8 +84,14 @@
+ try:
+ 	removeall(&quot;build/&quot;)
+ 	os.rmdir(&quot;build/&quot;)
++except:
++	pass
++try:
+ 	removeall(&quot;mo/&quot;)
+ 	os.rmdir(&quot;mo/&quot;)
++except:
++	pass
++try:
+ 	for f in os.listdir(&quot;.&quot;):
+ 		if os.path.isfile(f):
+ 			if os.path.splitext(os.path.basename(f))[1] == &quot;.pyc&quot;:
+
+
+Ciao,
+-- 
+  intrigeri &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">intrigeri at boum.org</A>&gt;
+  | gnupg key @ <A HREF="http://intrigeri.boum.org/intrigeri.asc">http://intrigeri.boum.org/intrigeri.asc</A>
+  | So what ?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000351.html">[Sonata-users] Album art wrt locale
+</A></li>
+	<LI>Next message: <A HREF="000353.html">[Sonata-users] setup.py clean a bit broken + patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#352">[ date ]</a>
+              <a href="thread.html#352">[ thread ]</a>
+              <a href="subject.html#352">[ subject ]</a>
+              <a href="author.html#352">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata loses status updates when mpd takes a while	to respond
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%20while%0A%09to%20respond&In-Reply-To=%3C449c10960707091754j26286bbfhe99842aaf9ced2ea%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000353.html">
+   <LINK REL="Next"  HREF="000356.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata loses status updates when mpd takes a while	to respond</H1>
+    <B>Dan McGee</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%20while%0A%09to%20respond&In-Reply-To=%3C449c10960707091754j26286bbfhe99842aaf9ced2ea%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata loses status updates when mpd takes a while	to respond">dpmcgee at gmail.com
+       </A><BR>
+    <I>Tue Jul 10 02:54:36 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000353.html">[Sonata-users] setup.py clean a bit broken + patch
+</A></li>
+        <LI>Next message: <A HREF="000356.html">[Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#354">[ date ]</a>
+              <a href="thread.html#354">[ thread ]</a>
+              <a href="subject.html#354">[ subject ]</a>
+              <a href="author.html#354">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is mainly directed to Scott since I've told him about the problem
+elsewhere, but I figured the proper place to report it was the list.
+With both the last released version of Sonata and the SVN version,
+Sonata seems to lose its connection with mpd when mpd takes a while to
+respond.
+
+My setup is the following: Sonata and mpd are running on computer A,
+and computer B holds my music, which is mounted over NFS to computer
+A.
+
+Steps to reproduce:
+1. Start sonata and mpd
+2. Play some music
+3. Stop the music playing, leave Sonata and mpd running
+4. Wait for the hard drive holding the music on computer B to spin
+down (suspend)
+5. Press play in Sonata- this son will usually play because it is
+cached on computer A
+6. Skip to the next track- the remote drive will spin up, but Sonata
+times out and displays &quot;Stopped&quot; as the status, even though mpd will
+eventually queue up and play the song
+
+Doing Alt-C then updates the status in Sonata, but it does not
+continuously update- it simply stays where it was when you did the
+Alt-C. Repeated presses of Alt-C will update the status. In addition,
+the buttons will then work and you can skip around songs, although the
+status does not update except at the moment you press the buttons.
+
+Let me know if you need anything else on this. The only way to fix the
+problem seems to be to restart Sonata.
+
+-Dan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000353.html">[Sonata-users] setup.py clean a bit broken + patch
+</A></li>
+	<LI>Next message: <A HREF="000356.html">[Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#354">[ date ]</a>
+              <a href="thread.html#354">[ thread ]</a>
+              <a href="subject.html#354">[ subject ]</a>
+              <a href="author.html#354">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

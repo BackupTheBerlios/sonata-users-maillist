@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] byte-compile failure
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20byte-compile%20failure&In-Reply-To=%3C35a6f8e30811201122j692d4d0dk7da14e5249150728%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000827.html">
+   <LINK REL="Next"  HREF="000829.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] byte-compile failure</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20byte-compile%20failure&In-Reply-To=%3C35a6f8e30811201122j692d4d0dk7da14e5249150728%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] byte-compile failure">stonecrest at gmail.com
+       </A><BR>
+    <I>Thu Nov 20 20:22:55 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000827.html">[Sonata-users] byte-compile failure
+</A></li>
+        <LI>Next message: <A HREF="000829.html">[Sonata-users] byte-compile failure
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#828">[ date ]</a>
+              <a href="thread.html#828">[ thread ]</a>
+              <a href="subject.html#828">[ subject ]</a>
+              <a href="author.html#828">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Nov 20, 2008 at 12:09 PM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">intrigeri at boum.org</A>&gt; wrote:
+
+&gt;<i> Scott Horowitz wrote (20 Nov 2008 04:12:20 GMT) :
+</I>&gt;<i> &gt; Can you try changing that line in tagedit.py to &quot;class TagEditor:&quot;  -
+</I>&gt;<i> that
+</I>&gt;<i> &gt; is, remove the parentheses - and see if that works? I think python 2.6
+</I>&gt;<i> &gt; allows the above syntax while you are using 2.5?
+</I>&gt;<i>
+</I>&gt;<i> This fixes my issue.
+</I>&gt;<i>
+</I>&gt;<i> I have both python 2.4 and 2.5 installed, and the Debian package tries
+</I>&gt;<i> to byte-compile sonata's .py files for both. Without the suggested
+</I>&gt;<i> change, this byte-compilation works for 2.5 but fails (as reported)
+</I>&gt;<i> with 2.4. With the suggested change, it works fine with both.
+</I>
+
+Ahh, that makes a lot more sense. I actually thought it was valid syntax for
+python 2.5 too, but since Sonata now depends on 2.5 or newer, I assumed you
+must be compiling it with python 2.5. I'm not particularly inclined to try
+to continue to keep the syntax valid for python 2.4 - is there any way that
+Debian logic can be disabled?
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20081120/624b9670/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20081120/624b9670/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000827.html">[Sonata-users] byte-compile failure
+</A></li>
+	<LI>Next message: <A HREF="000829.html">[Sonata-users] byte-compile failure
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#828">[ date ]</a>
+              <a href="thread.html#828">[ thread ]</a>
+              <a href="subject.html#828">[ subject ]</a>
+              <a href="author.html#828">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

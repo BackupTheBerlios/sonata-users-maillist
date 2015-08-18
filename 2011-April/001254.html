@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Lyricwiki patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2011-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Lyricwiki%20patch&In-Reply-To=%3C67bc073475f57f61a96b4bfa14f8a8bb%40mail.webfaction.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001252.html">
+   <LINK REL="Next"  HREF="001259.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Lyricwiki patch</H1>
+    <B>Jonathan Ballet</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Lyricwiki%20patch&In-Reply-To=%3C67bc073475f57f61a96b4bfa14f8a8bb%40mail.webfaction.com%3E"
+       TITLE="[Sonata-users] Lyricwiki patch">jon at multani.info
+       </A><BR>
+    <I>Wed Apr 27 17:59:38 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001252.html">[Sonata-users] Lyricwiki patch
+</A></li>
+        <LI>Next message: <A HREF="001259.html">[Sonata-users] Lyricwiki patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1254">[ date ]</a>
+              <a href="thread.html#1254">[ thread ]</a>
+              <a href="subject.html#1254">[ subject ]</a>
+              <a href="author.html#1254">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE> Hey,
+
+ just to complete Kirill's words, I actually had a whole branch for 
+ this, named &quot;fix-fetch-lyrics&quot; (hoz original), that you can see at 
+ <A HREF="https://github.com/multani/sonata/tree/fix-fetch-lyrics.">https://github.com/multani/sonata/tree/fix-fetch-lyrics.</A> It also 
+ contains several refactoring before the real fix.
+
+ No idea for the capitalization rule though. Considering the state of 
+ Sonata and the eventual evolution of LyricsWiki since the creation of 
+ the plugin, I won't be surprised the &quot;logical&quot; rules had evolved since.
+
+  Jon
+
+ On Wed, 27 Apr 2011 18:46:17 +0300, KL-7 &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">kl7.666 at gmail.com</A>&gt; wrote:
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I believe this one [1] will do the trick.
+</I>&gt;<i>
+</I>&gt;<i> Lazaros, I suggest you to look through commits in multani's [2] and 
+</I>&gt;<i> my
+</I>&gt;<i> [3] repos. You might find some useful fixes there.
+</I>&gt;<i>
+</I>&gt;<i> And I wonder how things are going with sonata. I don't see much
+</I>&gt;<i> activity of Paco's team on codingteam. Did they move the repo
+</I>&gt;<i> somewhere else or finally decide against resurrecting sonata project?
+</I>&gt;<i>
+</I>&gt;<i>  On Wed, Apr 27, 2011 at 2:39 PM, Lazaros Koromilas  wrote:
+</I>&gt;<i>
+</I>&gt;<i> On Tue, Apr 26, 2011 at 7:35 PM, KL-7  wrote:
+</I>&gt;<i>  &gt; Hi,
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt; Something really strange happened with their markup lately, so
+</I>&gt;<i> thank you for
+</I>&gt;<i>  &gt; sharing your patch. Though, I used this one for myself. It avoids
+</I>&gt;<i> splitting
+</I>&gt;<i>  &gt; string with the tag that contains simultaneously escaped '' as it
+</I>&gt;<i> looks a bit unstable for me.
+</I>&gt;<i>
+</I>&gt;<i>  Yep! This seems much better, thanks ;)
+</I>&gt;<i>  Another thing that needs attention is the capitalization rules, for
+</I>&gt;<i> instance
+</I>&gt;<i>  for the song &quot;Orchestral Manoeuvres In The Dark - She's Leaving&quot;
+</I>&gt;<i> sonata
+</I>&gt;<i>  will get the page:
+</I>&gt;<i>
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://lyrics.wikia.com/index.php?title=Orchestral%20Manoeuvres%20In%20The%20Dark:She%27S%20Leaving&amp;action=edit">http://lyrics.wikia.com/index.php?title=Orchestral%20Manoeuvres%20In%20The%20Dark:She%27S%20Leaving&amp;action=edit</A>
+</I>&gt;<i> [6]
+</I>&gt;<i>  whereas the logical would be:
+</I>&gt;<i>
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://lyrics.wikia.com/index.php?title=Orchestral%20Manoeuvres%20In%20The%20Dark:She%27s%20Leaving&amp;action=edit">http://lyrics.wikia.com/index.php?title=Orchestral%20Manoeuvres%20In%20The%20Dark:She%27s%20Leaving&amp;action=edit</A>
+</I>&gt;<i> [7]
+</I>&gt;<i>  where the lyrics actually exist.
+</I>&gt;<i>
+</I>&gt;<i>  &gt; On Tue, Apr 26, 2011 at 7:08 PM, Lazaros Koromilas
+</I>&gt;<i>  &gt; wrote:
+</I>&gt;<i>  &gt;&gt;
+</I>&gt;<i>  &gt;&gt; Lyrics fetching was not functional lately,
+</I>&gt;<i>  &gt;&gt; some changes in the markup apparently.
+</I>&gt;<i>  &gt;&gt; This patch fixes it.
+</I>&gt;<i>  &gt;&gt;
+</I>&gt;<i>  &gt;&gt; diff --git a/sonata/lyricwiki.py b/sonata/lyricwiki.py
+</I>&gt;<i>  &gt;&gt; index 0cd07fc..d4055c1 100644
+</I>&gt;<i>  &gt;&gt; --- a/sonata/lyricwiki.py
+</I>&gt;<i>  &gt;&gt; +++ b/sonata/lyricwiki.py
+</I>&gt;<i>  &gt;&gt; @@ -42,10 +42,9 @@ class LyricWiki(object):
+</I>&gt;<i>  &gt;&gt; &#160; &#160; &#160; &#160; &#160; &#160; if content[:len(redir_tag)].lower() ==
+</I>&gt;<i> redir_tag:
+</I>&gt;<i>  &gt;&gt; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; addr =
+</I>&gt;<i>  &gt;&gt; &quot;<A HREF="http://lyricwiki.org/index.php?title=%s&amp;action=edit">http://lyricwiki.org/index.php?title=%s&amp;action=edit</A> [9]&quot; %
+</I>&gt;<i>  &gt;&gt; urllib.quote(content.split(&quot;[[&quot;)[1].split(&quot;]]&quot;)[0])
+</I>&gt;<i>  &gt;&gt; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; lyricpage = urllib.urlopen(addr).read()
+</I>&gt;<i>  &gt;&gt; - &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;content = re.split(&quot;]*&gt;&quot;,
+</I>&gt;<i>  &gt;&gt; lyricpage)[1].split(&quot;&quot;)[0]
+</I>&gt;<i>  &gt;&gt; - &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;content = content.strip()
+</I>&gt;<i>  &gt;&gt; - &#160; &#160; &#160; &#160; &#160; &#160;lyrics =
+</I>&gt;<i>  &gt;&gt; content.split(&quot;&quot;)[1].split(&quot;&quot;)[0]
+</I>&gt;<i>  &gt;&gt; - &#160; &#160; &#160; &#160; &#160; &#160;if lyrics.strip() != &quot;&quot;:
+</I>&gt;<i>  &gt;&gt; + &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;lyrics = re.split(&quot;&quot;,
+</I>&gt;<i>  &gt;&gt; lyricpage)[1].split(&quot;&quot;)[0]
+</I>&gt;<i>  &gt;&gt; + &#160; &#160; &#160; &#160; &#160; &#160;if lyrics.find(&quot;PUT LYRICS HERE&quot;) == -1:
+</I>&gt;<i>  &gt;&gt; + &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;lyrics = lyrics.strip()
+</I>&gt;<i>  &gt;&gt; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; lyrics = misc.unescape_html(lyrics)
+</I>&gt;<i>  &gt;&gt; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; lyrics = misc.wiki_to_html(lyrics)
+</I>&gt;<i>  &gt;&gt; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; lyrics = lyrics.decode(&quot;utf-8&quot;)
+</I>&gt;<i>  &gt;&gt; _______________________________________________
+</I>&gt;<i>  &gt;&gt; Sonata-users mailing list
+</I>&gt;<i>  &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A> [10]
+</I>&gt;<i>  &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A> [11]
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt; --
+</I>&gt;<i>  &gt; Kirill
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt; _______________________________________________
+</I>&gt;<i>  &gt; Sonata-users mailing list
+</I>&gt;<i>  &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A> [12]
+</I>&gt;<i>  &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A> [13]
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  &gt;
+</I>&gt;<i>  _______________________________________________
+</I>&gt;<i>  Sonata-users mailing list
+</I>&gt;<i>  <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A> [14]
+</I>&gt;<i>  <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A> [15]
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Kirill
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001252.html">[Sonata-users] Lyricwiki patch
+</A></li>
+	<LI>Next message: <A HREF="001259.html">[Sonata-users] Lyricwiki patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1254">[ date ]</a>
+              <a href="thread.html#1254">[ thread ]</a>
+              <a href="subject.html#1254">[ subject ]</a>
+              <a href="author.html#1254">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

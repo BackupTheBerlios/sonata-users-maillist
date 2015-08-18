@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata 1.1 Released
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.1%20Released&In-Reply-To=%3C35a6f8e30705081942q346de9d5q7528f134fa033f6f%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000233.html">
+   <LINK REL="Next"  HREF="000246.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata 1.1 Released</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.1%20Released&In-Reply-To=%3C35a6f8e30705081942q346de9d5q7528f134fa033f6f%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata 1.1 Released">stonecrest at gmail.com
+       </A><BR>
+    <I>Wed May  9 04:42:03 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000233.html">[Sonata-users] Sonata 1.1 Released
+</A></li>
+        <LI>Next message: <A HREF="000246.html">[Sonata-users] Sonata 1.1 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 5/8/07, [vEX] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">niechift.vex at gmail.com</A>&gt; wrote:
+&gt;<i> Okay, I think I fixed the problem. The cause was that the new variable
+</I>&gt;<i> that helps keep track if an album is VA or not wasn't reset properly
+</I>&gt;<i> so the old information would be used for a new song that doesn't have
+</I>&gt;<i> the album tag. The attached patch should solve it I think, it seems to
+</I>&gt;<i> work fine for me.
+</I>
+The patch looks good, thanks. I slightly modified it to potentially
+reduce the needed mpd calls, and broke out the code into its own
+function.
+
+I really should create a directory full of music files with missing
+artist tags, album tags, and so on for testing purposes. If everyone
+would always have their tags perfect, the world would be such an
+easier place ;P
+
+Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000233.html">[Sonata-users] Sonata 1.1 Released
+</A></li>
+	<LI>Next message: <A HREF="000246.html">[Sonata-users] Sonata 1.1 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#244">[ date ]</a>
+              <a href="thread.html#244">[ thread ]</a>
+              <a href="subject.html#244">[ subject ]</a>
+              <a href="author.html#244">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

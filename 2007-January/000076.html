@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Some comments on 0.9.9
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Some%20comments%20on%200.9.9&In-Reply-To=%3C20070121165914.296ffa34.pizzapunk%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000078.html">
+   <LINK REL="Next"  HREF="000079.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Some comments on 0.9.9</H1>
+    <B>Alexander Fehr</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Some%20comments%20on%200.9.9&In-Reply-To=%3C20070121165914.296ffa34.pizzapunk%40gmail.com%3E"
+       TITLE="[Sonata-users] Some comments on 0.9.9">pizzapunk at gmail.com
+       </A><BR>
+    <I>Sun Jan 21 16:59:14 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000078.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+        <LI>Next message: <A HREF="000079.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; With expanded playlist Sonata jumps to the playing song. It would be
+</I>&gt;<i> &gt; nice if it does the same when a collapsed playlist is expanded.
+</I>&gt;<i> 
+</I>&gt;<i> Good idea. Done.
+</I>
+In most cases it seems to work now but sometimes it doesn't. It's hard
+to reproduce. When I scroll a long playlist to the middle, doubleclick
+on a song there, collapse and expand the playlist several times
+(up to 20 times) then the playing song isn't in the visible area. I
+know this isn't a typical use case but I wanted to mention it.
+
+&gt;<i> &gt; I think it's
+</I>&gt;<i> &gt; hard to show in screenshots so I will try to explain. Shoutcast
+</I>&gt;<i> &gt; streams usually have set only the song name tag. I don't want to
+</I>&gt;<i> &gt; have &quot;Unknown - Unknown&quot; in Current song line 2 when listening to
+</I>&gt;<i> &gt; them and so I have set the song line to {%A}{ - %B} to show nothing
+</I>&gt;<i> &gt; in such case. When I switch between such stream and a normal file
+</I>&gt;<i> &gt; (with Artist and Album name tags) the interface jumps similar to
+</I>&gt;<i> &gt; the (fixed) bug &quot;interface jumping because of progress bar font&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Ahh, I see the issue now. It should be fixed, thanks.
+</I>
+The interface still jumps when the GTK font is DejaVu Sans 10. With
+font size 8 it works.
+
+&gt;<i> Argh.. I had never noticed this before. Playing a stream actually
+</I>&gt;<i> causes the mpd playlist to change/increment, which ends up refreshing
+</I>&gt;<i> the current playlist, among other things. What a pain.. I have an ugly
+</I>&gt;<i> workaround so that the playlist doesn't jump now, hopefully it doesn't
+</I>&gt;<i> break anything.
+</I>
+When I have only one stream in the playlist and want to play it I get:
+
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.4/site-packages/sonata.py&quot;, line 1142, in
+    iterate self.handle_change_status()
+  File &quot;/usr/lib/python2.4/site-packages/sonata.py&quot;, line 2194, in
+    handle_change_status self.update_playlist()
+  File &quot;/usr/lib/python2.4/site-packages/sonata.py&quot;, line 2411, in
+    update_playlist print self.currentdata[i][1], item
+IndexError: could not find tree path
+
+Moreover the playlist isn't updated when playing a stream. I think the
+string in the playlist should be updated when tags in the stream are
+updated.
+
+&gt;<i> &gt; As mentioned above shoutcast streams have set only the song name
+</I>&gt;<i> &gt; tag. But this tag contains the artist AND the song name: &quot;artist -
+</I>&gt;<i> &gt; song&quot; Thus searching for lyrics should be possible but the lyrics
+</I>&gt;<i> &gt; tab shows &quot;Artist or song title not set&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> How is Sonata to know that both the artist and song are in the song
+</I>&gt;<i> name tag? Is it supposed to assume that a '-' in the song means this?
+</I>&gt;<i> There's obviously a huge number of situations where that doesn't work
+</I>&gt;<i> (hyphenated words). Do other clients look for this sort of thing? I
+</I>&gt;<i> hate to add specific code to work around problems with shoutcast
+</I>&gt;<i> streams that don't properly set their tags.
+</I>
+Amarok has this function but they use lyrc.com.ar. You are right, it
+would be a hacky solution to parse for the hyphen. Sometimes the
+track number or the album name are also in the song name tag.
+Unfortunately the majority of shoutcast streams have only set the song
+name tag and no artist tag.
+
+The other things seem to be fixed.
+
+
+Alex
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000078.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+	<LI>Next message: <A HREF="000079.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#76">[ date ]</a>
+              <a href="thread.html#76">[ thread ]</a>
+              <a href="subject.html#76">[ subject ]</a>
+              <a href="author.html#76">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

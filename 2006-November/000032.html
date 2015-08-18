@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Comments
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2006-November/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Comments&In-Reply-To=%3C35a6f8e30611121916qb0e25d5y963c9b0297af7163%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000031.html">
+   <LINK REL="Next"  HREF="000033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Comments</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Comments&In-Reply-To=%3C35a6f8e30611121916qb0e25d5y963c9b0297af7163%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Comments">stonecrest at gmail.com
+       </A><BR>
+    <I>Mon Nov 13 04:16:21 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000031.html">[Sonata-users] Comments
+</A></li>
+        <LI>Next message: <A HREF="000033.html">[Sonata-users] Sonata 0.9 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11/12/06, Juan Manuel Oppedisano &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">jmo707 at gmail.com</A>&gt; wrote:
+&gt;<i> I have a few suggestions that maybe could help. The principal thing is the
+</I>&gt;<i> volume. Playing with alsamixer I have wondered long ago why raising the PCM
+</I>&gt;<i> volume makes the sound noisy, when the Master volume dont. Ive noticed that
+</I>&gt;<i> the volume control in Sonata is the PCM one. Maybe this happen only to me,
+</I>&gt;<i> but I think that it would be better to have the Master volume controled from
+</I>&gt;<i> there.
+</I>
+This is actually not client-specific, the client merely tells mpd to
+raise or lower the volume. I haven't tried it, but I think you just
+need to specify mixer_control in your mpd.conf as Master instead of
+PCM.
+
+&gt;<i> The other thing is having an alternative to the progress bar. You'll see,
+</I>&gt;<i> when I reduce the player width, there is a moment when the bar becomes ugly,
+</I>&gt;<i> and even the time dissapear. It would be nice to have, maybe the time
+</I>&gt;<i> displayed on the title bar.
+</I>
+What I can do here is add two more keys to the 'Format' tab in
+preferences - %E for elapsed time and %L for song length, and then you
+would be able to have the time in the window title if that is what you
+want. Would that suffice? And what do you mean by the bar becomes
+ugly? (Yes, the time disappears if it can't fit.)
+
+&gt;<i> Finally, and I know that you are working on this so this will be only a
+</I>&gt;<i> confirmation of that =p, metadata, lyrics in a nice separated window, like
+</I>&gt;<i> the cover art.
+</I>
+Yup, I have added some more metadata to the song info window in svn
+(the window you get when you left-click on the album art). It's not
+finalized, but that sort of stuff is on the todo. The only problem
+with lyrics is that every lyrics site is very incomplete and it's
+often quite hackish to retrieve and parse the lyrics from the websites
+(I had a svn revision where I had played around with it).
+
+I'm also struggling with how to allow the user to access all this
+extra info. I like the idea of clicking on the album art to get a
+window with the additional info, but it doesn't work for the user that
+has artwork disabled in their prefs.
+
+Thanks for the kind words and suggestions.
+
+Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000031.html">[Sonata-users] Comments
+</A></li>
+	<LI>Next message: <A HREF="000033.html">[Sonata-users] Sonata 0.9 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

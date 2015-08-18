@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Some comments on 0.9.9
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Some%20comments%20on%200.9.9&In-Reply-To=%3C20070121134231.f3e41c38.mykey%40mykey.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000074.html">
+   <LINK REL="Next"  HREF="000077.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Some comments on 0.9.9</H1>
+    <B>mike</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Some%20comments%20on%200.9.9&In-Reply-To=%3C20070121134231.f3e41c38.mykey%40mykey.de%3E"
+       TITLE="[Sonata-users] Some comments on 0.9.9">mykey at mykey.de
+       </A><BR>
+    <I>Sun Jan 21 13:42:31 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000074.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+        <LI>Next message: <A HREF="000077.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+Maybe I'm doing something wrong - but I never saw a lyrics tab - how can I do that?
+
+mike
+
+On Sat, 20 Jan 2007 16:57:48 -0700
+&quot;Scott Horowitz&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+
+&gt;<i> On 1/20/07, Alexander Fehr &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">pizzapunk at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; I think it's hard to show in screenshots so I will try to explain.
+</I>&gt;<i> &gt; Shoutcast streams usually have set only the song name tag. I don't want
+</I>&gt;<i> &gt; to have &quot;Unknown - Unknown&quot; in Current song line 2 when listening to
+</I>&gt;<i> &gt; them and so I have set the song line to {%A}{ - %B} to show nothing in
+</I>&gt;<i> &gt; such case. When I switch between such stream and a normal file (with
+</I>&gt;<i> &gt; Artist and Album name tags) the interface jumps similar to the (fixed)
+</I>&gt;<i> &gt; bug &quot;interface jumping because of progress bar font&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Ahh, I see the issue now. It should be fixed, thanks.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; When I mark all at once and click to add them to the playlist it takes
+</I>&gt;<i> &gt; 10 seconds before the UI is responsible again.
+</I>&gt;<i> 
+</I>&gt;<i> I don't think there's much I can do about this.. I can make the UI
+</I>&gt;<i> more responsive when doing this, but it's not going to shorten how
+</I>&gt;<i> long the process takes. The beginning of each stream needs to be
+</I>&gt;<i> retrieved to determine if it's a playlist or a stream, and then
+</I>&gt;<i> depends wholly on how fast the stream's server sends data. The
+</I>&gt;<i> checking and parsing work on Sonata's end is very quick.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Now that I know about pls I have tested it too but it doesn't always
+</I>&gt;<i> &gt; work. Here are some streams which doesn't work:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="http://www.idobi.com/radio/iradio.pls">http://www.idobi.com/radio/iradio.pls</A>
+</I>&gt;<i> &gt; <A HREF="http://www.punkrockers-radio.de/listen.pls">http://www.punkrockers-radio.de/listen.pls</A>
+</I>&gt;<i> 
+</I>&gt;<i> I actually fixed this issue in svn right before I got your email ;) I
+</I>&gt;<i> imagine it also fixes your issue with a lot of shoutcast streams not
+</I>&gt;<i> working too.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Some other thing: When I have a long playlist and doubleclick on a
+</I>&gt;<i> &gt; stream at the end of the list, the playlist jumps to the beginning.
+</I>&gt;<i> &gt; It would be better if it stayed where I had scrolled it.
+</I>&gt;<i> 
+</I>&gt;<i> Argh.. I had never noticed this before. Playing a stream actually
+</I>&gt;<i> causes the mpd playlist to change/increment, which ends up refreshing
+</I>&gt;<i> the current playlist, among other things. What a pain.. I have an ugly
+</I>&gt;<i> workaround so that the playlist doesn't jump now, hopefully it doesn't
+</I>&gt;<i> break anything.
+</I>&gt;<i> 
+</I>&gt;<i> For what it's worth, mpd streaming support is pretty poor/buggy..
+</I>&gt;<i> 
+</I>&gt;<i> &gt; I can only speak for amazon.de. It has many covers that aren't
+</I>&gt;<i> &gt; available on amazon.com (mostly national artists). I don't know if it
+</I>&gt;<i> &gt; works exactly like the main amazon.com site but some other players
+</I>&gt;<i> &gt; (e.g. exaile) have this function so it seems to work.
+</I>&gt;<i> 
+</I>&gt;<i> I'll look into this at some point in the future.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; As mentioned above shoutcast streams have set only the song name tag.
+</I>&gt;<i> &gt; But this tag contains the artist AND the song name: &quot;artist - song&quot;
+</I>&gt;<i> &gt; Thus searching for lyrics should be possible but the lyrics tab shows
+</I>&gt;<i> &gt; &quot;Artist or song title not set&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> How is Sonata to know that both the artist and song are in the song
+</I>&gt;<i> name tag? Is it supposed to assume that a '-' in the song means this?
+</I>&gt;<i> There's obviously a huge number of situations where that doesn't work
+</I>&gt;<i> (hyphenated words). Do other clients look for this sort of thing? I
+</I>&gt;<i> hate to add specific code to work around problems with shoutcast
+</I>&gt;<i> streams that don't properly set their tags.
+</I>&gt;<i> 
+</I>&gt;<i> Anyway, I have thrown up a new tarball.. please test your issues
+</I>&gt;<i> (anyone else is welcome to as well ;p).
+</I>&gt;<i> <A HREF="http://people.os-zen.net/stonecrest/sonata-0.9.9.1.tar.gz">http://people.os-zen.net/stonecrest/sonata-0.9.9.1.tar.gz</A>
+</I>&gt;<i> 
+</I>&gt;<i> Scott
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000074.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+	<LI>Next message: <A HREF="000077.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Fetching lyrics fail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C98a2c790806250147v2854f057l8f7872620ffed3ac%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000663.html">
+   <LINK REL="Next"  HREF="000667.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Fetching lyrics fail</H1>
+    <B>Lazaros Koromilas</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C98a2c790806250147v2854f057l8f7872620ffed3ac%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Fetching lyrics fail">koromilaz at gmail.com
+       </A><BR>
+    <I>Wed Jun 25 10:47:43 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000663.html">[Sonata-users] Sonata 1.5.2 Released
+</A></li>
+        <LI>Next message: <A HREF="000667.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello all!
+
+I'm running sonata on `FreeBSD-7.0-RELEASE p1' and cannot get
+LyricWiki fetching to work.
+The message I get is: `Couldn't connect to LyricWiki'.
+I had to install `py-zsi-devel' from ports, because with `py-zsi'
+sonata would not recognize ZSI at all.
+
+Running the test zsi script outputs:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">koromil at blackpuma</A> ~/music]$ python zsi.py
+Traceback (most recent call last):
+  File &quot;zsi.py&quot;, line 10, in &lt;module&gt;
+    lyrics = lyricServer.getSong(artist=urllib.quote(artist),
+song=urllib.quote(title))['return'][&quot;lyrics&quot;]
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/ServiceProxy.py&quot;,
+line 305, in __call__
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/ServiceProxy.py&quot;,
+line 103, in _call
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/client.py&quot;, line
+502, in Receive
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/client.py&quot;, line
+436, in Receive
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/parse.py&quot;, line
+323, in Parse
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/TCcompound.py&quot;,
+line 201, in parse
+  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/TCcompound.py&quot;,
+line 147, in parse
+ZSI.EvaluateException: ComplexType for return has wrong
+type((u'urn:LyricWiki', u'LyricsResult')), looking for (None, None)
+[Element trace: /SOAP-ENV:Envelope/SOAP-ENV:Body/ns1:getSongResponse/return]
+
+Any help?
+
+Thank you,
+Lazaros.
+
+
+On Sun, Apr 27, 2008 at 6:29 PM, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> On Sun, Apr 27, 2008 at 4:25 AM, Revan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">revan at no-log.org</A>&gt; wrote:
+</I>&gt;&gt;<i> Hi everyone !
+</I>&gt;&gt;<i>  I have some troubles with Sonata (last SVN, rev 1.5).
+</I>&gt;&gt;<i>  Actually, I have the same issues described in these topics
+</I>&gt;&gt;<i>  <A HREF="https://lists.berlios.de/pipermail/sonata-users/2008-March/000585.html">https://lists.berlios.de/pipermail/sonata-users/2008-March/000585.html</A> and
+</I>&gt;&gt;<i>  <A HREF="https://lists.berlios.de/pipermail/sonata-users/2008-March/000590.html.">https://lists.berlios.de/pipermail/sonata-users/2008-March/000590.html.</A>
+</I>&gt;&gt;<i>  Unfortunately, removing .sonata did not solve anything...
+</I>&gt;<i>
+</I>&gt;<i> Can you try running the file mentioned in
+</I>&gt;<i> <A HREF="https://lists.berlios.de/pipermail/sonata-users/2008-March/000587.html">https://lists.berlios.de/pipermail/sonata-users/2008-March/000587.html</A>
+</I>&gt;<i> ?
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;<i>
+</I>
+
+
+-- 
+::<i>blackpuma::
+</I><A HREF="http://www.csd.uoc.gr/~koromil">http://www.csd.uoc.gr/~koromil</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000663.html">[Sonata-users] Sonata 1.5.2 Released
+</A></li>
+	<LI>Next message: <A HREF="000667.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

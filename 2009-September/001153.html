@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] new lyricwiki plugin (Re:  LyricWiki ugly fix.)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20new%20lyricwiki%20plugin%20%28Re%3A%20%20LyricWiki%20ugly%20fix.%29&In-Reply-To=%3C4AB4A9AA.3040305%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001152.html">
+   <LINK REL="Next"  HREF="001154.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] new lyricwiki plugin (Re:  LyricWiki ugly fix.)</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20new%20lyricwiki%20plugin%20%28Re%3A%20%20LyricWiki%20ugly%20fix.%29&In-Reply-To=%3C4AB4A9AA.3040305%40gmail.com%3E"
+       TITLE="[Sonata-users] new lyricwiki plugin (Re:  LyricWiki ugly fix.)">bebarino at gmail.com
+       </A><BR>
+    <I>Sat Sep 19 11:51:38 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001152.html">[Sonata-users] new lyricwiki plugin (Re: LyricWiki ugly fix.)
+</A></li>
+        <LI>Next message: <A HREF="001154.html">[Sonata-users] new lyricwiki plugin (Re:  LyricWiki ugly fix.)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1153">[ date ]</a>
+              <a href="thread.html#1153">[ thread ]</a>
+              <a href="subject.html#1153">[ subject ]</a>
+              <a href="author.html#1153">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tuukka Hastrup wrote:
+&gt;<i> As an example of writing lyrics plug-ins, here's one that currently 
+</I>&gt;<i> works for lyricwiki (btw, the domain name change to lyrics.wikia.com was 
+</I>&gt;<i> news to me), based on patches by others:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="http://tuukka.iki.fi/tmp/lyricwiki2.p">http://tuukka.iki.fi/tmp/lyricwiki2.p</A>
+</I>
+I've come up with this patch for 1.6.2 based on your work. Does it look
+good to you?
+
+diff --git a/sonata/info.py b/sonata/info.py
+index 166658f..f9e615f 100644
+--- a/sonata/info.py
++++ b/sonata/info.py
+@@ -1,15 +1,13 @@
+ 
+ import sys, os, locale, urllib
+ import threading # get_lyrics_start starts a thread get_lyrics_thread
+-from socket import getdefaulttimeout as socketgettimeout
+-from socket import setdefaulttimeout as socketsettimeout
+ 
+ import gtk, gobject
+-ServiceProxy = None # importing tried when needed
+ 
+ import ui, misc
+ import mpdhelper as mpdh
+ from consts import consts
++import re
+ 
+ class Info(object):
+ 	def __init__(self, config, info_image, linkcolor, on_link_click_cb, library_return_search_items, get_playing_song, TAB_INFO, on_image_activate, on_image_motion_cb, on_image_drop_cb, album_return_artist_and_tracks, new_tab):
+@@ -30,7 +28,6 @@ def __init__(self, config, info_image, linkcolor, on_link_click_cb, library_retu
+ 			print &quot;Locale cannot be found; please set your system's locale. Aborting...&quot;
+ 			sys.exit(1)
+ 
+-		self.lyricServer = None
+ 		self.last_info_bitrate = None
+ 
+ 		self.info_boxes_in_more = None
+@@ -313,19 +310,7 @@ def info_update(self, playing_or_paused, newbitrate, songinfo, update_all, blank
+ 					self.albumText.set_text(_(&quot;Album name not set.&quot;))
+ 				# Update lyrics:
+ 				if self.config.show_lyrics and not skip_lyrics:
+-					global ServiceProxy
+-					if ServiceProxy is None:
+-						try:
+-							from ZSI import ServiceProxy
+-							# Make sure we have the right version..
+-							if not hasattr(ServiceProxy, 'ServiceProxy'):
+-								ServiceProxy = None
+-						except ImportError:
+-							ServiceProxy = None
+-					if ServiceProxy is None:
+-						self.info_searchlabel.set_text(&quot;&quot;)
+-						self.info_show_lyrics(_(&quot;ZSI not found, fetching lyrics support disabled.&quot;), &quot;&quot;, &quot;&quot;, True)
+-					elif 'artist' in songinfo and 'title' in songinfo:
++					if 'artist' in songinfo and 'title' in songinfo:
+ 						self.get_lyrics_start(mpdh.get(songinfo, 'artist'), mpdh.get(songinfo, 'title'), mpdh.get(songinfo, 'artist'), mpdh.get(songinfo, 'title'), os.path.dirname(mpdh.get(songinfo, 'file')))
+ 					else:
+ 						self.info_searchlabel.set_text(&quot;&quot;)
+@@ -402,48 +387,30 @@ def get_lyrics_thread(self, search_artist, search_title, filename_artist, filena
+ 			filename = self.target_lyrics_filename(filename_artist, filename_title, song_dir)
+ 			# Fetch lyrics from lyricwiki.org
+ 			gobject.idle_add(self.info_show_lyrics, _(&quot;Fetching lyrics...&quot;), filename_artist, filename_title)
+-			if self.lyricServer is None:
+-				wsdlFile = &quot;<A HREF="http://lyricwiki.org/server.php?wsdl">http://lyricwiki.org/server.php?wsdl</A>&quot;
+-				try:
+-					self.lyricServer = True
+-					timeout = socketgettimeout()
+-					socketsettimeout(consts.LYRIC_TIMEOUT)
+-					self.lyricServer = ServiceProxy.ServiceProxy(wsdlFile, cachedir=os.path.expanduser(&quot;~/.service_proxy_dir&quot;)) 
+-				except:
+-					socketsettimeout(timeout)
+-					lyrics = _(&quot;Couldn't connect to LyricWiki&quot;)
+-					gobject.idle_add(self.info_show_lyrics, lyrics, filename_artist, filename_title)
+-					self.lyricServer = None
+-					gobject.idle_add(self.info_searchlabel.set_markup, search_str)
+-					gobject.idle_add(self.info_editlyricslabel.set_markup, edit_str)
+-					return
+ 			try:
+-				timeout = socketgettimeout()
+-				socketsettimeout(consts.LYRIC_TIMEOUT)
+-				lyrics = self.lyricServer.getSong(artist=self.lyricwiki_format(search_artist), song=self.lyricwiki_format(search_title))['return'][&quot;lyrics&quot;]
+-				if lyrics.lower() != &quot;not found&quot;:
++				lyricpage = urllib.urlopen(&quot;<A HREF="http://lyricwiki.org/index.php?title=%s:%s&amp;action=edit">http://lyricwiki.org/index.php?title=%s:%s&amp;action=edit</A>&quot; % (self.lyricwiki_format(search_artist), self.lyricwiki_format(search_title))).read()
++				content = re.split(&quot;&lt;textarea[^&gt;]*&gt;&quot;, lyricpage)[1].split(&quot;&lt;/textarea&gt;&quot;)[0]
++				if content.startswith(&quot;#REDIRECT [[&quot;):
++					addr = &quot;<A HREF="http://lyricwiki.org/index.php?title=%s&amp;action=edit">http://lyricwiki.org/index.php?title=%s&amp;action=edit</A>&quot; % urllib.quote(content.split(&quot;[[&quot;)[1].split(&quot;]]&quot;)[0])
++					content = urllib.urlopen(addr).read()
++				lyrics = content.split(&quot;&lt;lyrics&gt;&quot;)[1].split(&quot;&lt;/lyrics&gt;&quot;)[0]
++				if lyrics.strip() != &quot;&lt;!-- PUT LYRICS HERE (and delete this entire line) --&gt;&quot;:
+ 					lyrics = misc.unescape_html(lyrics)
+ 					lyrics = misc.wiki_to_html(lyrics)
+-					lyrics = lyrics.encode(&quot;ISO-8859-1&quot;)
+-					gobject.idle_add(self.info_show_lyrics, lyrics, filename_artist, filename_title)
+-					# Save lyrics to file:
++					lyrics = lyrics.decode(&quot;utf-8&quot;)
++# Save lyrics to file:
+ 					misc.create_dir('~/.lyrics/')
+ 					f = open(filename, 'w')
+-					lyrics = misc.unescape_html(lyrics)
+-					try:
+-						f.write(lyrics.decode(self.enc).encode('utf8'))
+-					except:
+-						f.write(lyrics)
++					f.write(lyrics)
+ 					f.close()
+ 				else:
+ 					lyrics = _(&quot;Lyrics not found&quot;)
+-					gobject.idle_add(self.info_show_lyrics, lyrics, filename_artist, filename_title)
++				gobject.idle_add(self.info_show_lyrics, lyrics, filename_artist, filename_title)
+ 			except:
+ 				lyrics = _(&quot;Fetching lyrics failed&quot;)
+ 				gobject.idle_add(self.info_show_lyrics, lyrics, filename_artist, filename_title)
+ 			gobject.idle_add(self.info_searchlabel.set_markup, search_str)
+ 			gobject.idle_add(self.info_editlyricslabel.set_markup, edit_str)
+-			socketsettimeout(timeout)
+ 
+ 	def info_show_lyrics(self, lyrics, artist, title, force=False):
+ 		if force:
+-- 
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001152.html">[Sonata-users] new lyricwiki plugin (Re: LyricWiki ugly fix.)
+</A></li>
+	<LI>Next message: <A HREF="001154.html">[Sonata-users] new lyricwiki plugin (Re:  LyricWiki ugly fix.)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1153">[ date ]</a>
+              <a href="thread.html#1153">[ thread ]</a>
+              <a href="subject.html#1153">[ subject ]</a>
+              <a href="author.html#1153">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

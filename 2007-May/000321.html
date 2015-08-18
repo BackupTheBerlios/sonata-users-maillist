@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Multimedia-keys in Gnome 2.18
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Multimedia-keys%20in%20Gnome%202.18&In-Reply-To=%3C465AAAFF.6000203%40gmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000320.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Multimedia-keys in Gnome 2.18</H1>
+    <B>Florian Zeitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Multimedia-keys%20in%20Gnome%202.18&In-Reply-To=%3C465AAAFF.6000203%40gmx.de%3E"
+       TITLE="[Sonata-users] Multimedia-keys in Gnome 2.18">florian.zeitz at gmx.de
+       </A><BR>
+    <I>Mon May 28 12:12:15 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000320.html">[Sonata-users] Multimedia-keys in Gnome 2.18
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Scott Horowitz schrieb:
+&gt;<i> On 5/27/07, Andrew Conkling &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">andrew.conkling at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> On 5/27/07, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i> Thanks Florian, committed. Did I miss the memo where the gnome folks
+</I>&gt;&gt;&gt;<i> said they changed this? :p
+</I>&gt;&gt;<i> If you did, then everyone did. There was a longtime-open and popular bug on
+</I>&gt;&gt;<i> Launchpad for Rhythmbox/Banshee/Amarok during the GNOME 2.17 development
+</I>&gt;&gt;<i> cycle, and it's actually still not resolved for Amarok. ;)
+</I>&gt;<i> 
+</I>&gt;<i> Heh. If only every community had a Florian to write a patch ;-)
+</I>&gt;<i> 
+</I>Now if they only were written properly...
+I just discovered that I made two mistakes (they don't manifest as bugs,
+but still).
+First there is a unnecessary space in line 6420 after
+settingsDaemonInterface:
+&quot;settingsDaemonInterface .connect_to_signal('MediaPlayerKeyPressed',
+self.mediaPlayerKeysCallback)&quot;
+
+Second the whole block in __init__ I added should be before
+Base.__init__ is called, because otherwise HAVE_MMKEYS has not been set
+to False and mmkeys is initialized even if it shouldn't be.
+
+- --
+Florob
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFGWqr/0JXcdjR+9YQRAku/AKCurfEv/3bX70oK5OqQiqbM/FdDeACfSKI/
+ugSy8wYnsYqVGpDfiRDaa4g=
+=G2ul
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000320.html">[Sonata-users] Multimedia-keys in Gnome 2.18
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#321">[ date ]</a>
+              <a href="thread.html#321">[ thread ]</a>
+              <a href="subject.html#321">[ subject ]</a>
+              <a href="author.html#321">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

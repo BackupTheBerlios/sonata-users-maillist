@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Request/Bug%3A%20Prefer%20higher%20resolution%20when%0A%20downloading%20Album%20Art&In-Reply-To=%3C4ADDACFD.1020805%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001179.html">
+   <LINK REL="Next"  HREF="001186.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art</H1>
+    <B>Joschka Thurner</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Request/Bug%3A%20Prefer%20higher%20resolution%20when%0A%20downloading%20Album%20Art&In-Reply-To=%3C4ADDACFD.1020805%40gmail.com%3E"
+       TITLE="[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art">joschka.thurner at googlemail.com
+       </A><BR>
+    <I>Tue Oct 20 14:28:45 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001179.html">[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+</A></li>
+        <LI>Next message: <A HREF="001186.html">[Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1183">[ date ]</a>
+              <a href="thread.html#1183">[ thread ]</a>
+              <a href="subject.html#1183">[ subject ]</a>
+              <a href="author.html#1183">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Wow, that was quick! Just rebuild Sonata from git, - works perfect.
+Thanks!
+
+&gt;<i> On 15.10.2009 08:49, Stephen Boyd wrote:
+</I>&gt;<i> ---&gt;8----
+</I>&gt;<i>
+</I>&gt;<i> From: Stephen Boyd&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt;
+</I>&gt;<i> Date: Wed, 14 Oct 2009 23:43:10 -0700
+</I>&gt;<i> Subject: [PATCH] rhapsody: download big artwork when requesting single image
+</I>&gt;<i>
+</I>&gt;<i> Previously, the first artwork image listed by rhapsody would be
+</I>&gt;<i> downloaded usually resulting in a small 70x70 image. Download the larger
+</I>&gt;<i> 170x170 image (usually the last image) instead because the most frequent
+</I>&gt;<i> user of the artwork is the currently playing icon.
+</I>&gt;<i>
+</I>&gt;<i> Reported-by: Joschka Thurner&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">joschka.thurner at googlemail.com</A>&gt;
+</I>&gt;<i> ---
+</I>&gt;<i>   sonata/artwork.py |    2 +-
+</I>&gt;<i>   1 files changed, 1 insertions(+), 1 deletions(-)
+</I>&gt;<i>
+</I>&gt;<i> diff --git a/sonata/artwork.py b/sonata/artwork.py
+</I>&gt;<i> index 69810a1..6441fa8 100644
+</I>&gt;<i> --- a/sonata/artwork.py
+</I>&gt;<i> +++ b/sonata/artwork.py
+</I>&gt;<i> @@ -558,7 +558,7 @@ def artwork_download_img_to_file(self, artist, album, dest_filename, all_images=
+</I>&gt;<i>               return False
+</I>&gt;<i>
+</I>&gt;<i>           if not all_images:
+</I>&gt;<i> -            urllib.urlretrieve(imglist[0], dest_filename)
+</I>&gt;<i> +            urllib.urlretrieve(imglist[-1], dest_filename)
+</I>&gt;<i>               self.downloading_image = False
+</I>&gt;<i>               return True
+</I>&gt;<i>           else:
+</I>&gt;<i>
+</I>&gt;<i>    
+</I>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001179.html">[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+</A></li>
+	<LI>Next message: <A HREF="001186.html">[Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1183">[ date ]</a>
+              <a href="thread.html#1183">[ thread ]</a>
+              <a href="subject.html#1183">[ subject ]</a>
+              <a href="author.html#1183">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

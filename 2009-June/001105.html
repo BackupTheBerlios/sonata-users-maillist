@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] playlists: make popup-menu more user-friendly
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20playlists%3A%20make%20popup-menu%20more%20user-friendly&In-Reply-To=%3C1245227420-10766-1-git-send-email-bebarino%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001104.html">
+   <LINK REL="Next"  HREF="001106.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] playlists: make popup-menu more user-friendly</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20playlists%3A%20make%20popup-menu%20more%20user-friendly&In-Reply-To=%3C1245227420-10766-1-git-send-email-bebarino%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] playlists: make popup-menu more user-friendly">bebarino at gmail.com
+       </A><BR>
+    <I>Wed Jun 17 10:30:20 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001104.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001106.html">[Sonata-users] [PATCH] playlists: make popup-menu more	user-friendly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1105">[ date ]</a>
+              <a href="thread.html#1105">[ thread ]</a>
+              <a href="subject.html#1105">[ subject ]</a>
+              <a href="author.html#1105">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Instead of having a popup dialog ask you to either replace or append to
+the selected playlist, provide two popup menus for the replace and
+append actions. This should be less intrusive.
+
+Allow the user to append and replace songs from within the library tab
+in addition to the usual current tab. This makes it easier to build
+&quot;misc&quot; playlists without requiring you to add songs to the current
+tab first.
+
+Inspired by a patch from Boris Grozev &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">nsfist at gmail.com</A>&gt;
+---
+
+Finally got around to this. Testing would be appreciated.
+
+ sonata/main.py      |   26 ++++++++++++++++++++------
+ sonata/playlists.py |   51 ++++++++++++++++++++++++++++++---------------------
+ 2 files changed, 50 insertions(+), 27 deletions(-)
+
+diff --git sonata/main.py sonata/main.py
+index a9237f9..c068968 100644
+--- sonata/main.py
++++ sonata/main.py
+@@ -239,7 +239,9 @@ def __init__(self, args, window=None, _sugar=False):
+ 		# Popup menus:
+ 		actions = [
+ 			('sortmenu', None, _('_Sort List')),
+-			('plmenu', None, _('Sa_ve List to')),
++			('plmenu', None, _('Sa_ve Selected to')),
++			('append', None, _('_Append')),
++			('replace', None, _('_Replace')),
+ 			('profilesmenu', None, _('_Connection')),
+ 			('playaftermenu', None, _('P_lay after')),
+ 			('updatemenu', None, _('_Update')),
+@@ -458,7 +460,7 @@ def __init__(self, args, window=None, _sugar=False):
+ 			]
+ 
+ 		# Playlists tab
+-		self.playlists = playlists.Playlists(self.config, self.window, self.client, lambda:self.UIManager, self.update_menu_visibility, self.iterate_now, self.on_add_item, self.on_playlists_button_press, self.current.get_current_songs, self.connected, self.TAB_PLAYLISTS)
++		self.playlists = playlists.Playlists(self.config, self.window, self.client, lambda:self.UIManager, self.update_menu_visibility, self.iterate_now, self.on_add_item, self.on_playlists_button_press, self.current.get_current_songs, self.connected, self.add_selected_to_playlist, self.TAB_PLAYLISTS)
+ 
+ 		self.playlists_treeview = self.playlists.get_treeview()
+ 		self.playlists_selection = self.playlists.get_selection()
+@@ -1255,6 +1257,18 @@ def on_add_item(self, _widget, play_after=False):
+ 					mpdh.call(self.client, 'play')
+ 				else:
+ 					mpdh.call(self.client, 'play', int(playid))
++	def add_selected_to_playlist(self, plname):
++		if self.current_tab == self.TAB_LIBRARY:
++			songs = self.library.get_path_child_filenames(True)
++		elif self.current_tab == self.TAB_CURRENT:
++			songs = self.current.get_selected_filenames(0)
++		else:
++			raise Exception(&quot;This tab doesn't support playlists&quot;)
++
++		mpdh.call(self.client, 'command_list_ok_begin')
++		for song in songs:
++			mpdh.call(self.client, 'playlistadd', plname, song)
++		mpdh.call(self.client, 'command_list_end')
+ 
+ 	def stream_parse_and_add(self, item):
+ 		# We need to do different things depending on if this is 
+@@ -3002,17 +3016,17 @@ def update_menu_visibility(self, show_songinfo_only=False):
+ 		elif self.current_tab == self.TAB_LIBRARY:
+ 			if len(self.librarydata) &gt; 0:
+ 				if self.library_selection.count_selected_rows() &gt; 0:
+-					for menu in ['add', 'replace', 'playafter', 'tag']:
++					for menu in ['add', 'replace', 'playafter', 'tag', 'pl']:
+ 						self.UIManager.get_widget('/mainmenu/' + menu + 'menu/').show()
+ 					self.UIManager.get_widget('/mainmenu/updatemenu/updateselectedmenu/').show()
+ 				else:
+-					for menu in ['add', 'replace', 'playafter', 'tag']:
++					for menu in ['add', 'replace', 'playafter', 'tag', 'pl']:
+ 						self.UIManager.get_widget('/mainmenu/' + menu + 'menu/').hide()
+ 					self.UIManager.get_widget('/mainmenu/updatemenu/updateselectedmenu/').hide()
+ 			else:
+-				for menu in ['add', 'replace', 'playafter', 'tag', 'update']:
++				for menu in ['add', 'replace', 'playafter', 'tag', 'update', 'pl']:
+ 					self.UIManager.get_widget('/mainmenu/' + menu + 'menu/').hide()
+-			for menu in ['remove', 'clear', 'pl', 'rename', 'rm', 'new', 'edit', 'sort']:
++			for menu in ['remove', 'clear', 'rename', 'rm', 'new', 'edit', 'sort']:
+ 				self.UIManager.get_widget('/mainmenu/' + menu + 'menu/').hide()
+ 			if self.library.search_visible():
+ 				self.UIManager.get_widget('/mainmenu/updatemenu/').hide()
+diff --git sonata/playlists.py sonata/playlists.py
+index b80403d..cd4dbcc 100644
+--- sonata/playlists.py
++++ sonata/playlists.py
+@@ -19,7 +19,7 @@
+ from pluginsystem import pluginsystem, BuiltinPlugin
+ 
+ class Playlists(object):
+-	def __init__(self, config, window, client, UIManager, update_menu_visibility, iterate_now, on_add_item, on_playlists_button_press, get_current_songs, connected, TAB_PLAYLISTS):
++	def __init__(self, config, window, client, UIManager, update_menu_visibility, iterate_now, on_add_item, on_playlists_button_press, get_current_songs, connected, add_selected_to_playlist, TAB_PLAYLISTS):
+ 		self.config = config
+ 		self.window = window
+ 		self.client = client
+@@ -29,6 +29,7 @@ def __init__(self, config, window, client, UIManager, update_menu_visibility, it
+ 		self.on_add_item = on_add_item
+ 		self.on_playlists_button_press = on_playlists_button_press
+ 		self.get_current_songs = get_current_songs
++		self.add_selected_to_playlist = add_selected_to_playlist
+ 		self.connected = connected
+ 
+ 		self.mergepl_id = None
+@@ -88,20 +89,31 @@ def populate_playlists_for_menu(self, playlistinfo):
+ 			self.actionGroupPlaylists = None
+ 		self.actionGroupPlaylists = gtk.ActionGroup('MPDPlaylists')
+ 		self.UIManager().ensure_update()
+-		actions = [(&quot;Playlist: %s&quot; % playlist.replace(&quot;&amp;&quot;, &quot;&quot;),
++		a_actions = [(&quot;Playlist-append: %s&quot; % playlist.replace(&quot;&amp;&quot;, &quot;&quot;),
+ 			    gtk.STOCK_JUSTIFY_CENTER,
+ 			    misc.unescape_html(playlist), None, None,
+-			    self.on_playlist_menu_click)
++			    self.on_playlist_append_click)
+ 			    for playlist in playlistinfo]
+-		self.actionGroupPlaylists.add_actions(actions)
++		r_actions = [(&quot;Playlist-replace: %s&quot; % playlist.replace(&quot;&amp;&quot;,&quot;&quot;),
++			    gtk.STOCK_JUSTIFY_CENTER,
++			    misc.unescape_html(playlist), None, None,
++			    self.on_playlist_replace_click)
++			    for playlist in playlistinfo]
++		self.actionGroupPlaylists.add_actions(a_actions)
++		self.actionGroupPlaylists.add_actions(r_actions)
+ 		uiDescription = &quot;&quot;&quot;
+ 			&lt;ui&gt;
+ 			  &lt;popup name=&quot;mainmenu&quot;&gt;
+ 			      &lt;menu action=&quot;plmenu&quot;&gt;
++			         &lt;menu action=&quot;append&quot;&gt;
+ 			&quot;&quot;&quot;
+-		uiDescription += &quot;&quot;.join('&lt;menuitem action=\&quot;%s\&quot;/&gt;' % action[0]
+-						for action in actions)
+-		uiDescription += '&lt;/menu&gt;&lt;/popup&gt;&lt;/ui&gt;'
++		uiDescription += &quot;&quot;.join('&lt;menuitem action=&quot;%s&quot;/&gt;' % action[0]
++						for action in a_actions)
++		uiDescription += '&lt;/menu&gt;&lt;menu action=&quot;replace&quot;&gt;'
++		uiDescription += &quot;&quot;.join('&lt;menuitem action=&quot;%s&quot;/&gt;' % action[0]
++						for action in r_actions)
++
++		uiDescription += '&lt;/menu&gt;&lt;/menu&gt;&lt;/popup&gt;&lt;/ui&gt;'
+ 		self.mergepl_id = self.UIManager().add_ui_from_string(uiDescription)
+ 		self.UIManager().insert_action_group(self.actionGroupPlaylists, 0)
+ 		self.UIManager().get_widget('/hidden').set_property('visible', False)
+@@ -115,6 +127,8 @@ def on_playlist_save(self, _action):
+ 			if self.playlist_name_exists(_(&quot;Save Playlist&quot;), 'savePlaylistError', plname):
+ 				return
+ 			self.playlist_create(plname)
++			mpdh.call(self.client, 'playlistclear', plname)
++			self.add_selected_to_playlist(plname)
+ 	
+ 	def playlist_create(self, playlistname, oldname=None):
+ 		mpdh.call(self.client, 'rm', playlistname)
+@@ -124,20 +138,15 @@ def playlist_create(self, playlistname, oldname=None):
+ 			mpdh.call(self.client, 'save', playlistname)
+ 		self.populate()
+ 		self.iterate_now()
+-	
+-	def on_playlist_menu_click(self, action):
+-		plname = misc.unescape_html(action.get_name().replace(&quot;Playlist: &quot;, &quot;&quot;))
+-		response = ui.show_msg(self.window, _(&quot;Would you like to replace the existing playlist or append these songs?&quot;), _(&quot;Existing Playlist&quot;), &quot;existingPlaylist&quot;, (_(&quot;Replace playlist&quot;), 1, _(&quot;Append songs&quot;), 2), default=self.config.existing_playlist_option)
+-		if response == 1: # Overwrite
+-			self.config.existing_playlist_option = response
+-			self.playlist_create(plname)
+-		elif response == 2: # Append songs:
+-			self.config.existing_playlist_option = response
+-			mpdh.call(self.client, 'command_list_ok_begin')
+-			for song in self.get_current_songs():
+-				mpdh.call(self.client, 'playlistadd', plname, mpdh.get(song, 'file'))
+-			mpdh.call(self.client, 'command_list_end')
+-		return
++
++	def on_playlist_append_click(self, action):
++		plname = misc.unescape_html(action.get_name().replace(&quot;Playlist-append: &quot;, &quot;&quot;))
++		self.add_selected_to_playlist(plname)
++
++	def on_playlist_replace_click(self, action):
++		plname = misc.unescape_html(action.get_name().replace(&quot;Playlist-replace: &quot;, &quot;&quot;))
++		mpdh.call(self.client, 'playlistclear', plname)
++		self.add_selected_to_playlist(plname)
+ 	
+ 	def playlist_name_exists(self, title, role, plname, skip_plname=&quot;&quot;):
+ 		# If the playlist already exists, and the user does not want to replace it, return True; In
+-- 
+1.6.3.2.306.g4f4fa
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001104.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001106.html">[Sonata-users] [PATCH] playlists: make popup-menu more	user-friendly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1105">[ date ]</a>
+              <a href="thread.html#1105">[ thread ]</a>
+              <a href="subject.html#1105">[ subject ]</a>
+              <a href="author.html#1105">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

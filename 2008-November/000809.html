@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Album view
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Album%20view&In-Reply-To=%3C35a6f8e30811162031v333c19a9j4aa1723e7c7180fe%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000843.html">
+   <LINK REL="Next"  HREF="000811.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Album view</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Album%20view&In-Reply-To=%3C35a6f8e30811162031v333c19a9j4aa1723e7c7180fe%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Album view">stonecrest at gmail.com
+       </A><BR>
+    <I>Mon Nov 17 05:31:31 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000843.html">[Sonata-users] Album view
+</A></li>
+        <LI>Next message: <A HREF="000811.html">[Sonata-users] Album view
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#809">[ date ]</a>
+              <a href="thread.html#809">[ thread ]</a>
+              <a href="subject.html#809">[ subject ]</a>
+              <a href="author.html#809">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Nov 16, 2008 at 8:19 PM, Fergus Bremner &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">fergus.bremner at gmail.com</A>&gt;wrote:
+
+&gt;<i> The only odd thing is the search: so, I'm looking at my albums and I
+</I>&gt;<i> just want to see those titled &quot;Tristan und Isolde&quot;, I select 'Album'
+</I>&gt;<i> from the search mode drop down and begin entering 'tristan...' in a
+</I>&gt;<i> flash I get results (wonderfully responsive), but instead of showing
+</I>&gt;<i> the albums it shows the songs within those albums. Which means I get a
+</I>&gt;<i> song list from all three versions of Tristan. Odd, no?
+</I>&gt;<i> Strictly speaking, the expected behaviour would be to return a result
+</I>&gt;<i> set based upon the current view.
+</I>&gt;<i> Further, were I in Artist list view and searched for 'Album'
+</I>&gt;<i> &quot;tristan&quot;, I would see a list of the three artists in my collection
+</I>&gt;<i> with Tristan und Isolde recordings. And so on.
+</I>&gt;<i> In this respect, Sonata is trying to do too much. It needn't.
+</I>
+
+Programmatically speaking, sonata is trying to do too little ;) The library
+search is completely unrelated to the library viewing mode (and it predates
+it), it simply returns a search of all files in your library. While you came
+up with a use case where you wanted a different behavior, it's certainly
+easy to come up with the opposite use case. Imagine you're somewhere buried
+inside your library and suddenly you want to add a specific file. The last
+thing you want is to have to switch library views before searching to get
+the result you want.
+
+I'm inclined to keep it the way it is because, in your use case, you have
+another option. You could have clicked on the library treeview and started
+typing 'tristan' instead. This would use gtk's built-in find-as-you-type
+and, since the albums are listed alphabetically, you would've had your three
+results right there.
+
+
+&gt;<i> I know this might be pushing it but an album cover preview would be
+</I>&gt;<i> perfect, in place of the generic (though attractive) blue icon. But
+</I>&gt;<i> you know that already...
+</I>
+
+If I had added it, the album view would've been extremely slow. Cover art
+will come, but it'll need to be refactored to be threaded so it can work in
+the background - it wasn't coded for getting so many covers at once.
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20081116/66112644/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20081116/66112644/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000843.html">[Sonata-users] Album view
+</A></li>
+	<LI>Next message: <A HREF="000811.html">[Sonata-users] Album view
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#809">[ date ]</a>
+              <a href="thread.html#809">[ thread ]</a>
+              <a href="subject.html#809">[ subject ]</a>
+              <a href="author.html#809">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

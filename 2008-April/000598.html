@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20r797%20breaks%20mmkeys%20on%20gnome%20%3C%202.22&In-Reply-To=%3C47F4CDA2.1090808%40gmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000599.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22</H1>
+    <B>Florian Zeitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20r797%20breaks%20mmkeys%20on%20gnome%20%3C%202.22&In-Reply-To=%3C47F4CDA2.1090808%40gmx.de%3E"
+       TITLE="[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22">florian.zeitz at gmx.de
+       </A><BR>
+    <I>Thu Apr  3 14:29:22 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000599.html">[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#598">[ date ]</a>
+              <a href="thread.html#598">[ thread ]</a>
+              <a href="subject.html#598">[ subject ]</a>
+              <a href="author.html#598">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hy list,
+the fix for multimedia keys in svn (r797) actually breaks them at least
+for Gnome 2.20, because:
+&quot;&quot;&quot;
+# mmkeys for gnome 2.22+
+settingsDaemonObj = bus.get_object('org.gnome.SettingsDaemon',
+'/org/gnome/SettingsDaemon/MediaKeys')
+settingsDaemonInterface = dbus.Interface(settingsDaemonObj,
+'org.gnome.SettingsDaemon.MediaKeys')
+&quot;&quot;&quot;
+doesn't raise an exception as the code expects.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFH9M2i0JXcdjR+9YQRArLkAJ90qETP5cUXFRqzNtTkhf1TrGrszgCgh2FI
+zxcz/Jzc92PvHzMzVwdJrT4=
+=ueou
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000599.html">[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#598">[ date ]</a>
+              <a href="thread.html#598">[ thread ]</a>
+              <a href="subject.html#598">[ subject ]</a>
+              <a href="author.html#598">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

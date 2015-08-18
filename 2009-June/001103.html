@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Notifications (and the plugin system in general)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C780e0a6b0906051512m67ca503dle2755ba2bdbd34e2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001102.html">
+   <LINK REL="Next"  HREF="001104.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Notifications (and the plugin system in general)</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C780e0a6b0906051512m67ca503dle2755ba2bdbd34e2%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Notifications (and the plugin system in general)">bebarino at gmail.com
+       </A><BR>
+    <I>Sat Jun  6 00:12:53 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001102.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001104.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1103">[ date ]</a>
+              <a href="thread.html#1103">[ thread ]</a>
+              <a href="subject.html#1103">[ subject ]</a>
+              <a href="author.html#1103">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jun 5, 2009 at 6:42 AM, Tuukka Hastrup&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt; wrote:
+&gt;<i> Do you guys have a lot of experience with plug-in systems, or would you
+</I>&gt;<i> just need more documentation to understand my design before going
+</I>&gt;<i> further? I admit I've never implemented a plug-in system before, I just
+</I>&gt;<i> know some: Eclipse, Firefox, Compiz, MoinMoin... Manuel Naranjo took the
+</I>&gt;<i> first stab at the plug-in system, and I designed the current one based
+</I>&gt;<i> on that.
+</I>
+I don't think documentation is necessary, just you pointing out where
+we thought wrong is good enough for me. I have never implemented a
+plugin system either, and it makes sense to investigate how others
+have implemented them. I thought the original system was distutils
+based, right? At least with that approach, the dependency management
+is handled by distutils, and we don't have to reinvent the wheel for
+capabilities. The downside is we depend on distutils and the system
+becomes heavy-weight.
+
+&gt;<i> * If MPD changes or Sonata changes, the plug-in interface should remain
+</I>&gt;<i> backward-compatible (within reason).
+</I>
+Are we too concerned about this? I thought we will be carrying most of
+the plugins in our code base so changing the API shouldn't be too much
+of a concern. I admit it's not pleasant, but we shouldn't contort the
+code for backwards compatibility.
+
+&gt;<i> What you describe is generic to subtyping. Python style prefers duck
+</I>&gt;<i> typing specifically, which means you don't require the objects of a type
+</I>&gt;<i> &#160;to actually be instances of a (sub-)class. The requirement follows:
+</I>&gt;<i> &#160;* We want that plug-ins don't have to extend a sonata.Plugin class.
+</I>
+I agree, there really isn't a need for an OO style. There's no real
+object hierarchy to speak of.
+
+&gt;<i> Currently, a plug-in is a module with the required metadata magic. The
+</I>&gt;<i> capabilities of a plug-in are currently described in the metadata to
+</I>&gt;<i> meet a requirement:
+</I>&gt;<i> &#160;* We may want to know the capabilities of a plug-in to decide when to
+</I>&gt;<i> load it.
+</I>
+I think if we go with the class style, we don't need to instantiate a
+class to inspect the class members. In this way we could have the
+capabilities be part of the class, not the instance. Then when we
+decide it's time to use the plugin, we instantiate the class. When we
+disable, we delete the class.
+
+&gt;<i> The decorator *syntax* might help here.
+</I>
+Thanks, I meant to say syntax (or semantics). It still feels like a
+pattern to me, but Wikipedia disagrees :-(
+
+&gt;<i> There is some exploration of the current system being used in the OO
+</I>&gt;<i> style plus commentary by the developer here:
+</I>&gt;<i> <A HREF="http://github.com/github076986099/sonata-plugins/tree/master">http://github.com/github076986099/sonata-plugins/tree/master</A>
+</I>&gt;<i>
+</I>&gt;<i> As can be seen here, the life cycle model needs to be designed
+</I>&gt;<i> carefully. Python modules are loaded but never unloaded, so we need
+</I>&gt;<i> something like the current &quot;enablables&quot; capability for setup and
+</I>&gt;<i> teardown (if it should be possible to disable plug-ins at runtime). The
+</I>&gt;<i> capability can instantiate classes, and other capabilities can refer to
+</I>&gt;<i> methods in the resulting objects (sonata/pluginsystem.py line 81).
+</I>&gt;<i>
+</I>
+Thanks for pointing out this OO style implementation. I'll have to
+look over this to get some more ideas.
+
+I think we just need some more competing implementations and we'll get
+this all figured out ;-)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001102.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001104.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1103">[ date ]</a>
+              <a href="thread.html#1103">[ thread ]</a>
+              <a href="subject.html#1103">[ subject ]</a>
+              <a href="author.html#1103">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

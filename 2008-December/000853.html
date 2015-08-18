@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Spontaneously deleting of album covers
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Spontaneously%20deleting%20of%20album%20covers&In-Reply-To=%3C4ab99cfd0812041029y7d730ba3kdd84abc1eb3159e8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000852.html">
+   <LINK REL="Next"  HREF="000854.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Spontaneously deleting of album covers</H1>
+    <B>&#1040;&#1088;&#1090;&#1077;&#1084; &#1057;&#1084;&#1080;&#1088;&#1085;&#1086;&#1074;</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Spontaneously%20deleting%20of%20album%20covers&In-Reply-To=%3C4ab99cfd0812041029y7d730ba3kdd84abc1eb3159e8%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Spontaneously deleting of album covers">smirnoffjr at gmail.com
+       </A><BR>
+    <I>Thu Dec  4 19:29:10 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000852.html">[Sonata-users] Spontaneously deleting of album covers
+</A></li>
+        <LI>Next message: <A HREF="000854.html">[Sonata-users] Spontaneously deleting of album covers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#853">[ date ]</a>
+              <a href="thread.html#853">[ thread ]</a>
+              <a href="subject.html#853">[ subject ]</a>
+              <a href="author.html#853">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>2008/12/4 Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt;:
+&gt;<i> On Wed, Dec 3, 2008 at 2:58 PM, &#1040;&#1088;&#1090;&#1077;&#1084; &#1057;&#1084;&#1080;&#1088;&#1085;&#1086;&#1074; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">smirnoffjr at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> after starting sonata (latest svn) with --hidden flag, cover of
+</I>&gt;&gt;<i> currently playing (or pausing) song is removed.
+</I>&gt;<i>
+</I>&gt;<i> Hmm, I'm not really sure why this is and I haven't experienced it. But I
+</I>&gt;<i> just made a commit to better protect from any possibility of deleting
+</I>&gt;<i> artwork. It may give a traceback now instead - can you see if this fixes the
+</I>&gt;<i> problem (or if a traceback happens)?
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i>
+</I>
+Now cover not deleted, but still strange output:
+
+% sonata --hidden
+/usr/lib/python2.6/site-packages/ZSI/resolvers.py:7:
+DeprecationWarning: the multifile module has been deprecated since
+Python 2.5
+  import multifile, mimetools, urllib
+/usr/lib/python2.6/site-packages/sonata/img.py:28: GtkWarning:
+gdk_pixbuf_scale_simple: assertion `dest_width &gt; 0' failed
+  crop_pixbuf = pixbuf.scale_simple(image_width, image_height,
+gtk.gdk.INTERP_HYPER)
+/usr/lib/python2.6/site-packages/sonata/artwork.py:415: GtkWarning:
+gdk_pixbuf_scale_simple: assertion `dest_width &gt; 0' failed
+  case = self.casepb.scale_simple(w, h, gtk.gdk.INTERP_BILINEAR)
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.6/site-packages/sonata/artwork.py&quot;, line 393,
+in artwork_set_image
+    pix2 = self.artwork_apply_composite_case(pix2, w, h)
+  File &quot;/usr/lib/python2.6/site-packages/sonata/artwork.py&quot;, line 417,
+in artwork_apply_composite_case
+    pix = pix.scale_simple(w-spine_width, h, gtk.gdk.INTERP_BILINEAR)
+AttributeError: 'NoneType' object has no attribute 'scale_simple'
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.6/site-packages/sonata/artwork.py&quot;, line 393,
+in artwork_set_image
+    pix2 = self.artwork_apply_composite_case(pix2, w, h)
+  File &quot;/usr/lib/python2.6/site-packages/sonata/artwork.py&quot;, line 417,
+in artwork_apply_composite_case
+    pix = pix.scale_simple(w-spine_width, h, gtk.gdk.INTERP_BILINEAR)
+AttributeError: 'NoneType' object has no attribute 'scale_simple'
+
+-- 
+Artyom
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000852.html">[Sonata-users] Spontaneously deleting of album covers
+</A></li>
+	<LI>Next message: <A HREF="000854.html">[Sonata-users] Spontaneously deleting of album covers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#853">[ date ]</a>
+              <a href="thread.html#853">[ thread ]</a>
+              <a href="subject.html#853">[ subject ]</a>
+              <a href="author.html#853">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

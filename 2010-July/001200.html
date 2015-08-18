@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Pull request
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2010-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Pull%20request&In-Reply-To=%3C20100731113705.681b50d3%40gourami%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Pull request</H1>
+    <B>Jonathan Ballet</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Pull%20request&In-Reply-To=%3C20100731113705.681b50d3%40gourami%3E"
+       TITLE="[Sonata-users] Pull request">jon at multani.info
+       </A><BR>
+    <I>Sat Jul 31 11:37:05 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1200">[ date ]</a>
+              <a href="thread.html#1200">[ thread ]</a>
+              <a href="subject.html#1200">[ subject ]</a>
+              <a href="author.html#1200">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+some months ago, I worked a bit on Sonata, to fix some daily issues. This ended
+in two small patches, which I request for inclusion into the mainline.
+
+The code can be found at <A HREF="git://github.com/multani/sonata.git">git://github.com/multani/sonata.git</A>
+
+Two branches are OK for inclusion:
+
+ * refactory-tray-icon: this provides compatibility for both GtkStatusIcon and
+   EggTrayIcon, with the same level of functionalities.
+   I already sent an email in December last year, saying I worked on this. Now,
+   I used it daily for several months, and I don't need python-eggtrayicon
+   anymore.
+
+ * fix-ui-connection: this fixes the bug where, at reconnection, parts of the
+   UI were still being 'disabled' (mostly the button in the interface), despite
+   most of the UI remains functional.
+   I believe this fixes #15848 (and I removed a TODO item as well).
+
+
+Also, I started to work on creating a dedicated distribution for mmkeys, which
+is currently included into Sonata itself. I believe if it moves to a dedicated
+repository and it is distributed as an egg or something, it can increase the
+visibility of this module.
+Some distributions (at least Debian and derivates) are already shipping this as
+an optional dependency.
+But, this is the subject of another topic.
+
+
+Thanks,
+
+ Jonathan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1200">[ date ]</a>
+              <a href="thread.html#1200">[ thread ]</a>
+              <a href="subject.html#1200">[ subject ]</a>
+              <a href="author.html#1200">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

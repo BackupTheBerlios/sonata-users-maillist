@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata didnt start under Ubuntu Jaunty
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20didnt%20start%20under%20Ubuntu%20Jaunty&In-Reply-To=%3C20090404143552.596d3a7c%40terrant.unimatrix.zero%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000985.html">
+   <LINK REL="Next"  HREF="000997.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata didnt start under Ubuntu Jaunty</H1>
+    <B>Matthias Schr&#246;der</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20didnt%20start%20under%20Ubuntu%20Jaunty&In-Reply-To=%3C20090404143552.596d3a7c%40terrant.unimatrix.zero%3E"
+       TITLE="[Sonata-users] Sonata didnt start under Ubuntu Jaunty">music at softimpulse.de
+       </A><BR>
+    <I>Sat Apr  4 14:35:52 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000985.html">[Sonata-users] library search broken in svn1150
+</A></li>
+        <LI>Next message: <A HREF="000997.html">[Sonata-users] Sonata didnt start under Ubuntu Jaunty
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#996">[ date ]</a>
+              <a href="thread.html#996">[ thread ]</a>
+              <a href="subject.html#996">[ subject ]</a>
+              <a href="author.html#996">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+i enjoy living on the edge ... but suddenly sonata stops working, the
+error message is:
+
+Traceback (most recent call last):
+  File &quot;/usr/local/bin/sonata&quot;, line 95, in &lt;module&gt;
+    if tuple(map(int, platform.python_version_tuple())) &lt; (2, 5, 0):
+ValueError: invalid literal for int() with base 10: '1+'
+
+i checked what the python_version_tuple returns:
+
+$ python
+Python 2.6.1+ (r261:67515, Apr  2 2009, 17:18:05) 
+[GCC 4.3.3] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;<i> import sys, platform, os
+</I>&gt;&gt;&gt;<i> platform.python_version_tuple()  
+</I>('2', '6', '1+')
+
+So i commented out the test and everything is fine for me (i dont know
+enough python to find a simple clever solution) 
+
+Thanks for the great program!
+
+Matthias
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000985.html">[Sonata-users] library search broken in svn1150
+</A></li>
+	<LI>Next message: <A HREF="000997.html">[Sonata-users] Sonata didnt start under Ubuntu Jaunty
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#996">[ date ]</a>
+              <a href="thread.html#996">[ thread ]</a>
+              <a href="subject.html#996">[ subject ]</a>
+              <a href="author.html#996">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

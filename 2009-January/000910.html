@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] SVN use (Re: Sonata crashes while searching the	library)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20SVN%20use%20%28Re%3A%20Sonata%20crashes%20while%20searching%20the%0A%09library%29&In-Reply-To=%3C7d4ddee30901161816p47cabf72p211ec089e7563bb9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000909.html">
+   <LINK REL="Next"  HREF="000911.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] SVN use (Re: Sonata crashes while searching the	library)</H1>
+    <B>Tom&#225;&#353; Kalu&#382;a</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20SVN%20use%20%28Re%3A%20Sonata%20crashes%20while%20searching%20the%0A%09library%29&In-Reply-To=%3C7d4ddee30901161816p47cabf72p211ec089e7563bb9%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] SVN use (Re: Sonata crashes while searching the	library)">elpraga at gmail.com
+       </A><BR>
+    <I>Sat Jan 17 03:16:52 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000909.html">[Sonata-users] SVN use (Re: Sonata crashes while searching the	library)
+</A></li>
+        <LI>Next message: <A HREF="000911.html">[Sonata-users] SVN use
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#910">[ date ]</a>
+              <a href="thread.html#910">[ thread ]</a>
+              <a href="subject.html#910">[ subject ]</a>
+              <a href="author.html#910">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Nevertheless this is what I get after running `svn update` and starting
+Sonata via `python sonata.py` in the about dialog:
+
+Sonata 1.5.3+svn????
+
+Tomas
+
+2009/1/17 Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt;
+
+&gt;<i> Thanks a lot Tuukka,
+</I>&gt;<i> it would be really nice if You could make Sonata svn revison number appear
+</I>&gt;<i> in the about dialog. Together with the webpage You have send t would provide
+</I>&gt;<i> an easy way to check out if a new revision is out before sending a bug
+</I>&gt;<i> report. Could the revision number set in the about dialog by default and
+</I>&gt;<i> only changed to a release number when a release is made? As the revisions
+</I>&gt;<i> are made much more often than releases? (I have no idea though how much work
+</I>&gt;<i> requires this... )
+</I>&gt;<i>
+</I>&gt;<i> And thank You for the svn update hint. :-)
+</I>&gt;<i>
+</I>&gt;<i> Tomas
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> 2009/1/16 Tuukka Hastrup &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i> Tom&#225;&#353; Kalu&#382;a wrote:
+</I>&gt;&gt;<i> &gt; It acutally does not need much time to get the svn
+</I>&gt;&gt;<i> &gt; version and install it, but the think is to know that there is a new
+</I>&gt;&gt;<i> &gt; version.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I see. At least, the SVN activity logs are available on two web sites,
+</I>&gt;&gt;<i> the first one official, the second one with an update feed (RSS; for
+</I>&gt;&gt;<i> subscribing to in Firefox, Thunderbird...):
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> <A HREF="http://svn.berlios.de/wsvn/sonata/trunk/?op=log">http://svn.berlios.de/wsvn/sonata/trunk/?op=log</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> <A HREF="http://cia.vc/stats/project/sonata">http://cia.vc/stats/project/sonata</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Once I had problem updating svn, so I keep a separate dir for
+</I>&gt;&gt;<i> &gt; every copy of sonata I have.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> You shouldn't normally need to do this, as &quot;svn update&quot; should be much
+</I>&gt;&gt;<i> faster than a new checkout and if you need to start over with a clean
+</I>&gt;&gt;<i> checkout, you can then use &quot;svn update -r&quot; with any revision number to
+</I>&gt;&gt;<i> get back to other versions at any time.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Could Sonata's svn version report the svn revision number in the About
+</I>&gt;&gt;<i> &gt; dialog instead of Sonata 1.5.3, for example? Would that be possible?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This is a good idea - I've now implemented it for the About dialog and
+</I>&gt;&gt;<i> &quot;sonata --version&quot;. However, at least for now, it only works if you run
+</I>&gt;&gt;<i> Sonata *uninstalled*, that is, directly from the sonata.py file within
+</I>&gt;&gt;<i> an SVN checkout directory. Maybe Scott (or someone else) would have an
+</I>&gt;&gt;<i> idea on how to make the SVN revision number visible in installed
+</I>&gt;&gt;<i> versions and still have it invisible in the official releases.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Regards,
+</I>&gt;&gt;<i> Tuukka
+</I>&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;<i> Sonata-users mailing list
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090117/b6c43770/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090117/b6c43770/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000909.html">[Sonata-users] SVN use (Re: Sonata crashes while searching the	library)
+</A></li>
+	<LI>Next message: <A HREF="000911.html">[Sonata-users] SVN use
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#910">[ date ]</a>
+              <a href="thread.html#910">[ thread ]</a>
+              <a href="subject.html#910">[ subject ]</a>
+              <a href="author.html#910">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

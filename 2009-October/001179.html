@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Request/Bug%3A%20Prefer%20higher%20resolution%20when%0A%20downloading%20Album%20Art&In-Reply-To=%3C4AD6C5EC.9080400%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001178.html">
+   <LINK REL="Next"  HREF="001183.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Request/Bug%3A%20Prefer%20higher%20resolution%20when%0A%20downloading%20Album%20Art&In-Reply-To=%3C4AD6C5EC.9080400%40gmail.com%3E"
+       TITLE="[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art">bebarino at gmail.com
+       </A><BR>
+    <I>Thu Oct 15 08:49:16 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001178.html">[Sonata-users] Request/Bug: Prefer higher resolution when	downloading Album Art
+</A></li>
+        <LI>Next message: <A HREF="001183.html">[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1179">[ date ]</a>
+              <a href="thread.html#1179">[ thread ]</a>
+              <a href="subject.html#1179">[ subject ]</a>
+              <a href="author.html#1179">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Joschka Thurner wrote:
+&gt;<i> Here is a small annoyance I encountered:
+</I>&gt;<i>
+</I>&gt;<i> When Sonata downloads album covers, it fetches a low resolution image
+</I>&gt;<i> (70x70), even though a higher resolution (170x170) is available when
+</I>&gt;<i> manually searching for covers. Apart from resolution, the covers are
+</I>&gt;<i> identical. This was the case for every cover I fetched so far.
+</I>&gt;<i>
+</I>&gt;<i> Two reasons I could imagine beeing being responsible for this: a)
+</I>&gt;<i> there is a &quot;thumbnail&quot; version that gets pulled, or b) the service (is
+</I>&gt;<i> it rhapsody now?) offers two resolutions, and the lower one is somehow
+</I>&gt;<i> preferred by sonata.
+</I>&gt;<i> I had a brief look through albumart.py, but was totally lost - can not
+</I>&gt;<i> code...
+</I>
+Heh this is understandable. We default to the first image, which is
+usually the smaller one. I think it's fine for now to default to the
+bigger image as the main usage is the bigger icon. In the future it
+would be nice to have the users of the images choose which size they
+prefer so for example the library can load faster by downloading smaller
+icons.
+
+&gt;<i>
+</I>&gt;<i> If anyone could come up with a way to make Sonata use the better
+</I>&gt;<i> resolution Covers by default, highly appreciated.
+</I>&gt;<i>
+</I>
+How about this?
+
+---&gt;8----
+
+From: Stephen Boyd &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt;
+Date: Wed, 14 Oct 2009 23:43:10 -0700
+Subject: [PATCH] rhapsody: download big artwork when requesting single image
+
+Previously, the first artwork image listed by rhapsody would be
+downloaded usually resulting in a small 70x70 image. Download the larger
+170x170 image (usually the last image) instead because the most frequent
+user of the artwork is the currently playing icon.
+
+Reported-by: Joschka Thurner &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">joschka.thurner at googlemail.com</A>&gt;
+---
+ sonata/artwork.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/sonata/artwork.py b/sonata/artwork.py
+index 69810a1..6441fa8 100644
+--- a/sonata/artwork.py
++++ b/sonata/artwork.py
+@@ -558,7 +558,7 @@ def artwork_download_img_to_file(self, artist, album, dest_filename, all_images=
+             return False
+
+         if not all_images:
+-            urllib.urlretrieve(imglist[0], dest_filename)
++            urllib.urlretrieve(imglist[-1], dest_filename)
+             self.downloading_image = False
+             return True
+         else:
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001178.html">[Sonata-users] Request/Bug: Prefer higher resolution when	downloading Album Art
+</A></li>
+	<LI>Next message: <A HREF="001183.html">[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1179">[ date ]</a>
+              <a href="thread.html#1179">[ thread ]</a>
+              <a href="subject.html#1179">[ subject ]</a>
+              <a href="author.html#1179">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] library search &amp; breadcrumbs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20library%20search%20%26%20breadcrumbs&In-Reply-To=%3C77cfe8310912311157m7944fb4eve7252375bf818972%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001190.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] library search &amp; breadcrumbs</H1>
+    <B>Matthew Gibson</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20library%20search%20%26%20breadcrumbs&In-Reply-To=%3C77cfe8310912311157m7944fb4eve7252375bf818972%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] library search &amp; breadcrumbs">mdg583 at gmail.com
+       </A><BR>
+    <I>Thu Dec 31 20:57:57 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001190.html">[Sonata-users] Crop Feature Suggestion
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1191">[ date ]</a>
+              <a href="thread.html#1191">[ thread ]</a>
+              <a href="subject.html#1191">[ subject ]</a>
+              <a href="author.html#1191">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I was experimenting with modifying the library search and breadcrumbs, and
+this is what I came up with. What do you think? It gives more room to the
+library tab - but hides the search feature a bit.
+
+I hope this is how you do patches:
+
+diff --git a/sonata/sonata/consts.py b/sonata.modified/sonata/consts.py
+index 8e54a49..e8e7fef 100644
+--- a/sonata/sonata/consts.py
++++ b/sonata.modified/sonata/consts.py
+@@ -27,7 +27,7 @@ class Constants:
+         self.LYRIC_TIMEOUT = 10
+         self.NOTIFICATION_WIDTH_MAX = 500
+         self.NOTIFICATION_WIDTH_MIN = 350
+-        self.FULLSCREEN_COVER_SIZE = 500
++        self.FULLSCREEN_COVER_SIZE = 400
+         self.ART_LOCATION_HOMECOVERS = 0      #
+~/.covers/[artist]-[album].jpg
+         self.ART_LOCATION_COVER = 1           # file_dir/cover.jpg
+         self.ART_LOCATION_ALBUM = 2           # file_dir/album.jpg
+--- a/sonata/sonata/library.py
++++ b/sonata.modified/sonata/library.py
+@@ -74,15 +74,16 @@ class Library(object):
+         self.library_selection = self.library.get_selection()
+         self.breadcrumbs = breadcrumbs.CrumbBox()
+         self.breadcrumbs.props.spacing = 2
++        # self.breadcrumbs.set_no_show_all(True)
+         expanderwindow2 = ui.scrollwindow(add=self.library)
+         self.searchbox = gtk.HBox()
++        self.searchbox.hide()
++        self.searchbox.set_no_show_all(True)
+         self.searchcombo = ui.combo(items=self.search_terms)
+         self.searchcombo.set_tooltip_text(_(&quot;Search terms&quot;))
+         self.searchtext = ui.entry()
+         self.searchtext.set_tooltip_text(_(&quot;Search library&quot;))
+         self.searchbutton = ui.button(img=ui.image(stock=gtk.STOCK_CANCEL),
+h=self.searchcombo.size_request()[1])
+-        self.searchbutton.set_no_show_all(True)
+-        self.searchbutton.hide()
+         self.searchbutton.set_tooltip_text(_(&quot;End Search&quot;))
+         self.libraryview = ui.button(relief=gtk.RELIEF_NONE)
+         self.libraryview.set_tooltip_text(_(&quot;Library browsing view&quot;))
+@@ -93,9 +94,11 @@ class Library(object):
+         self.searchbox.pack_start(self.searchtext, True, True, 2)
+         self.searchbox.pack_start(self.searchcombo, False, False, 2)
+         self.searchbox.pack_start(self.searchbutton, False, False, 2)
++
+         self.libraryvbox.pack_start(self.breadcrumbs, False, False, 2)
+-        self.libraryvbox.pack_start(expanderwindow2, True, True)
+         self.libraryvbox.pack_start(self.searchbox, False, False, 2)
++        self.libraryvbox.pack_start(expanderwindow2, True, True)
++
+
+         self.tab = new_tab(self.libraryvbox, gtk.STOCK_HARDDISK,
+TAB_LIBRARY, self.library)
+
+@@ -1090,12 +1093,14 @@ class Library(object):
+             self.libsearchfilter_toggle(move_focus)
+
+     def search_visible(self):
+-        return self.searchbutton.get_property('visible')
++        return self.searchbox.get_property('visible')
+
+     def libsearchfilter_toggle(self, move_focus):
++        &quot;&quot;&quot; Toggle the search box &quot;&quot;&quot;
+         if not self.search_visible() and self.connected():
+             self.library.set_property('has-tooltip', True)
+-            ui.show(self.searchbutton)
++            ui.show(self.searchbox)
++            ui.hide(self.breadcrumbs)
+             self.prevlibtodo = 'foo'
+             self.prevlibtodo_base = &quot;__&quot;
+             self.prevlibtodo_base_results = []
+@@ -1106,7 +1111,8 @@ class Library(object):
+             qsearch_thread.setDaemon(True)
+             qsearch_thread.start()
+         elif self.search_visible():
+-            ui.hide(self.searchbutton)
++            ui.hide(self.searchbox)
++            ui.show(self.breadcrumbs)
+             self.searchtext.handler_block(self.libfilter_changed_handler)
+             self.searchtext.set_text(&quot;&quot;)
+             self.searchtext.handler_unblock(self.libfilter_changed_handler)
+@@ -1117,9 +1123,10 @@ class Library(object):
+
+     def libsearchfilter_feed_loop(self, editable):
+         if not self.search_visible():
++            # Turn on the search
+             self.libsearchfilter_toggle(None)
+         # Lets only trigger the searchfilter_loop if 200ms pass without a
+change
+-        # in gtk.Entry
++        # in gtk.Entry -- ???
+         try:
+             gobject.source_remove(self.libfilterbox_source)
+         except:
+@@ -1139,6 +1146,9 @@ class Library(object):
+         self.libfilterbox_cond.release()
+
+     def libsearchfilter_loop(self):
++        &quot;&quot;&quot; What does this do? It is the threaded search process.
++        It runs in the background. It continually checks the search
++        field and continues to search for the term accordingly.&quot;&quot;&quot;
+         while True:
+             # copy the last command or pattern safely
+             self.libfilterbox_cond.acquire()
+@@ -1158,7 +1168,7 @@ class Library(object):
+                     gobject.idle_add(self.libsearchfilter_do_search,
+searchby, todo)
+                 elif len(todo) == 0:
+                     gobject.idle_add(self.filtering_entry_revert_color,
+self.searchtext)
+-                    self.libsearchfilter_toggle(False)
++                    # self.libsearchfilter_toggle(False)
+                 else:
+                     gobject.idle_add(self.filtering_entry_revert_color,
+self.searchtext)
+             self.libfilterbox_cond.acquire()
+@@ -1255,4 +1265,4 @@ class Library(object):
+         gobject.idle_add(self.searchtext.grab_focus)
+
+     def libsearchfilter_get_style(self):
+-        return self.searchtext.get_style()
++        return self.searchtext.get_style()
+\ No newline at end of file
+diff --git a/sonata/sonata/main.py b/sonata.modified/sonata/main.py
+index 3af9965..336b8a7 100644
+--- a/sonata/sonata/main.py
++++ b/sonata.modified/sonata/main.py
+@@ -255,6 +255,7 @@ class Base(object):
+             ('clearmenu', gtk.STOCK_CLEAR, _('_Clear'), '&lt;Ctrl&gt;Delete',
+None, self.mpd_clear),
+             ('updatefullmenu', None, _('_Entire Library'),
+'&lt;Ctrl&gt;&lt;Shift&gt;u', None, self.on_updatedb),
+             ('updateselectedmenu', None, _('_Selected Items'), '&lt;Ctrl&gt;u',
+None, self.on_updatedb_shortcut),
++            ('searchmenu', gtk.STOCK_FIND, _('Search'), None, None,
+self.on_library_search_shortcut),
+             ('preferencemenu', gtk.STOCK_PREFERENCES, _('_Preferences...'),
+'F5', None, self.on_prefs),
+             ('aboutmenu', None, _('_About...'), 'F1', None, self.on_about),
+             ('tagmenu', None, _('_Edit Tags...'), '&lt;Ctrl&gt;t', None,
+self.on_tags_edit),
+@@ -355,6 +356,7 @@ class Base(object):
+                 &lt;separator name=&quot;FM1&quot;/&gt;
+                 &lt;menuitem action=&quot;repeatmenu&quot;/&gt;
+                 &lt;menuitem action=&quot;randommenu&quot;/&gt;
++                &lt;menuitem action=&quot;searchmenu&quot;/&gt;
+                 &lt;menu action=&quot;updatemenu&quot;&gt;
+                   &lt;menuitem action=&quot;updateselectedmenu&quot;/&gt;
+                   &lt;menuitem action=&quot;updatefullmenu&quot;/&gt;
+@@ -485,6 +487,7 @@ class Base(object):
+         self.mainmenu = self.UIManager.get_widget('/mainmenu')
+         self.randommenu = self.UIManager.get_widget('/mainmenu/randommenu')
+         self.repeatmenu = self.UIManager.get_widget('/mainmenu/repeatmenu')
++        self.searchmenu = self.UIManager.get_widget('/mainmenu/searchmenu')
+         self.imagemenu = self.UIManager.get_widget('/imagemenu')
+         self.traymenu = self.UIManager.get_widget('/traymenu')
+         self.librarymenu = self.UIManager.get_widget('/librarymenu')
+@@ -2989,8 +2992,10 @@ class Base(object):
+             return
+         if self.current_tab != self.TAB_LIBRARY:
+             self.switch_to_tab_name(self.TAB_LIBRARY)
+-        if self.library.search_visible():
+-            self.library.on_search_end(None)
++        # if self.library.search_visible():
++        #     self.library.on_search_end(None)
++        if not self.library.search_visible():
++            self.library.libsearchfilter_toggle(False)
+         self.library.libsearchfilter_set_focus()
+
+     def update_menu_visibility(self, show_songinfo_only=False):
+
+
+Matthew
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20091231/d57f0038/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20091231/d57f0038/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001190.html">[Sonata-users] Crop Feature Suggestion
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1191">[ date ]</a>
+              <a href="thread.html#1191">[ thread ]</a>
+              <a href="subject.html#1191">[ subject ]</a>
+              <a href="author.html#1191">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

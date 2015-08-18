@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4AD54F2C.8050607%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001175.html">
+   <LINK REL="Next"  HREF="001177.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4AD54F2C.8050607%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.">bebarino at gmail.com
+       </A><BR>
+    <I>Wed Oct 14 06:10:20 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001175.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001177.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1176">[ date ]</a>
+              <a href="thread.html#1176">[ thread ]</a>
+              <a href="subject.html#1176">[ subject ]</a>
+              <a href="author.html#1176">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Stephen Boyd wrote:
+&gt;<i> Hmph. It also breaks when enabling scrobbling for the first time.
+</I>&gt;<i>
+</I>&gt;<i> Have a song playing, start sonata, enable scrobbling, click next.
+</I>&gt;<i>
+</I>&gt;<i> Traceback (most recent call last):
+</I>&gt;<i>   File &quot;/home/swboyd/Programming/Sonata/sonata/main.py&quot;, line 2833, in
+</I>&gt;<i> mpd_next
+</I>&gt;<i>     self.iterate_now()
+</I>&gt;<i>   File &quot;/home/swboyd/Programming/Sonata/sonata/main.py&quot;, line 1058, in
+</I>&gt;<i> iterate_now
+</I>&gt;<i>     self.iterate()
+</I>&gt;<i>   File &quot;/home/swboyd/Programming/Sonata/sonata/main.py&quot;, line 1016, in
+</I>&gt;<i> iterate
+</I>&gt;<i>     self.handle_change_status()
+</I>&gt;<i>   File &quot;/home/swboyd/Programming/Sonata/sonata/main.py&quot;, line 1643, in
+</I>&gt;<i> handle_change_status
+</I>&gt;<i>     self.scrobbler.handle_change_status('play', 'stop',
+</I>&gt;<i> self.prevsonginfo, self.prevsonginfo)
+</I>&gt;<i>   File &quot;/home/swboyd/Programming/Sonata/sonata/scrobbler.py&quot;, line 77,
+</I>&gt;<i> in handle_change_status
+</I>&gt;<i>     self.scrob_playing_duration += time.time() - self.scrob_prev_time
+</I>&gt;<i> AttributeError: 'Scrobbler' object has no attribute 'scrob_playing_duration'
+</I>&gt;<i>   
+</I>
+Nevermind. Merge error on my part. I'd like to apply this onto the
+maint-1.6.2 branch but I suppose something is different there.
+
+Commit 27bd1fc5d28276686c493510bac4aa988558d2be is what I'm applying onto.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001175.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001177.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1176">[ date ]</a>
+              <a href="thread.html#1176">[ thread ]</a>
+              <a href="subject.html#1176">[ subject ]</a>
+              <a href="author.html#1176">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] New one here, plugins framework :D
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20New%20one%20here%2C%20plugins%20framework%20%3AD&In-Reply-To=%3C4945B903.1000203%40aircable.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000857.html">
+   <LINK REL="Next"  HREF="000862.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] New one here, plugins framework :D</H1>
+    <B>Manuel Naranjo</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20New%20one%20here%2C%20plugins%20framework%20%3AD&In-Reply-To=%3C4945B903.1000203%40aircable.net%3E"
+       TITLE="[Sonata-users] New one here, plugins framework :D">manuel at aircable.net
+       </A><BR>
+    <I>Mon Dec 15 02:55:15 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000857.html">[Sonata-users] Spontaneously deleting of album covers
+</A></li>
+        <LI>Next message: <A HREF="000862.html">[Sonata-users] New one here, plugins framework :D
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#860">[ date ]</a>
+              <a href="thread.html#860">[ thread ]</a>
+              <a href="subject.html#860">[ subject ]</a>
+              <a href="author.html#860">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello guys,
+
+My name is Manuel I'm from Rosario, Argentina, I'm an electronics
+engineer student, and I also work for AIRcable (www.aircable.net) . I've
+been using sonata for about 3 months, and I have to admit WHAT A GREAT
+APPLICATION! sonata+mpd creates the perfect remote audio player for my
+apartment. At AIRcable we integrated a little box called ebox2300 with a
+linux version from a friend of mine from here, an then my friend told me
+of mpd, I liked mpd at first, but then when I met sonata I really felt
+in love with the solution.
+
+I'm also a big fan of amarok I have to admit, amarok rocks, but sonata
+isn't bad either. One of the things I really love about amarok is
+shoutcast integration, been able to browse the hole shoutcast server
+listing made me fall in love with it.
+
+So as I was a fan of both projects I started to wonder how Amarok
+handles shoutcast, once I discovered that I started to try to integrate
+shoutcast into sonata, and that's when I noticed something... Sonata
+code IS a nightmare, I can't get how you made it to maintain the code
+for so long, and made such a great application with such a complex code.
+But anyway, as I know how to code, and how hard is to maintain an Open
+Source project, I wanna give my piece of sand to the time.
+
+Yesterday taling to tuukkah in the IRC we started talking about a
+plugins framework, and I told him I was going to try to implement a
+prototype. Well here it is, I present you my plugin framework. The
+plugin frameworks uses distutils so we leave distutils all the work
+related to dependencies, insertion points and all that. Actually the
+hole framework is based on this:
+<A HREF="http://lucumr.pocoo.org/blogarchive/setuptools-plugins">http://lucumr.pocoo.org/blogarchive/setuptools-plugins</A>
+
+Mhh I know lots of questions will arise from this email, and I have to
+admit I'm not a guy who likes to writes long emails, but I will if
+needed, check the attached file. This patch has been generated against
+svn rev953.
+
+Please let the questions rain fell down over me.
+
+Thanks,
+Manuel Naranjo
+Wireless Cables Inc. www.aircable.net
+manuel at aircable dot net
+
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: plugins.patch
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20081214/23c9291b/attachment.ksh">https://lists.berlios.de/pipermail/sonata-users/attachments/20081214/23c9291b/attachment.ksh</A>&gt;
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: plugins.commitlog
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20081214/23c9291b/attachment-0001.ksh">https://lists.berlios.de/pipermail/sonata-users/attachments/20081214/23c9291b/attachment-0001.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000857.html">[Sonata-users] Spontaneously deleting of album covers
+</A></li>
+	<LI>Next message: <A HREF="000862.html">[Sonata-users] New one here, plugins framework :D
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#860">[ date ]</a>
+              <a href="thread.html#860">[ thread ]</a>
+              <a href="subject.html#860">[ subject ]</a>
+              <a href="author.html#860">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

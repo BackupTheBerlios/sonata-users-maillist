@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Unexpected crashes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Unexpected%20crashes&In-Reply-To=%3C35a6f8e30901171721y7e238937gfc56fb52b463efa5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000896.html">
+   <LINK REL="Next"  HREF="000936.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Unexpected crashes</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Unexpected%20crashes&In-Reply-To=%3C35a6f8e30901171721y7e238937gfc56fb52b463efa5%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Unexpected crashes">stonecrest at gmail.com
+       </A><BR>
+    <I>Sun Jan 18 02:21:24 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000896.html">[Sonata-users] Unexpected crashes
+</A></li>
+        <LI>Next message: <A HREF="000936.html">[Sonata-users] Unexpected crashes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#913">[ date ]</a>
+              <a href="thread.html#913">[ thread ]</a>
+              <a href="subject.html#913">[ subject ]</a>
+              <a href="author.html#913">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jan 8, 2009 at 6:05 AM, Lazaros Koromilas &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">koromilaz at gmail.com</A>&gt;wrote:
+
+&gt;<i> Another (I think irrelevant) problem I'm facing is the following.
+</I>&gt;<i> I use the 'multiple-profiles' feature of sonata to connect to
+</I>&gt;<i> a total of 3 mpd servers (local, home-desktop, icecast-source).
+</I>&gt;<i> When I switch between these, I frequently have to restart sonata
+</I>&gt;<i> because:
+</I>&gt;<i> - the playlist gets corrupted with elements from the previous server
+</I>&gt;<i> - the saved streams dissapear
+</I>&gt;<i> - the playlists disappear
+</I>&gt;<i> - rarely sonata hangs in 'not connected' state
+</I>&gt;<i>
+</I>&gt;<i> Strangely the library is always consistent between switches
+</I>&gt;<i> or it becomes with a backspace keypress.
+</I>&gt;<i>
+</I>
+Hi Lazaros,
+
+Can you see if things are improved with the latest commit? I'm forcing a
+disconnect before sonata tries connecting to the new profile - this is
+probably a good idea even if it doesn't fix your issues.
+
+(On a related but side note: I'm seeing some weird behavior myself where,
+when I click on a profile name in the menu, nothing happens - and the radio
+button for this profile doesn't become the active one. In fact, gtk doesn't
+seem to even fire an event on my click, my code is never told to execute.
+I'm not sure if this is a gtk bug or what..)
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090117/67147471/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090117/67147471/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000896.html">[Sonata-users] Unexpected crashes
+</A></li>
+	<LI>Next message: <A HREF="000936.html">[Sonata-users] Unexpected crashes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#913">[ date ]</a>
+              <a href="thread.html#913">[ thread ]</a>
+              <a href="subject.html#913">[ subject ]</a>
+              <a href="author.html#913">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

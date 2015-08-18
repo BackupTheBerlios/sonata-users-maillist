@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] LyricWiki ugly fix.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20LyricWiki%20ugly%20fix.&In-Reply-To=%3C110ee9010908040324k5806f1ferfa83d6dca804cfc2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001134.html">
+   <LINK REL="Next"  HREF="001136.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] LyricWiki ugly fix.</H1>
+    <B>Shashi</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20LyricWiki%20ugly%20fix.&In-Reply-To=%3C110ee9010908040324k5806f1ferfa83d6dca804cfc2%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] LyricWiki ugly fix.">connect2shashi at gmail.com
+       </A><BR>
+    <I>Tue Aug  4 12:24:47 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001134.html">[Sonata-users] [Notice] lyrics functionality no longer works
+</A></li>
+        <LI>Next message: <A HREF="001136.html">[Sonata-users] Libre.fm Support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1130">[ date ]</a>
+              <a href="thread.html#1130">[ thread ]</a>
+              <a href="subject.html#1130">[ subject ]</a>
+              <a href="author.html#1130">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+This is my first post to the list,
+I just rashly did this to fix the LyricWiki API thingy:
+
+lyrics = self.lyricServer.getSong(artist=self.lyricwiki_format(search_artist),
+song=self.lyricwiki_format(search_title))['return'][&quot;lyrics&quot;]
+lyrics = urllib.urlopen(&quot;<A HREF="http://lyricwiki.org/">http://lyricwiki.org/</A>&quot;+self.lyricwiki_format(search_artist)+&quot;:&quot;+self.lyricwiki_format(search_title)).read().split(&quot;&lt;div
+class='lyricbox' &gt;&quot;)[1].split(&quot;&lt;/div&gt;&quot;)[0].replace('&lt;br /&gt;',&quot;\n&quot;)
+if lyrics.lower() != &quot;not found&quot;:
+
+(Add the second line in the right place and it should start working again)
+
+This is a very ugly hack,
+I recommend you to wait until this is fixed by either LyricWiki / sonata
+there is no risk in doing this though :)
+
+Best,
+Shashi
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001134.html">[Sonata-users] [Notice] lyrics functionality no longer works
+</A></li>
+	<LI>Next message: <A HREF="001136.html">[Sonata-users] Libre.fm Support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1130">[ date ]</a>
+              <a href="thread.html#1130">[ thread ]</a>
+              <a href="subject.html#1130">[ subject ]</a>
+              <a href="author.html#1130">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Cover handling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Cover%20handling&In-Reply-To=%3C802aab940705180536k5aa6e8f6y83317deec3b42c15%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000293.html">
+   <LINK REL="Next"  HREF="000301.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Cover handling</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Cover%20handling&In-Reply-To=%3C802aab940705180536k5aa6e8f6y83317deec3b42c15%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Cover handling">niechift.vex at gmail.com
+       </A><BR>
+    <I>Fri May 18 14:36:54 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000293.html">[Sonata-users] Cover handling
+</A></li>
+        <LI>Next message: <A HREF="000301.html">[Sonata-users] Cover handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Seems like there is some other bug related to the new VA covers
+handling code. Just noticed yet another old file missing the album tag
+and hence was using the wrong cover, as I clicked the cover to bring
+up the song info window and fix it I got a nice traceback printed in
+the console:
+
+Traceback (most recent call last):
+  File &quot;/home/fredrik/Saker/sonata/sonata-svn/sonata.py&quot;, line 3329,
+in on_image_activate
+    self.on_infowindow_show()
+  File &quot;/home/fredrik/Saker/sonata/sonata-svn/sonata.py&quot;, line 3549,
+in on_infowindow_show
+    self.infowindow_update(True, update_all=True)
+  File &quot;/home/fredrik/Saker/sonata/sonata-svn/sonata.py&quot;, line 3606,
+in infowindow_update
+    self.infowindow_tracklabel.set_text(self.sanitize_tracknum(self.songinfo.track,
+False, 2))
+  File &quot;/home/fredrik/Saker/sonata/sonata-svn/mpdclient3.py&quot;, line
+282, in __getattr__
+    raise AttributeError
+AttributeError
+
+Commenting out line 3606 makes the problem go away so it's something
+around there. The only tags available on the file is artist and title,
+just a quick glimze tells me it could also be something about
+non-existant track nummer.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000293.html">[Sonata-users] Cover handling
+</A></li>
+	<LI>Next message: <A HREF="000301.html">[Sonata-users] Cover handling
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#300">[ date ]</a>
+              <a href="thread.html#300">[ thread ]</a>
+              <a href="subject.html#300">[ subject ]</a>
+              <a href="author.html#300">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

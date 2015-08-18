@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata and lyrics
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20and%20lyrics&In-Reply-To=%3C47E6C6FD.3010809%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000591.html">
+   <LINK REL="Next"  HREF="000593.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata and lyrics</H1>
+    <B>Jason Martyn</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20and%20lyrics&In-Reply-To=%3C47E6C6FD.3010809%40gmail.com%3E"
+       TITLE="[Sonata-users] Sonata and lyrics">jrsmartyn at gmail.com
+       </A><BR>
+    <I>Sun Mar 23 22:09:17 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000591.html">[Sonata-users] Sonata and lyrics
+</A></li>
+        <LI>Next message: <A HREF="000593.html">[Sonata-users] Problem with utf8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#592">[ date ]</a>
+              <a href="thread.html#592">[ thread ]</a>
+              <a href="subject.html#592">[ subject ]</a>
+              <a href="author.html#592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well, I decided further to try a fresh install.  After a fresh install 
+it still wasn't working, however I realized the sonatarc file was still 
+around.  I decided to delete .sonata config directory in my home 
+directory and voila, everything started working.  Not really sure how or 
+why this would affect the issue, but nonetheless, it works.
+
+Thanks a lot guys.  Very helpful advice. 
+
+Happy Easter,
+J
+
+Jason Martyn wrote:
+&gt;<i> Hey Scott,
+</I>&gt;<i>
+</I>&gt;<i> I've downloaded the ZSI.py script and gave it a try.  It seems I was 
+</I>&gt;<i> missing the py-xml library.  I downloaded and installed it, tried it 
+</I>&gt;<i> again, and the script functioned perfectly.  I tried again with the 
+</I>&gt;<i> song I've been testing it on (The Beatles, Come Together), and the 
+</I>&gt;<i> script managed to pull it up as well.
+</I>&gt;<i>
+</I>&gt;<i> I started up Sonata again and gave it a try.  It seems like things are 
+</I>&gt;<i> starting to work.. but still some minor problems.   The lyrics seem to 
+</I>&gt;<i> be fetching, but directly after they display ( &lt; 1 sec), they 
+</I>&gt;<i> disappear with a &quot;lyrics fetching failed&quot; message.  I tried the raise 
+</I>&gt;<i> statement with still the same &quot;no NoneType allowed&quot; type response.  I 
+</I>&gt;<i> tried again increasing the timeout from 10 to 100 and 1000 without 
+</I>&gt;<i> luck.  I thought perhaps a file permissions problem on a lyrics file?  
+</I>&gt;<i> So I tried running sonata as root.  This didn't work.
+</I>&gt;<i>
+</I>&gt;<i> I know it's hard to diagnose an issue when there's not too many 
+</I>&gt;<i> symptoms.  Hopefully this &quot;flashing&quot; of the lyrics helps.
+</I>&gt;<i>
+</I>&gt;<i> Thanks again for the help Scott and Florian,
+</I>&gt;<i> J
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users-request at lists.berlios.de</A> wrote:
+</I>&gt;&gt;<i> Message: 1
+</I>&gt;&gt;<i> Date: Sat, 22 Mar 2008 11:32:26 -0600
+</I>&gt;&gt;<i> From: &quot;Scott Horowitz&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt;
+</I>&gt;&gt;<i> Subject: Re: [Sonata-users] Sonata and lyrics
+</I>&gt;&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> Message-ID:
+</I>&gt;&gt;<i>     &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">35a6f8e30803221032wd29494eh5e620f65a924bf61 at mail.gmail.com</A>&gt;
+</I>&gt;&gt;<i> Content-Type: text/plain; charset=&quot;utf-8&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Fri, Mar 21, 2008 at 3:20 AM, Jason Martyn &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">jrsmartyn at gmail.com</A>&gt; 
+</I>&gt;&gt;<i> wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  
+</I>&gt;&gt;&gt;<i> I'm having some troubles getting the lyrics fetching to work. I have
+</I>&gt;&gt;&gt;<i> ZSI 2.0 installed, and sonata seems to be recognizing it, however
+</I>&gt;&gt;&gt;<i> whenever I double click on a song (quite well known songs.. i.e. the
+</I>&gt;&gt;&gt;<i> beatles, etc.) and check the lyrics it tells me that &quot;Fetching lyrics
+</I>&gt;&gt;&gt;<i> failed | (search).&quot;  Which if trying the search, it doesn't matter
+</I>&gt;&gt;&gt;<i> what I've tried, the lyrics never show up.
+</I>&gt;&gt;&gt;<i>     
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Can you download the file <A HREF="http://sonata.berlios.de/test/zsi.py">http://sonata.berlios.de/test/zsi.py</A> and 
+</I>&gt;&gt;<i> run it
+</I>&gt;&gt;<i> was &quot;python zsi.py&quot;? If it displays lyrics, then everything is at least
+</I>&gt;&gt;<i> theoretically working together correctly. You can edit the file and 
+</I>&gt;&gt;<i> supply
+</I>&gt;&gt;<i> your own artist/title to test a specific song.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Scott
+</I>&gt;&gt;<i> -------------- next part --------------
+</I>&gt;&gt;<i> An HTML attachment was scrubbed...
+</I>&gt;&gt;<i> URL: 
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20080322/01b86113/attachment-0001.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20080322/01b86113/attachment-0001.html</A> 
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ------------------------------
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Message: 2
+</I>&gt;&gt;<i> Date: Sat, 22 Mar 2008 11:33:22 -0600
+</I>&gt;&gt;<i> From: &quot;Scott Horowitz&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt;
+</I>&gt;&gt;<i> Subject: Re: [Sonata-users] Sonata and lyrics
+</I>&gt;&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> Message-ID:
+</I>&gt;&gt;<i>     &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">35a6f8e30803221033y4cb30820v12ea13350d60b1b3 at mail.gmail.com</A>&gt;
+</I>&gt;&gt;<i> Content-Type: text/plain; charset=&quot;utf-8&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Sat, Mar 22, 2008 at 11:32 AM, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt;
+</I>&gt;&gt;<i> wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  
+</I>&gt;&gt;&gt;<i> Can you download the file <A HREF="http://sonata.berlios.de/test/zsi.py">http://sonata.berlios.de/test/zsi.py</A> and 
+</I>&gt;&gt;&gt;<i> run it
+</I>&gt;&gt;&gt;<i> was &quot;python zsi.py&quot;? If it displays lyrics, then everything is at least
+</I>&gt;&gt;&gt;<i> theoretically working together correctly. You can edit the file and 
+</I>&gt;&gt;&gt;<i> supply
+</I>&gt;&gt;&gt;<i> your own artist/title to test a specific song.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>     
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> That should say 'run it as ...'
+</I>&gt;&gt;<i> -------------- next part --------------
+</I>&gt;&gt;<i> An HTML attachment was scrubbed...
+</I>&gt;&gt;<i> URL: 
+</I>&gt;&gt;<i> <A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20080322/4ea2af18/attachment-0001.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20080322/4ea2af18/attachment-0001.html</A> 
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ------------------------------
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Message: 3
+</I>&gt;&gt;<i> Date: Sat, 22 Mar 2008 17:49:47 -0600
+</I>&gt;&gt;<i> From: &quot;Jason Martyn&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">jrsmartyn at gmail.com</A>&gt;
+</I>&gt;&gt;<i> Subject: Re: [Sonata-users] Sonata-users Digest, Vol 19, Issue 6
+</I>&gt;&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;<i> Message-ID:
+</I>&gt;&gt;<i>     &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">3a602c70803221649n6348dd94q83664e394f97d57b at mail.gmail.com</A>&gt;
+</I>&gt;&gt;<i> Content-Type: text/plain; charset=ISO-8859-1
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Hmm.  So I've done the forementioned changes.  First, I tried changing
+</I>&gt;&gt;<i> the timeout to 100, and 1000 with no luck.  I then changed the .py
+</I>&gt;&gt;<i> file and added the statement raise as suggested and found this pops up
+</I>&gt;&gt;<i> in the terminal:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Traceback (most recent call last):
+</I>&gt;&gt;<i>  File &quot;/usr/bin/sonata&quot;, line 30, in &lt;module&gt;
+</I>&gt;&gt;<i>    import dbus
+</I>&gt;&gt;<i> ImportError: No module named dbus
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Also, upon searching for lyrics, I now get a more specific error that
+</I>&gt;&gt;<i> pops up in sonata that tells me:
+</I>&gt;&gt;<i> &quot;Couldn't connect to LyricWiki&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> In light of this, and the fact that dbus python bindings were not
+</I>&gt;&gt;<i> installed previously, I installed the dbus-python package from
+</I>&gt;&gt;<i> www.linuxpackages.net. After a restart/ldconfig, I started up Sonata
+</I>&gt;&gt;<i> again but this time with different errors.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Specifically:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> TypeError: exceptions must be classes, instances, or strings
+</I>&gt;&gt;<i> (deprecated), not NoneType
+</I>&gt;&gt;<i> Traceback (most recent call last):
+</I>&gt;&gt;<i>  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 2997, in
+</I>&gt;&gt;<i> info_show_lyrics
+</I>&gt;&gt;<i>    raise
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Which I'm guessing may be referring to the raise statement not having
+</I>&gt;&gt;<i> anything to report?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I then tried again to search for the lyrics, however it has just gone
+</I>&gt;&gt;<i> back to just saying that lyric fetching has failed.  I checked
+</I>&gt;&gt;<i> www.lyricwiki.org to make sure the site was working and ensured that
+</I>&gt;&gt;<i> the lyrics to the songs were actually there.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm not quite sure where to go from here?  Thanks in advance,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Jason
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Sat, Mar 22, 2008 at 5:01 AM,  
+</I>&gt;&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users-request at lists.berlios.de</A>&gt; wrote:
+</I>&gt;&gt;<i>  
+</I>&gt;&gt;&gt;<i> Send Sonata-users mailing list submissions to
+</I>&gt;&gt;&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;&gt;&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i>  or, via email, send a message with subject or body 'help' to
+</I>&gt;&gt;&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users-request at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  You can reach the person managing the list at
+</I>&gt;&gt;&gt;<i>         <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users-owner at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  When replying, please edit your Subject line so it is more specific
+</I>&gt;&gt;&gt;<i>  than &quot;Re: Contents of Sonata-users digest...&quot;
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  Today's Topics:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>    1. Re: Sonata and lyrics (Florian Zeitz)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  ----------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  Message: 1
+</I>&gt;&gt;&gt;<i>  Date: Fri, 21 Mar 2008 13:31:56 +0100
+</I>&gt;&gt;&gt;<i>  From: Florian Zeitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">florian.zeitz at gmx.de</A>&gt;
+</I>&gt;&gt;&gt;<i>  Subject: Re: [Sonata-users] Sonata and lyrics
+</I>&gt;&gt;&gt;<i>  To: <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i>  Message-ID: &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">47E3AABC.3080007 at gmx.de</A>&gt;
+</I>&gt;&gt;&gt;<i>  Content-Type: text/plain; charset=ISO-8859-1
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  -----BEGIN PGP SIGNED MESSAGE-----
+</I>&gt;&gt;&gt;<i>  Hash: SHA1
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  Jason Martyn schrieb:
+</I>&gt;&gt;&gt;<i>  &gt; Hello everyone,
+</I>&gt;&gt;&gt;<i>  &gt;
+</I>&gt;&gt;&gt;<i>  &gt; I'm having some troubles getting the lyrics fetching to work. I have
+</I>&gt;&gt;&gt;<i>  &gt; ZSI 2.0 installed, and sonata seems to be recognizing it, however
+</I>&gt;&gt;&gt;<i>  &gt; whenever I double click on a song (quite well known songs.. i.e. the
+</I>&gt;&gt;&gt;<i>  &gt; beatles, etc.) and check the lyrics it tells me that &quot;Fetching 
+</I>&gt;&gt;&gt;<i> lyrics
+</I>&gt;&gt;&gt;<i>  &gt; failed | (search).&quot;  Which if trying the search, it doesn't matter
+</I>&gt;&gt;&gt;<i>  &gt; what I've tried, the lyrics never show up.
+</I>&gt;&gt;&gt;<i>  &gt;
+</I>&gt;&gt;&gt;<i>  &gt; Any ideas?  Is there a setting that has to be switched?  I'm not
+</I>&gt;&gt;&gt;<i>  &gt; behind a firewall, however is it needed that I forward the port for
+</I>&gt;&gt;&gt;<i>  &gt; sonata?
+</I>&gt;&gt;&gt;<i>  &gt;
+</I>&gt;&gt;&gt;<i>  &gt; I'm using Slackware 12.0 with Fluxbox.
+</I>&gt;&gt;&gt;<i>  &gt;
+</I>&gt;&gt;&gt;<i>  &gt; Any suggestions would be useful. Thanks,
+</I>&gt;&gt;&gt;<i>  &gt; Jason
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  Hy Jason,
+</I>&gt;&gt;&gt;<i>  actually if it says  &quot;Fetching lyrics failed&quot; it is definitely 
+</I>&gt;&gt;&gt;<i> trying to
+</I>&gt;&gt;&gt;<i>  fetch lyrics, so all settings should be correct. There shouldn't be 
+</I>&gt;&gt;&gt;<i> any
+</I>&gt;&gt;&gt;<i>  ports to forward either.
+</I>&gt;&gt;&gt;<i>  The most common reason for this error in the past has been that either
+</I>&gt;&gt;&gt;<i>  the connection timed out (slow response from LyricWiki (that is what
+</I>&gt;&gt;&gt;<i>  sonata uses for lyrics), but it's pretty fast for me right now) or
+</I>&gt;&gt;&gt;<i>  LyricWiki was down temporary.
+</I>&gt;&gt;&gt;<i>  If it still doesn't work now it is probably a time-out (slow internet
+</I>&gt;&gt;&gt;<i>  connection?).  Try setting self.LYRIC_TIMEOUT to something higher than
+</I>&gt;&gt;&gt;<i>  10 in line 166 in sonata/main.py (I (and I think sonatas SVN too) used
+</I>&gt;&gt;&gt;<i>  100 when LyricWiki was still very slow).
+</I>&gt;&gt;&gt;<i>  If that doesn't help try the following:
+</I>&gt;&gt;&gt;<i>  In 2998 of sonata/main.py there is a except-clause. It will hide any
+</I>&gt;&gt;&gt;<i>  errors that happen during lyric fetching and put &quot;Fetching lyrics
+</I>&gt;&gt;&gt;<i>  failed&quot; instead.
+</I>&gt;&gt;&gt;<i>  Add a line after that and put &quot;raise&quot; there.
+</I>&gt;&gt;&gt;<i>  Start sonata from a terminal, try to fetch some lyrics and tell us 
+</I>&gt;&gt;&gt;<i> what
+</I>&gt;&gt;&gt;<i>  error is shown in the terminal.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  I hope some of that helps.
+</I>&gt;&gt;&gt;<i>  -----BEGIN PGP SIGNATURE-----
+</I>&gt;&gt;&gt;<i>  Version: GnuPG v1.4.6 (GNU/Linux)
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  iD8DBQFH46qy0JXcdjR+9YQRAhLjAJ9Q8ihp3VAUrBSQNzGLbhatp/IQ/gCeJ172
+</I>&gt;&gt;&gt;<i>  q+ZJ+jH5xBJxMEccP4cGI04=
+</I>&gt;&gt;&gt;<i>  =8J4u
+</I>&gt;&gt;&gt;<i>  -----END PGP SIGNATURE-----
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  ------------------------------
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  _______________________________________________
+</I>&gt;&gt;&gt;<i>  Sonata-users mailing list
+</I>&gt;&gt;&gt;<i>  <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i>  <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>  End of Sonata-users Digest, Vol 19, Issue 6
+</I>&gt;&gt;&gt;<i>  *******************************************
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>     
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000591.html">[Sonata-users] Sonata and lyrics
+</A></li>
+	<LI>Next message: <A HREF="000593.html">[Sonata-users] Problem with utf8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#592">[ date ]</a>
+              <a href="thread.html#592">[ thread ]</a>
+              <a href="subject.html#592">[ subject ]</a>
+              <a href="author.html#592">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

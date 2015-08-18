@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%0A%09Sonata%09breadcrumbs&In-Reply-To=%3C49D7EAAB.4090905%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000992.html">
+   <LINK REL="Next"  HREF="001009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%0A%09Sonata%09breadcrumbs&In-Reply-To=%3C49D7EAAB.4090905%40iki.fi%3E"
+       TITLE="[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Sun Apr  5 01:18:03 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000992.html">[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+</A></li>
+        <LI>Next message: <A HREF="001009.html">[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1008">[ date ]</a>
+              <a href="thread.html#1008">[ thread ]</a>
+              <a href="subject.html#1008">[ subject ]</a>
+              <a href="author.html#1008">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tuukka Hastrup wrote:
+&gt;<i> Now, how to best implement a dynamic layout like this in pygtk? We need 
+</I>&gt;<i> a left-aligned (mirror if the language is right-to-left) box layout 
+</I>&gt;<i> which can do ellipsis in the middle to fit its allocated width, plus 
+</I>&gt;<i> some constraints:
+</I>&gt;<i> * the minimum width is condensed root crumb + (condensed parent crumb if 
+</I>&gt;<i> any) + (ellipsis if any) + (condensed current crumb if any)
+</I>&gt;<i> * the natural width is all crumbs in full
+</I>&gt;<i> 
+</I>&gt;<i> Start with the natural layout and continue until we fit in the allocated 
+</I>&gt;<i> width:
+</I>&gt;<i> 1. Condense the root crumb.
+</I>&gt;<i> 2. Replace an increasing amount of the crumbs after the root with the 
+</I>&gt;<i> ellipsis until right before the parent crumb.
+</I>&gt;<i> 3. Condense the parent crumb.
+</I>&gt;<i> 4. Truncate the current crumb to fit.
+</I>&gt;<i> 
+</I>&gt;<i> At least it doesn't sound impossible...
+</I>
+I've just committed a first version of this to SVN. Known bugs:
+* When we need to truncate, the three dots &quot;...&quot; don't appear.
+* The condensing is done crudely, without taking the real icon size into 
+account.
+* Doesn't check whether the language is right-to-left.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000992.html">[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+</A></li>
+	<LI>Next message: <A HREF="001009.html">[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1008">[ date ]</a>
+              <a href="thread.html#1008">[ thread ]</a>
+              <a href="subject.html#1008">[ subject ]</a>
+              <a href="author.html#1008">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

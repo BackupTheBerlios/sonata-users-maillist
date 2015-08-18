@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata and Murrine Transparency
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20and%20Murrine%20Transparency&In-Reply-To=%3C1201700229.7329.13.camel%40idnzor-laptop%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000517.html">
+   <LINK REL="Next"  HREF="000529.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata and Murrine Transparency</H1>
+    <B>Jon Bolt</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20and%20Murrine%20Transparency&In-Reply-To=%3C1201700229.7329.13.camel%40idnzor-laptop%3E"
+       TITLE="[Sonata-users] Sonata and Murrine Transparency">jon at idnzor.net
+       </A><BR>
+    <I>Wed Jan 30 14:37:09 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000517.html">[Sonata-users] Sonata and Murrine Transparency
+</A></li>
+        <LI>Next message: <A HREF="000529.html">[Sonata-users] Keyboard focus behaviour
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#518">[ date ]</a>
+              <a href="thread.html#518">[ thread ]</a>
+              <a href="subject.html#518">[ subject ]</a>
+              <a href="author.html#518">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sorry if i am not replying to your messages directly, I think I set the
+settings on digest on this mailing list and cannot seem to reply to
+individuals messages. Like I said I am kinda noob with this, first time
+getting in to open source, so sorry :)
+
+Re: tab issue - ok good its getting fixed, I tried to look for the fix
+in Python but to avail. There are also some issues on the new info tab
+in sonata, some of it does not render properly. I will have a look at
+this and see if i can fix things. 
+
+In response to Andrew Conkling comments:
+
+Basically, the theme engine requires changes in the GTK apps themselves,
+there is no way for the theme engine (as far as i know to force
+transparency: maybe this is a good thing tho)
+
+Most of the guys are writing plugins to handle the transparency but I
+thought it would be best to go round patching the apps themselves at
+source where i can!
+
+I just found an issue with the previous patch though - the credits
+window in the about dialog does not include the transparent look. This
+is pretty bad for consistency. Apparently there is a way to use 
+
+gtk.widget_set_default_colormap
+
+which will automatically set the right color map for all widgets, i am
+not 100% sure though. The new patch can be found at
+
+<A HREF="http://idnzor.net/tmp/rgba.diff">http://idnzor.net/tmp/rgba.diff</A>
+
+Trouble with this approach is I get the following X window error: not
+sure what it means though. 
+
+ZSI not found, fetching lyrics support disabled.
+Cannot connect to MPD: (111, 'Connection refused')
+The program 'sonata' received an X Window System error.
+This probably reflects a bug in the program.
+The error was 'BadMatch (invalid parameter attributes)'.
+  (Details: serial 188 error_code 8 request_code 2 minor_code 0)
+  (Note to programmers: normally, X errors are reported asynchronously;
+   that is, you will receive the error a while after causing it.
+   To debug your program, run it with the --sync command line
+   option to change this behavior. You can then get a meaningful
+   backtrace from your debugger if you break on the gdk_x_error()
+function.)
+
+Jon
+
+
+
+On Mon, 2008-01-28 at 18:12 +0000, Jon Bolt wrote: 
+&gt;<i> Hi
+</I>&gt;<i> 
+</I>&gt;<i> I have created a patch (my first ever one!) to allow sonata to use the
+</I>&gt;<i> transparency with the new murrine engine. Please see the screen shot at
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://idnzor.net/tmp/Sonata.png">http://idnzor.net/tmp/Sonata.png</A>
+</I>&gt;<i> 
+</I>&gt;<i> As you can see the tab buttons on the main window seem to be a bit
+</I>&gt;<i> funny, this is not the engine but I think how the tabs are created. 
+</I>&gt;<i> 
+</I>&gt;<i> Please find the patch at
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://idnzor.net/tmp/rgba.patch">http://idnzor.net/tmp/rgba.patch</A>
+</I>&gt;<i> 
+</I>&gt;<i> I am not sure if this thread can accept attachments - never emailed a
+</I>&gt;<i> mailing list before :)
+</I>&gt;<i> 
+</I>&gt;<i> For more info on the murrine engine and transparency see:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://www.cimitan.com/blog/2007/12/12/gtk-rgba-transparent-widgets-with-the-murrine-engine">http://www.cimitan.com/blog/2007/12/12/gtk-rgba-transparent-widgets-with-the-murrine-engine</A>
+</I>&gt;<i> 
+</I>&gt;<i> This is all 100% degradable - so users without a composite window
+</I>&gt;<i> manager will see no difference, it is also super fast still! You will
+</I>&gt;<i> need the latest version of murrine which can be found at 
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://bazaar.launchpad.net/~cimi/murrine/trunk">http://bazaar.launchpad.net/~cimi/murrine/trunk</A>
+</I>&gt;<i> 
+</I>&gt;<i> Example: bzr branch <A HREF="http://bazaar.launchpad.net/~cimi/murrine/trunk">http://bazaar.launchpad.net/~cimi/murrine/trunk</A>
+</I>&gt;<i> 
+</I>&gt;<i> Look forward to your feedback
+</I>&gt;<i> 
+</I>&gt;<i> Jon Bolt
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000517.html">[Sonata-users] Sonata and Murrine Transparency
+</A></li>
+	<LI>Next message: <A HREF="000529.html">[Sonata-users] Keyboard focus behaviour
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#518">[ date ]</a>
+              <a href="thread.html#518">[ thread ]</a>
+              <a href="subject.html#518">[ subject ]</a>
+              <a href="author.html#518">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

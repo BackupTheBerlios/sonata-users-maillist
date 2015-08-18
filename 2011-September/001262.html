@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [Sonata] Appindicator patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BSonata%5D%20Appindicator%20patch&In-Reply-To=%3C20110904103426.GB10229%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [Sonata] Appindicator patch</H1>
+    <B>Jonathan Ballet</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BSonata%5D%20Appindicator%20patch&In-Reply-To=%3C20110904103426.GB10229%40localhost%3E"
+       TITLE="[Sonata-users] [Sonata] Appindicator patch">jon at multani.info
+       </A><BR>
+    <I>Sun Sep  4 12:34:27 CEST 2011</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1262">[ date ]</a>
+              <a href="thread.html#1262">[ thread ]</a>
+              <a href="subject.html#1262">[ subject ]</a>
+              <a href="author.html#1262">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi R&#233;my,
+
+On Tue, Aug 30, 2011 at 10:16:25AM +0200, R&#233;my Hubscher wrote:
+&gt;<i> Hello guys,
+</I>&gt;<i>
+</I>...
+&gt;<i>
+</I>&gt;<i> You can follow patch overthere : <A HREF="https://bitbucket.org/natim/sonata">https://bitbucket.org/natim/sonata</A>
+</I>
+First of all, thanks for taking the time to make this patch!
+
+Originally, the project is hosted with Git, and there's also a
+Subversion repository on Codingteam, may I suggest you not to recreate
+another kind of repository? ;)
+
+&gt;<i> Appindicator Patch :
+</I>&gt;<i> <A HREF="https://bitbucket.org/natim/sonata/changeset/db47d7d007c2/raw/">https://bitbucket.org/natim/sonata/changeset/db47d7d007c2/raw/</A>
+</I>
+Last year, I refactored a bit how Sonata handles the tray icon and in
+articular, I removed all those &quot;if HAVE_...&quot; tests and proposed an
+unified interface to both egg.trayicon and gtk.StatusIcon. Basically, it
+abstracts (maybe in a very adequate way) the use of the tray icon by
+Sonata so that the main code doesn't bother to know if it deals with the
+egg extension or the built-in GTK thing. I suggest you have a look
+there: <A HREF="https://github.com/multani/sonata/commit/dc9427">https://github.com/multani/sonata/commit/dc9427</A>
+
+I had a look at your patch, and it seems it can fit in the proposed
+unified tray interface, since AFAIK, the appindicator stuff replaces the
+tray icon (I'm not familiar with appindicator, so I may be wrong).  So,
+I would strongly encourage you to rebase your patch on the work I did
+back then, I think it makes things clearer in the main code.
+
+&gt;<i> Cheers,
+</I>&gt;<i>
+</I>&gt;<i> R&#233;my
+</I>
+Cheers,
+
+ Jonathan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1262">[ date ]</a>
+              <a href="thread.html#1262">[ thread ]</a>
+              <a href="subject.html#1262">[ subject ]</a>
+              <a href="author.html#1262">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Disconnect/reconnect doesn't
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Disconnect/reconnect%20doesn%27t&In-Reply-To=%3C20080818215348.GA25856%40moregruel.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000682.html">
+   <LINK REL="Next"  HREF="000684.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Disconnect/reconnect doesn't</H1>
+    <B>Steve Greenland</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Disconnect/reconnect%20doesn%27t&In-Reply-To=%3C20080818215348.GA25856%40moregruel.net%3E"
+       TITLE="[Sonata-users] Disconnect/reconnect doesn't">steveg at moregruel.net
+       </A><BR>
+    <I>Mon Aug 18 23:53:48 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000682.html">[Sonata-users] Library search sorting
+</A></li>
+        <LI>Next message: <A HREF="000684.html">[Sonata-users] Disconnect/reconnect doesn't
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#683">[ date ]</a>
+              <a href="thread.html#683">[ thread ]</a>
+              <a href="subject.html#683">[ subject ]</a>
+              <a href="author.html#683">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>If mpd restarts, or the mpd host restarts, or the network connection is
+dropped, and Sonata (running on a different machine) tries to access mpd
+during the outage, sonata more-or-less-permanently loses the connection
+until restarted. The progress bar shows &quot;No Read Permission&quot;. The
+library disappears completely. If I've run Sonata in a terminal window,
+I get a traceback ending in &quot;socket.error: (32, 'Broken pipe')&quot;, which
+is fair enough.
+
+I wrote &quot;more-or-less-permanently&quot; because sometimes I *can* re-connect
+without restarting. In particular, everytime I've caused this
+deliberately (by stopping and restarting mpd), I've been able to select
+&quot;Disconnect&quot; and &quot;Reconnect&quot; successfully. But othertimes, repeated
+disconnect/reconnect cycles have failed to reestablish the connection.
+
+My guess would be that the whether or not dis-/re- works depends on
+exactly what Sonata was doing when it trips the exception, but I don't
+have any traces to prove it. If you've got any debugging suggestions,
+I'd be glad to try them.
+
+Steve
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000682.html">[Sonata-users] Library search sorting
+</A></li>
+	<LI>Next message: <A HREF="000684.html">[Sonata-users] Disconnect/reconnect doesn't
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#683">[ date ]</a>
+              <a href="thread.html#683">[ thread ]</a>
+              <a href="subject.html#683">[ subject ]</a>
+              <a href="author.html#683">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

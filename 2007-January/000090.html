@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Auto-discard notification
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Auto-discard%20notification&In-Reply-To=%3C35a6f8e30701301912l18d517d3ma1ec0280816ebec2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000091.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Auto-discard notification</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Auto-discard%20notification&In-Reply-To=%3C35a6f8e30701301912l18d517d3ma1ec0280816ebec2%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Auto-discard notification">stonecrest at gmail.com
+       </A><BR>
+    <I>Wed Jan 31 04:12:50 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000091.html">[Sonata-users] Ubuntu package for Sonata 1.0
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#90">[ date ]</a>
+              <a href="thread.html#90">[ thread ]</a>
+              <a href="subject.html#90">[ subject ]</a>
+              <a href="author.html#90">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 1/30/07, <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users-bounces at lists.berlios.de</A>
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users-bounces at lists.berlios.de</A>&gt; wrote:
+&gt;<i> ---------- Forwarded message ----------
+</I>&gt;<i> From: Louis Chartrand &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">eo750 at ncf.ca</A>&gt;
+</I>&gt;<i> To: <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata-users at lists.berlios.de</A>
+</I>&gt;<i> Date: Tue, 30 Jan 2007 02:03:37 -0500
+</I>&gt;<i> Subject: getting tags editing to work
+</I>&gt;<i> I'm using Xubuntu 6.10, and I installed Sonata because of its ability
+</I>&gt;<i> to edit tags. Unfortunatly, when I try to edit tags, all I get is a
+</I>&gt;<i> cursor spinning indefinitly (i.e. until I close Sonata--without using
+</I>&gt;<i> kill nor xkill).
+</I>&gt;<i> My songs are in an external drive which is ln -s'd
+</I>&gt;<i> to /var/lib/mpd/music. The folders' names often include characters like
+</I>&gt;<i> spaces and accented letters. Sonata is 1.0, pytag is 0.90.1.
+</I>&gt;<i> I managed to get an output, which appears precisely when I try to edit
+</I>&gt;<i> a song's infos:
+</I>&gt;<i>
+</I>&gt;<i> Traceback (most recent call last):
+</I>&gt;<i>   File &quot;/usr/lib/python2.4/site-packages/sonata.py&quot;, line 4845, in
+</I>&gt;<i> edit_tags self.editwindow_update(editwindow, tags, savebutton, entries,
+</I>&gt;<i> entries_names) File &quot;/usr/lib/python2.4/site-packages/sonata.py&quot;, line
+</I>&gt;<i> 4937, in editwindow_update
+</I>&gt;<i> entries[0].set_text(tags[self.tagnum]['title']) TypeError:
+</I>&gt;<i> GtkEntry.set_text() argument 1 must be string, not instancemethod
+</I>
+Hi Louis,
+
+It seems that the latest version of tagpy made a big change from
+previous versions. So if you install the latest version of tagpy
+(version 0.91), it will fix this problem. I'll bump the requirements
+in the website and documentation to reflect this, thanks for bringing
+it to my attention.
+
+Scott
+
+&gt;<i> Can anyone help?
+</I>&gt;<i> Thanks,
+</I>&gt;<i>
+</I>&gt;<i> Louis Chartrand
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000091.html">[Sonata-users] Ubuntu package for Sonata 1.0
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#90">[ date ]</a>
+              <a href="thread.html#90">[ thread ]</a>
+              <a href="subject.html#90">[ subject ]</a>
+              <a href="author.html#90">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

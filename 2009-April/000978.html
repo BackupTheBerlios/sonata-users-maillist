@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Breadcrumbs (Re:  Various feature requests)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Breadcrumbs%20%28Re%3A%20%20Various%20feature%20requests%29&In-Reply-To=%3C20090401174309.M31624%40ronin-group.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000976.html">
+   <LINK REL="Next"  HREF="000980.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Breadcrumbs (Re:  Various feature requests)</H1>
+    <B>michael.venables</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Breadcrumbs%20%28Re%3A%20%20Various%20feature%20requests%29&In-Reply-To=%3C20090401174309.M31624%40ronin-group.org%3E"
+       TITLE="[Sonata-users] Breadcrumbs (Re:  Various feature requests)">michael.venables at ronin-group.org
+       </A><BR>
+    <I>Wed Apr  1 19:46:11 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000976.html">[Sonata-users] Breadcrumbs (Re: Various feature requests)
+</A></li>
+        <LI>Next message: <A HREF="000980.html">[Sonata-users] Breadcrumbs (Re: Various feature requests)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#978">[ date ]</a>
+              <a href="thread.html#978">[ thread ]</a>
+              <a href="subject.html#978">[ subject ]</a>
+              <a href="author.html#978">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+EDIT: removed screenshot and resubmitted since the list server held the
+original for moderator approval. Sorry about that... (I think it's still clear
+what I'm talking about.)
+
+
+On Wed, 01 Apr 2009 19:07:47 +0300, Tuukka Hastrup wrote
+&gt;<i> I hope no-one minds I went ahead and implemented this in SVN to see 
+</I>&gt;<i> how it could work out.
+</I>&gt;<i> 
+</I>&gt;<i> * The / and .. entries are not necessary anymore, and removing them 
+</I>&gt;<i> more than offsets the vertical space the breadcrumbs take.
+</I>&gt;<i> 
+</I>&gt;<i> * The button to choose the view becomes part of the breadcrumbs too, 
+</I>&gt;<i> so it doesn't distract the search UI anymore.
+</I>
+I took a quick look at the new breadcrumbs feature, and I have to say that on
+my system, it looks pretty bad.
+
+I run Sonata fairly narrow. Only slightly narrower than all of the screenshots
+on the Sonata website. One of the greatest things about Sonata is that it's so
+compact that it actually encourages this. It's not a huge music manager that
+requires you to devote a massive amount of screen real estate just to be able
+to see all the parts of the UI at once.
+
+As you can see in the attached screenshot [EDIT: removed], the breadcrumbs
+implementation takes up so much horizontal width that the final directory is
+cut off. I have some directories where the parents are so long that the
+children don't even appear in the UI.
+
+It's also important to mention that my mpd library root directory is a small
+subset of my collection -- on that I've cleaned up and correctly tagged. If I
+was to point mpd to the actual root of my library (which I'll eventually have
+to do when everything is cleaned up), I'd have to run Sonata close to full
+screen to be able to see the current directory.
+
+I do like that that the view is part of the breadcrumb, though I'm not sure if
+&quot;Filesystem&quot; is intuitive enough to make someone assume that it's the root
+directory. After all, in Sonata context, file system is a view, not a place.
+Now it's both a view AND a place.
+
+I don't know if there's a way of fixing this issue, if you want to stick with
+a breadcrumbs-only display. While this implementation obviously needs some
+refinement, I think it would be better to offer users the flexibility of
+choosing the navigation UI that suits their way of doing things. Even the
+Nautilus UI does this.
+
+ michael
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000976.html">[Sonata-users] Breadcrumbs (Re: Various feature requests)
+</A></li>
+	<LI>Next message: <A HREF="000980.html">[Sonata-users] Breadcrumbs (Re: Various feature requests)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#978">[ date ]</a>
+              <a href="thread.html#978">[ thread ]</a>
+              <a href="subject.html#978">[ subject ]</a>
+              <a href="author.html#978">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

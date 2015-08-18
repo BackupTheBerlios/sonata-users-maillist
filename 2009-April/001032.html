@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] error in Sonata(svn)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20error%20in%20Sonata%28svn%29&In-Reply-To=%3Ccd74309b0904120428m213f5b72m59a7be629382cd7b%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001031.html">
+   <LINK REL="Next"  HREF="001033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] error in Sonata(svn)</H1>
+    <B>Fomin Denis</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20error%20in%20Sonata%28svn%29&In-Reply-To=%3Ccd74309b0904120428m213f5b72m59a7be629382cd7b%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] error in Sonata(svn)">fominde at gmail.com
+       </A><BR>
+    <I>Sun Apr 12 13:28:23 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001031.html">[Sonata-users] Sonata 1.6.1 Released
+</A></li>
+        <LI>Next message: <A HREF="001033.html">[Sonata-users] error in Sonata(svn)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1032">[ date ]</a>
+              <a href="thread.html#1032">[ thread ]</a>
+              <a href="subject.html#1032">[ subject ]</a>
+              <a href="author.html#1032">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE><A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">test at dicson</A>:~$ sonata status
+Traceback (most recent call last):
+  File &quot;/usr/bin/sonata&quot;, line 160, in &lt;module&gt;
+    args.execute_cmds()
+  File &quot;/usr/lib/python2.5/site-packages/sonata/cli.py&quot;, line 89, in
+execute_cmds
+    main = CliMain(self)
+  File &quot;/usr/lib/python2.5/site-packages/sonata/cli.py&quot;, line 150, in
+__init__
+    import library
+  File &quot;/usr/lib/python2.5/site-packages/sonata/library.py&quot;, line 11, in
+&lt;module&gt;
+    import breadcrumbs
+  File &quot;/usr/lib/python2.5/site-packages/sonata/breadcrumbs.py&quot;, line 5, in
+&lt;module&gt;
+    class CrumbButton(gtk.ToggleButton):
+AttributeError: 'FakeModule' object has no attribute 'ToggleButton'
+
+sonata info send error too
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090412/4dba68af/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090412/4dba68af/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001031.html">[Sonata-users] Sonata 1.6.1 Released
+</A></li>
+	<LI>Next message: <A HREF="001033.html">[Sonata-users] error in Sonata(svn)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1032">[ date ]</a>
+              <a href="thread.html#1032">[ thread ]</a>
+              <a href="subject.html#1032">[ subject ]</a>
+              <a href="author.html#1032">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

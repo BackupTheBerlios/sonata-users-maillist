@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Lyricwiki patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2011-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Lyricwiki%20patch&In-Reply-To=%3CBANLkTimnBaM2WFuVss%3D-cDXrHSSw9TTHBw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="001250.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Lyricwiki patch</H1>
+    <B>Lazaros Koromilas</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Lyricwiki%20patch&In-Reply-To=%3CBANLkTimnBaM2WFuVss%3D-cDXrHSSw9TTHBw%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Lyricwiki patch">koromilaz at gmail.com
+       </A><BR>
+    <I>Tue Apr 26 18:08:30 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="001250.html">[Sonata-users] Lyricwiki patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1249">[ date ]</a>
+              <a href="thread.html#1249">[ thread ]</a>
+              <a href="subject.html#1249">[ subject ]</a>
+              <a href="author.html#1249">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Lyrics fetching was not functional lately,
+some changes in the markup apparently.
+This patch fixes it.
+
+diff --git a/sonata/lyricwiki.py b/sonata/lyricwiki.py
+index 0cd07fc..d4055c1 100644
+--- a/sonata/lyricwiki.py
++++ b/sonata/lyricwiki.py
+@@ -42,10 +42,9 @@ class LyricWiki(object):
+             if content[:len(redir_tag)].lower() == redir_tag:
+                 addr =
+&quot;<A HREF="http://lyricwiki.org/index.php?title=%s&amp;action=edit">http://lyricwiki.org/index.php?title=%s&amp;action=edit</A>&quot; %
+urllib.quote(content.split(&quot;[[&quot;)[1].split(&quot;]]&quot;)[0])
+                 lyricpage = urllib.urlopen(addr).read()
+-                content = re.split(&quot;&lt;textarea[^&gt;]*&gt;&quot;,
+lyricpage)[1].split(&quot;&lt;/textarea&gt;&quot;)[0]
+-                content = content.strip()
+-            lyrics =
+content.split(&quot;&lt;lyrics&gt;&quot;)[1].split(&quot;&lt;/lyrics&gt;&quot;)[0]
+-            if lyrics.strip() != &quot;&lt;!-- PUT LYRICS HERE (and delete
+this entire line) --&gt;&quot;:
++                lyrics = re.split(&quot;&lt;lyrics&gt;&quot;,
+lyricpage)[1].split(&quot;&lt;/lyrics&gt;&quot;)[0]
++            if lyrics.find(&quot;PUT LYRICS HERE&quot;) == -1:
++                lyrics = lyrics.strip()
+                 lyrics = misc.unescape_html(lyrics)
+                 lyrics = misc.wiki_to_html(lyrics)
+                 lyrics = lyrics.decode(&quot;utf-8&quot;)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="001250.html">[Sonata-users] Lyricwiki patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1249">[ date ]</a>
+              <a href="thread.html#1249">[ thread ]</a>
+              <a href="subject.html#1249">[ subject ]</a>
+              <a href="author.html#1249">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

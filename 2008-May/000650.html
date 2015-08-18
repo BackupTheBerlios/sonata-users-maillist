@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] sonata on debian etch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20sonata%20on%20debian%20etch&In-Reply-To=%3C200805152117.34474.Dexter.Filmore%40gmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000649.html">
+   <LINK REL="Next"  HREF="000651.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] sonata on debian etch</H1>
+    <B>Dexter Filmore</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20sonata%20on%20debian%20etch&In-Reply-To=%3C200805152117.34474.Dexter.Filmore%40gmx.de%3E"
+       TITLE="[Sonata-users] sonata on debian etch">Dexter.Filmore at gmx.de
+       </A><BR>
+    <I>Thu May 15 21:17:34 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000649.html">[Sonata-users] One example of use of sonata
+</A></li>
+        <LI>Next message: <A HREF="000651.html">[Sonata-users] sonata on debian etch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#650">[ date ]</a>
+              <a href="thread.html#650">[ thread ]</a>
+              <a href="subject.html#650">[ subject ]</a>
+              <a href="author.html#650">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Tried to install sonata on debian etch. 
+Got this far:
+First backported python-mpd from lenny which worked ok, I guess. At leat no 
+errors.
+Then pulled the deb-src for sonata-1.5-4, entered the dir and ran 
+
+$ dpkg-buildpackage -b -uc -us -rfakeroot
+
+Last I got was:
+
+[...]
+copying 
+mo/et/sonata.mo -&gt; /home/dexter/software/audio/sonata-1.5/debian/tmp/usr/share/locale/et/LC_MESSAGES
+copying 
+mo/<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">be at latin</A>/sonata.mo -&gt; /home/dexter/software/audio/sonata-1.5/debian/tmp/usr/share/locale/<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">be at latin</A>/LC_MESSAGES
+copying 
+mo/uk/sonata.mo -&gt; /home/dexter/software/audio/sonata-1.5/debian/tmp/usr/share/locale/uk/LC_MESSAGES
+Cleaning up...
+# We install docs other way
+rm -rf /home/dexter/software/audio/sonata-1.5/debian/tmp/usr/share/sonata
+install -m644 
+debian/sonata.xpm /home/dexter/software/audio/sonata-1.5/debian/tmp/usr/share/pixmaps
+dh_testdir -i
+dh_testroot -i
+dh_installchangelogs -i CHANGELOG
+dh_installdocs -i
+dh_install -i --sourcedir=debian/tmp
+dh_install: sonata missing files (usr/lib/python*/site-packages/Sonata*), 
+aborting
+make: *** [binary-indep] Fehler 1
+
+What's going wrong here?
+
+Dex
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000649.html">[Sonata-users] One example of use of sonata
+</A></li>
+	<LI>Next message: <A HREF="000651.html">[Sonata-users] sonata on debian etch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#650">[ date ]</a>
+              <a href="thread.html#650">[ thread ]</a>
+              <a href="subject.html#650">[ subject ]</a>
+              <a href="author.html#650">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

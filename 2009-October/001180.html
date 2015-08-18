@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4AD6CB01.7000901%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001177.html">
+   <LINK REL="Next"  HREF="001181.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4AD6CB01.7000901%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.">bebarino at gmail.com
+       </A><BR>
+    <I>Thu Oct 15 09:10:57 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001177.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001181.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1180">[ date ]</a>
+              <a href="thread.html#1180">[ thread ]</a>
+              <a href="subject.html#1180">[ subject ]</a>
+              <a href="author.html#1180">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John McNeil wrote:
+&gt;<i> I wrote it for a8562e8a9f8d325416f5d3896e129b97c46ec7bc, as it's both
+</I>&gt;<i> the current tip of master and the current HEAD. It actually applies
+</I>&gt;<i> just fine to both. Which is to say, that bug occurs in both. The
+</I>&gt;<i> problem is that it assumes a stop-&gt;pause/play transition before use,
+</I>&gt;<i> which, in the case of it being disabled at startup and then enabling
+</I>&gt;<i> scrobbling mid-song, doesn't occur.
+</I>
+Thanks, I was mistakenly comparing between your patch and my patch on
+top of your patch causing me confusion.
+
+&gt;<i>
+</I>&gt;<i> The attached patch fixes both these problems. Note that you can't
+</I>&gt;<i> simply initialize the attributes in scrobbler.__init__(). While that
+</I>&gt;<i> avoids the exception, it trades it off for instead possibly incorrect
+</I>&gt;<i> (possibly *very* incorrect) play durations on the song that's playing
+</I>&gt;<i> when scrobbling is enabled. Which is less bad, but still not good.
+</I>&gt;<i>
+</I>&gt;<i> diff --git a/sonata/main.py b/sonata/main.py
+</I>&gt;<i> index 943a9f4..5b50904 100644
+</I>&gt;<i> --- a/sonata/main.py
+</I>&gt;<i> +++ b/sonata/main.py
+</I>&gt;<i> @@ -178,7 +178,7 @@ class Base(object):
+</I>&gt;<i>          self.plugintabs = dict()
+</I>&gt;<i>  
+</I>&gt;<i>          self.config = Config(_('Default Profile'), _(&quot;by&quot;) + &quot; %A &quot; + _(&quot;from&quot;) + &quot; %B&quot;, library.library_set_data)
+</I>&gt;<i> -        self.preferences = preferences.Preferences(self.config,
+</I>&gt;<i> +        self.preferences = preferences.Preferences(self, self.config,
+</I>&gt;<i>              self.on_connectkey_pressed, self.on_currsong_notify,
+</I>&gt;<i>              self.update_infofile, self.settings_save,
+</I>&gt;<i>              self.populate_profiles_for_menu)
+</I>&gt;<i> --- a/sonata/preferences.py
+</I>&gt;<i> +++ b/sonata/preferences.py
+</I>&gt;<i> @@ -66,9 +66,10 @@ class Preferences():
+</I>&gt;<i>      Many changes are applied instantly with respective
+</I>&gt;<i>      callbacks. Closing the dialog causes a response callback.
+</I>&gt;<i>      &quot;&quot;&quot;
+</I>&gt;<i> -    def __init__(self, config, reconnect, renotify, reinfofile,
+</I>&gt;<i> +    def __init__(self, main, config, reconnect, renotify, reinfofile,
+</I>&gt;<i>               settings_save, populate_profiles_for_menu):
+</I>&gt;<i>  
+</I>&gt;<i> +        self.main = main
+</I>&gt;<i>          self.config = config
+</I>&gt;<i>  
+</I>&gt;<i>          # These are callbacks to Main
+</I>&gt;<i> @@ -689,6 +690,8 @@ class Preferences():
+</I>&gt;<i>          if self.scrobbler.imported():
+</I>&gt;<i>              self.config.as_enabled = checkbox.get_active()
+</I>&gt;<i>              self.scrobbler.init()
+</I>&gt;<i> +            if self.main.status:
+</I>&gt;<i> +                self.scrobbler.handle_change_status('stop', self.main.status['state'], self.main.prevsonginfo, self.main.songinfo)
+</I>
+Can we somehow avoid this? This allows easy abuse of main.foo in the
+future, when we'd like to promote more separate modules. I think its OK
+to lose the scrobble (scribble?) for the track currently playing when we
+enable scrobbling. Which further questions, should we add the playing
+time that's already completed when we start-up mid-play?
+
+&gt;<i> +        
+</I>&gt;<i> +        if prevstate != 'play' and state != 'stop':
+</I>&gt;<i> +            # No need to check if the song is 30 seconds or longer,
+</I>&gt;<i> +            # audioscrobbler.py takes care of that.
+</I>&gt;<i> +            self.np(songinfo)
+</I>&gt;<i> +            self.scrob_prev_time = time.time()
+</I>&gt;<i> +        elif prevstate == 'play' and state != 'play':
+</I>&gt;<i> +            self.scrob_playing_duration += time.time() - self.scrob_prev_time
+</I>&gt;<i> +        if prevstate == 'stop':
+</I>&gt;<i> +            # New track playing, prepare to submit it later.
+</I>&gt;<i> +            if audioscrobbler is not None:
+</I>&gt;<i> +                self.scrob_start_time = &quot;&quot;
+</I>&gt;<i> +                self.scrob_playing_duration = 0
+</I>&gt;<i> +                if self.config.as_enabled and songinfo:
+</I>&gt;<i> +                    self.scrob_start_time = str(int(self.scrob_prev_time))
+</I>
+Isn't self.config.as_enabled always true at this point? Why do we need
+to test for songinfo when it isn't even used in the if block?
+audioscrobbler should have been imported by now too.
+
+I know you've just moved code around, but we can use this opportunity to
+clean up code that is irrelevant.
+
+&gt;<i> +        elif state == 'stop':
+</I>&gt;<i> +            # Track stopped playing, submit it if the submission criteria have
+</I>&gt;<i> +            # been met. The song must have been playing for at least 4 minutes
+</I>&gt;<i> +            # or have been at least halfway into its total length to be submitted.
+</I>&gt;<i> +            prevlen = float(mpdh.get(prevsonginfo, 'time'))
+</I>&gt;<i> +            if self.scrob_playing_duration &gt;= min(4*60, prevlen/2):
+</I>&gt;<i> +                if self.scrob_start_time:
+</I>&gt;<i> +                    self.post(prevsonginfo)
+</I>
+What if I'm playing a stream without a 'time'? Do we need to test for
+scrob_start_time or shouldn't it have already been set?
+
+Now I think this patch is doing too much. Can we fix the problem that
+started this whole long thread with only a few lines changed? Something
+like this?
+
+diff --git a/sonata/scrobbler.py b/sonata/scrobbler.py
+index 6a8d104..452fd23 100644
+--- a/sonata/scrobbler.py
++++ b/sonata/scrobbler.py
+@@ -32,6 +32,7 @@ def __init__(self, config):
+         self.scrob_time_now = None
+ 
+         self.elapsed_now = None
++        self.got_time = True
+ 
+     def import_module(self, _show_error=False):
+         &quot;&quot;&quot;Import the audioscrobbler module&quot;&quot;&quot;
+@@ -72,7 +73,9 @@ def init_thread(self):
+ 
+     def iterate(self):
+         &quot;&quot;&quot;Update the running time&quot;&quot;&quot;
+-        self.scrob_time_now = time.time()
++        if self.got_time:
++            self.scrob_time_now = time.time()
++            self.got_time = False
+ 
+     def handle_change_status(self, playing, prevsonginfo, songinfo=None, switched_from_stop_to_play=None, mpd_time_now=None):
+         &quot;&quot;&quot;Handle changes to play status, submitting info as appropriate&quot;&quot;&quot;
+@@ -106,6 +109,7 @@ def handle_change_status(self, playing, prevsonginfo, songinfo=None, switched_fr
+                 # Keep track of the total amount of time that the current song
+                 # has been playing:
+                 self.scrob_playing_duration += time.time() - self.scrob_time_now
++                self.got_time = True
+         else: # stopped:
+             self.elapsed_now = 0
+             if prevsong_time:
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001177.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001181.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1180">[ date ]</a>
+              <a href="thread.html#1180">[ thread ]</a>
+              <a href="subject.html#1180">[ subject ]</a>
+              <a href="author.html#1180">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

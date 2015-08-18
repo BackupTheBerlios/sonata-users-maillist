@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] -&gt; Tuukka: Two panels in Sonata
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20-%3E%20Tuukka%3A%20Two%20panels%20in%20Sonata&In-Reply-To=%3C20090403194147.M98750%40ronin-group.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000989.html">
+   <LINK REL="Next"  HREF="000993.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] -&gt; Tuukka: Two panels in Sonata</H1>
+    <B>michael.venables</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20-%3E%20Tuukka%3A%20Two%20panels%20in%20Sonata&In-Reply-To=%3C20090403194147.M98750%40ronin-group.org%3E"
+       TITLE="[Sonata-users] -&gt; Tuukka: Two panels in Sonata">michael.venables at ronin-group.org
+       </A><BR>
+    <I>Fri Apr  3 21:48:51 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000989.html">[Sonata-users] -&gt; Tuukka: Two panels in Sonata
+</A></li>
+        <LI>Next message: <A HREF="000993.html">[Sonata-users] Screen and Sonata size (Re: -&gt; Tuukka: Two panels in Sonata)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#990">[ date ]</a>
+              <a href="thread.html#990">[ thread ]</a>
+              <a href="subject.html#990">[ subject ]</a>
+              <a href="author.html#990">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 3 Apr 2009 10:26:04 -0700, Stephen Boyd wrote
+&gt;<i> On Fri, Apr 3, 2009 at 9:33 AM, michael.venables
+</I>&gt;<i> &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">michael.venables at ronin-group.org</A>&gt; wrote:
+</I>&gt;<i> &gt; On Fri, 03 Apr 2009 16:39:30 +0300, Tuukka Hastrup wrote
+</I>&gt;<i> &gt;&gt; I have to admit I never use the Firefox sidebars and didn't think
+</I>&gt;<i> &gt;&gt; about them here, but they look similar indeed. The difference would
+</I>&gt;<i> &gt;&gt; be that in Firefox you choose items in the sidebar, here you would
+</I>&gt;<i> &gt;&gt; choose items in the main application area. (Would this warrant
+</I>&gt;<i> &gt;&gt; moving the Current sidebar to the right side?)
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; I was initially thinking more along the lines of moving the Current
+</I>&gt;<i> &gt;&gt; tab out of the tab area and to its left side, but I think your take
+</I>&gt;<i> &gt;&gt; sounds better.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm not a fan of the Firefox sidebar. In order for it to be really useful --
+</I>&gt;<i> &gt; to keep you from having to constantly scroll left/right to read things and see
+</I>&gt;<i> &gt; what's going on -- you have to keep it set wide. And if it's set wide, then it
+</I>&gt;<i> &gt; covers a great deal of the main window -- which now means you have to
+</I>resize that.
+&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> What if the library tab was placed above the current tab instead of 
+</I>&gt;<i> to the left or the right? IOW, there would be a vertically split window
+</I>&gt;<i> instead of a horizontally split window. This would allow the narrow
+</I>&gt;<i> width users to keep their narrow windows. The only issue here is that
+</I>&gt;<i> users might need a very tall window. But I imagine the library tab
+</I>&gt;<i> would slide out when it is needed and hidden at other times.
+</I>
+I'm not a coder, but I've done a fair amount of UI design over the years, so
+I'm going to take a stab at this from a couple of perspectives...
+
+Sonata, in its current form, makes very efficient use of its vertical space.
+There are individual rows for controls, information, tabs, and navigation --
+and most of them are fully populated all the way across (if you run a narrow
+window). The nav row, though in a state of flux, is mostly blank if you're on
+any view except File System. Devoting another row entirely to the Library
+tab/button, even if it springs into a panel, would impact the efficiency of
+the layout.
+
+My kneejerk reaction is that if -- and only if -- it's important to be able to
+run Sonata in a compact fashion, then some effort should be made to keep the
+UI as a non-split single window. Small is great for a single window, but makes
+two worthless halves if it's split, because neither half gives you enough real
+estate to be all that functional or convenient. Requiring users to resize the
+main window to make a new element useful doesn't seem like a good idea,
+either. Tear-off, or separate windows are good, because assumably you'd open
+one, do whatever you were going to do, and then close it once you're done.
+
+Sonata's great strength lies in the fact that it has an inherently small
+desktop footprint. This sets it apart from almost all other media players,
+since the trend has been to integrate much more management, organizing, and
+cataloging functionality, all of which require screen space to present all the
+data legibly.
+
+If anything, my thinking is geared towards finding a less complex solution. I
+probably spend &lt;2% of my Sonata use time loading things to listen to; the
+other &gt;98%, it just sits there playing and making me happy -- so I need the
+functionality, but I don't require it to be a major component of the UI. YMMV.
+
+Here's a question: can tabs also be buttons? If so, middle-clicking a tab
+could open it in a separate window, which means people could drag things
+between windows, then close the child window. It would be even cooler if that
+click could act as a show/hide toggle; you wouldn't need window decoration,
+and your mousing could be more efficient since you control it from the main
+window, which is where you control all the other parts of Sonata.
+
+Thoughts?
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000989.html">[Sonata-users] -&gt; Tuukka: Two panels in Sonata
+</A></li>
+	<LI>Next message: <A HREF="000993.html">[Sonata-users] Screen and Sonata size (Re: -&gt; Tuukka: Two panels in Sonata)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#990">[ date ]</a>
+              <a href="thread.html#990">[ thread ]</a>
+              <a href="subject.html#990">[ subject ]</a>
+              <a href="author.html#990">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

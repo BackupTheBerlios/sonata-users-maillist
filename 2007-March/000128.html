@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Cover art for albums with various artists
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Cover%20art%20for%20albums%20with%20various%20artists&In-Reply-To=%3C802aab940703290424u4c407c4bw5f5c5095992563ec%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000127.html">
+   <LINK REL="Next"  HREF="000129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Cover art for albums with various artists</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Cover%20art%20for%20albums%20with%20various%20artists&In-Reply-To=%3C802aab940703290424u4c407c4bw5f5c5095992563ec%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Cover art for albums with various artists">niechift.vex at gmail.com
+       </A><BR>
+    <I>Thu Mar 29 13:24:26 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000127.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+        <LI>Next message: <A HREF="000129.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 3/29/07, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> I was thinking about this some more on the bus ride home from work,
+</I>&gt;<i> wondering if there might be some sort of algorithm that would make 99%
+</I>&gt;<i> of people happy. It seems to me that a Various Artists album would
+</I>&gt;<i> tend to never have more than some maximum number of songs from the
+</I>&gt;<i> same artist - say 5.
+</I>&gt;<i>
+</I>&gt;<i> So if we had Song A from Artist A on the Untitled Album.. we would do
+</I>&gt;<i> a search for all other songs with Untitled Album as the album name. If
+</I>&gt;<i> these songs span only a single artist, Artist A, it's a simple case.
+</I>&gt;<i> If instead there are multiple artists, we check to see if there are
+</I>&gt;<i> more than 5 songs by any artist. If so, it's a good chance that we are
+</I>&gt;<i> dealing with multiple albums from different artists (i.e. Untitled
+</I>&gt;<i> Album by Artist A and Untitled Album by Artist B). If not, we assume
+</I>&gt;<i> this is a single Various Artists album.
+</I>&gt;<i>
+</I>&gt;<i> Anyway, just wanted to jot down these thoughts.. if anyone else has a
+</I>&gt;<i> suggestion, feel free to mention it ;-) I'm sure there are other ways
+</I>&gt;<i> you could structure the algorithm. But I think something along these
+</I>&gt;<i> lines would be an interesting approach..
+</I>
+I was thinking of something reallly simple, when selecting album art,
+you could add a checkbox (or something) that states &quot;this is a mixed
+artist album&quot; and the file would be saved as album.jpg. When looking
+for the album art you first check if there is any artist-album.jpg
+file, if not, check if there is an album.jpg file if so use that.
+Though the downside is you have to set it up manually. :-/
+
+While looking around I found out how BMPx is doing it:
+<A HREF="http://forum.beep-media-player.org/viewthread.php?tid=438">http://forum.beep-media-player.org/viewthread.php?tid=438</A>
+
+I'm not sure I like their approach since it again will also lead to
+manual work by setting the extra tag up.
+
+Amarok seems to user the same approach as Soanta (but using a hash of
+artist-album as name):
+<A HREF="http://amarok.kde.org/forum/index.php?topic=11741.msg11871#msg11871">http://amarok.kde.org/forum/index.php?topic=11741.msg11871#msg11871</A>
+
+And they seem to have an internal database that keeps track of VA
+albums: <A HREF="http://amarok.kde.org/forum/index.php?topic=10146.0">http://amarok.kde.org/forum/index.php?topic=10146.0</A>
+
+That's what I've found out.. I've never used many players myself (only
+XMMS/Audacious) before moving to MPD and Sonata so I don't know many
+others.
+
+
+(one of these days gmail is going to drive me mad -- I keep replying
+privatly when I intend to send to the mailing list)
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000127.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+	<LI>Next message: <A HREF="000129.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

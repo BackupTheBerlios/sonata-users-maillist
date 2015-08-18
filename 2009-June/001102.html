@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Notifications (and the plugin system in general)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C4A2920DC.2000407%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001101.html">
+   <LINK REL="Next"  HREF="001103.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Notifications (and the plugin system in general)</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C4A2920DC.2000407%40iki.fi%3E"
+       TITLE="[Sonata-users] Notifications (and the plugin system in general)">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Fri Jun  5 15:42:52 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001101.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001103.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1102">[ date ]</a>
+              <a href="thread.html#1102">[ thread ]</a>
+              <a href="subject.html#1102">[ subject ]</a>
+              <a href="author.html#1102">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Welcome Scott!
+
+(Please quote using &gt; instead of indenting - makes nesting easier.)
+
+Scott Armitage wrote:
+&gt;<i> On Thu, Jun 4, 2009 at 4:52 PM, Stephen Boyd &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A> 
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt;&gt; wrote:
+</I>&gt;<i>     I agree, the magic stuff is gross. I think the first attempt at the
+</I>&gt;<i>     plugin infrastructure was good to smoke out some common problems and
+</I>&gt;<i>     help us figure out what we really need to do. It will probably take a
+</I>&gt;<i>     couple iterations to get it right though. We kind of just made a
+</I>&gt;<i>     plugin infrastructure without thinking about what the plugins would
+</I>&gt;<i>     need, or how they would interact with each other.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Glad to  see we're on the same page here =P
+</I>
+Do you guys have a lot of experience with plug-in systems, or would you 
+just need more documentation to understand my design before going 
+further? I admit I've never implemented a plug-in system before, I just 
+know some: Eclipse, Firefox, Compiz, MoinMoin... Manuel Naranjo took the 
+first stab at the plug-in system, and I designed the current one based 
+on that.
+
+The requirements that lead to the magic stuff:
+  * We want plug-in metadata.
+  * We want a simple plug-in to be a single file.
+  * If a plug-in isn't enabled, we want its code to have no effect.
+
+I'm open to new designs if someone comes up with something better 
+(import plug-ins in a sandbox, anyone?).
+
+&gt;<i> This one is a toughy. Too many callbacks and you're wasting CPU cycles 
+</I>&gt;<i> calling the hook notification functions (and any plugin callbacks that 
+</I>&gt;<i> get called as a result). Too few, and you lose the ability for plugins 
+</I>&gt;<i> to get in on the action.
+</I>
+I wouldn't worry too much about CPU cycles: it's not like we're working 
+on signal processing here. It's more about having an appropriate model 
+of the domain.
+
+Requirements:
+* We want simple things to be simple and complex things to be possible.
+* If MPD changes or Sonata changes, the plug-in interface should remain 
+backward-compatible (within reason).
+
+&gt;<i> Allowing plugins to have access to the Sonata base class certainly gives 
+</I>&gt;<i> them access to any information they may want to take advantage of, but 
+</I>&gt;<i> it also gives them too much power over the core. I was briefly 
+</I>&gt;<i> considering -- though I do not think this is a good way to go -- of 
+</I>&gt;<i> implementing a ReadOnlyBase class, which effectively would have a 
+</I>&gt;<i> reference to the main class instance, and then provide read-only 
+</I>&gt;<i> interfaces to all of the attributes. Too much overhead, I think -- there 
+</I>&gt;<i> must be a simpler way to access this.
+</I>
+Too tight coupling would be the real problem here. I'd want to see a 
+solution based on a domain model of properties (and objects?) including 
+observers -- more concretely: pretty much what gobject properties and 
+signals are (but I think we should unsubscribe a plug-in automatically 
+when it gets disabled).
+
+&gt;<i> each plugin 
+</I>&gt;<i> -- if contained within it's own module -- could be imported directly, 
+</I>&gt;<i> from anywhere -- e.g. 'from SuperAwesomeGuysPluginPack import 
+</I>&gt;<i> WickedCoolPlugin'. This is less of a concern, but it avoids having to 
+</I>&gt;<i> bring in and parse the module manually if you could just do a simple 
+</I>&gt;<i> import statement.
+</I>
+Concretely:
+  * How do you locate plug-in packages?
+  * How do you enumerate plug-ins?
+  * How do you import the code?
+
+One answer to this is in sonata/pluginsystem.py: lines 11-15, lines 
+145-158, lines 180-185 respectively. Again, I'm open to improvements.
+
+&gt;<i> Second, the part you already got -- in Python, a function that does some 
+</I>&gt;<i> action on a particular type of object should be able to perform the 
+</I>&gt;<i> comperable action on any object type that it is reasonable to apply it 
+</I>&gt;<i> to -- in particular, any subclasses of a class must only /extend/ a 
+</I>&gt;<i> superclass. But this starts to become less about typing and more about a 
+</I>&gt;<i> specification if you take away the focus on OO programming (which indeed 
+</I>&gt;<i> may be overkill here -- I'm not sure one needs  room for /instances/ of 
+</I>&gt;<i> plugins so much...).
+</I>
+What you describe is generic to subtyping. Python style prefers duck 
+typing specifically, which means you don't require the objects of a type 
+  to actually be instances of a (sub-)class. The requirement follows:
+  * We want that plug-ins don't have to extend a sonata.Plugin class.
+
+&gt;<i> I was kind of flip-flopping back and forth between the idea of a 
+</I>&gt;<i> plugin being a module vs. a plugin being an object instance/class. I 
+</I>&gt;<i> have a bad tendency to jump straight to OO fundamentals without fully 
+</I>&gt;<i> thinking through the applicability, even though I usually end up with a 
+</I>&gt;<i> functional/OO hybrid solution to stuff. But you're right, certainly a 
+</I>&gt;<i> module/class with specified attributes would work just as well as a 
+</I>&gt;<i> dictionary. I suppose either way, as long as you have a specification 
+</I>&gt;<i> indicating what needs to be provided and in what form, either one would 
+</I>&gt;<i> work. Attributes might be a bit cleaner, but would be more difficult to 
+</I>&gt;<i> handle when missing (i.e. as opposed to plugin.get('key','default')). 
+</I>
+Currently, a plug-in is a module with the required metadata magic. The 
+capabilities of a plug-in are currently described in the metadata to 
+meet a requirement:
+  * We may want to know the capabilities of a plug-in to decide when to 
+load it.
+
+The Python name that implements a capability is included in the 
+metadata. This distances the names from the interface: allows a plug-in 
+to have multiple implementations of a capability, allows a single name 
+to implement multiple capabilities, allows a plug-in to implement 
+capabilities in (multiple) objects etc. Something comparable would be to 
+have the plug-in modules call sonata.register_plugin at import and pass 
+a mapping from capabilities to implementations. This seems to me to be 
+additional boilerplate with little advantage, although it felt more 
+natural for internal plug-ins (see e.g. sonata/amazoncovers.py lines 
+15-19). The decorator *syntax* might help here.
+
+There is some exploration of the current system being used in the OO 
+style plus commentary by the developer here:
+<A HREF="http://github.com/github076986099/sonata-plugins/tree/master">http://github.com/github076986099/sonata-plugins/tree/master</A>
+
+As can be seen here, the life cycle model needs to be designed 
+carefully. Python modules are loaded but never unloaded, so we need 
+something like the current &quot;enablables&quot; capability for setup and 
+teardown (if it should be possible to disable plug-ins at runtime). The 
+capability can instantiate classes, and other capabilities can refer to 
+methods in the resulting objects (sonata/pluginsystem.py line 81).
+
+&gt;<i>     These are just my thoughts. If you have patches I can review it might
+</I>&gt;<i>     be easier to understand what you want to do.
+</I>
+Yes, creating a working patch is one good way to ensure the scope of the 
+solution is complete as well as detailed.
+
+&gt;<i>     If you want to rework the plugin framework, I think it might be easier
+</I>&gt;<i>     to start fresh from the latest release. At least there you can easily
+</I>&gt;<i>     rip out (or ignore) the existing framework. Nowadays, some of the core
+</I>&gt;<i>     functionality (artwork, lyrics) has been moved into plugins, so
+</I>&gt;<i>     working from the trunk might be harder. Of course, that functionality
+</I>&gt;<i>     isn't essential, so it's probably ok either way.
+</I>
+Just remember that the trunk has some necessary clean-ups applied to it 
+as well. My bet would be that it's easier to understand the current 
+system and refactor it to your liking.
+
+
+Regards,
+Tuukka
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001101.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001103.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1102">[ date ]</a>
+              <a href="thread.html#1102">[ thread ]</a>
+              <a href="subject.html#1102">[ subject ]</a>
+              <a href="author.html#1102">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

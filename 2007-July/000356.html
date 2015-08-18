@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%0A%09while%20to%20respond&In-Reply-To=%3C449c10960707160607ve99218flc8f84fff8e3def79%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000354.html">
+   <LINK REL="Next"  HREF="000358.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata loses status updates when mpd takes a	while to respond</H1>
+    <B>Dan McGee</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%0A%09while%20to%20respond&In-Reply-To=%3C449c10960707160607ve99218flc8f84fff8e3def79%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata loses status updates when mpd takes a	while to respond">dpmcgee at gmail.com
+       </A><BR>
+    <I>Mon Jul 16 15:07:13 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000354.html">[Sonata-users] Sonata loses status updates when mpd takes a while	to respond
+</A></li>
+        <LI>Next message: <A HREF="000358.html">[Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#356">[ date ]</a>
+              <a href="thread.html#356">[ thread ]</a>
+              <a href="subject.html#356">[ subject ]</a>
+              <a href="author.html#356">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 7/9/07, Dan McGee &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">dpmcgee at gmail.com</A>&gt; wrote:
+&gt;<i> This is mainly directed to Scott since I've told him about the problem
+</I>&gt;<i> elsewhere, but I figured the proper place to report it was the list.
+</I>&gt;<i> With both the last released version of Sonata and the SVN version,
+</I>&gt;<i> Sonata seems to lose its connection with mpd when mpd takes a while to
+</I>&gt;<i> respond.
+</I>&gt;<i>
+</I>&gt;<i> My setup is the following: Sonata and mpd are running on computer A,
+</I>&gt;<i> and computer B holds my music, which is mounted over NFS to computer
+</I>&gt;<i> A.
+</I>&gt;<i>
+</I>&gt;<i> Steps to reproduce:
+</I>&gt;<i> 1. Start sonata and mpd
+</I>&gt;<i> 2. Play some music
+</I>&gt;<i> 3. Stop the music playing, leave Sonata and mpd running
+</I>&gt;<i> 4. Wait for the hard drive holding the music on computer B to spin
+</I>&gt;<i> down (suspend)
+</I>&gt;<i> 5. Press play in Sonata- this son will usually play because it is
+</I>&gt;<i> cached on computer A
+</I>&gt;<i> 6. Skip to the next track- the remote drive will spin up, but Sonata
+</I>&gt;<i> times out and displays &quot;Stopped&quot; as the status, even though mpd will
+</I>&gt;<i> eventually queue up and play the song
+</I>&gt;<i>
+</I>&gt;<i> Doing Alt-C then updates the status in Sonata, but it does not
+</I>&gt;<i> continuously update- it simply stays where it was when you did the
+</I>&gt;<i> Alt-C. Repeated presses of Alt-C will update the status. In addition,
+</I>&gt;<i> the buttons will then work and you can skip around songs, although the
+</I>&gt;<i> status does not update except at the moment you press the buttons.
+</I>&gt;<i>
+</I>&gt;<i> Let me know if you need anything else on this. The only way to fix the
+</I>&gt;<i> problem seems to be to restart Sonata.
+</I>&gt;<i>
+</I>&gt;<i> -Dan
+</I>&gt;<i>
+</I>
+Scott- finally got some output for you. Running Sonata v1.2. Added
+some comments in there:
+
+&gt;&gt;&gt;<i> On startup &lt;&lt;&lt;
+</I>$ sonata
+SOAPpy not found, fetching lyrics support disabled.
+
+&gt;&gt;&gt;<i> During timeout (drive spinning up) &lt;&lt;&lt;
+</I>Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 4667, in next
+    self.conn.do.next()
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 181, in &lt;lambda&gt;
+    return lambda *args: self.send_n_fetch(cmd, args)
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 188, in
+send_n_fetch
+    self.fetcher.clear()
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 224, in clear
+    self.talker.get_line()
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 29, in get_line
+    self.current_line = self.file.readline().rstrip(&quot;\n&quot;)
+  File &quot;/usr/lib/python2.5/socket.py&quot;, line 346, in readline
+    data = self._sock.recv(self._rbufsize)
+socket.timeout: timed out
+
+&gt;&gt;&gt;<i> After pressing Alt-C once &lt;&lt;&lt;
+</I>Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 1369, in iterate
+    self.handle_change_song()
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 2649, in
+handle_change_song
+    if not self.prevsonginfo or self.songinfo.file != self.prevsonginfo.file:
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 286, in
+__getattr__
+    raise AttributeError
+AttributeError
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000354.html">[Sonata-users] Sonata loses status updates when mpd takes a while	to respond
+</A></li>
+	<LI>Next message: <A HREF="000358.html">[Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#356">[ date ]</a>
+              <a href="thread.html#356">[ thread ]</a>
+              <a href="subject.html#356">[ subject ]</a>
+              <a href="author.html#356">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] linking album and artist views
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-November/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20linking%20album%20and%20artist%20views&In-Reply-To=%3C35a6f8e30811251930pf001c22t2d7321b2f5d6dfdc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000840.html">
+   <LINK REL="Next"  HREF="000844.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] linking album and artist views</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20linking%20album%20and%20artist%20views&In-Reply-To=%3C35a6f8e30811251930pf001c22t2d7321b2f5d6dfdc%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] linking album and artist views">stonecrest at gmail.com
+       </A><BR>
+    <I>Wed Nov 26 04:30:39 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000840.html">[Sonata-users] linking album and artist views
+</A></li>
+        <LI>Next message: <A HREF="000844.html">[Sonata-users] Can't Play a Stream
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#842">[ date ]</a>
+              <a href="thread.html#842">[ thread ]</a>
+              <a href="subject.html#842">[ subject ]</a>
+              <a href="author.html#842">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Nov 25, 2008 at 1:22 PM, &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">intrigeri at boum.org</A>&gt; wrote:
+
+&gt;<i> I guess it's not so hard to implement, but the tricky UI part is: in
+</I>&gt;<i> Album view, the whole album list item already has a defined behavior
+</I>&gt;<i> when clicked; can the artist part become a link on its own? I don't
+</I>&gt;<i> know if GTK allows this.
+</I>
+
+I had thought of this as well, having some text in a treeview row that links
+to another view. Unfortunately, like you point out, the UI would be tricky
+if even possible.
+
+It's easy to render the text as a link (although ideally we could only
+render as a link on a mouse hover, so that it didn't detract too much from
+the primary row information), but it'd be difficult to know when the mouse
+is over that text portion of the widget. On the info tab, I use a whole
+widget for each link and just check when the mouse is over the widget, so
+it's a much easier task.
+
+Conversely, you might be able to use a custom widget via a
+GenericCellRenderer, but I'm still not sure if it'd be possible. I'd also be
+worried about the effort to do so and the impact on speed of populating the
+treeview.
+
+Can't see this happening, unfortunately.
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20081125/6df063b5/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20081125/6df063b5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000840.html">[Sonata-users] linking album and artist views
+</A></li>
+	<LI>Next message: <A HREF="000844.html">[Sonata-users] Can't Play a Stream
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#842">[ date ]</a>
+              <a href="thread.html#842">[ thread ]</a>
+              <a href="subject.html#842">[ subject ]</a>
+              <a href="author.html#842">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

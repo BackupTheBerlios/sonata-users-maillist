@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] enqueue track
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20enqueue%20track&In-Reply-To=%3C4AA43FF4.7070706%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="001144.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] enqueue track</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20enqueue%20track&In-Reply-To=%3C4AA43FF4.7070706%40gmail.com%3E"
+       TITLE="[Sonata-users] enqueue track">bebarino at gmail.com
+       </A><BR>
+    <I>Mon Sep  7 01:04:20 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="001144.html">[Sonata-users] ideas for usable features
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1143">[ date ]</a>
+              <a href="thread.html#1143">[ thread ]</a>
+              <a href="subject.html#1143">[ subject ]</a>
+              <a href="author.html#1143">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Mathieu R. wrote
+&gt;<i> In most common (aka non mpd client) music player, there is a feature to
+</I>&gt;<i> enqueue tracks. i mean, something like a right-clic menu option, in the
+</I>&gt;<i> current playlist context, wich will enqueue the selected track just
+</I>&gt;<i> after the currently playing song. Select that option for an other track
+</I>&gt;<i> will enqueue it in third place. Select that option again will enqueue
+</I>&gt;<i> the selected song in fourth place, and so on...
+</I>
+MPD doesn't currently support a queue command. You can see some
+discussion about a possible queue command on the wiki[1]. That page is
+over a year old though, so things may have changed since then.
+
+We could simulate a queue command on our own, but I imagine it would
+become fairly difficult to maintain (the current playlist code would
+most likely need to be rewritten). It would be far easier if we could
+just send a command to MPD and not worry about it.
+
+If someone wants to write a patch to simulate this command I'll gladly
+review it. Or if someone wants to bring this issue up with the MPD folks
+we could go that way.
+
+[1] <A HREF="http://mpd.wikia.com/wiki/MusicPlayerDaemonQueue">http://mpd.wikia.com/wiki/MusicPlayerDaemonQueue</A>
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="001144.html">[Sonata-users] ideas for usable features
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1143">[ date ]</a>
+              <a href="thread.html#1143">[ thread ]</a>
+              <a href="subject.html#1143">[ subject ]</a>
+              <a href="author.html#1143">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

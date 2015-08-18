@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] ID3 tag whitespace padding displays ugly
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20ID3%20tag%20whitespace%20padding%20displays%20ugly&In-Reply-To=%3C85veexank6.fsf%40boum.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000219.html">
+   <LINK REL="Next"  HREF="000272.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] ID3 tag whitespace padding displays ugly</H1>
+    <B>intrigeri</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20ID3%20tag%20whitespace%20padding%20displays%20ugly&In-Reply-To=%3C85veexank6.fsf%40boum.org%3E"
+       TITLE="[Sonata-users] ID3 tag whitespace padding displays ugly">intrigeri at boum.org
+       </A><BR>
+    <I>Sat May 12 20:45:13 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000219.html">[Sonata-users] ID3 tag whitespace padding displays ugly
+</A></li>
+        <LI>Next message: <A HREF="000272.html">[Sonata-users] ID3 tag whitespace padding displays ugly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#270">[ date ]</a>
+              <a href="thread.html#270">[ thread ]</a>
+              <a href="subject.html#270">[ subject ]</a>
+              <a href="author.html#270">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello again,
+
+intrigeri wrote (07 May 2007 12:52:03 GMT) :
+&gt;&gt;<i> Apparently it only applies to id3v1 tags (I should have guessed
+</I>&gt;&gt;<i> that, why would id3v2 tags need padding?) which is why I wasn't
+</I>&gt;&gt;<i> seeing it in other media players with id3v2. But indeed, there is
+</I>&gt;&gt;<i> some &quot;popular encoder&quot; that does indeed pad with spaces, I wish
+</I>&gt;&gt;<i> I knew which one.
+</I>&gt;<i>
+</I>&gt;<i> Ok. What seems weird to me is : Sonata + taglib seems to be itself
+</I>&gt;<i> adding trailing/padding space.
+</I>
+I did some more tests with different id3 tags versions, hoping to
+isolate the particular case where Sonata adds such padding whitespace
+to id3v2 tags, where they don't belong.
+
+I could reproduce the issue I described first, using a mp3 file that
+has :
+  - id3v1 tags padded with spaces (which is wrong, but probably
+    common, as stated by jat in the mpd mantis bug)
+  - no id3v2 tag at all.
+
+Before editing tags with Sonata, it is properly displayed in the
+library and playlist views : they both don't show the whitespace
+padding, presumably because MPD (or libid3tag it seems to be using to
+read tags) already cleans a bit such buggy id3v1 tags. Great.
+
+In the &quot;edit tag&quot; window, the whitespace padding is there (obviously,
+since it is white, it can only be seen by selecting the faulty text).
+This seemed at first incoherent to me, before I realized that the
+library view data comes from MPD, whereas the &quot;edit tag&quot; window's data
+comes from tagpy.
+
+Then I tested several things, starting every time with the same mp3
+file described above, and doing all edits with Sonata+taglib :
+
+a) If I edit a non-padded field, such as the track number, then
+   an id3v2.4 tag is added to the mp3 file, and the original padding
+   whitespace is copied into this new tag. It the appears in the
+   library and playlist views =&gt; ugly.
+
+b) If I remove by hand the padding space, and save the file, then an
+   id3v2.4 tag is added to the mp3 file, without any padding =&gt; great.
+
+To sum up, the current behaviour seems clearly bad to me :
+  - buggy id3v1 tags are handled correctly, thanks to mpd+libid3tag
+  - Sonata is creating brand-new buggy id3v2 tags, that are displayed
+    without any fixing, and mpd developpers don't seem to be willing
+    to handle such buggy tags nicely, and I guess they are right.
+=&gt; Sonata turns &quot;buggy but nicely handled&quot; tags into &quot;buggy and not
+handled tags&quot;. Bad.
+
+OK, how do we fix this then ?
+
+I guess nobody wants to dig into low-level v1 vs. v2.3 vs. v2.4
+conversion issues, and anyway I'm not sure at all this is possible at
+all with tagpy. Well.
+
+I would then suggest to remove the padding space from tags when
+loading them into the &quot;edit tags&quot; window (in tagpy_get_tag
+function ?), and when saving this window's data (in tagpy_set_tag
+function ?), to make sure no buggy id3v2 tag gets written.
+
+Ciao,
+-- 
+  intrigeri &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">intrigeri at boum.org</A>&gt;
+  | gnupg key @ <A HREF="http://intrigeri.boum.org/intrigeri.asc">http://intrigeri.boum.org/intrigeri.asc</A>
+  | Who wants a world in which the guarantee that we shall not
+  | die of starvation would entail the risk of dying of boredom ?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000219.html">[Sonata-users] ID3 tag whitespace padding displays ugly
+</A></li>
+	<LI>Next message: <A HREF="000272.html">[Sonata-users] ID3 tag whitespace padding displays ugly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#270">[ date ]</a>
+              <a href="thread.html#270">[ thread ]</a>
+              <a href="subject.html#270">[ subject ]</a>
+              <a href="author.html#270">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

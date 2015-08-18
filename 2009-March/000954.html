@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Bug: sonata --toggle only works partially
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Bug%3A%20sonata%20--toggle%20only%20works%20partially&In-Reply-To=%3C35a6f8e30903231901k6d73b1d4k1d231c15222eb5%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000950.html">
+   <LINK REL="Next"  HREF="000956.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Bug: sonata --toggle only works partially</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Bug%3A%20sonata%20--toggle%20only%20works%20partially&In-Reply-To=%3C35a6f8e30903231901k6d73b1d4k1d231c15222eb5%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Bug: sonata --toggle only works partially">stonecrest at gmail.com
+       </A><BR>
+    <I>Tue Mar 24 03:01:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000950.html">[Sonata-users] Bug: sonata --toggle only works partially
+</A></li>
+        <LI>Next message: <A HREF="000956.html">[Sonata-users] Sonata 1.6 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#954">[ date ]</a>
+              <a href="thread.html#954">[ thread ]</a>
+              <a href="subject.html#954">[ subject ]</a>
+              <a href="author.html#954">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Mar 23, 2009 at 10:10 AM, &#1571;&#1581;&#1605;&#1583; &#1601;&#1585;&#1594;&#1604; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">ahmad.farghal at gmail.com</A>&gt; wrote:
+
+&gt;<i> OK, this is very weird. I did some more testing and it seems that the
+</I>&gt;<i> problem I described only happens when my updated Arabic sonata.mo (the
+</I>&gt;<i> compiled version of my latest translation file) is placed in
+</I>&gt;<i> /usr/share/locale/ar/LC_MESSAGES. If I delete the file, the problem
+</I>&gt;<i> goes away and sonata --toggle in gmrun works.
+</I>
+
+I'm still not able to reproduce this...
+
+If I run LC_ALL=ar_AE.uft8 gmrun and then type 'sonata --toggle', it pops up
+fine. In the terminal, I see:
+
+&#1601;&#1588;&#1604; &#1578;&#1606;&#1601;&#1610;&#1584; &#1575;&#1604;&#1571;&#1608;&#1575;&#1605;&#1585; &#1575;&#1604;&#1576;&#1593;&#1610;&#1583;&#1577;.
+&#1587;&#1610;&#1578;&#1605; &#1576;&#1583;&#1569; &#1587;&#1608;&#1606;&#1575;&#1578;&#1575;...
+
+I assume that is saying:
+
+Failed to execute remote commands.
+Starting Sonata instead...
+
+Do you see similar text in your terminal if you run gmrun from it?
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090323/1b40c561/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090323/1b40c561/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000950.html">[Sonata-users] Bug: sonata --toggle only works partially
+</A></li>
+	<LI>Next message: <A HREF="000956.html">[Sonata-users] Sonata 1.6 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#954">[ date ]</a>
+              <a href="thread.html#954">[ thread ]</a>
+              <a href="subject.html#954">[ subject ]</a>
+              <a href="author.html#954">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

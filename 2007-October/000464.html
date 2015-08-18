@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata 1.3 approaching... testing, translations
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.3%20approaching...%20testing%2C%20translations&In-Reply-To=%3C802aab940710240938t79bc788aw7551e9c5bc007995%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000461.html">
+   <LINK REL="Next"  HREF="000451.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata 1.3 approaching... testing, translations</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.3%20approaching...%20testing%2C%20translations&In-Reply-To=%3C802aab940710240938t79bc788aw7551e9c5bc007995%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata 1.3 approaching... testing, translations">niechift.vex at gmail.com
+       </A><BR>
+    <I>Wed Oct 24 18:38:13 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000461.html">[Sonata-users] Sonata 1.3 approaching... testing, translations
+</A></li>
+        <LI>Next message: <A HREF="000451.html">[Sonata-users] Sonata bleeding edge Debian packages : now available	for lenny as well
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#464">[ date ]</a>
+              <a href="thread.html#464">[ thread ]</a>
+              <a href="subject.html#464">[ subject ]</a>
+              <a href="author.html#464">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10/24/07, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> On 10/23/07, [vEX] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">niechift.vex at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Traceback (most recent call last):
+</I>&gt;<i> &gt;   File &quot;~/Saker/sonata-svn/sonata.py&quot;, line 3958, in on_image_activate
+</I>&gt;<i> &gt;     self.on_infowindow_show()
+</I>&gt;<i> &gt;   File &quot;~/Saker/sonata-svn/sonata.py&quot;, line 4194, in on_infowindow_show
+</I>&gt;<i> &gt;     self.infowindow_update(True, update_all=True)
+</I>&gt;<i> &gt;   File &quot;~/Saker/sonata-svn/sonata.py&quot;, line 4344, in infowindow_update
+</I>&gt;<i> &gt;     self.lyrics_refresh.set_sensitive(False)
+</I>&gt;<i> &gt; AttributeError: 'BaseDBus' object has no attribute 'lyrics_refresh'
+</I>&gt;<i>
+</I>&gt;<i> I'm not able to reproduce this, it works fine here. I have no idea why
+</I>&gt;<i> it's looking for lyrics_refresh in the BaseDBus object either... Does
+</I>&gt;<i> this happen if you install sonata and run it normally (as opposed to
+</I>&gt;<i> running sonata straight from the source code, which isn't a very good
+</I>&gt;<i> idea)? Does it happen in a different desktop environment (e.g. gnome
+</I>&gt;<i> or non-gnome)?
+</I>
+Only use Openbox, don't have anything else installed and it happens
+with 1.2.3 installed by the package manager as well.
+
+$ pacman -Qo `which sonata`
+/usr/bin/sonata is owned by sonata 1.2.3-1
+
+$ sonata -v
+Version: Sonata 1.2.3
+Website: <A HREF="http://sonata.berlios.de/">http://sonata.berlios.de/</A>
+
+$ sonata
+SOAPpy not found, fetching lyrics support disabled.
+Error grabbing key 144, 0xbcd010
+Error grabbing key 153, 0xbcd010
+Error grabbing key 162, 0xbcd010
+Error grabbing key 164, 0xbcd010
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 3671, in
+on_image_activate
+    self.on_infowindow_show()
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 3905, in
+on_infowindow_show
+    self.infowindow_update(True, update_all=True)
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 4055, in
+infowindow_update
+    self.lyrics_refresh.set_sensitive(False)
+AttributeError: 'BaseDBus' object has no attribute 'lyrics_refresh'
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 1366, in iterate
+    self.infowindow_update(update_all=False)
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 4055, in
+infowindow_update
+    self.lyrics_refresh.set_sensitive(False)
+AttributeError: 'BaseDBus' object has no attribute 'lyrics_refresh'
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000461.html">[Sonata-users] Sonata 1.3 approaching... testing, translations
+</A></li>
+	<LI>Next message: <A HREF="000451.html">[Sonata-users] Sonata bleeding edge Debian packages : now available	for lenny as well
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#464">[ date ]</a>
+              <a href="thread.html#464">[ thread ]</a>
+              <a href="subject.html#464">[ subject ]</a>
+              <a href="author.html#464">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

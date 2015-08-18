@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] album-covers: replace amazon.com with	rhapsody.com cover fetching
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20album-covers%3A%20replace%20amazon.com%20with%0A%09rhapsody.com%20cover%20fetching&In-Reply-To=%3C1251358392-20323-1-git-send-email-bebarino%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001141.html">
+   <LINK REL="Next"  HREF="001142.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] album-covers: replace amazon.com with	rhapsody.com cover fetching</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20album-covers%3A%20replace%20amazon.com%20with%0A%09rhapsody.com%20cover%20fetching&In-Reply-To=%3C1251358392-20323-1-git-send-email-bebarino%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] album-covers: replace amazon.com with	rhapsody.com cover fetching">bebarino at gmail.com
+       </A><BR>
+    <I>Thu Aug 27 09:33:12 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001141.html">[Sonata-users] Feature request - Visibility of comment tag
+</A></li>
+        <LI>Next message: <A HREF="001142.html">[Sonata-users] enqueue track
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1140">[ date ]</a>
+              <a href="thread.html#1140">[ thread ]</a>
+              <a href="subject.html#1140">[ subject ]</a>
+              <a href="author.html#1140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>As of August 15th, 2009 amazon.com requires all requests sent to their
+server to be signed with the private key corresponding to the public key
+being used. Since we're an open source project we cannot do this without
+exposing the private key. Therefore switch to using rhapsody.com's
+webservice.
+---
+
+I just noticed this today. I checked rhythmbox's sources and they have
+also disabled their cover fetching from amazon. This seems to work but not 
+that well. I imagine we could do a bunch of requests to get all the album
+images for an artist, but I feel simpler is better right now. Usually you
+have the album and artist and it just works. I don't know about compilation
+albums though; I imagine in that case this will fail horribly.
+
+ sonata/amazoncovers.py   |   76 ----------------------------------------------
+ sonata/artwork.py        |    2 +-
+ sonata/consts.py         |    2 +-
+ sonata/main.py           |    6 ++--
+ sonata/rhapsodycovers.py |   59 +++++++++++++++++++++++++++++++++++
+ 5 files changed, 64 insertions(+), 81 deletions(-)
+ delete mode 100644 sonata/amazoncovers.py
+ create mode 100644 sonata/rhapsodycovers.py
+
+diff --git a/sonata/amazoncovers.py b/sonata/amazoncovers.py
+deleted file mode 100644
+index b64c75f..0000000
+--- a/sonata/amazoncovers.py
++++ /dev/null
+@@ -1,76 +0,0 @@
+-
+-import os
+-import urllib, urllib2
+-from xml.etree import ElementTree
+-
+-import misc
+-from pluginsystem import pluginsystem, BuiltinPlugin
+-
+-AMAZON_KEY = &quot;12DR2PGAQT303YTEWP02&quot;
+-AMAZON_NS = &quot;{<A HREF="http://webservices.amazon.com/AWSECommerceService/2005-10-05">http://webservices.amazon.com/AWSECommerceService/2005-10-05</A>}&quot;
+-AMAZON_URI = &quot;<A HREF="http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&amp;AWSAccessKeyId=%s&amp;Operation=ItemSearch&amp;SearchIndex=Music&amp;Artist=%s&amp;ResponseGroup=Images">http://webservices.amazon.com/onca/xml?Service=AWSECommerceService&amp;AWSAccessKeyId=%s&amp;Operation=ItemSearch&amp;SearchIndex=Music&amp;Artist=%s&amp;ResponseGroup=Images</A>&quot;
+-
+-class AmazonCovers(object):
+-	def __init__(self):
+-		pluginsystem.plugin_infos.append(BuiltinPlugin(
+-				'amazoncovers', &quot;Amazon Covers&quot;, 
+-				&quot;Fetch album covers from Amazon.com.&quot;, 
+-				{'cover_fetching': 'get_cover'}, self))
+-
+-	def get_cover(self, progress_callback, artist, album, dest_filename, 
+-		      all_images=False):
+-		return self.artwork_download_img_to_file(progress_callback, artist, album, dest_filename, all_images)
+-
+-	def artwork_download_img_to_file(self, progress_callback, artist, album, dest_filename, all_images=False):
+-		# Returns False if no images found
+-		if not artist and not album:
+-			return False
+-
+-		# Amazon currently doesn't support utf8 and suggests latin1 encoding instead:
+-		artist = urllib.quote(artist.encode('latin1', 'replace'))
+-		album = urllib.quote(album.encode('latin1', 'replace'))
+-
+-		# Try searching urls from most specific (artist, title) to least specific (artist only)
+-		urls = [(AMAZON_URI + &quot;&amp;Title=%s&quot;) % (AMAZON_KEY, artist, album),
+-			(AMAZON_URI + &quot;&amp;Keywords=%s&quot;) % (AMAZON_KEY, artist, album),
+-			AMAZON_URI % (AMAZON_KEY, artist)]
+-
+-		for url in urls:
+-			request = urllib2.Request(url)
+-			opener = urllib2.build_opener()
+-			try:
+-				body = opener.open(request).read()
+-				xml = ElementTree.fromstring(body)
+-				largeimgs = xml.getiterator(AMAZON_NS + &quot;LargeImage&quot;)
+-			except:
+-				largeimgs = None
+-
+-			if largeimgs:
+-				break
+-			elif url == urls[-1]:
+-				return False
+-
+-		imgs = misc.iunique(url.text for img in largeimgs for url in img.getiterator(AMAZON_NS + &quot;URL&quot;))
+-		# Prevent duplicate images in remote art window:
+-		# FIXME the line above should already accomplish this
+-		# FIXME this loses the order of the results
+-		imglist = list(set(list(imgs)))
+-
+-		if not all_images:
+-			urllib.urlretrieve(imglist[0], dest_filename)
+-			return True
+-		else:
+-			try:
+-				imgfound = False
+-				for i, image in enumerate(imglist):
+-					dest_filename_curr = dest_filename.replace(&quot;&lt;imagenum&gt;&quot;, str(i+1))
+-					urllib.urlretrieve(image, dest_filename_curr)
+-					if not progress_callback(
+-						dest_filename_curr, i):
+-						return imgfound # cancelled
+-					if os.path.exists(dest_filename_curr):
+-						imgfound = True
+-
+-			except:
+-				pass
+-			return imgfound
+diff --git a/sonata/artwork.py b/sonata/artwork.py
+index 30e34b8..4e620aa 100644
+--- a/sonata/artwork.py
++++ b/sonata/artwork.py
+@@ -538,7 +538,7 @@ def artwork_is_for_playing_song(self, filename):
+ 
+ 	def artwork_download_img_to_file(self, artist, album, dest_filename, all_images=False):
+ 		self.downloading_image = True
+-		# Fetch covers from amazon.com etc.
++		# Fetch covers from rhapsody.com etc.
+ 		cover_fetchers = pluginsystem.get('cover_fetching')
+ 		imgfound = False
+ 		for _plugin, cb in cover_fetchers:
+diff --git a/sonata/consts.py b/sonata/consts.py
+index 3f44ddf..ffb10d8 100644
+--- a/sonata/consts.py
++++ b/sonata/consts.py
+@@ -55,6 +55,6 @@ def __init__(self):
+ 		self.NUM_ARTISTS_FOR_VA = 2
+ 
+ 		# the names of the plug-ins that will be enabled by default
+-		self.DEFAULT_PLUGINS = &quot;playlists streams lyricwiki amazoncovers localmpd&quot;.split()
++		self.DEFAULT_PLUGINS = &quot;playlists streams lyricwiki rhapsodycovers localmpd&quot;.split()
+ 
+ consts = Constants()
+diff --git a/sonata/main.py b/sonata/main.py
+index 85b0ab6..fc32ebb 100644
+--- a/sonata/main.py
++++ b/sonata/main.py
+@@ -60,7 +60,7 @@
+ from config import Config
+ 
+ import preferences, tagedit, artwork, about, scrobbler, info, library, streams, playlists, current
+-import lyricwiki, amazoncovers # plug-ins
++import lyricwiki, rhapsodycovers # plug-ins
+ import dbus_plugin as dbus
+ 
+ try:
+@@ -415,7 +415,7 @@ def __init__(self, args, window=None, _sugar=False):
+ 
+ 		# Plug-ins imported as modules
+ 		self.lyricwiki = lyricwiki.LyricWiki()
+-		self.amazoncovers = amazoncovers.AmazonCovers()
++		self.rhapsodycovers = rhapsodycovers.RhapsodyCovers()
+ 
+ 		# Current tab
+ 		self.current = current.Current(self.config, self.client, self.TAB_CURRENT, self.on_current_button_press, self.connected, lambda:self.sonata_loaded, lambda:self.songinfo, self.update_statusbar, self.iterate_now, lambda:self.library.libsearchfilter_get_style(), self.new_tab)
+@@ -2345,7 +2345,7 @@ def image_remote_refresh(self, _entry, imagewidget):
+ 
+ 	def _image_remote_refresh(self, imagewidget, _ignore):
+ 		self.artwork.stop_art_update = False
+-		# Retrieve all images from amazon:
++		# Retrieve all images from rhapsody:
+ 		artist_search = self.remote_artistentry.get_text()
+ 		album_search = self.remote_albumentry.get_text()
+ 		if len(artist_search) == 0 and len(album_search) == 0:
+diff --git a/sonata/rhapsodycovers.py b/sonata/rhapsodycovers.py
+new file mode 100644
+index 0000000..1bd6c5f
+--- /dev/null
++++ b/sonata/rhapsodycovers.py
+@@ -0,0 +1,59 @@
++import os
++import urllib
++import urllib2
++from xml.etree import ElementTree
++
++from pluginsystem import pluginsystem, BuiltinPlugin
++
++class RhapsodyCovers(object):
++	def __init__(self):
++		pluginsystem.plugin_infos.append(BuiltinPlugin(
++				'rhapsodycovers', &quot;Rhapsody Covers&quot;,
++				&quot;Fetch album covers from Rhapsody.com.&quot;,
++				{'cover_fetching': 'get_cover'}, self))
++
++	def _sanitize_query(self, str):
++		return str.replace(&quot; &quot;, &quot;&quot;).replace(&quot;'&quot;, &quot;&quot;).replace(&quot;&amp;&quot;,&quot;&quot;)
++
++	def get_cover(self, progress_callback, artist, album, dest_filename,
++		      all_images=False):
++		return self.artwork_download_img_to_file(progress_callback, artist, album, dest_filename, all_images)
++
++	def artwork_download_img_to_file(self, progress_callback, artist, album, dest_filename, all_images=False):
++		if not artist and not album:
++			return False
++
++		rhapsody_uri = &quot;<A HREF="http://feeds.rhapsody.com">http://feeds.rhapsody.com</A>&quot;
++		url = &quot;%s/%s/%s/data.xml&quot; % (rhapsody_uri, artist, album)
++		url = self._sanitize_query(url)
++		request = urllib2.Request(url)
++		opener = urllib2.build_opener()
++		try:
++			body = opener.open(request).read()
++			xml = ElementTree.fromstring(body)
++			imgs = xml.getiterator(&quot;img&quot;)
++		except:
++			return False
++
++		imglist = [img.attrib['src'] for img in imgs if img.attrib['src']]
++		# Couldn't find any images
++		if not imglist:
++			return False
++
++		if not all_images:
++			urllib.urlretrieve(imglist[0], dest_filename)
++			return True
++		else:
++			try:
++				imgfound = False
++				for i, image in enumerate(imglist):
++					dest_filename_curr = dest_filename.replace(&quot;&lt;imagenum&gt;&quot;, str(i+1))
++					urllib.urlretrieve(image, dest_filename_curr)
++					if not progress_callback(
++						dest_filename_curr, i):
++						return imgfound # cancelled
++					if os.path.exists(dest_filename_curr):
++						imgfound = True
++			except:
++				pass
++			return imgfound
+-- 
+1.6.4.1.207.g68ea
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001141.html">[Sonata-users] Feature request - Visibility of comment tag
+</A></li>
+	<LI>Next message: <A HREF="001142.html">[Sonata-users] enqueue track
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1140">[ date ]</a>
+              <a href="thread.html#1140">[ thread ]</a>
+              <a href="subject.html#1140">[ subject ]</a>
+              <a href="author.html#1140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

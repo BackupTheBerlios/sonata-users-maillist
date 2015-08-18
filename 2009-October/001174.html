@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4AD4CE20.1060407%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001173.html">
+   <LINK REL="Next"  HREF="001175.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4AD4CE20.1060407%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.">bebarino at gmail.com
+       </A><BR>
+    <I>Tue Oct 13 20:59:44 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001173.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001175.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1174">[ date ]</a>
+              <a href="thread.html#1174">[ thread ]</a>
+              <a href="subject.html#1174">[ subject ]</a>
+              <a href="author.html#1174">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John McNeil wrote:
+&gt;<i> Besides the problem mentioned above, your code doesn't properly handle
+</I>&gt;<i> switching from a paused track to another one; play() will be called
+</I>&gt;<i> first above before song_change() below, overwriting the data of the
+</I>&gt;<i> old song before it can be posted.
+</I>
+Ah, thanks. I'm inclined to just apply your patch for now. I'll leave
+splitting it up into functions for someone to take care of later.
+
+&gt;<i>  Additionally, play() doesn't just
+</I>&gt;<i> set things up for posting when you first play a song, it does it every
+</I>&gt;<i> time, so it np()s unnecessarily and can post with incorrect start
+</I>&gt;<i> times. Very incorrect if you, for example, happen to pause near the
+</I>&gt;<i> end of a song and then resume. And my complaint that it adds more code
+</I>&gt;<i> for no real gain still stands
+</I>
+Perhaps this is the only piece missing from your patch. Suppose I play,
+then pause the song, grab a cup of coffee and then come back and press
+play. My now playing on last.fm will be nothing because we only update
+now playing once. It seems that last.fm doesn't keep the now playing up
+for much longer than the actual length of the song sent.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001173.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001175.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1174">[ date ]</a>
+              <a href="thread.html#1174">[ thread ]</a>
+              <a href="subject.html#1174">[ subject ]</a>
+              <a href="author.html#1174">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

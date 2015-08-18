@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Problem with albums and artists view
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Problem%20with%20albums%20and%20artists%20view&In-Reply-To=%3C5feb2bb00904160738u48f8c5dfr184070ccfb993aeb%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001049.html">
+   <LINK REL="Next"  HREF="001048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Problem with albums and artists view</H1>
+    <B>Kelliann DiIenno</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Problem%20with%20albums%20and%20artists%20view&In-Reply-To=%3C5feb2bb00904160738u48f8c5dfr184070ccfb993aeb%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Problem with albums and artists view">kellidiienno at gmail.com
+       </A><BR>
+    <I>Thu Apr 16 16:38:59 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001049.html">[Sonata-users] Searching for Covers don't work anymore (local and internet)
+</A></li>
+        <LI>Next message: <A HREF="001048.html">[Sonata-users] Problem with albums and artists view
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1040">[ date ]</a>
+              <a href="thread.html#1040">[ thread ]</a>
+              <a href="subject.html#1040">[ subject ]</a>
+              <a href="author.html#1040">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm using the latest stable release of sonata, 1.6.2, on Intrepid, and I'll
+admit that I have a huge music library, and so this might be my fault.
+Whenever I go to the library tab and attempt to view my music by either
+artist or album, sonata crashes.  Sometimes the window freezes and I have to
+kill sonata, and sometimes the library tab goes blank and I can't get it
+back up no matter which view I then chose.  Sometimes sonata won't even
+start up again after that.
+
+Here's what I get from terminal when I try to view by artist:
+
+Traceback (most recent call last):
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 201, in
+on_libraryview_chosen
+    self.library_browse(self.library_set_data(path=&quot;/&quot;))
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 327, in
+library_browse
+    bd = self.library_populate_toplevel_data(albumview=True)
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 546, in
+library_populate_toplevel_data
+    for item in mpdh.call(self.client, 'listallinfo', '/'):
+TypeError: 'NoneType' object is not iterable
+2009-04-16 10:26:25  Connection lost while reading line
+2009-04-16 10:26:25  Connection lost while reading line
+Traceback (most recent call last):
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/main.py&quot;, line 1017, in
+iterate
+    self.handle_change_conn()
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/main.py&quot;, line 1156, in
+handle_change_conn
+    self.library.library_browse(library.library_set_data(path=&quot;/&quot;))
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 327, in
+library_browse
+    bd = self.library_populate_toplevel_data(albumview=True)
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 546, in
+library_populate_toplevel_data
+    for item in mpdh.call(self.client, 'listallinfo', '/'):
+TypeError: 'NoneType' object is not iterable
+2009-04-16 10:28:56  Connection lost while reading line
+2009-04-16 10:28:56  (32, 'Broken pipe')
+Traceback (most recent call last):
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 201, in
+on_libraryview_chosen
+    self.library_browse(self.library_set_data(path=&quot;/&quot;))
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 345, in
+library_browse
+    bd = self.library_populate_toplevel_data(genreview=True)
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 534, in
+library_populate_toplevel_data
+    playtime, num_songs = self.library_return_count(genre=item)
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 740, in
+library_return_count
+    playtime += int(mpdh.get(count, 'playtime'))
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/mpdhelper.py&quot;, line 27, in
+get
+    value = mapping.get(key, alt)
+AttributeError: 'NoneType' object has no attribute 'get'
+2009-04-16 10:29:00  (32, 'Broken pipe')
+Traceback (most recent call last):
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 201, in
+on_libraryview_chosen
+    self.library_browse(self.library_set_data(path=&quot;/&quot;))
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 327, in
+library_browse
+    bd = self.library_populate_toplevel_data(albumview=True)
+  File &quot;/home/kelli/Downloads/sonata-1.6.2/sonata/library.py&quot;, line 546, in
+library_populate_toplevel_data
+    for item in mpdh.call(self.client, 'listallinfo', '/'):
+TypeError: 'NoneType' object is not iterable
+
+Please tell me if any other information what be helpful.
+
+Thanks,
+Kelli
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090416/0975f183/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090416/0975f183/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001049.html">[Sonata-users] Searching for Covers don't work anymore (local and internet)
+</A></li>
+	<LI>Next message: <A HREF="001048.html">[Sonata-users] Problem with albums and artists view
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1040">[ date ]</a>
+              <a href="thread.html#1040">[ thread ]</a>
+              <a href="subject.html#1040">[ subject ]</a>
+              <a href="author.html#1040">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

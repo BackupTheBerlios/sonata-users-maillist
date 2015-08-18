@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Playlist%20search%20is%20not%20triggered%20by%0A%20Arabic%09characters%20in%20svn1023&In-Reply-To=%3C4977518C.80206%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000929.html">
+   <LINK REL="Next"  HREF="000931.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Playlist%20search%20is%20not%20triggered%20by%0A%20Arabic%09characters%20in%20svn1023&In-Reply-To=%3C4977518C.80206%40iki.fi%3E"
+       TITLE="[Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Wed Jan 21 17:47:08 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000929.html">[Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023
+</A></li>
+        <LI>Next message: <A HREF="000931.html">[Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#930">[ date ]</a>
+              <a href="thread.html#930">[ thread ]</a>
+              <a href="subject.html#930">[ subject ]</a>
+              <a href="author.html#930">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&#1571;&#1581;&#1605;&#1583; &#1601;&#1585;&#1594;&#1604; wrote:
+&gt;<i> It used to work OK in Sonata 1.5.3 and in the svn versions until
+</I>&gt;<i> recently (around a month ago) I just installed 1.5.3 and it works in
+</I>&gt;<i> it. 
+</I>
+I'm sorry, I must have broken it while I was making other changes, as it 
+was broken for many other languages as well. I cleaned the code a bit 
+more and now it works in my tests again - please let me know whether it 
+works for you too.
+
+&gt;<i> Filtering lists in other GTK programs works here too (rhythmbox
+</I>&gt;<i> and the gtk file selection dialog)
+</I>
+There's an additional issue of whether the first character displays 
+correctly in all cases, but I don't know if it's important enough in 
+some languages to fix it. For example, if I press &lt;Compose&gt; a &quot; I expect 
+to see &#228; as the first character, but get two characters a and &quot; instead. 
+I should have a look at how the GTK file selection dialog implements this...
+
+&gt;&gt;<i> I don't even know what kind of input methods are used
+</I>&gt;&gt;<i> for typing Arabic.
+</I>&gt;<i> 
+</I>&gt;<i> Me neither, unfortunately. I am relatively a noob.
+</I>
+I'm sorry again. I meant to ask if you sometimes need to press several 
+keys on the keyboard to type a character, and if there is some user 
+interface element on the screen while typing in addition to the text 
+box. For example, in Chinese, you need to type what the character sounds 
+like and then choose from a list of possibilities.
+
+
+Regards,
+Tuukka
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000929.html">[Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023
+</A></li>
+	<LI>Next message: <A HREF="000931.html">[Sonata-users] Playlist search is not triggered by Arabic	characters in svn1023
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#930">[ date ]</a>
+              <a href="thread.html#930">[ thread ]</a>
+              <a href="subject.html#930">[ subject ]</a>
+              <a href="author.html#930">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Some comments on 0.9.9
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Some%20comments%20on%200.9.9&In-Reply-To=%3C20070120231414.5fac1dd0.pizzapunk%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000072.html">
+   <LINK REL="Next"  HREF="000074.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Some comments on 0.9.9</H1>
+    <B>Alexander Fehr</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Some%20comments%20on%200.9.9&In-Reply-To=%3C20070120231414.5fac1dd0.pizzapunk%40gmail.com%3E"
+       TITLE="[Sonata-users] Some comments on 0.9.9">pizzapunk at gmail.com
+       </A><BR>
+    <I>Sat Jan 20 23:14:14 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000072.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+        <LI>Next message: <A HREF="000074.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#73">[ date ]</a>
+              <a href="thread.html#73">[ thread ]</a>
+              <a href="subject.html#73">[ subject ]</a>
+              <a href="author.html#73">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; I have &quot;{%A}{ - %B}&quot; in Current song line 2. When I switch between
+</I>&gt;<i> &gt; songs with and without artist and album tags the interface is
+</I>&gt;<i> &gt; jumping.
+</I>&gt;<i> 
+</I>&gt;<i> I'm either not seeing this or not understanding what you mean by the
+</I>&gt;<i> interface is jumping. Can you provide before and after screenshots to
+</I>&gt;<i> illustrate?
+</I>
+I think it's hard to show in screenshots so I will try to explain.
+Shoutcast streams usually have set only the song name tag. I don't want
+to have &quot;Unknown - Unknown&quot; in Current song line 2 when listening to
+them and so I have set the song line to {%A}{ - %B} to show nothing in
+such case. When I switch between such stream and a normal file (with
+Artist and Album name tags) the interface jumps similar to the (fixed)
+bug &quot;interface jumping because of progress bar font&quot;.
+
+&gt;<i> &gt; When I add more than one stream at once to the playlist, sonata
+</I>&gt;<i> &gt; hangs for some seconds. Is there anything going on in the
+</I>&gt;<i> &gt; background?
+</I>&gt;<i> 
+</I>&gt;<i> It depends on a couple of things. But to be concise, Sonata has to
+</I>&gt;<i> retrieve a portion of the stream before adding it to test if it's a
+</I>&gt;<i> pls/m3u or a simple stream, and if it's a pls/m3u, it has to parse and
+</I>&gt;<i> add multiple items. If you could link me to the specific streams
+</I>&gt;<i> you're testing with, I'll look into it a bit more.
+</I>
+I have tested it with simple shoutcast streams. I haven't known that it
+is possible to use pls or m3u. Here are 10 streams which I have in my
+streams tab:
+
+<A HREF="http://217.20.113.177:8000/">http://217.20.113.177:8000/</A>
+<A HREF="http://66.232.102.103:9055/">http://66.232.102.103:9055/</A>
+<A HREF="http://216.69.157.108:8000/">http://216.69.157.108:8000/</A>
+<A HREF="http://www.punk-radio.de:8000/">http://www.punk-radio.de:8000/</A>
+<A HREF="http://punkrockers-radio.de:8003/">http://punkrockers-radio.de:8003/</A>
+<A HREF="http://128.hifipunk.com:8000/">http://128.hifipunk.com:8000/</A>
+<A HREF="http://205.188.215.227:8094/">http://205.188.215.227:8094/</A>
+<A HREF="http://213.251.129.70:80/">http://213.251.129.70:80/</A>
+<A HREF="http://ramones.rootoon.com:8666/">http://ramones.rootoon.com:8666/</A>
+<A HREF="http://193.202.9.42:8000/">http://193.202.9.42:8000/</A>
+
+When I mark all at once and click to add them to the playlist it takes
+10 seconds before the UI is responsible again.
+
+Now that I know about pls I have tested it too but it doesn't always
+work. Here are some streams which doesn't work:
+
+<A HREF="http://www.idobi.com/radio/iradio.pls">http://www.idobi.com/radio/iradio.pls</A>
+<A HREF="http://www.punkrockers-radio.de/listen.pls">http://www.punkrockers-radio.de/listen.pls</A>
+
+Moreover a lot of shoutcast streams from www.shoutcast.com doesn't
+work. It works if I extract the stream URLs manually.
+
+Some other thing: When I have a long playlist and doubleclick on a
+stream at the end of the list, the playlist jumps to the beginning.
+It would be better if it stayed where I had scrolled it.
+
+&gt;<i> &gt; Is amazon.com used for covers? Will there be the possibility to
+</I>&gt;<i> &gt; change it to a local amazon.* site?
+</I>&gt;<i> 
+</I>&gt;<i> Yes. What is the benefit of this, just lower pings? Will it work
+</I>&gt;<i> exactly like the main amazon.com site? I'm honestly ignorant about
+</I>&gt;<i> non-US things like this ;-)
+</I>
+I can only speak for amazon.de. It has many covers that aren't
+available on amazon.com (mostly national artists). I don't know if it
+works exactly like the main amazon.com site but some other players
+(e.g. exaile) have this function so it seems to work.
+
+&gt;<i> &gt; Lyrics doesn't work with shoutcast streams because they have only
+</I>&gt;<i> &gt; set the song name tag (with artist and song name in it).
+</I>&gt;<i> 
+</I>&gt;<i> I'm not sure what you want Sonata to do about this.
+</I>
+As mentioned above shoutcast streams have set only the song name tag.
+But this tag contains the artist AND the song name: &quot;artist - song&quot;
+Thus searching for lyrics should be possible but the lyrics tab shows
+&quot;Artist or song title not set&quot;.
+
+Alex
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000072.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+	<LI>Next message: <A HREF="000074.html">[Sonata-users] Some comments on 0.9.9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#73">[ date ]</a>
+              <a href="thread.html#73">[ thread ]</a>
+              <a href="subject.html#73">[ subject ]</a>
+              <a href="author.html#73">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

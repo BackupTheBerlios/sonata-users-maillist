@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Installing Sonata....
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Installing%20Sonata....&In-Reply-To=%3C49D76C5C.50005%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000994.html">
+   <LINK REL="Next"  HREF="001006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Installing Sonata....</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Installing%20Sonata....&In-Reply-To=%3C49D76C5C.50005%40iki.fi%3E"
+       TITLE="[Sonata-users] Installing Sonata....">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Sat Apr  4 16:19:08 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000994.html">[Sonata-users] Installing Sonata....
+</A></li>
+        <LI>Next message: <A HREF="001006.html">[Sonata-users] Installing Sonata....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1000">[ date ]</a>
+              <a href="thread.html#1000">[ thread ]</a>
+              <a href="subject.html#1000">[ subject ]</a>
+              <a href="author.html#1000">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John wrote:
+&gt;<i> Ok, well, I installed mpd, but I still cant work out how to set it up to 
+</I>&gt;<i> play the music. I did a bit of a search on the Ubuntu forums, and on 
+</I>&gt;<i> there there are quite a few people having the same problem. I couldnt 
+</I>&gt;<i> find where you set up mpd. Can you help please?
+</I>
+Unfortunately, you don't actually give concrete information about the 
+steps you took and the problem you are seeing, so I have to guess...
+
+1. You edit the file /etc/mpd.conf. At least, you should change the 
+value of music_directory to point to your music collection. For more on 
+mpd.conf, see <A HREF="http://mpd.wikia.com/wiki/Configuration">http://mpd.wikia.com/wiki/Configuration</A>
+
+2. You restart mpd with the command &quot;sudo service mpd restart&quot;
+
+3. *If* you can connect to MPD from Sonata, see your music collection, 
+add songs to the Current playlist, and start playing, but it stops right 
+away with no sound, *then* you have hit the problems with Ubuntu's 
+PulseAudio. For help, see 
+<A HREF="http://mpd.wikia.com/wiki/PulseAudio#Version_0.12.0_and_later">http://mpd.wikia.com/wiki/PulseAudio#Version_0.12.0_and_later</A>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000994.html">[Sonata-users] Installing Sonata....
+</A></li>
+	<LI>Next message: <A HREF="001006.html">[Sonata-users] Installing Sonata....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1000">[ date ]</a>
+              <a href="thread.html#1000">[ thread ]</a>
+              <a href="subject.html#1000">[ subject ]</a>
+              <a href="author.html#1000">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

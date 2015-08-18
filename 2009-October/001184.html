@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%09for%20audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910162009m5e2ed60fld71f9cb84f4e3f16%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001182.html">
+   <LINK REL="Next"  HREF="001185.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.</H1>
+    <B>John McNeil</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%09for%20audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910162009m5e2ed60fld71f9cb84f4e3f16%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.">usodag at gmail.com
+       </A><BR>
+    <I>Sat Oct 17 05:09:13 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001182.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001185.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1184">[ date ]</a>
+              <a href="thread.html#1184">[ thread ]</a>
+              <a href="subject.html#1184">[ subject ]</a>
+              <a href="author.html#1184">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Oct 15, 2009 at 3:27 PM, Stephen Boyd &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt; wrote:
+&gt;<i> I sense you've lost interest/motivation. Please don't get discouraged.
+</I>I'm going to have to be blunt here. You have suggested a significant
+change, left it to someone else to invest the not-insignificant effort
+to make, test, and refine a patch for this change, and then at a
+moment's notice, unilaterally decided to scrap it on the basis that it
+is a significant change. I don't think there's anyone who wouldn't be
+even the slightest bit discouraged over this.
+&gt;<i> What I suggested didn't seem to work out very well, so I think lets just
+</I>&gt;<i> apply the first patch you wrote and come back to cleaning up the
+</I>&gt;<i> scrobbler later.
+</I>&gt;<i>
+</I>&gt;<i> Is there anything missing, besides the
+</I>&gt;<i>
+</I>&gt;<i> &#160; &#160;if state != 'pause' or prevstate != 'pause'
+</I>&gt;<i>
+</I>&gt;<i> part you talked about earlier?
+</I>That's stupid and I was stupid when I said it. It obviously horribly
+breaks the calculations, please don't do that. As for the rest of the
+patch, there's a lot that could be cleaned up, but at least at a very
+quick glance, nothing really wrong.
+
+Anyway, you now have a few working patches on this issue to do with as
+you please. I have expended far more effort on this than I ever
+planned, and there's not really anything else to be done here anymore,
+so I shall bow out.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001182.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001185.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1184">[ date ]</a>
+              <a href="thread.html#1184">[ thread ]</a>
+              <a href="subject.html#1184">[ subject ]</a>
+              <a href="author.html#1184">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

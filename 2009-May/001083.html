@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] HINT: time bookmark plugin
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20HINT%3A%20time%20bookmark%20plugin&In-Reply-To=%3C7d4ddee30905162058w314ee237n676cb034704184b4%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001095.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] HINT: time bookmark plugin</H1>
+    <B>Tom&#225;&#353; Kalu&#382;a</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20HINT%3A%20time%20bookmark%20plugin&In-Reply-To=%3C7d4ddee30905162058w314ee237n676cb034704184b4%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] HINT: time bookmark plugin">elpraga at gmail.com
+       </A><BR>
+    <I>Sun May 17 05:58:49 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001095.html">[Sonata-users] Feature request: add selected tracks to playlist
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1083">[ date ]</a>
+              <a href="thread.html#1083">[ thread ]</a>
+              <a href="subject.html#1083">[ subject ]</a>
+              <a href="author.html#1083">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello everybody,
+I would like to share one idea, that I am using, maybe someone would be
+interested to write a plugin like this. Unfortunately I cannot do it,
+because I know nothing about python :-(..
+
+The idea is to be able to set time bookmarks in songs. I am using this when
+I want to learn a song, to come back to a particular spot. But I can be used
+for word transcription or translations as well. At the moment I am using a
+set of bash scripts. One sets the bookmark, the other jumps to this
+bookmark. I am using fluxbox, which has excellent support for keybinings, so
+I am limited only by my on memory when setting the keys to set and call
+bookmarks, but other managers do not have this possibility (like metacity),
+and here is where the Sonata's plugin could be useful.
+
+I played with the scripts a little, so now I am able to set the bookmarks
+per song (songs must be properly named, though), and the bookmarks are
+remembered even after restart.
+
+
+Here is the script that sets the bookmark:
+=================================================================
+<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~$ cat /usr/local/bin/MPD-Q-mark.sh
+#! /bin/sh
+
+# A simple script for setting time bookmarks for every song
+#
+# Tomas Kaluza
+
+MARK=`mpc |grep / |grep % |cut -f5 -d&quot; &quot; | cut -f1 -d&quot;/&quot;`
+SONG_NAME=`mpc |grep -`
+MARK_FILE=MPD-Q-mark
+
+mkdir -p &quot;$HOME/.MPD-bookmarks/$SONG_NAME&quot;
+touch &quot;$HOME/.MPD-bookmarks/$SONG_NAME/$MARK_FILE&quot;
+echo $MARK &gt;&quot;$HOME/.MPD-bookmarks/$SONG_NAME/$MARK_FILE&quot;
+
+echo Setting Q mark for $SONG_NAME at $MARK
+#zenity --text &quot;Setting Q mark for $SONG_NAME at $MARK&quot; --info --timeout 5
+2&gt;/dev/null
+
+=================================================================
+
+
+Here is the script that calls the bookmark:
+=================================================================
+<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~$ cat /usr/local/bin/MPD-GOTO-Q-mark.sh
+#! /bin/sh
+
+# A simple script reading a time bookmark for a song
+#
+# Tomas Kaluza
+MARK_FILE=MPD-Q-mark
+SONG_NAME=`mpc |grep -`
+
+
+
+mpc seek `cat &quot;$HOME/.MPD-bookmarks/$SONG_NAME/$MARK_FILE&quot;`
+
+=================================================================
+
+I am using Win-Q, Win-W, Win-E, Win-T to set the bookmarks (each calling own
+script) and Win-A, Win-S, Win-D, and Win-F to call the bookmark.
+
+I guess that from within Sonata it could be done in even cleaner and nicer
+way, but this works for me fine :-)
+
+I hope someone finds this useful..
+
+Regards
+
+Tomas
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090517/f2fd510c/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090517/f2fd510c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001095.html">[Sonata-users] Feature request: add selected tracks to playlist
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1083">[ date ]</a>
+              <a href="thread.html#1083">[ thread ]</a>
+              <a href="subject.html#1083">[ subject ]</a>
+              <a href="author.html#1083">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

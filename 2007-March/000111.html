@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [Patch] Multithreaded XMMS-like search for Sonata	1.0.1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-March/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPatch%5D%20Multithreaded%20XMMS-like%20search%20for%20Sonata%0A%091.0.1&In-Reply-To=%3C20070312175634.GA11306%40rotes76.wohnheim.uni-kl.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000130.html">
+   <LINK REL="Next"  HREF="000113.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [Patch] Multithreaded XMMS-like search for Sonata	1.0.1</H1>
+    <B>Eduard Bloch</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPatch%5D%20Multithreaded%20XMMS-like%20search%20for%20Sonata%0A%091.0.1&In-Reply-To=%3C20070312175634.GA11306%40rotes76.wohnheim.uni-kl.de%3E"
+       TITLE="[Sonata-users] [Patch] Multithreaded XMMS-like search for Sonata	1.0.1">edi at gmx.de
+       </A><BR>
+    <I>Mon Mar 12 18:56:34 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000130.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+        <LI>Next message: <A HREF="000113.html">[Sonata-users] [Patch] Multithreaded XMMS-like search for	Sonata 1.0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>#include &lt;hallo.h&gt;
+* [vEX] [Thu, Feb 15 2007, 11:41:52AM]:
+&gt;<i> Hey,
+</I>&gt;<i> 
+</I>&gt;<i> A new version of Sonata means a new version of the patch, possibly the
+</I>&gt;<i> last though since you're now thinking of integrating (and redoing it)
+</I>&gt;<i> with Sonata.
+</I>&gt;<i> 
+</I>&gt;<i> The patch and instructions are available at either
+</I>&gt;<i> <A HREF="http://niechift.com/vex/sonata/">http://niechift.com/vex/sonata/</A> or
+</I>&gt;<i> <A HREF="http://web.telia.com/~u85920559/sonata/">http://web.telia.com/~u85920559/sonata/</A>
+</I>
+So, as written in the private mail, I didn't like its behavior because
+the GUI becomes stuck all the time while $user is typing. You may not
+notice it when having few dozens of list entries on a multi-GHz PC but
+on slower machines with a larger list it just sucks. So I made it using
+a separate thread for the dirty work, see
+
+<A HREF="http://rootfs.net/jaws/index.php?gadget=Blog&amp;action=SingleView&amp;id=32">http://rootfs.net/jaws/index.php?gadget=Blog&amp;action=SingleView&amp;id=32</A>
+<A HREF="http://rootfs.net/misc/sonata_1.0.1_xmms_search_mt.diff">http://rootfs.net/misc/sonata_1.0.1_xmms_search_mt.diff</A>
+
+for comments and the resulting patch. I am not sure which code will be
+reused for the &quot;official integration&quot; but it may serve as some
+example... though I am not a Python guru.
+
+Eduard.
+-- 
+&lt;Salz&gt; jjFux: Ted hie&#223; ja fr&#252;her auch Walther
+&lt;Salz&gt; winkiller: hm... es sind 8... die 7 kandidaten und NOTA
+&lt;Madkiss&gt; Ist der jetzt eigentlich eine gespaltene Pers&#246;nlichkeit, bei der aber
+  beide Teile bekloppt sind?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000130.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+	<LI>Next message: <A HREF="000113.html">[Sonata-users] [Patch] Multithreaded XMMS-like search for	Sonata 1.0.1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#111">[ date ]</a>
+              <a href="thread.html#111">[ thread ]</a>
+              <a href="subject.html#111">[ subject ]</a>
+              <a href="author.html#111">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

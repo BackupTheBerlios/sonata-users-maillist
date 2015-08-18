@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Notifications (and the plugin system in general)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C6e3476780906042041v4d88602qa32bfb498310d7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001099.html">
+   <LINK REL="Next"  HREF="001101.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Notifications (and the plugin system in general)</H1>
+    <B>Scott Armitage</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C6e3476780906042041v4d88602qa32bfb498310d7%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Notifications (and the plugin system in general)">sonata at scott.armitage.name
+       </A><BR>
+    <I>Fri Jun  5 05:41:19 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001099.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001101.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1100">[ date ]</a>
+              <a href="thread.html#1100">[ thread ]</a>
+              <a href="subject.html#1100">[ subject ]</a>
+              <a href="author.html#1100">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 4, 2009 at 4:52 PM, Stephen Boyd &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt; wrote:
+
+&gt;<i>
+</I>&gt;<i> I agree, the magic stuff is gross. I think the first attempt at the
+</I>&gt;<i> plugin infrastructure was good to smoke out some common problems and
+</I>&gt;<i> help us figure out what we really need to do. It will probably take a
+</I>&gt;<i> couple iterations to get it right though. We kind of just made a
+</I>&gt;<i> plugin infrastructure without thinking about what the plugins would
+</I>&gt;<i> need, or how they would interact with each other.
+</I>&gt;<i>
+</I>
+Glad to  see we're on the same page here =P
+
+I was thinking that maybe a decorator pattern would work for
+&gt;<i> callbacks. I'm not sure though, and I haven't thought that through too
+</I>&gt;<i> carefully. I guess the decorator would be registering the callback
+</I>&gt;<i> with the core, which you don't like :-)
+</I>
+
+Actually the decorator pattern kind of subverts my issue with registering
+the callback with the core; mainly, that trusting the plugin author to take
+of that each and every time would be tedious and could introduce errors. If
+a decorator pattern took care of all that automatically, then you achieve
+the same thing I was thinking of -- mainly, having a single code-base that
+handles the linking.
+
+Also, what kind of callbacks should be provided? Maybe song change,
+&gt;<i> time change, tags change, play, stop, etc. Do we allow plugins to
+</I>&gt;<i> affect the core, or do we sandbox them? If we allow plugins to change
+</I>&gt;<i> the state we may get caught in infinite callback loops. If we have
+</I>&gt;<i> competing artwork plugins, maybe an amazon artwork vs. a last.fm
+</I>&gt;<i> artwork plugin, how do we make sure only one is enabled? As you can
+</I>&gt;<i> see there are a lot of questions to be answered.
+</I>
+
+This one is a toughy. Too many callbacks and you're wasting CPU cycles
+calling the hook notification functions (and any plugin callbacks that get
+called as a result). Too few, and you lose the ability for plugins to get in
+on the action.
+
+What information the plugins have is also an interesting question. Looking
+at the current song observers, it looks like they are passed the song
+information; but what if a plugin what's to display something /else/, it
+just happens to want to display it (or act on it) on song change? For
+example, Leo's notification plugin -- something it doesn't do that I would
+like is show a notification saying &quot;End of playlist.&quot; when the playlist
+finishes, or &quot;Paused&quot; etc. whenever a control is commanded.
+
+Allowing plugins to have access to the Sonata base class certainly gives
+them access to any information they may want to take advantage of, but it
+also gives them too much power over the core. I was briefly considering --
+though I do not think this is a good way to go -- of implementing a
+ReadOnlyBase class, which effectively would have a reference to the main
+class instance, and then provide read-only interfaces to all of the
+attributes. Too much overhead, I think -- there must be a simpler way to
+access this.
+
+Here's a nifty thought -- fresh off the presses in my mind, so I haven't
+worked through it yet -- but a callback function could specify which
+data/GUI controls it wants to have access to. When the plugin gets
+registered with the core (or whatever happens), an object is built that
+contains references to only those attributes. Then whenever that particular
+callback is called, it gets passed this object. Hmm, thinking about this a
+bit more, I think this might also have too much overhead. Something to come
+back to, definitely.
+
+&gt;<i> Each plugin module would also have a dictionary with all the plugin info,
+</I>&gt;<i> &gt; i.e. license, author, name, description, etc.; whether or not there
+</I>&gt;<i> should
+</I>&gt;<i> &gt; be a &quot;Configure&quot; button in the plugins window (a la Firefox), and so on.
+</I>&gt;<i>
+</I>&gt;<i> Why use a dictionary, when a class is essentially already a
+</I>&gt;<i> dictionary? We can just lay down some guidelines as to what the
+</I>&gt;<i> members of the class must be called, such as &quot;author&quot;, &quot;description&quot;,
+</I>&gt;<i> etc. If we go with the inheritance style (which I'm not too excited
+</I>&gt;<i> about yet) this could be as simple as making the required fields part
+</I>&gt;<i> of the constructor.
+</I>
+
+Yeah.. I was kind of flip-flopping back and forth between the idea of a
+plugin being a module vs. a plugin being an object instance/class. I have a
+bad tendency to jump straight to OO fundamentals without fully thinking
+through the applicability, even though I usually end up with a functional/OO
+hybrid solution to stuff. But you're right, certainly a module/class with
+specified attributes would work just as well as a dictionary. I suppose
+either way, as long as you have a specification indicating what needs to be
+provided and in what form, either one would work. Attributes might be a bit
+cleaner, but would be more difficult to handle when missing (i.e. as opposed
+to plugin.get('key','default')).
+
+
+&gt;<i> &gt; This method allows the pluginsystem to simply locate plugin modules, load
+</I>&gt;<i> &gt; the information for the window, and then -- if enabled -- instatiate an
+</I>&gt;<i> &gt; instance of the plugin. In true Pythonic fashion, any plugin shall act
+</I>&gt;<i> &gt; exactly as a Plugin object would -- that is, the rest of Sonata can treat
+</I>&gt;<i> &gt; them all the same, with no special code based on what they plugin wants
+</I>&gt;<i> to
+</I>&gt;<i> &gt; do, etc. This avoids having to parse plugin files for the configure info
+</I>&gt;<i> &gt; (let Python do the heavy lifting), and also allows pre-compiled plugin
+</I>&gt;<i> &gt; modules for faster importing.
+</I>&gt;<i>
+</I>&gt;<i> I don't entirely understand this but I think I get the general idea.
+</I>&gt;<i> Unifying the plugins into a standard form sounds like a great idea.
+</I>&gt;<i> Pre-compiled bytecode is nice too.
+</I>
+
+Sorry, I was starting to ramble. I tend not to think out what all I want to
+say in advance, and it just kind of comes as I type. I think I was trying to
+hammer home two disparate ideas here: first, that each plugin -- if
+contained within it's own module -- could be imported directly, from
+anywhere -- e.g. 'from SuperAwesomeGuysPluginPack import WickedCoolPlugin'.
+This is less of a concern, but it avoids having to bring in and parse the
+module manually if you could just do a simple import statement.
+
+Second, the part you already got -- in Python, a function that does some
+action on a particular type of object should be able to perform the
+comperable action on any object type that it is reasonable to apply it to --
+in particular, any subclasses of a class must only /extend/ a superclass.
+But this starts to become less about typing and more about a specification
+if you take away the focus on OO programming (which indeed may be overkill
+here -- I'm not sure one needs  room for /instances/ of plugins so much...).
+
+
+These are just my thoughts. If you have patches I can review it might
+&gt;<i> be easier to understand what you want to do.
+</I>&gt;<i>
+</I>
+Good discussion so far. I think any patches from my end will be quite far
+away -- I'll be doing my work primarily locally and in Bazaar branches on
+Launchpad (<A HREF="http://www.launchpad.net/~scott-armitage">http://www.launchpad.net/~scott-armitage</A>), but I think there's a
+lot more to hash out first, especially if I'm going to try tackling a plugin
+revamp.
+
+If you want to rework the plugin framework, I think it might be easier
+&gt;<i> to start fresh from the latest release. At least there you can easily
+</I>&gt;<i> rip out (or ignore) the existing framework. Nowadays, some of the core
+</I>&gt;<i> functionality (artwork, lyrics) has been moved into plugins, so
+</I>&gt;<i> working from the trunk might be harder. Of course, that functionality
+</I>&gt;<i> isn't essential, so it's probably ok either way.
+</I>&gt;<i>
+</I>&gt;<i> Finally, you might want to talk with Tuukka &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt; as
+</I>&gt;<i> he's the main push behind the plugins so far.
+</I>
+
+Thank you kindly for the input; I presume that Tuukka is subscribed to this
+list, so I'll not bother him(?) about it just yet, but certainly as I start
+getting a clearer picture of where I see this heading.
+
+-Scott
+
+-- 
+Scott Armitage, B.A.Sc., M.A.Sc. candidate
+Space Flight Laboratory
+University of Toronto Institute for Aerospace Studies
+4925 Dufferin Street, Toronto, Ontario, Canada, M3H 5T6
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090604/ae677c5e/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090604/ae677c5e/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001099.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001101.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1100">[ date ]</a>
+              <a href="thread.html#1100">[ thread ]</a>
+              <a href="subject.html#1100">[ subject ]</a>
+              <a href="author.html#1100">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

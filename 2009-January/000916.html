@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] SVN use
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20SVN%20use&In-Reply-To=%3C35a6f8e30901181106t1a69345dj69a06bb285887148%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000911.html">
+   <LINK REL="Next"  HREF="000917.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] SVN use</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20SVN%20use&In-Reply-To=%3C35a6f8e30901181106t1a69345dj69a06bb285887148%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] SVN use">stonecrest at gmail.com
+       </A><BR>
+    <I>Sun Jan 18 20:06:18 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000911.html">[Sonata-users] SVN use
+</A></li>
+        <LI>Next message: <A HREF="000917.html">[Sonata-users] SVN use
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#916">[ date ]</a>
+              <a href="thread.html#916">[ thread ]</a>
+              <a href="subject.html#916">[ subject ]</a>
+              <a href="author.html#916">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 17, 2009 at 4:02 AM, Tuukka Hastrup &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt;wrote:
+
+&gt;<i> Scott, looking at the SVN documentation, we could store the $Revision$
+</I>&gt;<i> and $HeadURL$ keywords in one of the files and in code check whether
+</I>&gt;<i> HeadURL contains &quot;/trunk/&quot; or &quot;/tags/&quot;. Then if you tag the release
+</I>&gt;<i> before packaging it (svn copy trunk tags/1.6.0 or so), the code can know
+</I>&gt;<i> it's from a release (and even, which release). Does this sound like a
+</I>&gt;<i> good idea?
+</I>
+
+This sounds fine to me. main.py already has some of this at the top of its
+file, although HeadURL appears out of date. I also just committed the build
+script I'd been using, you can add the svn tag command there if you'd like.
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090118/e20f2eaa/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090118/e20f2eaa/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000911.html">[Sonata-users] SVN use
+</A></li>
+	<LI>Next message: <A HREF="000917.html">[Sonata-users] SVN use
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#916">[ date ]</a>
+              <a href="thread.html#916">[ thread ]</a>
+              <a href="subject.html#916">[ subject ]</a>
+              <a href="author.html#916">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Suggestion: Collapsible view of multiple lyrics	versions (eg. translations) from LyricWiki
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Suggestion%3A%20Collapsible%20view%20of%20multiple%20lyrics%0A%09versions%20%28eg.%20translations%29%20from%20LyricWiki&In-Reply-To=%3C8c390c670905021711l1b66f0d3p41adb2f57ec418e9%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001076.html">
+   <LINK REL="Next"  HREF="001078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Suggestion: Collapsible view of multiple lyrics	versions (eg. translations) from LyricWiki</H1>
+    <B>Wendy Lin</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Suggestion%3A%20Collapsible%20view%20of%20multiple%20lyrics%0A%09versions%20%28eg.%20translations%29%20from%20LyricWiki&In-Reply-To=%3C8c390c670905021711l1b66f0d3p41adb2f57ec418e9%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Suggestion: Collapsible view of multiple lyrics	versions (eg. translations) from LyricWiki">solinde at gmail.com
+       </A><BR>
+    <I>Sun May  3 02:11:15 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001076.html">[Sonata-users] pluginsystem
+</A></li>
+        <LI>Next message: <A HREF="001078.html">[Sonata-users] Various Artist: albumartist tag?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1077">[ date ]</a>
+              <a href="thread.html#1077">[ thread ]</a>
+              <a href="subject.html#1077">[ subject ]</a>
+              <a href="author.html#1077">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Thanks to the lyrics-fetching feature of Sonata, I've gotten into the
+habit of adding/fixing lyrics at LyricWiki.
+
+I've run into a minor issue, which might be an opportunity for a UI
+change: some song pages on the wiki have lyrics in multiple languages.
+Usually this consists of the original language plus the English
+translation&#185;, but sometimes there can be three separate elements&#178;:
+&lt;lyrics&gt;original lyrics&lt;/lyrics&gt;, &lt;lyrics&gt;Romanised lyrics&lt;/lyrics&gt;,
+and then &lt;lyrics&gt;English translation&lt;/lyrics&gt;.
+
+When these are fetched by Sonata, unparsed tags are visible in the
+&quot;Lyrics&quot; section of the &quot;Info&quot; tab in Sonata's UI. Every &lt;/lyrics&gt; and
+&lt;lyrics&gt; tag in between the first and last on the page is rendered in
+plaintext. Same with ==Headers==, || and {{Other|Stuff}}.
+
+For example, if Sonata pulls text from a page with 2 boxes, this is
+the sort of text that is displayed in &quot;Lyrics&quot;:
+
+la la la
+m&#250;sica
+la la la
+&lt;/lyrics&gt;
+||<i>
+</I>==English translation==
+&lt;lyrics&gt;
+la la la
+music
+la la la
+
+Worse than the visible tags, however, is the fact that all the lyrics
+versions are displayed as one long wall of text. It can be unwieldy to
+scroll through.
+
+My suggestion is that each &lt;lyrics&gt; box be rendered in Sonata as its
+own collapsible view under the &quot;Info&quot; tab (just like the current
+collapsible &quot;Lyrics&quot; view). That way, the user could collapse some of
+the lyrics versions and display only the ones they are interested in.
+
+As for the headers: it is the standard format on LyricWiki&#179; to use a
+==Header== immediately above each box as a label, eg. &quot;German&quot;,
+&quot;English translation&quot;. Assuming every page follows the standard&#8308;, it
+seems that any page with multiple &lt;lyrics&gt; box should be rendered by
+Sonata with each ==Header== as the name (label) of the collapsible
+view for the &lt;lyrics&gt; box it corresponds to.
+
+I don't know how difficult this would be to implement, but am sending
+it as a suggestion anyway.
+
+Thank you for your time, and many thanks for Sonata!
+
+
+Wendy
+
+--
+Footnotes:-
+
+&#185; An example of a page with 2 boxes: <A HREF="http://lyricwiki.org/Dschinghis_Khan:Moskau">http://lyricwiki.org/Dschinghis_Khan:Moskau</A>
+
+&#178; An example of a page with 3 boxes:
+<A HREF="http://lyricwiki.org/%D0%92%D0%B8%D1%82%D0%B0%D1%81:%D0%9E%D0%BF%D0%B5%D1%80%D0%B0_%E2%84%962">http://lyricwiki.org/%D0%92%D0%B8%D1%82%D0%B0%D1%81:%D0%9E%D0%BF%D0%B5%D1%80%D0%B0_%E2%84%962</A>
+
+&#179; The help page with the translation template is at
+&lt;<A HREF="http://lyricwiki.org/Help:Translations">http://lyricwiki.org/Help:Translations</A>&gt;.
+
+&#8308; And if a page's text is rendered strangely in Sonata, then it might
+indicate that the page needs to be fixed. A sort of quick visual
+validation?
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001076.html">[Sonata-users] pluginsystem
+</A></li>
+	<LI>Next message: <A HREF="001078.html">[Sonata-users] Various Artist: albumartist tag?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1077">[ date ]</a>
+              <a href="thread.html#1077">[ thread ]</a>
+              <a href="subject.html#1077">[ subject ]</a>
+              <a href="author.html#1077">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

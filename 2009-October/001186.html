@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20main%3A%20make%20ctrl-w%20withdraw%20app%20when%20withdraw%0A%09app%20config%20set&In-Reply-To=%3C1255982917-9082-1-git-send-email-bebarino%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001183.html">
+   <LINK REL="Next"  HREF="001187.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20main%3A%20make%20ctrl-w%20withdraw%20app%20when%20withdraw%0A%09app%20config%20set&In-Reply-To=%3C1255982917-9082-1-git-send-email-bebarino%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] main: make ctrl-w withdraw app when withdraw	app config set">bebarino at gmail.com
+       </A><BR>
+    <I>Mon Oct 19 22:08:37 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001183.html">[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+</A></li>
+        <LI>Next message: <A HREF="001187.html">[Sonata-users] [PATCH] Fix crashes when files cannot be opened for	reading/writing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1186">[ date ]</a>
+              <a href="thread.html#1186">[ thread ]</a>
+              <a href="subject.html#1186">[ subject ]</a>
+              <a href="author.html#1186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>If the config option to withdraw the app on close is set, ctrl-w would
+close the entire program when it should really just withdraw the app.
+Fix by not forcing the application to close on ctrl-w.
+
+Fixes: #16354
+---
+ sonata/main.py |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/sonata/main.py b/sonata/main.py
+index 213adc2..1371f80 100644
+--- a/sonata/main.py
++++ b/sonata/main.py
+@@ -275,7 +275,7 @@ def __init__(self, args, window=None, sugar=False):
+             ('raisekey', None, 'Raise Volume Key', '&lt;Ctrl&gt;plus', None, self.on_volume_raise),
+             ('raisekey2', None, 'Raise Volume Key 2', '&lt;Ctrl&gt;equal', None, self.on_volume_raise),
+             ('quitkey', None, 'Quit Key', '&lt;Ctrl&gt;q', None, self.on_delete_event_yes),
+-            ('quitkey2', None, 'Quit Key 2', '&lt;Ctrl&gt;w', None, self.on_delete_event_yes),
++            ('quitkey2', None, 'Quit Key 2', '&lt;Ctrl&gt;w', None, self.on_delete_event),
+             ('connectkey', None, 'Connect Key', '&lt;Alt&gt;c', None, self.on_connectkey_pressed),
+             ('disconnectkey', None, 'Disconnect Key', '&lt;Alt&gt;d', None, self.on_disconnectkey_pressed),
+             ('searchkey', None, 'Search Key', '&lt;Ctrl&gt;h', None, self.on_library_search_shortcut),
+-- 
+1.6.5.1.101.g325e5
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001183.html">[Sonata-users] Request/Bug: Prefer higher resolution when downloading Album Art
+</A></li>
+	<LI>Next message: <A HREF="001187.html">[Sonata-users] [PATCH] Fix crashes when files cannot be opened for	reading/writing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1186">[ date ]</a>
+              <a href="thread.html#1186">[ thread ]</a>
+              <a href="subject.html#1186">[ subject ]</a>
+              <a href="author.html#1186">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

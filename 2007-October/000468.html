@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] SOAPpy replacement
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20SOAPpy%20replacement&In-Reply-To=%3C20071028184629.35b13ef1%40lnx.cz%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000467.html">
+   <LINK REL="Next"  HREF="000469.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] SOAPpy replacement</H1>
+    <B>Pavel Dobe&#353;</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20SOAPpy%20replacement&In-Reply-To=%3C20071028184629.35b13ef1%40lnx.cz%3E"
+       TITLE="[Sonata-users] SOAPpy replacement">dobes at lnx.cz
+       </A><BR>
+    <I>Sun Oct 28 18:46:29 CET 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000467.html">[Sonata-users] SOAPpy replacement
+</A></li>
+        <LI>Next message: <A HREF="000469.html">[Sonata-users] Sonata 1.3 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#468">[ date ]</a>
+              <a href="thread.html#468">[ thread ]</a>
+              <a href="subject.html#468">[ subject ]</a>
+              <a href="author.html#468">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 26 Oct 2007 14:50:02 +0200
+Florian Zeitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">florian.zeitz at gmx.de</A>&gt; wrote:
+
+&gt;<i> Pavel Dobe&#353; schrieb:
+</I>&gt;<i> &gt; Hi,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; because of SOAPpy fetching bugs with LyricWiki may by time to move from SOAPpy to other python SOAP library.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The main reason, why I write this is [1]. The last version of SOAPpy is from 2005-02-22 08:49 for RC and 2004-09-09 21:00 for stable version [2] and I don't know about any further patches. May be it's better in SVN, but in gentoo is last available soappy 0.12.0 [3] and in other Linux distributions it will be similar.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Pavel
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; [1] <A HREF="http://sourceforge.net/forum/forum.php?thread_id=128768&amp;forum_id=83649">http://sourceforge.net/forum/forum.php?thread_id=128768&amp;forum_id=83649</A>
+</I>&gt;<i> &gt; [2] <A HREF="http://sourceforge.net/project/showfiles.php?group_id=26590&amp;package_id=18246">http://sourceforge.net/project/showfiles.php?group_id=26590&amp;package_id=18246</A>
+</I>&gt;<i> &gt; [3] <A HREF="http://gentoo-portage.com/dev-python/soappy">http://gentoo-portage.com/dev-python/soappy</A>
+</I>&gt;<i> 
+</I>&gt;<i> Being the evil person that kind of introduced SOAPpy in the first place,
+</I>&gt;<i> here is a tiny patch that uses ZSI (which seems to be the successor)
+</I>&gt;<i> instead. Unfortunately it has the same encoding bug (if that's not
+</I>&gt;<i> LyricWikis fault after all).
+</I>
+Hi all,
+
+it looks like only 'stupid' bug. I reported this to
+<A HREF="http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1821709&amp;group_id=26590&amp;atid=387667">http://sourceforge.net/tracker/index.php?func=detail&amp;aid=1821709&amp;group_id=26590&amp;atid=387667</A>
+
+Because only difference between perl working web service and ZSI I found is missing 
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+declaration in the begin of SOAPAction.
+
+See:
+POST /server.php HTTP/1.1
+Host: lyricwiki.org:80
+Accept-Encoding: identity
+Content-Length: 555
+Content-Type: text/xml; charset=utf-8
+SOAPAction: &quot;urn:LyricWiki#getSong&quot;
+
+&lt;SOAP-ENV:Envelope xmlns:SOAP-ENC=&quot;<A HREF="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</A>&quot; xmlns:SOAP-ENV=&quot;<A HREF="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</A>&quot; xmlns:
+ZSI=&quot;<A HREF="http://www.zolera.com/schemas/ZSI/">http://www.zolera.com/schemas/ZSI/</A>&quot; xmlns:xsd=&quot;<A HREF="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</A>&quot; xmlns:xsi=&quot;<A HREF="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</A>&quot; SOA
+P-ENV:encodingStyle=&quot;<A HREF="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</A>&quot;&gt;
+   &lt;SOAP-ENV:Header&gt;&lt;/SOAP-ENV:Header&gt;
+   &lt;SOAP-ENV:Body xmlns:ns1=&quot;urn:LyricWiki&quot;&gt;
+      &lt;ns1:getSong&gt;
+         &lt;artist&gt;Jarom&#237;r Nohavica&lt;/artist&gt;
+         &lt;song&gt;Zat&#237;mco se Koupe&#353;&lt;/song&gt;
+      &lt;/ns1:getSong&gt;
+   &lt;/SOAP-ENV:Body&gt;&lt;/SOAP-ENV:Envelope&gt;
+
+and
+
+POST /server.php HTTP/1.1
+TE: deflate,gzip;q=0.3
+Connection: TE, close
+Accept: text/xml
+Accept: multipart/*
+Accept: application/soap
+Host: lyricwiki.org:80
+User-Agent: SOAP::Lite/Perl/0.69
+Content-Length: 696
+Content-Type: text/xml; charset=utf-8
+SOAPAction: &quot;urn:LyricWiki#getSong&quot;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;SOAP-ENV:Envelope
+xmlns:SOAP-ENV=&quot;<A HREF="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</A>&quot;
+xmlns:si=&quot;<A HREF="http://soapinterop.org/xsd">http://soapinterop.org/xsd</A>&quot;
+xmlns:soap=&quot;<A HREF="http://schemas.xmlsoap.org/wsdl/soap/">http://schemas.xmlsoap.org/wsdl/soap/</A>&quot;
+xmlns:wsdl=&quot;<A HREF="http://schemas.xmlsoap.org/wsdl/">http://schemas.xmlsoap.org/wsdl/</A>&quot;
+xmlns:xsi=&quot;<A HREF="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</A>&quot;
+xmlns:SOAP-ENC=&quot;<A HREF="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</A>&quot;
+xmlns:tns=&quot;urn:LyricWiki&quot; xmlns:xsd=&quot;<A HREF="http://www.w3.org/2001/XMLSchema">http://www.w3.org/2001/XMLSchema</A>&quot;
+SOAP-ENV:encodingStyle=&quot;<A HREF="http://schemas.xmlsoap.org/soap/encoding/">http://schemas.xmlsoap.org/soap/encoding/</A>&quot;&gt;&lt;SOAP-ENV:Body&gt;&lt;tns:getSong&gt;&lt;artist
+xsi:type=&quot;xsd:string&quot;&gt;Jarom&#195;&#173;r Nohavica&lt;/artist&gt;&lt;song
+xsi:type=&quot;xsd:string&quot;&gt;Zat&#195;&#173;mco se
+koupe&#197;&#161;&lt;/song&gt;&lt;/tns:getSong&gt;&lt;/SOAP-ENV:Body&gt;&lt;/SOAP-ENV:Envelope&gt;
+
+Because of this, perl keep UTF-8 in response and ZSI don't.
+
+Hope it will be only this...
+
+Pavel
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000467.html">[Sonata-users] SOAPpy replacement
+</A></li>
+	<LI>Next message: <A HREF="000469.html">[Sonata-users] Sonata 1.3 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#468">[ date ]</a>
+              <a href="thread.html#468">[ thread ]</a>
+              <a href="subject.html#468">[ subject ]</a>
+              <a href="author.html#468">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

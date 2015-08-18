@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Fetching lyrics fail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C98a2c790807180840n7d0a8028ufa0c2fcac897b19a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000672.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Fetching lyrics fail</H1>
+    <B>Lazaros Koromilas</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C98a2c790807180840n7d0a8028ufa0c2fcac897b19a%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Fetching lyrics fail">koromilaz at gmail.com
+       </A><BR>
+    <I>Fri Jul 18 17:40:28 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000672.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#671">[ date ]</a>
+              <a href="thread.html#671">[ thread ]</a>
+              <a href="subject.html#671">[ subject ]</a>
+              <a href="author.html#671">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You are absolutely right!
+
+After trying many things and manual editing, I found a workaround. I
+am posting this here
+in case I save someone's useful time..
+
+FreeBSD has ZSI 2.0 in the port tree only as `py-zsi-devel' who
+currently corresponds to the package `py25-ZSI-devel-2.0.r3,1'.
+Installing this makes Sonata detect the ZSI module but definetely
+doesn't work.
+
+So I performed a manual install by these steps:
+
+# cd
+# fetch <A HREF="http://switch.dl.sourceforge.net/sourceforge/pywebsvcs/ZSI-2.0-py2.5.egg">http://switch.dl.sourceforge.net/sourceforge/pywebsvcs/ZSI-2.0-py2.5.egg</A>
+# cd /usr/local/lib/python2.5/site-packages
+# sudo tar -xvf ~/ZSI-2.0-py2.5.egg
+
+Now all behave as expected to.
+
+On Fri, Jun 27, 2008 at 4:42 AM, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> On Wed, Jun 25, 2008 at 2:47 AM, Lazaros Koromilas &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">koromilaz at gmail.com</A>&gt;
+</I>&gt;<i> wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  File &quot;build/bdist.freebsd-7.0-RELEASE-i386/egg/ZSI/TCcompound.py&quot;,
+</I>&gt;&gt;<i> line 147, in parse
+</I>&gt;&gt;<i> ZSI.EvaluateException: ComplexType for return has wrong
+</I>&gt;&gt;<i> type((u'urn:LyricWiki', u'LyricsResult')), looking for (None, None)
+</I>&gt;&gt;<i> [Element trace:
+</I>&gt;&gt;<i> /SOAP-ENV:Envelope/SOAP-ENV:Body/ns1:getSongResponse/return]
+</I>&gt;<i>
+</I>&gt;<i> This looks like a zsi problem, not a Sonata problem.
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+
+
+-- 
+::<i>blackpuma::
+</I><A HREF="http://www.csd.uoc.gr/~koromil">http://www.csd.uoc.gr/~koromil</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000672.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#671">[ date ]</a>
+              <a href="thread.html#671">[ thread ]</a>
+              <a href="subject.html#671">[ subject ]</a>
+              <a href="author.html#671">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

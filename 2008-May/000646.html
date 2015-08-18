@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Case insensitive search in non-latin
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Case%20insensitive%20search%20in%20non-latin&In-Reply-To=%3C4ab99cfd0805091446r2e9e6319y4b5cf2c6227459ad%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000648.html">
+   <LINK REL="Next"  HREF="000649.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Case insensitive search in non-latin</H1>
+    <B>&#1040;&#1088;&#1090;&#1077;&#1084; &#1057;&#1084;&#1080;&#1088;&#1085;&#1086;&#1074;</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Case%20insensitive%20search%20in%20non-latin&In-Reply-To=%3C4ab99cfd0805091446r2e9e6319y4b5cf2c6227459ad%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Case insensitive search in non-latin">smirnoffjr at gmail.com
+       </A><BR>
+    <I>Fri May  9 23:46:25 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000648.html">[Sonata-users] OSD is not shown correctly in an RTL environment
+</A></li>
+        <LI>Next message: <A HREF="000649.html">[Sonata-users] One example of use of sonata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#646">[ date ]</a>
+              <a href="thread.html#646">[ thread ]</a>
+              <a href="subject.html#646">[ subject ]</a>
+              <a href="author.html#646">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, Scott.
+
+I found little bug in search by library and quick search by playlist:
+case insesitive search don't work with strings which contain non-latin
+characters (all work, but all results is case sensitive). This caused
+by wrong result returned by method lower, if string contain non-latin
+characters:
+
+'&#1040;&#1041;&#1042;'.lower() - expected &#1072;&#1073;&#1074;, but result is &#1040;&#1041;&#1042;.
+
+I do this rough workaround for quick search filter for myself:
+
+--- /usr/lib/python2.5/site-packages/sonata/main.py	2008-05-10
+01:33:06.000000000 +0400
++++ sonata/main.py	2008-05-10 01:36:33.000000000 +0400
+@@ -7420,10 +7420,10 @@
+ 			else:
+ 				# this make take some seconds... and we'll escape the search text because
+ 				# we'll be searching for a match in items that are also escaped.
+-				todo = unicode(misc.escape_html(todo), 'utf8')
++				todo = misc.escape_html(todo)
+ 				todo = re.escape(todo)
+ 				todo = '.*' + todo.replace(' ', ' .*').lower()
+-				regexp = re.compile(todo, re.UNICODE)
++				regexp = re.compile(todo)
+ 				rownum = 0
+ 				if self.prevtodo in todo and len(self.prevtodo) &gt; 0:
+ 					# If the user's current filter is a subset of the
+@@ -7447,7 +7447,7 @@
+ 						song_info.append(misc.unbold(row[i+1]))
+ 					# Search for matches in all columns:
+ 					for i in range(len(self.columnformat)):
+-						if regexp.match(unicode(str(song_info[i+1]), 'utf8').lower()):
++						if regexp.match(str(song_info[i+1]).lower()):
+ 							matches.append(song_info)
+ 							if subset:
+ 								self.filter_row_mapping.append(prev_rownums[rownum])
+
+-- 
+Artyom
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000648.html">[Sonata-users] OSD is not shown correctly in an RTL environment
+</A></li>
+	<LI>Next message: <A HREF="000649.html">[Sonata-users] One example of use of sonata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#646">[ date ]</a>
+              <a href="thread.html#646">[ thread ]</a>
+              <a href="subject.html#646">[ subject ]</a>
+              <a href="author.html#646">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

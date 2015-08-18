@@ -1,0 +1,75 @@
+From jon at multani.info  Tue Nov 26 12:29:36 2013
+From: jon at multani.info (Jonathan Ballet)
+Date: Tue, 26 Nov 2013 12:29:36 +0100
+Subject: [Sonata-users] Announcing Sonata 1.7a2
+Message-ID: <20131126112905.GA23408@danio.home>
+
+Hi there,
+
+I'm pleased to announce a new (alpha!) release of Sonata!
+
+Sonata is a graphical client for the Music Player Daemon, written in
+Python 3 and using GTK+ 3. It is available on the following Git
+repository: https://github.com/multani/sonata/
+
+What's new in 1.7a2?
+====================
+
+This release is primarily done for those who want to use Sonata with the
+latest MPD 0.18 since previous versions of Sonata are known to have
+troubles.
+
+Still, there are a few other small features:
+
+    - bigger covers from Last.fm
+    - new translations and a new translation system (see below)
+    - tagpy v2013.1 restores tagging facilities in Sonata, broken since
+      the Python 3 port
+    - and dozen of bug fixed...
+
+Have a look at the changelog at
+https://github.com/multani/sonata/blob/v1.7a2/CHANGELOG for the details!
+
+New translation system
+----------------------
+
+A few months ago, I set up a project on Transiflex in order to improve
+the translation of Sonata. You can have a look here
+https://www.transifex.com/projects/p/sonata/ for the current state of
+translations and propose new or improved ones if you feel it!
+The TRANSLATORS file in the Sonata's Git repository should be up-to-date
+to reflect how to submit translations, but feel free to send me
+improvements if it's not clear enough.
+
+What's next?
+============
+
+As you can see, Sonata's development is quite slow, although not dead
+yet. At the moment, it is mostly bug-fixes-driven and would probably
+greatly profit from new contributors.
+I'll also have less time in the future to do improvements and fixes to
+the code base so I gladly welcome any patches and people who wants to be
+involved into this project. There are gazillions things to do here and
+there, from small tasks to big refactoring and I can surely give some
+advices to those interested!
+
+Where to I get this already?
+============================
+
+The code can be find in the Git repository at
+https://github.com/multani/sonata or you can grab a tarball at the
+following address:
+https://github.com/multani/sonata/archive/v1.7a2.tar.gz
+
+Bugs should be preferably reported on Github at
+https://github.com/multani/sonata/issues or here on the mailing-list.
+
+If you have patches which add new features, improve Sonata or fix bugs,
+you can submit them as pull requests on Github at
+https://github.com/multani/sonata/pulls or here on the mailing list.
+
+
+Thanks for the people still interested and involved in Sonata so far!
+
+ Jonathan
+

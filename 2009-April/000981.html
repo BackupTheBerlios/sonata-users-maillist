@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%20Sonata%0A%09breadcrumbs&In-Reply-To=%3C20090402044401.M72933%40ronin-group.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001001.html">
+   <LINK REL="Next"  HREF="000991.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs</H1>
+    <B>michael.venables</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%20Sonata%0A%09breadcrumbs&In-Reply-To=%3C20090402044401.M72933%40ronin-group.org%3E"
+       TITLE="[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs">michael.venables at ronin-group.org
+       </A><BR>
+    <I>Thu Apr  2 06:46:32 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001001.html">[Sonata-users] -&gt; Tuukka: Two panels in Sonata
+</A></li>
+        <LI>Next message: <A HREF="000991.html">[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#981">[ date ]</a>
+              <a href="thread.html#981">[ thread ]</a>
+              <a href="subject.html#981">[ subject ]</a>
+              <a href="author.html#981">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+First off, credit where it's due. Tuukkah did an amazing job putting a
+breadcrumb navigation system together in really short order. Congrats!
+
+In playing with the thing, there's great merit in the new navigation, but
+there are some issues with crumbs rather quickly overrunning the narrow width
+Sonata window I run.
+
+Stonecrest suggested that the breadcrumb model used in the gtk open dialogue
+box (or a Thunar or Nautilus window) offers a good example of what might be
+done to solve the width issue. In playing around with that, and looking at how
+I run Sonata, I had some thoughts that I wanted to put forth, and let rest of
+the list pick at them...
+
+The problem, as I see it, with the gtk breadcrumb system is that the crumbs,
+themselves, do not scale. If there's not enough room to display an entire
+crumb, you get no crumb at all. If you have a really long current crumb, it
+can knock all the preceding crumbs out of view, and if the current crumb is
+too long to be displayed in its entirety, you can wind up with no crumbs at
+all, since the contents of the crumbs don't scale down.
+
+Those issues provide suggestions as how Sonata could behave.
+
+The current Sonata layout has the &quot;Views&quot; and view-type buttons on the same
+row as the breadcrumbs. That makes sense, in terms of keeping relevant info in
+the same place, but further truncates the space available for crumbs. (This
+whole issue of horizontal space and line length issue really only pertains to
+using the File System view, anyway.)
+
+So the navigation line should always contain &quot;Views&quot; &quot;File System&quot; and however
+many breadcrumbs get you to where you are.
+
+Cheesy text mock-up like so:
+	VIEWS FILE_SYSTEM CRUMB01 CRUMB02 CRUMB02 ...
+
+What should happen if there are too many crumbs to display? The first thing
+that could be done to reclaim space (even before you run out of space) is to
+shorten the view-type button. 
+
+File System, which displays as &quot;[icon] Filesystem&quot; could collapse to &quot;[icon]&quot;
+as soon as the crumb trail grows beyond the root directory. Users should be
+able to jump to the top of the file system without having to scroll to find it
+(this replaces the legacy &quot;/&quot;). Tuukkah's implementation works like this now,
+except for the collapsing crumb. 
+
+So
+	VIEWS FS_ICON+LABEL
+becomes
+	VIEWS FS_ICON CRUMB
+
+The great benefit of breadcrumbs is that it saves mouse-clicks. If it causes
+you to use more clicks, then it's lost its efficiency. Unlike the gtk
+implementation that knocks previous crumbs out of view to display long crumbs,
+you should always be able to move up to the parent crumb with only one click.
+That means that the previous crumb should always be visible, instead of
+forcing you to scroll to make it visible, and then click it. If there's not
+enough space to display the name of the parent crumb, then it should display
+as an icon. (Probably a file folder would be appropriate, since an up arrow,
+while perfectly sensible for moving up a directory tree structure, doesn't
+make as much sense if your crumb trail moves horizontally.)
+
+Like so:
+	VIEWS FS_ICON ^ CURRENT_CRUMB
+
+^ == iconized parent crumb button
+
+If the current crumb is too long to display fully, the title should truncate
+with ... at the edge of the screen, the way long entries do in the Library
+album view.
+
+Like so:
+	VIEWS FS_ICON CURRENT_CRU...
+
+When there are enough crumbs to require scrolling the trail, a LEFT arrow
+should be placed after the FILESYSTEM crumb. (There's no reason to eat up
+space by adding a RIGHT arrow unless it's needed to move that way. Sonata has
+never supported moving forward, only back. It might be nice to be able to move
+forward.)
+
+	VIEWS FS_ICON &lt; ^ CURRENT_CRUMB
+or:
+	VIEWS FS_ICON &lt; ^ CURRENT_CRU...
+
+and possibly:
+	VIEWS FS_ICON &lt; ^ CURRENT_CRU... &gt;
+
+&lt; = left arrow
+&gt;<i> = right arrow
+</I>^ = parent crumb
+
+It would be super-cool if the trail could be rolled with the mousewheel.
+Nautilus allows this; I don't recall if Thunar does or not.
+
+So are my ideas for better breadcrumbing. Any thoughts?
+
+ michael
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001001.html">[Sonata-users] -&gt; Tuukka: Two panels in Sonata
+</A></li>
+	<LI>Next message: <A HREF="000991.html">[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#981">[ date ]</a>
+              <a href="thread.html#981">[ thread ]</a>
+              <a href="subject.html#981">[ subject ]</a>
+              <a href="author.html#981">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

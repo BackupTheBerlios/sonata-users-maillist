@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Refactoring of tray icon management
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-December/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Refactoring%20of%20tray%20icon%20management&In-Reply-To=%3C20091220155137.4f147dca%40gourami%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="001190.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Refactoring of tray icon management</H1>
+    <B>Jonathan Ballet</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Refactoring%20of%20tray%20icon%20management&In-Reply-To=%3C20091220155137.4f147dca%40gourami%3E"
+       TITLE="[Sonata-users] Refactoring of tray icon management">jon at multani.info
+       </A><BR>
+    <I>Sun Dec 20 16:51:37 CET 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="001190.html">[Sonata-users] Crop Feature Suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1189">[ date ]</a>
+              <a href="thread.html#1189">[ thread ]</a>
+              <a href="subject.html#1189">[ subject ]</a>
+              <a href="author.html#1189">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Sonata was the last application which used the egg.trayicon module on my
+computer, so I decided to take a look to see if I could remove the
+dependency on this module, as this functionality is provided by
+gtk.StatusIcon.
+
+At first glance, it looks like Sonata already supported StatusIcon, but
+not as well as egg.trayicon, in particular:
+
+  * middle click on the tray icon didn't toggle play/pause
+  * scrolling with the middle button didn't raise or lower the volume
+
+Looking in the code show that the support of both module is rather hard
+to follow: there are a bunch of ifs all around the code, methods and
+attributes which exist only to provide support for one or the other
+module, dispatched in different places...
+
+
+So, I decided to get my hands dirty, and I extracted all of this into
+dedicated classes, with the same interface. Now, Sonata only has one
+tray object, which wraps call to either egg.trayicon or gtk.StatusIcon.
+
+I also updated the support of gtk.StatusIcon so that it offers the same
+level of functionalities as egg.trayicon (at least for the two problems I
+raised below).
+
+
+Currently, the code works fine for me, with either gtk.StatusIcon or
+egg.trayicon, with only one remaining glitch: the &quot;Enable system tray
+icon&quot; can always be enabled or disable, whereas the underlying
+platform support it or not.
+
+Anyway, I decided to publish this, so that I can get feedback and
+potentially some help too. The patch is available in a TopGit branch
+'refactor-tray-icon' on <A HREF="http://github.com/multani/sonata-tray-icon">http://github.com/multani/sonata-tray-icon</A>
+Eventually, I hope this patch to be integrated into the main repository
+when it will get ready.
+
+Any comments are welcome!
+
+
+Regards,
+
+ Jonathan
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="001190.html">[Sonata-users] Crop Feature Suggestion
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1189">[ date ]</a>
+              <a href="thread.html#1189">[ thread ]</a>
+              <a href="subject.html#1189">[ subject ]</a>
+              <a href="author.html#1189">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

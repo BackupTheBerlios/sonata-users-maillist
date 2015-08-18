@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Cover art for albums with various artists
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Cover%20art%20for%20albums%20with%20various%20artists&In-Reply-To=%3C802aab940704290546o7d9b9988k14b0428097d7bea8%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000155.html">
+   <LINK REL="Next"  HREF="000160.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Cover art for albums with various artists</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Cover%20art%20for%20albums%20with%20various%20artists&In-Reply-To=%3C802aab940704290546o7d9b9988k14b0428097d7bea8%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Cover art for albums with various artists">niechift.vex at gmail.com
+       </A><BR>
+    <I>Sun Apr 29 14:46:33 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000155.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+        <LI>Next message: <A HREF="000160.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 4/28/07, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> Okay, I implemented the logic for Various Artists that I think should
+</I>&gt;<i> satisfy 99% of situations. It's all automated, which I greatly prefer
+</I>&gt;<i> to any sort of manual flagging. Now, if you have a VA album (defined
+</I>&gt;<i> by Sonata as &gt;3 artists with the same album name as the current song),
+</I>&gt;<i> you should be able to set the artwork for one song and it will show
+</I>&gt;<i> for the rest of the songs. As before, it will also show up as a VA
+</I>&gt;<i> album in the info window.
+</I>&gt;<i>
+</I>&gt;<i> Once again, any testing is greatly appreciated. It's very possible
+</I>&gt;<i> that I introduced a regression or bug while doing this, although it's
+</I>&gt;<i> been stable so far here (granted I had lots of bugs whilst getting to
+</I>&gt;<i> this point ;-)).
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i>
+</I>&gt;<i> P.S. If the user's preference is storing artwork in ~/.covers, the
+</I>&gt;<i> artwork will be saved as &quot;~/.covers/Various Artists-AlbumName&quot;.
+</I>
+$ svn up
+At revision 392.
+
+Trying to use a local image as cover for a various artists album
+(happens when clicking Open in the dialog):
+
+Traceback (most recent call last):
+  File &quot;~/Saker/sonata/sonata-svn/sonata.py&quot;, line 3878, in
+choose_image_local_response
+    if os.path.exists(dest_filename):
+  File &quot;/usr/lib/python2.5/posixpath.py&quot;, line 171, in exists
+    st = os.stat(path)
+TypeError: coercing to Unicode: need string or buffer, NoneType found
+
+Image was saved as /tmp/cover.jpg
+
+Trying to use a remote image seems to work, except the image isn't
+saved. I can see it in ~/.covers/tmp/ so it looks like it isn't moved.
+Manually moving it to ~/.covers/Various Artists-Album.jpg made it show
+up though.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000155.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+	<LI>Next message: <A HREF="000160.html">[Sonata-users] Cover art for albums with various artists
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#159">[ date ]</a>
+              <a href="thread.html#159">[ thread ]</a>
+              <a href="subject.html#159">[ subject ]</a>
+              <a href="author.html#159">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

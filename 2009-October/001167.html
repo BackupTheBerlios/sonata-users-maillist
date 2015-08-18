@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time for	audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%20for%0A%09audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910102124v2ca0cb5bp68b7dd6e7ac32ed7%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="001168.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time for	audioscrobbling.</H1>
+    <B>John McNeil</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%20for%0A%09audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910102124v2ca0cb5bp68b7dd6e7ac32ed7%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time for	audioscrobbling.">usodag at gmail.com
+       </A><BR>
+    <I>Sun Oct 11 06:24:27 CEST 2009</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="001168.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1167">[ date ]</a>
+              <a href="thread.html#1167">[ thread ]</a>
+              <a href="subject.html#1167">[ subject ]</a>
+              <a href="author.html#1167">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sonata calls iterate() at 0.5s intervals when playing a song, in which
+it calls handle_change_status() if the status has changed, which calls
+scrobbler's handle_change_status(), which updates the played time using
+its scrob_time_now attribute. iterate() then calls scrobbler's
+iterate(), which updates that attribute to the current time.
+
+As a result, it can only increment 0.5s per status update. The status
+usually doesn't update that often, and thus the counted play time lags
+significantly behind the actual play time. In particular, if the update
+interval exceeds 1s, scrobbler will never post the song after a normal
+play.  This fixes this by counting play time entirely in scrobbler's
+handle_change_status().
+---
+ sonata/main.py      |   24 ++++++++++++------------
+ sonata/scrobbler.py |   22 ++++++++++------------
+ 2 files changed, 22 insertions(+), 24 deletions(-)
+
+diff --git a/sonata/main.py b/sonata/main.py
+index 943a9f4..70482a5 100644
+--- a/sonata/main.py
++++ b/sonata/main.py
+@@ -1022,10 +1022,6 @@ class Base(object):
+             self.handle_change_conn()
+         if self.status != self.prevstatus:
+             self.handle_change_status()
+-        if self.config.as_enabled:
+-            # We update this here because self.handle_change_status() won't be
+-            # called while the client is paused.
+-            self.scrobbler.iterate()
+         if self.songinfo != self.prevsonginfo:
+             self.handle_change_song()
+
+@@ -1484,16 +1480,20 @@ class Base(object):
+         self.mpd_update_queued = False
+
+         if self.config.as_enabled:
+-            playing = self.status and self.status['state'] == 'play'
+-            stopped = self.status and self.status['state'] == 'stop'
++            if self.prevstatus:
++                prevstate = self.prevstatus['state']
++            else:
++                prevstate = 'stop'
++            if self.status:
++                state = self.status['state']
++            else:
++                state = 'stop'
+
+-            if playing:
++            if state in ('play', 'pause'):
+                 mpd_time_now = self.status['time']
+-                switched_from_stop_to_play = not self.prevstatus or
+(self.prevstatus and self.prevstatus['state'] == 'stop')
+-
+-                self.scrobbler.handle_change_status(True,
+self.prevsonginfo, self.songinfo, switched_from_stop_to_play,
+mpd_time_now)
+-            elif stopped:
+-                self.scrobbler.handle_change_status(False, self.prevsonginfo)
++                self.scrobbler.handle_change_status(state, prevstate,
+self.prevsonginfo, self.songinfo,  mpd_time_now)
++            elif state == 'stop':
++                self.scrobbler.handle_change_status(state, prevstate,
+self.prevsonginfo)
+
+     def mpd_updated_db(self):
+         self.library.view_caches_reset()
+diff --git a/sonata/scrobbler.py b/sonata/scrobbler.py
+index 6a8d104..d6202e9 100644
+--- a/sonata/scrobbler.py
++++ b/sonata/scrobbler.py
+@@ -29,7 +29,6 @@ class Scrobbler(object):
+         self.scrob_start_time = &quot;&quot;
+         self.scrob_playing_duration = 0
+         self.scrob_last_prepared = &quot;&quot;
+-        self.scrob_time_now = None
+
+         self.elapsed_now = None
+
+@@ -70,22 +69,18 @@ class Scrobbler(object):
+         if self.scrob_post:
+             self.retrieve_cache()
+
+-    def iterate(self):
+-        &quot;&quot;&quot;Update the running time&quot;&quot;&quot;
+-        self.scrob_time_now = time.time()
+-
+-    def handle_change_status(self, playing, prevsonginfo,
+songinfo=None, switched_from_stop_to_play=None, mpd_time_now=None):
++    def handle_change_status(self, state, prevstate, prevsonginfo,
+songinfo=None, mpd_time_now=None):
+         &quot;&quot;&quot;Handle changes to play status, submitting info as appropriate&quot;&quot;&quot;
+         if prevsonginfo and 'time' in prevsonginfo:
+             prevsong_time = mpdh.get(prevsonginfo, 'time')
+         else:
+             prevsong_time = None
+
+-        if playing:
++        if state in ('play', 'pause'):
+             elapsed_prev = self.elapsed_now
+             self.elapsed_now, length = [float(c) for c in
+mpd_time_now.split(':')]
+             current_file = mpdh.get(songinfo, 'file')
+-            if switched_from_stop_to_play:
++            if prevstate == 'stop':
+                 # Switched from stop to play, prepare current track:
+                 self.prepare(songinfo)
+             elif (prevsong_time and
+@@ -102,10 +97,12 @@ class Scrobbler(object):
+                         self.post(prevsonginfo)
+                 # Prepare current track:
+                 self.prepare(songinfo)
+-            elif self.scrob_time_now:
+-                # Keep track of the total amount of time that the current song
+-                # has been playing:
+-                self.scrob_playing_duration += time.time() -
+self.scrob_time_now
++            # Keep track of the total amount of time that the current song
++            # has been playing:
++            now = time.time()
++            if prevstate != 'pause':
++                self.scrob_playing_duration += now - self.scrob_prev_time
++            self.scrob_prev_time = now
+         else: # stopped:
+             self.elapsed_now = 0
+             if prevsong_time:
+@@ -126,6 +123,7 @@ class Scrobbler(object):
+             self.scrob_start_time = &quot;&quot;
+             self.scrob_last_prepared = &quot;&quot;
+             self.scrob_playing_duration = 0
++            self.scrob_prev_time = time.time()
+
+             if self.config.as_enabled and songinfo:
+                 # No need to check if the song is 30 seconds or longer,
+-- 
+1.6.4.2
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="001168.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1167">[ date ]</a>
+              <a href="thread.html#1167">[ thread ]</a>
+              <a href="subject.html#1167">[ subject ]</a>
+              <a href="author.html#1167">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Downloading Album Covers
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Downloading%20Album%20Covers&In-Reply-To=%3C35a6f8e30708190932u322799co77fbeb0202742d66%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000384.html">
+   <LINK REL="Next"  HREF="000385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Downloading Album Covers</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Downloading%20Album%20Covers&In-Reply-To=%3C35a6f8e30708190932u322799co77fbeb0202742d66%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Downloading Album Covers">stonecrest at gmail.com
+       </A><BR>
+    <I>Sun Aug 19 18:32:36 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000384.html">[Sonata-users] Downloading Album Covers
+</A></li>
+        <LI>Next message: <A HREF="000385.html">[Sonata-users] Default cover not deleted after refetching
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#386">[ date ]</a>
+              <a href="thread.html#386">[ thread ]</a>
+              <a href="subject.html#386">[ subject ]</a>
+              <a href="author.html#386">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 8/18/07, Thomas Bevan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">thomas.bevan at gmail.com</A>&gt; wrote:
+&gt;<i> I'm having problems with the remote downloading of album covers.
+</I>&gt;<i> Whenever I ask for a remote image I get the response &quot;No Cover Art
+</I>&gt;<i> Found&quot; irrespective of the album I look for.
+</I>
+Fetching artwork with older versions of Sonata broke because of
+Amazon. Sonata was requesting gzip'ed pages from Amazon if they were
+available, and was using them contently. But at some point, these
+gzip'ed pages being fetched started to return garbage. So newer
+versions of Sonata have the compression requesting turned off.
+
+You can either use version 1.2.2 or remove all instances of
+&quot;request.add_header('Accept-encoding', 'gzip')&quot; from your current
+version's code.
+
+Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000384.html">[Sonata-users] Downloading Album Covers
+</A></li>
+	<LI>Next message: <A HREF="000385.html">[Sonata-users] Default cover not deleted after refetching
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#386">[ date ]</a>
+              <a href="thread.html#386">[ thread ]</a>
+              <a href="subject.html#386">[ subject ]</a>
+              <a href="author.html#386">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

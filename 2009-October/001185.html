@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4ADC1567.9060007%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001184.html">
+   <LINK REL="Next"  HREF="001178.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%20for%20audioscrobbling.&In-Reply-To=%3C4ADC1567.9060007%40gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.">bebarino at gmail.com
+       </A><BR>
+    <I>Mon Oct 19 09:29:43 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001184.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001178.html">[Sonata-users] Request/Bug: Prefer higher resolution when	downloading Album Art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1185">[ date ]</a>
+              <a href="thread.html#1185">[ thread ]</a>
+              <a href="subject.html#1185">[ subject ]</a>
+              <a href="author.html#1185">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John McNeil wrote:
+&gt;<i>
+</I>&gt;<i> I'm going to have to be blunt here. You have suggested a significant
+</I>&gt;<i> change, left it to someone else to invest the not-insignificant effort
+</I>&gt;<i> to make, test, and refine a patch for this change, and then at a
+</I>&gt;<i> moment's notice, unilaterally decided to scrap it on the basis that it
+</I>&gt;<i> is a significant change. I don't think there's anyone who wouldn't be
+</I>&gt;<i> even the slightest bit discouraged over this.
+</I>
+The significant change is the wrong change to make because it adds more
+complexity. I merely suggested it might be better to try another
+approach, but it didn't work out as well as I had hoped. You were
+willing to try the idea out (which I thank you for), but I never said I
+wouldn't accept your first patch. I was just hoping another approach
+could clean up the code and solve the bug in a nicer way. I'm sorry you
+spent significant effort on something you feel has been a waste. It
+hasn't been a waste at all.
+
+It's layed the groundwork for the scrobbler code to be transitioned to
+some event/edge-triggered framework in the future. It's also highlighted
+some issues with that transition and what kind of support the framework
+should provide. Plus we've discovered that scrobbling doesn't work well
+when enabled mid-song. All important things that can only improve the code.
+
+&gt;<i>
+</I>&gt;<i> Anyway, you now have a few working patches on this issue to do with as
+</I>&gt;<i> you please.
+</I>
+Thanks. I've applied the first patch and queued it for the next
+maintenance release.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001184.html">[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001178.html">[Sonata-users] Request/Bug: Prefer higher resolution when	downloading Album Art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1185">[ date ]</a>
+              <a href="thread.html#1185">[ thread ]</a>
+              <a href="subject.html#1185">[ subject ]</a>
+              <a href="author.html#1185">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

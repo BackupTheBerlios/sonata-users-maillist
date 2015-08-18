@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%09for%20audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910151011u60e2675eg29ee6addf9e494c6%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001180.html">
+   <LINK REL="Next"  HREF="001182.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.</H1>
+    <B>John McNeil</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%09for%20audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910151011u60e2675eg29ee6addf9e494c6%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.">usodag at gmail.com
+       </A><BR>
+    <I>Thu Oct 15 19:11:56 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001180.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001182.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1181">[ date ]</a>
+              <a href="thread.html#1181">[ thread ]</a>
+              <a href="subject.html#1181">[ subject ]</a>
+              <a href="author.html#1181">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Oct 15, 2009 at 2:10 AM, Stephen Boyd &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt; wrote:
+&gt;<i> Can we somehow avoid this? This allows easy abuse of main.foo in the
+</I>&gt;<i> future, when we'd like to promote more separate modules.
+</I>There's really no simple way to do it that's not ugly (the way to do
+it without it being ugly probably goes along the lines of 'massive
+code overhaul').
+&gt;<i> I think its OK to lose the scrobble (scribble?) for the track
+</I>&gt;<i> currently playing when we enable scrobbling. Which further questions,
+</I>&gt;<i> should we add the playing time that's already completed when we
+</I>&gt;<i> start-up mid-play?
+</I>As the amount of played time isn't kept track outside of the
+audioscrobbler code, when it's enabled there's no way to know how much
+the track has been playing, and the track could've been skipped or so
+on, so there's really no way to tell how long it's been playing and
+thus it's going to be incorrect either way. It's just a matter of
+which incorrectness you prefer.
+&gt;<i> I know you've just moved code around, but we can use this opportunity to
+</I>&gt;<i> clean up code that is irrelevant.
+</I>Then go ahead and do so.
+&gt;<i> What if I'm playing a stream without a 'time'? Do we need to test for
+</I>&gt;<i> scrob_start_time or shouldn't it have already been set?
+</I>I have no idea. I don't think it'd introduce any problems if there
+weren't any in the original though.
+&gt;<i> Now I think this patch is doing too much. Can we fix the problem that
+</I>&gt;<i> started this whole long thread with only a few lines changed? Something
+</I>&gt;<i> like this?
+</I>If you'll go all the way up to the message that started this thread,
+you'll note that my original patch merely took care of the bug and
+didn't do anything more, nor anything less. The one who suggested a
+rewrite of the scrobbler module was you.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001180.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001182.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1181">[ date ]</a>
+              <a href="thread.html#1181">[ thread ]</a>
+              <a href="subject.html#1181">[ subject ]</a>
+              <a href="author.html#1181">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

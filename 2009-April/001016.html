@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Installing Sonata....
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Installing%20Sonata....&In-Reply-To=%3C49DA3015.20900%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001014.html">
+   <LINK REL="Next"  HREF="001017.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Installing Sonata....</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Installing%20Sonata....&In-Reply-To=%3C49DA3015.20900%40iki.fi%3E"
+       TITLE="[Sonata-users] Installing Sonata....">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Mon Apr  6 18:38:45 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001014.html">[Sonata-users] Installing Sonata....
+</A></li>
+        <LI>Next message: <A HREF="001017.html">[Sonata-users] Installing Sonata....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1016">[ date ]</a>
+              <a href="thread.html#1016">[ thread ]</a>
+              <a href="subject.html#1016">[ subject ]</a>
+              <a href="author.html#1016">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John wrote:
+&gt;<i> Ok, I am not sure what is happening, but I posted an answer but it 
+</I>&gt;<i> doesnt seem to have got to you.I installed mpd from the synaptic 
+</I>
+We sometimes have other things to do than helpdesk - more so as this 
+isn't really much to do with Sonata...
+
+&gt;<i> manager, but when I look for the mpd.conf file, it has an x over the top 
+</I>&gt;<i> of it, and it says it cant be opened. Can somebody help please? I cant 
+</I>&gt;<i> edit the file unless I can open it.
+</I>
+Thanks for the clear problem description :-) As you're new to Ubuntu, 
+you should find the documentation here useful in general: 
+<A HREF="https://help.ubuntu.com/">https://help.ubuntu.com/</A>
+
+Regarding this specific issue: A normal user account in Linux doesn't 
+have the permissions to modify system files, hence the x. Further, the 
+system cannot always guess and you have to choose *which* application 
+you want to open a file in. You do this by right-clicking the file icon 
+and choosing &quot;Open with other application...&quot; or such.
+
+You can click &quot;Text editor&quot; in the list once, and see its name &quot;gedit&quot; 
+appear in the &quot;Use a custom command&quot; section. To edit with root 
+(administrator) capabilities, prepend &quot;gksudo&quot; so that you get
+&quot;gksudo gedit&quot;. Now you can click &quot;Open&quot; and the file should open in a 
+Text Editor after you provide your password.
+
+Now that you know this, the more powerful, alternative way is to open a 
+Terminal window and enter &quot;gksudo gedit /etc/mpd.conf&quot;.
+
+
+Hoping this helps,
+Tuukka
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001014.html">[Sonata-users] Installing Sonata....
+</A></li>
+	<LI>Next message: <A HREF="001017.html">[Sonata-users] Installing Sonata....
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1016">[ date ]</a>
+              <a href="thread.html#1016">[ thread ]</a>
+              <a href="subject.html#1016">[ subject ]</a>
+              <a href="author.html#1016">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

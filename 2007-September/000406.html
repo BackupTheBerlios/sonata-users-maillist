@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata loses status updates when mpd takes a	while to respond
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%0A%09while%20to%20respond&In-Reply-To=%3C449c10960709021439k51497c49h3a31053444fc1126%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000407.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata loses status updates when mpd takes a	while to respond</H1>
+    <B>Dan McGee</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20loses%20status%20updates%20when%20mpd%20takes%20a%0A%09while%20to%20respond&In-Reply-To=%3C449c10960709021439k51497c49h3a31053444fc1126%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata loses status updates when mpd takes a	while to respond">dpmcgee at gmail.com
+       </A><BR>
+    <I>Sun Sep  2 23:39:21 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000407.html">[Sonata-users] Non-ASCII characters can cause problems in Sonata -	loading cover images
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#406">[ date ]</a>
+              <a href="thread.html#406">[ thread ]</a>
+              <a href="subject.html#406">[ subject ]</a>
+              <a href="author.html#406">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 7/17/07, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> On 7/16/07, Dan McGee &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">dpmcgee at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Scott- finally got some output for you. Running Sonata v1.2. Added
+</I>&gt;<i> &gt; some comments in there:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &lt;snip&gt;
+</I>&gt;<i>
+</I>&gt;<i> I was wary of putting this into the 1.2.1 bugfix release since it
+</I>&gt;<i> seems like an infrequent problem and I know you would be fine with
+</I>&gt;<i> running from svn ;-) But looking at it closer, I think the only
+</I>&gt;<i> problem is that the socket timeout causes a traceback, and thus Sonata
+</I>&gt;<i> doesn't realize that there is not a valid MPD connection anymore. And
+</I>&gt;<i> that propagates into Sonata tracebacks because it's in a weird state
+</I>&gt;<i> where it thinks there is a MPD connection but there isn't any
+</I>&gt;<i> information available (like self.songinfo, in this case).
+</I>&gt;<i>
+</I>&gt;<i> So, long story short, see if the (small) latest commit fixes this. And
+</I>&gt;<i> the correct behavior that we're looking for is that you shouldn't have
+</I>&gt;<i> to even press Alt-C to connect manually, it should automatically
+</I>&gt;<i> reconnect when MPD is responding again (as is the case for most
+</I>&gt;<i> scenarios currently).
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>
+Scott,
+
+I've told you that it didn't fix the problem (the below is running
+Sonata 1.2.3), so here is some more debug output. The buttons continue
+to respond and send cues to MPD, which means this is isolated only to
+the mpd-&gt;mpc connection and not the other way around.
+
+Let me know what else you need.
+
+-Dan
+
+$ sonata
+SOAPpy not found, fetching lyrics support disabled.
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 4742, in next
+    self.conn.do.next()
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 186, in &lt;lambda&gt;
+    return lambda *args: self.send_n_fetch(cmd, args)
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 193, in
+send_n_fetch
+    self.fetcher.clear()
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 229, in clear
+    self.talker.get_line()
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 36, in get_line
+    raise EOFError
+EOFError
+
+P.S. Pulling up the &quot;About&quot; dialog fails too with the following
+backtrace after the above error happens.
+
+Traceback (most recent call last):
+  File &quot;/usr/lib/python2.5/site-packages/sonata.py&quot;, line 6310, in about
+    statslabel = stats.songs + ' ' + gettext.ngettext('song', 'songs',
+int(stats.songs)) + '.\n'
+  File &quot;/usr/lib/python2.5/site-packages/mpdclient3.py&quot;, line 291, in
+__getattr__
+    raise AttributeError
+AttributeError
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000407.html">[Sonata-users] Non-ASCII characters can cause problems in Sonata -	loading cover images
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#406">[ date ]</a>
+              <a href="thread.html#406">[ thread ]</a>
+              <a href="subject.html#406">[ subject ]</a>
+              <a href="author.html#406">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

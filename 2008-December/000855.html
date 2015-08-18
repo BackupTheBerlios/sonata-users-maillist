@@ -1,0 +1,503 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Future A-B plugin
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-December/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Future%20A-B%20plugin&In-Reply-To=%3C7d4ddee30812051713h58be021bkde1d711a7d050827%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000851.html">
+   <LINK REL="Next"  HREF="000858.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Future A-B plugin</H1>
+    <B>Tom&#225;&#353; Kalu&#382;a</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Future%20A-B%20plugin&In-Reply-To=%3C7d4ddee30812051713h58be021bkde1d711a7d050827%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Future A-B plugin">elpraga at gmail.com
+       </A><BR>
+    <I>Sat Dec  6 02:13:37 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000851.html">[Sonata-users] Future A-B plugin
+</A></li>
+        <LI>Next message: <A HREF="000858.html">[Sonata-users] Future A-B plugin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#855">[ date ]</a>
+              <a href="thread.html#855">[ thread ]</a>
+              <a href="subject.html#855">[ subject ]</a>
+              <a href="author.html#855">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well, I was thinking before to make some script in wish until Sonata can
+have plugins,
+but what I have now works guite well.
+
+Here are the modified scripts:
+(Yes, it does work with dash)
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~$ cat /usr/local/bin/MPD-AB-loop.sh
+----------------------------------------------------------------------------------------------------------------------
+
+#!/bin/sh
+
+# Uncomment this if You are the only user using MPD or if You are
+# starting your ouwn copy of MPD
+#A_MARK_FILE=~/.A-mark
+#B_MARK_FILE=~/.B-mark
+
+# Uncomment this if You are sharing MPD with other users on the machine
+A_MARK_FILE=/tmp/A-mark
+B_MARK_FILE=/tmp/B-mark
+
+
+mark()
+{
+    POS=$(mpc | sed -n 2p | awk '{ print $3 }' | sed 's/\/.*$//')
+}
+
+mark_a()
+{
+    A=$(cat $A_MARK_FILE)
+    echo Mark A at: $A
+}
+
+mark_b()
+{
+    B=$(cat $B_MARK_FILE)
+    echo Mark B at: $B
+}
+
+
+while [ true ]
+do
+#   uncomment following to see the change :-)
+#    clear
+    mark
+    mark_a
+    mark_b
+    if [ $POS = $B ]
+    then
+        mpc seek $A 1&gt; /dev/null
+    fi
+    sleep 0.5
+done
+
+while [ true ]
+do
+#    uncomment following to see the change :-)
+#    clear
+    mark
+    mark_a
+    mark_b
+    if [ $POS = $B ]
+    then
+        mpc seek $A 1&gt; /dev/null
+    fi
+    sleep 0.5
+done
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~$ cat /usr/local/bin/MPD-A-mark.sh
+----------------------------------------------------------------------------------------------------------------------
+
+#! /bin/sh
+
+# Uncomment this if You are the only user using MPD or if You are
+# starting your ouwn copy of MPD
+#A_MARK_FILE=~/.A-mark
+#B_MARK_FILE=~/.B-mark
+
+# Uncomment this if You are sharing MPD with other users on the machine
+A_MARK_FILE=/tmp/A-mark
+B_MARK_FILE=/tmp/B-mark
+
+
+mpc |grep / |grep % |cut -f5 -d&quot; &quot; | cut -f1 -d&quot;/&quot; &gt; $A_MARK_FILE
+chmod a+w $A_MARK_FILE
+echo Setting A mark at `cat $A_MARK_FILE`
+zenity --text &quot;Setting A mark at `cat $A_MARK_FILE`&quot; --info --timeout 2
+2&gt;/dev/null
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~$ cat /usr/local/bin/MPD-B-mark.sh
+----------------------------------------------------------------------------------------------------------------------
+
+#! /bin/sh
+
+# Uncomment this if You are the only user using MPD or if You are
+# starting your ouwn copy of MPD
+#A_MARK_FILE=~/.A-mark
+#B_MARK_FILE=~/.B-mark
+
+# Uncomment this if You are sharing MPD with other users on the machine
+A_MARK_FILE=/tmp/A-mark
+B_MARK_FILE=/tmp/B-mark
+
+B_MARK=$(cat $B_MARK_FILE)
+
+
+if [ -f $B_MARK_FILE ] ; then
+    if [ $B_MARK != none ] ; then
+        echo none &gt; $B_MARK_FILE
+        echo Deleting B mark
+        zenity --text &quot;Deleting B mark.&quot; --info --timeout 2 2&gt;/dev/null
+    else
+        mpc |grep / |grep % |cut -f5 -d&quot; &quot; | cut -f1 -d&quot;/&quot; &gt; $B_MARK_FILE
+        chmod a+w $B_MARK_FILE
+        echo Setting B mark at `cat $B_MARK_FILE`
+        zenity --text &quot;Setting B mark at `cat $B_MARK_FILE`&quot; --info
+--timeout 2 2&gt;/dev/null
+    fi
+else
+    mpc |grep / |grep % |cut -f5 -d&quot; &quot; | cut -f1 -d&quot;/&quot; &gt; $B_MARK_FILE
+    chmod a+w $B_MARK_FILE
+    echo Setting B mark at `cat $B_MARK_FILE`
+    zenity --text &quot;Setting B mark at `cat $B_MARK_FILE`&quot; --info --timeout 2
+2&gt;/dev/null
+fi
+
+----------------------------------------------------------------------------------------------------------------------
+
+I have add two screenshots running MPD-AB-loop.sh in gnome-terminal with
+large fonts (for this I have disabled zenity in the scripts, because it is
+not really needed), I could give a hint to make the A-B plugin in Sonata
+look nice.
+
+Tomas
+
+
+
+2008/12/4 Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt;
+
+&gt;<i> Well, Lazaros,
+</I>&gt;<i> I was looking at the script again, and I guess, it would not be so easy to
+</I>&gt;<i> implement the third stroke the way You wrote it.. I was thinking about it a
+</I>&gt;<i> little bit more, and I see some advanatages of using another scipt and
+</I>&gt;<i> helper files as well...
+</I>&gt;<i>
+</I>&gt;<i> The advantage of storing the A and B time in outside is that You can use it
+</I>&gt;<i> in other scripts as well, and also other users can be notified that the A or
+</I>&gt;<i> B mark have been set (imagine that You set the A-B loop on al local machine
+</I>&gt;<i> and You walk off, other User starting his session and using the same local
+</I>&gt;<i> MPD cannot stop the loop and would get crazy :-) ). Furthermore if You store
+</I>&gt;<i> the A and  B times in helper files, Sonata can know that the mark has been
+</I>&gt;<i> set by another script, for example..
+</I>&gt;<i>
+</I>&gt;<i> I will give it anoter thought, and we shall see. In any case I like very
+</I>&gt;<i> much Your solution of the loop :-)
+</I>&gt;<i>
+</I>&gt;<i> Tomas
+</I>&gt;<i>
+</I>&gt;<i> 2008/12/3 Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i> Hmmm,
+</I>&gt;&gt;<i> impressive, indeed :-) Nice way to resolve Lazaros :-)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This part is responsible for reading the input, right?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> read -n1 -s
+</I>&gt;&gt;<i> mark_a
+</I>&gt;&gt;<i> read -n1 -s
+</I>&gt;&gt;<i> mark_b
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> One thing more. On tercer enter reset the A and B and start over again? Im
+</I>&gt;&gt;<i> not familiar with shell scripting, but this should not be difficult no?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Do You have any idea how to make it graphical? A small window showing the
+</I>&gt;&gt;<i> name of the song playing and the values of A and B maybe? Or something in
+</I>&gt;&gt;<i> the systray ;-)?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The way You have done it is very nice and I think a very much suitable for
+</I>&gt;&gt;<i> implementing as the future plugin, but as it is now, it is not possible to
+</I>&gt;&gt;<i> bind it to a keystroke in WM and one have to have the teminal window
+</I>&gt;&gt;<i> focussed to use it (if it would be the sonata plugin, I think it is OK,
+</I>&gt;&gt;<i> beasause You would have Sonata focused to use the plugin, which is fair)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Tomas
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> 2008/12/3 Lazaros Koromilas &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">koromilaz at gmail.com</A>&gt;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Hmm.. yes you are definetely right. This is my fault.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I wrote it on a Debian machine and forgot that sh is a symlink to bash:
+</I>&gt;&gt;&gt;<i> lrwxrwxrwx 1 root root 4 2008-10-26 23:52 /bin/sh -&gt; bash
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> So, I ended up with a bash specific script (that I was trying to avoid).
+</I>&gt;&gt;&gt;<i> Anyway, change the interpreter line to /bin/bash (or whereis bash) and
+</I>&gt;&gt;&gt;<i> this should work.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Thanx,
+</I>&gt;&gt;&gt;<i> Lazaros.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> On Wed, Dec 3, 2008 at 3:54 AM, Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i> &gt; Hello Lazaros,
+</I>&gt;&gt;&gt;<i> &gt; this is what I get running Your script:
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> ------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~/Escritorio$ ./mpd-ab.sh
+</I>&gt;&gt;&gt;<i> &gt; read: 22: Illegal option -n
+</I>&gt;&gt;&gt;<i> &gt; A=0:06
+</I>&gt;&gt;&gt;<i> &gt; read: 24: Illegal option -n
+</I>&gt;&gt;&gt;<i> &gt; B=0:06
+</I>&gt;&gt;&gt;<i> &gt; Ni&#241;a Pastori - Burbujas de amor
+</I>&gt;&gt;&gt;<i> &gt; [playing] #1/10   0:06/3:41 (3%)
+</I>&gt;&gt;&gt;<i> &gt; volume: 52%   repeat: on    random: off
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~/Escritorio$ ./mpd-ab.sh
+</I>&gt;&gt;&gt;<i> &gt; read: 22: Illegal option -n
+</I>&gt;&gt;&gt;<i> &gt; A=0:54
+</I>&gt;&gt;&gt;<i> &gt; read: 24: Illegal option -n
+</I>&gt;&gt;&gt;<i> &gt; B=0:54
+</I>&gt;&gt;&gt;<i> &gt; Ni&#241;a Pastori - Burbujas de amor
+</I>&gt;&gt;&gt;<i> &gt; [playing] #1/10   0:54/3:41 (24%)
+</I>&gt;&gt;&gt;<i> &gt; volume: 32%   repeat: on    random: off
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> ------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; I guess, it is not working, but unfortunatelly, I cannot debug it. I do
+</I>&gt;&gt;&gt;<i> not
+</I>&gt;&gt;&gt;<i> &gt; know so much.
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; I have made a small change to my script which removes the bugg when the
+</I>&gt;&gt;&gt;<i> name
+</I>&gt;&gt;&gt;<i> &gt; of the song included &quot;/&quot; (the script did not work), and I also send the
+</I>&gt;&gt;&gt;<i> &gt; zenity error output to /dev/null. It looks nicer when running from
+</I>&gt;&gt;&gt;<i> command
+</I>&gt;&gt;&gt;<i> &gt; line.
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; Here is the script.
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> ------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">tomas at Ubuntu-ElPraga</A>:~/Escritorio$ cat /usr/local/bin/A-mark.sh
+</I>&gt;&gt;&gt;<i> &gt; #! /bin/sh
+</I>&gt;&gt;&gt;<i> &gt; if [ -f ~/.A-mark ] ; then
+</I>&gt;&gt;&gt;<i> &gt;     rm ~/.A-mark
+</I>&gt;&gt;&gt;<i> &gt;     echo Deleting time mark
+</I>&gt;&gt;&gt;<i> &gt;     zenity --text &quot;Deleting time mark.&quot; --info --timeout 1 2&gt;/dev/null
+</I>&gt;&gt;&gt;<i> &gt;     else
+</I>&gt;&gt;&gt;<i> &gt;     mpc |grep / |grep % |cut -f5 -d&quot; &quot; | cut -f1 -d&quot;/&quot; &gt; ~/.A-mark
+</I>&gt;&gt;&gt;<i> &gt;     echo Setting mark at `cat ~/.A-mark`
+</I>&gt;&gt;&gt;<i> &gt;     zenity --text &quot;Setting time mark at `cat ~/.A-mark`&quot; --info
+</I>&gt;&gt;&gt;<i> --timeout 1
+</I>&gt;&gt;&gt;<i> &gt; 2&gt;/dev/null
+</I>&gt;&gt;&gt;<i> &gt;     fi
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> ------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; Tomas
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; 2008/12/2 Lazaros Koromilas &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">koromilaz at gmail.com</A>&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; Another similar approach here :)
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; On Mon, Nov 24, 2008 at 5:58 AM, Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt;
+</I>&gt;&gt;&gt;<i> wrote:
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; Well, Fergus,
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; I have got good news for You.. It is far from Sonata A-B plugin yet,
+</I>&gt;&gt;&gt;<i> but
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; I
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; does what I need, and could be useful to You as well..
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; I have created two scripts. This first one sets time mark, the
+</I>&gt;&gt;&gt;<i> second
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; time
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; You call the script, it delets it. The second script jupmps to given
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; timemark..
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; The first script (A-mark.sh):
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> ---------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; #! /bin/sh
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; if [ -f ~/.A-mark ] ; then
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     rm ~/.A-mark
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     echo Deleting time mark
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     zenity --text &quot;Deleting time mark.&quot; --info --timeout 1
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     else
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     mpc |grep / | cut -f5 -d&quot; &quot; | cut -f1 -d&quot;/&quot; &gt; ~/.A-mark
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     echo Setting mark at `cat ~/.A-mark`
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     zenity --text &quot;Setting time mark at `cat ~/.A-mark`&quot; --info
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; --timeout 1
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;     fi
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> ---------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; The second script (GOTO-A-mark.sh):
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> ---------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; #! /bin/sh
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; mpc seek `cat ~/.A-mark`
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> ---------------------------------------------------------------------------------------------------
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; If You save it in (/usr/local/bin/) for example, make it executable,
+</I>&gt;&gt;&gt;<i> and
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; bind the two scripts to some shortcuts in Your window manager, You
+</I>&gt;&gt;&gt;<i> can
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; get
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; an easy way to make a time mark and jump to it.
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; It is not perfect at all.
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; 1. It does not check if You have changed the song meanwhile :-)
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; 2. I still do not know how to make an automatic A-B loop. It is a
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; cuestion
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; to tell it after B seconds to skip at &quot;~/.A-mark&quot; back again, but I
+</I>&gt;&gt;&gt;<i> do
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; not
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; know how to do it..
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; 3. It is not a part of Sonata at all :-( The Sonata plugin could for
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; example
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; mark the A and B time in the progress bar?? That would be really
+</I>&gt;&gt;&gt;<i> cool..
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; :-)
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; To use it, You need to install a mpc command line MPD client. In
+</I>&gt;&gt;&gt;<i> Ubuntu
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; &quot;apt-get install mpc&quot;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; Tomas
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; 2008/11/23 Fergus Bremner &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">fergus.bremner at gmail.com</A>&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; I second Tomas - great idea.
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; --Fergus
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; On Sat, Nov 22, 2008 at 10:19 PM, Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; wrote:
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; Can anybody help me with a A-B plugin for Sonata? (I am talking
+</I>&gt;&gt;&gt;<i> about
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; the
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; future of Sonata, when it will have plugins.. :-) )
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; As for the moment I am trying to get it working using mpc. I was
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; thinking to
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; use date +%s command to mark A time, then mark a B time the same
+</I>&gt;&gt;&gt;<i> way,
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; and
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; then to use mpc seek -s the difference, but I do not know how to
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; calculate
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; the difference in bash, and I do not know how to make the loop
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; working
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; this
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; way :-(.
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; And I suppose, there is a much cleaner way to do it, but I am not
+</I>&gt;&gt;&gt;<i> a
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; programmer, I am only thinking how to help me when I need to
+</I>&gt;&gt;&gt;<i> learn a
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; part of
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; some song..
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; Could anyone help me?
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; P.S.
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; The idea is when You press a key for the first time,  it marks A
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; time,
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; when
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; You press it for second time, it marks B time of a song, and it
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; starts a
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; loop between A-B. When You press the key the third time, it
+</I>&gt;&gt;&gt;<i> erraces A
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; and B
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; time and continue in normal playback..
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; Tomas
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; _______________________________________________
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; Sonata-users mailing list
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; _______________________________________________
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; Sonata-users mailing list
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; _______________________________________________
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; Sonata-users mailing list
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; &gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; --
+</I>&gt;&gt;&gt;<i> &gt;&gt; A well adjusted person is one who makes
+</I>&gt;&gt;&gt;<i> &gt;&gt; the same mistake twice without getting nervous.
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;&gt; _______________________________________________
+</I>&gt;&gt;&gt;<i> &gt;&gt; Sonata-users mailing list
+</I>&gt;&gt;&gt;<i> &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i> &gt;&gt;
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt; _______________________________________________
+</I>&gt;&gt;&gt;<i> &gt; Sonata-users mailing list
+</I>&gt;&gt;&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i> &gt;
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> --
+</I>&gt;&gt;&gt;<i> A well adjusted person is one who makes
+</I>&gt;&gt;&gt;<i> the same mistake twice without getting nervous.
+</I>&gt;&gt;&gt;<i> _______________________________________________
+</I>&gt;&gt;&gt;<i> Sonata-users mailing list
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;&gt;&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20081206/13f6b6cf/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20081206/13f6b6cf/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000851.html">[Sonata-users] Future A-B plugin
+</A></li>
+	<LI>Next message: <A HREF="000858.html">[Sonata-users] Future A-B plugin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#855">[ date ]</a>
+              <a href="thread.html#855">[ thread ]</a>
+              <a href="subject.html#855">[ subject ]</a>
+              <a href="author.html#855">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

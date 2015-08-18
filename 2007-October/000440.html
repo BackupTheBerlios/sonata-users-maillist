@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] wrong encoding in some files
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20wrong%20encoding%20in%20some%20files&In-Reply-To=%3C20071014193939.006cfe3b%40lnx.cz%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000439.html">
+   <LINK REL="Next"  HREF="000444.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] wrong encoding in some files</H1>
+    <B>Pavel Dobe&#353;</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20wrong%20encoding%20in%20some%20files&In-Reply-To=%3C20071014193939.006cfe3b%40lnx.cz%3E"
+       TITLE="[Sonata-users] wrong encoding in some files">dobes at lnx.cz
+       </A><BR>
+    <I>Sun Oct 14 19:39:39 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000439.html">[Sonata-users] Another weird empty tracklist case...
+</A></li>
+        <LI>Next message: <A HREF="000444.html">[Sonata-users] wrong encoding in some files
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#440">[ date ]</a>
+              <a href="thread.html#440">[ thread ]</a>
+              <a href="subject.html#440">[ subject ]</a>
+              <a href="author.html#440">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I had MP3 with empty id tags. But it happend in some taged mp3 too.
+
+When I' writing some names in, lettrs &#269; (c with hang), &#345; (r with hang) etc. has bad encoding.
+
+Fixing is easy - open and save in easytag (easytag output encoding is set to UTF-8). After this operation I'm able to write correct tags via sonata too. It looks like tagpy is not able to write correct UTF-8 ID3 tags into empty tags or rewrite ID3 tags witch have different encoding (in CP1250 or ISO-8859-2 in my case).
+
+file returns the same filetype (for both of them)
+
+Audio file with ID3 version 24.0 tag, MP3 encoding
+
+mpd is set to:
+filesystem_charset &quot;UTF-8&quot;
+id3v1_encoding &quot;UTF-8&quot;
+
+Any help?
+
+Thanks
+Pavel
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000439.html">[Sonata-users] Another weird empty tracklist case...
+</A></li>
+	<LI>Next message: <A HREF="000444.html">[Sonata-users] wrong encoding in some files
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#440">[ date ]</a>
+              <a href="thread.html#440">[ thread ]</a>
+              <a href="subject.html#440">[ subject ]</a>
+              <a href="author.html#440">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

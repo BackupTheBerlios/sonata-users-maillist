@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata 1.6 call for testing
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-March/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.6%20call%20for%20testing&In-Reply-To=%3C49C7191A.30806%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000942.html">
+   <LINK REL="Next"  HREF="000955.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata 1.6 call for testing</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.6%20call%20for%20testing&In-Reply-To=%3C49C7191A.30806%40gmail.com%3E"
+       TITLE="[Sonata-users] Sonata 1.6 call for testing">bebarino at gmail.com
+       </A><BR>
+    <I>Mon Mar 23 06:07:38 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000942.html">[Sonata-users] Sonata 1.6 call for testing
+</A></li>
+        <LI>Next message: <A HREF="000955.html">[Sonata-users] Sonata 1.6 call for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#943">[ date ]</a>
+              <a href="thread.html#943">[ thread ]</a>
+              <a href="subject.html#943">[ subject ]</a>
+              <a href="author.html#943">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&#1571;&#1581;&#1605;&#1583; &#1601;&#1585;&#1594;&#1604; wrote:
+&gt;<i> Here it is:
+</I>&gt;<i>
+</I>&gt;<i> Traceback (most recent call last):
+</I>&gt;<i>   File &quot;/usr/lib/python2.6/site-packages/sonata/preferences.py&quot;, line
+</I>&gt;<i> 600, in prefs_direntry_changed
+</I>&gt;<i>     self.config.musicdir[prefs_profile_num] =
+</I>&gt;<i> misc.sanitize_musicdir(entry.get_filename())
+</I>&gt;<i>   File &quot;/usr/lib/python2.6/site-packages/sonata/misc.py&quot;, line 190, in
+</I>&gt;<i> sanitize_musicdir
+</I>&gt;<i>     mdir = os.path.expanduser(mdir)
+</I>&gt;<i>   File &quot;/usr/lib/python2.6/posixpath.py&quot;, line 247, in expanduser
+</I>&gt;<i>     if not path.startswith('~'):
+</I>&gt;<i> AttributeError: 'NoneType' object has no attribute 'startswith'
+</I>&gt;<i>
+</I>&gt;<i> Thank you!
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> Can you post the traceback?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks,
+</I>&gt;&gt;<i> -Stephen
+</I>&gt;&gt;<i>     
+</I>
+Either you haven't selected a folder, unlikely, or the &quot;selected folder 
+can't be represented with a local filename&quot;.
+
+The attached patch should fix this crash, but I believe you won't be 
+able to select the folder even after the fact.
+
+-Stephen
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: 0001-Fix-a-bug-when-sanitize_musicdir-is-passed-None.patch
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090322/1482f946/attachment.ksh">https://lists.berlios.de/pipermail/sonata-users/attachments/20090322/1482f946/attachment.ksh</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000942.html">[Sonata-users] Sonata 1.6 call for testing
+</A></li>
+	<LI>Next message: <A HREF="000955.html">[Sonata-users] Sonata 1.6 call for testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#943">[ date ]</a>
+              <a href="thread.html#943">[ thread ]</a>
+              <a href="subject.html#943">[ subject ]</a>
+              <a href="author.html#943">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

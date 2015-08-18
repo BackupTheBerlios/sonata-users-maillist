@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Notifications (and the plugin system in general)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C780e0a6b0906041352x2c20587v82ea3202dee94fc%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001098.html">
+   <LINK REL="Next"  HREF="001100.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Notifications (and the plugin system in general)</H1>
+    <B>Stephen Boyd</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C780e0a6b0906041352x2c20587v82ea3202dee94fc%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Notifications (and the plugin system in general)">bebarino at gmail.com
+       </A><BR>
+    <I>Thu Jun  4 22:52:28 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001098.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001100.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1099">[ date ]</a>
+              <a href="thread.html#1099">[ thread ]</a>
+              <a href="subject.html#1099">[ subject ]</a>
+              <a href="author.html#1099">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 4, 2009 at 7:13 AM, Scott
+Armitage&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sonata at scott.armitage.name</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> First, I'm not a huge fan of this &quot;plugin magic&quot; section. Sonata is Python,
+</I>&gt;<i> plugins are Python -- why not just do the magic in Python? Sonata core could
+</I>&gt;<i> have a generic Plugin class that specifies a basic API (with most functions
+</I>&gt;<i> being &quot;pass&quot;), as well as code to do plugin validation. People writing
+</I>&gt;<i> plugins would write a module with a new plugin class that inherits from
+</I>&gt;<i> Plugin (i.e. `class NotifyPlugin(sonata.Plugin):` or some-such).
+</I>
+I agree, the magic stuff is gross. I think the first attempt at the
+plugin infrastructure was good to smoke out some common problems and
+help us figure out what we really need to do. It will probably take a
+couple iterations to get it right though. We kind of just made a
+plugin infrastructure without thinking about what the plugins would
+need, or how they would interact with each other.
+
+&gt;<i> You could have a fixed-name for the enablables (which needs a new name, by
+</I>&gt;<i> the way) function/method that all plugins must provide. For registering
+</I>&gt;<i> callbacks (i.e. hook notifications), you could just have a dictionary keyed
+</I>&gt;<i> on hook-name, with the values being the method callables. (Alternatively,
+</I>&gt;<i> you could have the plugin register it's callbacks with the pluginsystem
+</I>&gt;<i> module in Sonata.. but I like the idea of Sonata core doing the work
+</I>&gt;<i> instead. Then you just need to provide this dictionary, and the rest will be
+</I>&gt;<i> handled by itself).
+</I>
+I was thinking that maybe a decorator pattern would work for
+callbacks. I'm not sure though, and I haven't thought that through too
+carefully. I guess the decorator would be registering the callback
+with the core, which you don't like :-)
+
+Also, what kind of callbacks should be provided? Maybe song change,
+time change, tags change, play, stop, etc. Do we allow plugins to
+affect the core, or do we sandbox them? If we allow plugins to change
+the state we may get caught in infinite callback loops. If we have
+competing artwork plugins, maybe an amazon artwork vs. a last.fm
+artwork plugin, how do we make sure only one is enabled? As you can
+see there are a lot of questions to be answered.
+
+&gt;<i> Each plugin module would also have a dictionary with all the plugin info,
+</I>&gt;<i> i.e. license, author, name, description, etc.; whether or not there should
+</I>&gt;<i> be a &quot;Configure&quot; button in the plugins window (a la Firefox), and so on.
+</I>
+Why use a dictionary, when a class is essentially already a
+dictionary? We can just lay down some guidelines as to what the
+members of the class must be called, such as &quot;author&quot;, &quot;description&quot;,
+etc. If we go with the inheritance style (which I'm not too excited
+about yet) this could be as simple as making the required fields part
+of the constructor.
+
+&gt;<i> This method allows the pluginsystem to simply locate plugin modules, load
+</I>&gt;<i> the information for the window, and then -- if enabled -- instatiate an
+</I>&gt;<i> instance of the plugin. In true Pythonic fashion, any plugin shall act
+</I>&gt;<i> exactly as a Plugin object would -- that is, the rest of Sonata can treat
+</I>&gt;<i> them all the same, with no special code based on what they plugin wants to
+</I>&gt;<i> do, etc. This avoids having to parse plugin files for the configure info
+</I>&gt;<i> (let Python do the heavy lifting), and also allows pre-compiled plugin
+</I>&gt;<i> modules for faster importing.
+</I>
+I don't entirely understand this but I think I get the general idea.
+Unifying the plugins into a standard form sounds like a great idea.
+Pre-compiled bytecode is nice too.
+
+These are just my thoughts. If you have patches I can review it might
+be easier to understand what you want to do.
+
+If you want to rework the plugin framework, I think it might be easier
+to start fresh from the latest release. At least there you can easily
+rip out (or ignore) the existing framework. Nowadays, some of the core
+functionality (artwork, lyrics) has been moved into plugins, so
+working from the trunk might be harder. Of course, that functionality
+isn't essential, so it's probably ok either way.
+
+Finally, you might want to talk with Tuukka &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt; as
+he's the main push behind the plugins so far.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001098.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001100.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1099">[ date ]</a>
+              <a href="thread.html#1099">[ thread ]</a>
+              <a href="subject.html#1099">[ subject ]</a>
+              <a href="author.html#1099">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

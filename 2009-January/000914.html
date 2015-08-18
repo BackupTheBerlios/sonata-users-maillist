@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD	playlist using another application
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-January/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.5.3%2Bsvn1006%20hangs%20when%20loading%20MPD%0A%09playlist%20using%20another%20application&In-Reply-To=%3C35a6f8e30901171754s49e533d4pf0587707d178e905%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000912.html">
+   <LINK REL="Next"  HREF="000915.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD	playlist using another application</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%201.5.3%2Bsvn1006%20hangs%20when%20loading%20MPD%0A%09playlist%20using%20another%20application&In-Reply-To=%3C35a6f8e30901171754s49e533d4pf0587707d178e905%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD	playlist using another application">stonecrest at gmail.com
+       </A><BR>
+    <I>Sun Jan 18 02:54:07 CET 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000912.html">[Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD playlist	using another application
+</A></li>
+        <LI>Next message: <A HREF="000915.html">[Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD	playlist using another application
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#914">[ date ]</a>
+              <a href="thread.html#914">[ thread ]</a>
+              <a href="subject.html#914">[ subject ]</a>
+              <a href="author.html#914">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 17, 2009 at 10:17 AM, Tom&#225;&#353; Kalu&#382;a &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">elpraga at gmail.com</A>&gt; wrote:
+
+&gt;<i> Traceback (most recent call last):
+</I>&gt;<i>   File &quot;/home/Install/Ubuntu/Sonata/sonata/sonata/main.py&quot;, line 1017, in
+</I>&gt;<i> iterate
+</I>&gt;<i>     self.handle_change_status()
+</I>&gt;<i>   File &quot;/home/Install/Ubuntu/Sonata/sonata/sonata/main.py&quot;, line 1534, in
+</I>&gt;<i> handle_change_status
+</I>&gt;<i>     self.current.current_update(prevstatus_playlist,
+</I>&gt;<i> self.status['playlistlength'])
+</I>&gt;<i>   File &quot;/home/Install/Ubuntu/Sonata/sonata/sonata/current.py&quot;, line 242, in
+</I>&gt;<i> current_update
+</I>&gt;<i>     it = self.currentdata.get_iter((newlen-1-i,))
+</I>&gt;<i> ValueError: invalid tree path
+</I>&gt;<i>
+</I>
+This should be fixed in svn, thanks for posting the traceback. Let me know
+if you still experience this problem after svn updating.
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090117/3f10de0b/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20090117/3f10de0b/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000912.html">[Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD playlist	using another application
+</A></li>
+	<LI>Next message: <A HREF="000915.html">[Sonata-users] Sonata 1.5.3+svn1006 hangs when loading MPD	playlist using another application
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#914">[ date ]</a>
+              <a href="thread.html#914">[ thread ]</a>
+              <a href="subject.html#914">[ subject ]</a>
+              <a href="author.html#914">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Fetching lyrics fail
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C48161384.4060506%40no-log.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000635.html">
+   <LINK REL="Next"  HREF="000639.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Fetching lyrics fail</H1>
+    <B>Revan</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Fetching%20lyrics%20fail&In-Reply-To=%3C48161384.4060506%40no-log.org%3E"
+       TITLE="[Sonata-users] Fetching lyrics fail">revan at no-log.org
+       </A><BR>
+    <I>Mon Apr 28 20:12:20 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000635.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+        <LI>Next message: <A HREF="000639.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#638">[ date ]</a>
+              <a href="thread.html#638">[ thread ]</a>
+              <a href="subject.html#638">[ subject ]</a>
+              <a href="author.html#638">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Florian Zeitz a &#233;crit :
+&gt;<i> Revan schrieb:
+</I>&gt;<i> &gt; Scott Horowitz a &#233;crit :
+</I>&gt;<i> &gt;&gt; On Sun, Apr 27, 2008 at 10:09 AM, Revan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">revan at no-log.org</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt;   
+</I>&gt;<i> &gt;&gt;&gt;  The script seems to work ;)
+</I>&gt;<i> &gt;&gt;&gt;     
+</I>&gt;<i> &gt;&gt; Well that's a good sign. Since you said you're using svn, can you
+</I>&gt;<i> &gt;&gt; replace your sonata/main.py with this one?
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; <A HREF="http://sonata.berlios.de/test/main.py">http://sonata.berlios.de/test/main.py</A>
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Then run sonata from a terminal and paste all output here when the
+</I>&gt;<i> &gt;&gt; lyric fetching fails. (There will be some output about 'getSong' not
+</I>&gt;<i> &gt;&gt; existing that can be safely ignored, that isn't the culprit.)
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt; Scott
+</I>&gt;<i> &gt;&gt;
+</I>&gt;<i> &gt;&gt;   
+</I>&gt;<i> &gt; I think the problem is related to
+</I>&gt;<i> &gt; <A HREF="https://bugs.launchpad.net/ubuntu/+source/emesene/+bug/199014">https://bugs.launchpad.net/ubuntu/+source/emesene/+bug/199014</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> And you're perfectly right I just wish Ubuntu developers weren't such
+</I>&gt;<i> fools sometimes (well it seems partitially Debians fault, but still)...
+</I>&gt;<i>
+</I>&gt;<i> The situation as of know seems to be as follows.
+</I>&gt;<i> Python has a own xml module since 2.5 this module implements some, but
+</I>&gt;<i> not all functionality that PyXML has.
+</I>&gt;<i> Ubuntu and Debian decided it's a good idea to remove PyXML (python-xml)
+</I>&gt;<i> from the repos (theoretically all missing code should be inlcuded in the
+</I>&gt;<i> standard library according to the bug you linked, it hasn't...)
+</I>&gt;<i> ZSI uses some of the functionallity that is not in the standard python
+</I>&gt;<i> library. The code is still there but not in the standard path. It can be
+</I>&gt;<i> used by putting
+</I>&gt;<i> &quot;sys.path.append('/usr/lib/python%s/site-packages/oldxml' %
+</I>&gt;<i> sys.version[:3])&quot;
+</I>&gt;<i> before your includes, but AFAICT this has to happen in ZSI, so there is
+</I>&gt;<i> no chance for sonata to fix this. Oh and of course Ubuntu people didn't
+</I>&gt;<i> put that in there python-zsi package...
+</I>&gt;<i>
+</I>&gt;<i> Florob - being somewhat angry and going to write a bug report
+</I>Ok, thanks for the answer and the temporary fix  ;)
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000635.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+	<LI>Next message: <A HREF="000639.html">[Sonata-users] Fetching lyrics fail
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#638">[ date ]</a>
+              <a href="thread.html#638">[ thread ]</a>
+              <a href="subject.html#638">[ subject ]</a>
+              <a href="author.html#638">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

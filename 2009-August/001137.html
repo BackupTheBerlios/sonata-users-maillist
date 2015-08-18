@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] sonata 1.6.2 stopped scrobbling
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20sonata%201.6.2%20stopped%20scrobbling&In-Reply-To=%3C20090816225431.3f6c08c1%40finnegan.my.domain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001135.html">
+   <LINK REL="Next"  HREF="001126.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] sonata 1.6.2 stopped scrobbling</H1>
+    <B>Emmanuel Viaud</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20sonata%201.6.2%20stopped%20scrobbling&In-Reply-To=%3C20090816225431.3f6c08c1%40finnegan.my.domain%3E"
+       TITLE="[Sonata-users] sonata 1.6.2 stopped scrobbling">emmanuel.viaud at gmail.com
+       </A><BR>
+    <I>Sun Aug 16 22:54:31 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001135.html">[Sonata-users] sonata 1.6.2 stopped scrobbling
+</A></li>
+        <LI>Next message: <A HREF="001126.html">[Sonata-users] Tango-ish icons
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1137">[ date ]</a>
+              <a href="thread.html#1137">[ thread ]</a>
+              <a href="subject.html#1137">[ subject ]</a>
+              <a href="author.html#1137">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le Wed, 12 Aug 2009 04:24:08 +0300
+Tuukka Hastrup &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt; a &#233;crit
+
+&gt;<i> Fergus Symon wrote:
+</I>&gt;<i> &gt; I think it may be an issue with the time calculations. I say this 
+</I>&gt;<i> &gt; because a 16 minute song was just successfully scrobbled, however
+</I>&gt;<i> &gt; an 8 minute song (the one after) was not.
+</I>&gt;<i> 
+</I>&gt;<i> I researched this briefly on my system. While scrobbling worked, a
+</I>&gt;<i> debug print before line 100 revealed that it only works by a slight
+</I>&gt;<i> margin as the calculations are badly off indeed:
+</I>&gt;<i> 
+</I>&gt;<i> print &quot;%d:%02d vs. %d:%02d&quot; % (int(self.scrob_playing_duration)/60, 
+</I>&gt;<i> int(self.scrob_playing_duration)%60, int(prevsong_time)/60, 
+</I>&gt;<i> int(prevsong_time)%60)
+</I>&gt;<i> 
+</I>&gt;<i> In my tests, self.scrob_playing_duration was just over half of 
+</I>&gt;<i> prevsong_time, while the actual playing time was exactly
+</I>&gt;<i> prevsong_time. As an exception to this, some songs had
+</I>&gt;<i> self.scrob_playing_duration just a couple of seconds shorter than
+</I>&gt;<i> prevsong_time...
+</I>&gt;<i> 
+</I>&gt;<i> Turns out that for some songs (with variable bitrate), 
+</I>&gt;<i> handle_change_status is called once for each call to iterate, whereas 
+</I>&gt;<i> for other songs (constant bitrate), its called once for every other
+</I>&gt;<i> call to iterate.
+</I>
+Hi.
+
+As I suffer from the same problem, I took a look at it (using
+sonata latest SVN head and mpd 0.15.1) and here is what I've been able
+to find, I hope this can help solve the problem (sorry if some elements
+(the two first ones in particular) are obvious to people who know the
+internals of sonata as it is not my case):
+
+ - the iterate method (which queries mpd status and also calls the
+scrobbler.iterate and scrobbler.handle_change_status methods) is called
+once per second when no track is played and twice per second when
+something is played.
+
+ - the scrobbler.iterate method is called every time main.iterate is
+called whereas the scrobbler.handle_change_status method is only
+called, you guessed it, when mpd status has changed;
+
+ - the time returned by mpd is not precise at all (sometimes when
+called at two different instants distant from more than 1 second, mpd
+returns the same playing time). This means that the status does not
+change every second;
+
+ - from the two previous points, we can deduce that the ratio between
+the number of calls to scrobbler.iterate and
+scrobbler.handle_change_status is not fixed (in my tests, is usually
+varies between 1 and 3);
+
+ - the way the scrob_playing_duration is calculated seems pretty
+strange to me: &quot;self.scrob_playing_duration += time.time() -
+self.scrob_time_now&quot;. What is calculated here is the delay between this
+call to handle_change_status and the previous call to
+scrobbler.iterate. As the scrobbler.iterate method is called every 500
+ms, this value is always around 500 ms (a very small bit larger than
+500 ms in fact as the code is more complex in
+scrobbler.handle_change_status);
+
+ - from the two previous points, we can conclude that the scrobbling
+time is incremented at somewhat random times by an almost constant value
+of 500 ms. Hence the final value which is completely different from the
+real playing time. I did not get the same results as Tuuka concerning
+the difference between CBR and VBR files but this may be explained by
+the fact that the bitrate of the VBR file I used does not vary much. In
+the &quot;best&quot; (or is it the worst?) case where a track has its bitrate
+modified every 500 ms, the mpd status will be modified every 500 ms and
+thus both methods (scrobbler.iterate and
+scrobbler.handle_change_status) will be called every time -&gt; this will
+produce a correct scrob_playing_duration.
+
+As for the solution, I don't really know the correct way to fix this
+problem unfortunately... Maybe simply using the playing time returned
+by mpd? But I suppose that this doesn't work in some situation...
+
+Hope this helped a bit.
+
+Thanks and best regards,
+Emmanuel
+
+PS: for the curious, I've put the two log files (which are quite
+unreadable) here: <A HREF="http://emmanuel.viaud.free.fr/sonata/">http://emmanuel.viaud.free.fr/sonata/</A>
+I've basically added some debug lines in main.iterate
+(&quot;main.iterate_time&quot; and the content of self.status), scrobbler.iterate
+('Iterate, time is &quot;) and scrobbler.handle_change_status (&quot;mpd
+time now:&quot;, Tuuka's line and &quot;scrob_time_now&quot; and friends).
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001135.html">[Sonata-users] sonata 1.6.2 stopped scrobbling
+</A></li>
+	<LI>Next message: <A HREF="001126.html">[Sonata-users] Tango-ish icons
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1137">[ date ]</a>
+              <a href="thread.html#1137">[ thread ]</a>
+              <a href="subject.html#1137">[ subject ]</a>
+              <a href="author.html#1137">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

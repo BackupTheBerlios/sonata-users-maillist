@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%0A%09Sonata%09breadcrumbs&In-Reply-To=%3C49D67AA5.6030806%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000981.html">
+   <LINK REL="Next"  HREF="000992.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%0A%09Sonata%09breadcrumbs&In-Reply-To=%3C49D67AA5.6030806%40iki.fi%3E"
+       TITLE="[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Fri Apr  3 23:07:49 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000981.html">[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+</A></li>
+        <LI>Next message: <A HREF="000992.html">[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#991">[ date ]</a>
+              <a href="thread.html#991">[ thread ]</a>
+              <a href="subject.html#991">[ subject ]</a>
+              <a href="author.html#991">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>michael.venables wrote:
+&gt;<i> The problem, as I see it, with the gtk breadcrumb system is that the crumbs,
+</I>&gt;<i> themselves, do not scale. If there's not enough room to display an entire
+</I>&gt;<i> crumb, you get no crumb at all. If you have a really long current crumb, it
+</I>&gt;<i> can knock all the preceding crumbs out of view, and if the current crumb is
+</I>&gt;<i> too long to be displayed in its entirety, you can wind up with no crumbs at
+</I>&gt;<i> all, since the contents of the crumbs don't scale down.
+</I>
+&gt;<i> (This
+</I>&gt;<i> whole issue of horizontal space and line length issue really only pertains to
+</I>&gt;<i> using the File System view, anyway.)
+</I>
+I don't know if it makes sense to design for deep folder paths and 
+narrow Sonata windows, as I'd guess both are rare.
+
+That being said...
+
+&gt;<i> The great benefit of breadcrumbs is that it saves mouse-clicks. If it causes
+</I>&gt;<i> you to use more clicks, then it's lost its efficiency. Unlike the gtk
+</I>&gt;<i> implementation that knocks previous crumbs out of view to display long crumbs,
+</I>&gt;<i> you should always be able to move up to the parent crumb with only one click.
+</I>
+Although I think the biggest benefit is to orientate the user, I agree 
+that we want to force the root crumb and the parent crumb to always show 
+somehow.
+
+&gt;<i> If there's not
+</I>&gt;<i> enough space to display the name of the parent crumb, then it should display
+</I>&gt;<i> as an icon. (Probably a file folder would be appropriate, since an up arrow,
+</I>&gt;<i> while perfectly sensible for moving up a directory tree structure, doesn't
+</I>&gt;<i> make as much sense if your crumb trail moves horizontally.)
+</I>
+I agree. And probably put the full name in a tooltip.
+
+&gt;<i> If the current crumb is too long to display fully, the title should truncate
+</I>&gt;<i> with ... at the edge of the screen, the way long entries do in the Library
+</I>&gt;<i> album view.
+</I>
+Good point.
+
+&gt;<i> When there are enough crumbs to require scrolling the trail, a LEFT arrow
+</I>&gt;<i> should be placed after the FILESYSTEM crumb. (There's no reason to eat up
+</I>&gt;<i> space by adding a RIGHT arrow unless it's needed to move that way. Sonata has
+</I>&gt;<i> never supported moving forward, only back. It might be nice to be able to move
+</I>&gt;<i> forward.)
+</I>&gt;<i> It would be super-cool if the trail could be rolled with the mousewheel.
+</I>&gt;<i> Nautilus allows this; I don't recall if Thunar does or not.
+</I>
+I don't know if any scrolling is really useful here. You can always go 
+up one step at a time or directly to the root just as before.
+
+
+Now, how to best implement a dynamic layout like this in pygtk? We need 
+a left-aligned (mirror if the language is right-to-left) box layout 
+which can do ellipsis in the middle to fit its allocated width, plus 
+some constraints:
+* the minimum width is condensed root crumb + (condensed parent crumb if 
+any) + (ellipsis if any) + (condensed current crumb if any)
+* the natural width is all crumbs in full
+
+Start with the natural layout and continue until we fit in the allocated 
+width:
+1. Condense the root crumb.
+2. Replace an increasing amount of the crumbs after the root with the 
+ellipsis until right before the parent crumb.
+3. Condense the parent crumb.
+4. Truncate the current crumb to fit.
+
+At least it doesn't sound impossible...
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000981.html">[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+</A></li>
+	<LI>Next message: <A HREF="000992.html">[Sonata-users] feedback wanted: some thoughts about Sonata	breadcrumbs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#991">[ date ]</a>
+              <a href="thread.html#991">[ thread ]</a>
+              <a href="subject.html#991">[ subject ]</a>
+              <a href="author.html#991">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

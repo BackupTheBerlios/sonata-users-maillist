@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Feature request: Wikipedia look-up
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-May/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Feature%20request%3A%20Wikipedia%20look-up&In-Reply-To=%3C802aab940705060614i7f52ec4bl538ef253db3a67c2%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000196.html">
+   <LINK REL="Next"  HREF="000206.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Feature request: Wikipedia look-up</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Feature%20request%3A%20Wikipedia%20look-up&In-Reply-To=%3C802aab940705060614i7f52ec4bl538ef253db3a67c2%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Feature request: Wikipedia look-up">niechift.vex at gmail.com
+       </A><BR>
+    <I>Sun May  6 15:14:35 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000196.html">[Sonata-users] Feature request: Wikipedia look-up
+</A></li>
+        <LI>Next message: <A HREF="000206.html">[Sonata-users] Feature request: Wikipedia look-up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#205">[ date ]</a>
+              <a href="thread.html#205">[ thread ]</a>
+              <a href="subject.html#205">[ subject ]</a>
+              <a href="author.html#205">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 5/5/07, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+&gt;<i> On 5/5/07, [vEX] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">niechift.vex at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; I just get the following when trying to click a link:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Error showing url: There was an error launching the default action
+</I>&gt;<i> &gt; command associated with this location.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I couldn't find that message in the source so I guess it's some module
+</I>&gt;<i> &gt; being used that prints it, so how do I get Sonata to use my firefox to
+</I>&gt;<i> &gt; load the URL? Running Arch Linux (64-bit);
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; $ which firefox
+</I>&gt;<i> &gt; /opt/mozilla/bin/firefox
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Could it be that Arch uses /opt/mozilla instead of /usr/bin?
+</I>&gt;<i>
+</I>&gt;<i> No, as long as firefox is in your $PATH, it would be fine. Since
+</I>&gt;<i> you're familiar with python, do you mind putting some print statements
+</I>&gt;<i> in the browser_load() function to see what it's trying to use? It's a
+</I>&gt;<i> simple function that tries a variety of different binaries
+</I>&gt;<i> sequentially (gnome-open, exo-open, firefox, etc) and I don't know
+</I>&gt;<i> which it's trying for you.
+</I>&gt;<i>
+</I>&gt;<i> I'm using Arch and firefox and it all works here. I use xfce, so for
+</I>&gt;<i> me it's using exo-open.
+</I>
+Turns out it's using gnome-open, and I have no idea why gnome-open is
+even running on my system as I'm using Openbux with the xfce4-panel.
+It could be related to either gdm or the fact that I'm using the
+xfce4-panel plugin to use gnome applets and that way using the gnome
+clock (and calendar). Those two are the only gnome apps I can think of
+that I'm running. Trying to kill gnome-open only left me with a zombie
+process, kill -9 doesn't seem to bite on it. :-/
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000196.html">[Sonata-users] Feature request: Wikipedia look-up
+</A></li>
+	<LI>Next message: <A HREF="000206.html">[Sonata-users] Feature request: Wikipedia look-up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#205">[ date ]</a>
+              <a href="thread.html#205">[ thread ]</a>
+              <a href="subject.html#205">[ subject ]</a>
+              <a href="author.html#205">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

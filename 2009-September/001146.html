@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] LyricWiki ugly fix.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20LyricWiki%20ugly%20fix.&In-Reply-To=%3C20090917170907.908e55a2.mykey%40mykey.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001145.html">
+   <LINK REL="Next"  HREF="001148.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] LyricWiki ugly fix.</H1>
+    <B>mike</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20LyricWiki%20ugly%20fix.&In-Reply-To=%3C20090917170907.908e55a2.mykey%40mykey.de%3E"
+       TITLE="[Sonata-users] LyricWiki ugly fix.">mykey at mykey.de
+       </A><BR>
+    <I>Thu Sep 17 17:09:07 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001145.html">[Sonata-users] LyricWiki ugly fix.
+</A></li>
+        <LI>Next message: <A HREF="001148.html">[Sonata-users] LyricWiki ugly fix.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1146">[ date ]</a>
+              <a href="thread.html#1146">[ thread ]</a>
+              <a href="subject.html#1146">[ subject ]</a>
+              <a href="author.html#1146">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>who would know which file to patch ? shashi does not mention ... there is a
+'real' patch which uses leolyrics instead of lyricwiki for the svn version
+1274 I found in the bug tracker yesterday - find it attached - it does not
+work 'real' nice, but it works - though - this does not fix the album art
+fetching, which also does not work since a while now ... I really liked
+sonata, but do not feel like having to get into programming only to get
+things working, which worked before and so checked out a couple of different
+mpd clients which have these things working alright - no offence but - I just
+want to be able to listen to my music in a way that suits me, which sonata
+seems not to be able to provide at the moment.
+
+best 
+mike
+
+
+On Thu, 17 Sep 2009 16:32:29 +0300
+Lazaros Koromilas &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">koromilaz at gmail.com</A>&gt; wrote:
+
+&gt;<i> did anyone (dirty-)patched sonata after the domain name
+</I>&gt;<i> (and possibly html structure) changes of lyricwiki?
+</I>&gt;<i> 
+</I>&gt;<i> thanx,
+</I>&gt;<i> lazaros.
+</I>&gt;<i> 
+</I>&gt;<i> On Tue, Aug 4, 2009 at 1:24 PM, Shashi &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">connect2shashi at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Hi all,
+</I>&gt;<i> &gt; This is my first post to the list,
+</I>&gt;<i> &gt; I just rashly did this to fix the LyricWiki API thingy:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; lyrics = self.lyricServer.getSong(artist=self.lyricwiki_format(search_artist),
+</I>&gt;<i> &gt; song=self.lyricwiki_format(search_title))['return'][&quot;lyrics&quot;]
+</I>&gt;<i> &gt; lyrics = urllib.urlopen(&quot;<A HREF="http://lyricwiki.org/">http://lyricwiki.org/</A>&quot;+self.lyricwiki_format(search_artist)+&quot;:&quot;+self.lyricwiki_format(search_title)).read().split(&quot;&lt;div
+</I>&gt;<i> &gt; class='lyricbox' &gt;&quot;)[1].split(&quot;&lt;/div&gt;&quot;)[0].replace('&lt;br /&gt;',&quot;\n&quot;)
+</I>&gt;<i> &gt; if lyrics.lower() != &quot;not found&quot;:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; (Add the second line in the right place and it should start working again)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This is a very ugly hack,
+</I>&gt;<i> &gt; I recommend you to wait until this is fixed by either LyricWiki / sonata
+</I>&gt;<i> &gt; there is no risk in doing this though :)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Best,
+</I>&gt;<i> &gt; Shashi
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Sonata-users mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lyricwiki.patch
+Type: application/octet-stream
+Size: 12035 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20090917/3892bb90/attachment.obj">https://lists.berlios.de/pipermail/sonata-users/attachments/20090917/3892bb90/attachment.obj</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001145.html">[Sonata-users] LyricWiki ugly fix.
+</A></li>
+	<LI>Next message: <A HREF="001148.html">[Sonata-users] LyricWiki ugly fix.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1146">[ date ]</a>
+              <a href="thread.html#1146">[ thread ]</a>
+              <a href="subject.html#1146">[ subject ]</a>
+              <a href="author.html#1146">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

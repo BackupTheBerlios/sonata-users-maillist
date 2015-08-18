@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Editing tags for MP3s while playing song seems	to freeze Sonata
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-February/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Editing%20tags%20for%20MP3s%20while%20playing%20song%20seems%0A%09to%20freeze%20Sonata&In-Reply-To=%3C35a6f8e30701311837x667aaa6ob540147fa1396e08%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000093.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Editing tags for MP3s while playing song seems	to freeze Sonata</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Editing%20tags%20for%20MP3s%20while%20playing%20song%20seems%0A%09to%20freeze%20Sonata&In-Reply-To=%3C35a6f8e30701311837x667aaa6ob540147fa1396e08%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Editing tags for MP3s while playing song seems	to freeze Sonata">stonecrest at gmail.com
+       </A><BR>
+    <I>Thu Feb  1 03:37:26 CET 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000093.html">[Sonata-users] Editing tags for MP3s while playing song seems	to freeze Sonata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 1/23/07, [vEX] &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">niechift.vex at gmail.com</A>&gt; wrote:
+&gt;<i> I've been trying the new tag feature and noticed that if I tag a MP3
+</I>&gt;<i> while it's playing Sonata will freeze after hitting save. It doesn't
+</I>&gt;<i> happen with my OGG files and seems mostly okay with FLAC, but whenever
+</I>&gt;<i> I edit a MP3 that's playing it'll freeze.
+</I>
+You're right, this happens with all my ogg files when I modify the
+album name. I spent hours trying to track this down and finally found
+where it occurs, but I'm absolutely at a loss as to why it happens and
+how to prevent it. It just doesn't make any sense at all :(
+
+Just to verify, can you confirm that this prevents the freeze? Comment
+out lines 3352-3355, they say:
+				if track.has_key('artist'):
+					artist.append(track.artist)
+				if track.has_key('date'):
+					year.append(track.date)
+
+Scott
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000093.html">[Sonata-users] Editing tags for MP3s while playing song seems	to freeze Sonata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Notifications (and the plugin system in general)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-June/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C4A2AE3A7.40109%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001103.html">
+   <LINK REL="Next"  HREF="001105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Notifications (and the plugin system in general)</H1>
+    <B>Tuukka Hastrup</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Notifications%20%28and%20the%20plugin%20system%20in%20general%29&In-Reply-To=%3C4A2AE3A7.40109%40iki.fi%3E"
+       TITLE="[Sonata-users] Notifications (and the plugin system in general)">Tuukka.Hastrup at iki.fi
+       </A><BR>
+    <I>Sat Jun  6 23:46:15 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001103.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+        <LI>Next message: <A HREF="001105.html">[Sonata-users] [PATCH] playlists: make popup-menu more user-friendly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1104">[ date ]</a>
+              <a href="thread.html#1104">[ thread ]</a>
+              <a href="subject.html#1104">[ subject ]</a>
+              <a href="author.html#1104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Stephen Boyd wrote:
+&gt;<i> On Fri, Jun 5, 2009 at 6:42 AM, Tuukka Hastrup&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Tuukka.Hastrup at iki.fi</A>&gt; wrote:
+</I>&gt;<i> I don't think documentation is necessary, just you pointing out where
+</I>&gt;<i> we thought wrong is good enough for me. 
+</I>
+I hope people could understand the code and via documentation also the 
+rationale behind it. The goal would be to let people work on the code 
+instead of requiring them to wonder why on earth it is as it is.
+
+&gt;<i> I thought the original system was distutils
+</I>&gt;<i> based, right? At least with that approach, the dependency management
+</I>&gt;<i> is handled by distutils, and we don't have to reinvent the wheel for
+</I>&gt;<i> capabilities. The downside is we depend on distutils and the system
+</I>&gt;<i> becomes heavy-weight.
+</I>
+distutils works for public modules and commands, but it doesn't have 
+anything for plug-ins. The original system was based on setuptools, 
+which includes functionality for defining capabilities in setup.py 
+(although they call them entry points) pretty much as we do in metadata:
+<A HREF="http://peak.telecommunity.com/DevCenter/setuptools#dynamic-discovery-of-services-and-plugins">http://peak.telecommunity.com/DevCenter/setuptools#dynamic-discovery-of-services-and-plugins</A>
+
+Depending on setuptools would be a risk, since not everything it does is 
+accepted widely in the Python community, and it's future is thus 
+unclear. Also, I'm not sure it can meet these requirements feasibly:
+  * We want plug-in installation to be simple.
+  * We want Sonata to work without installation.
+  * We want Sonata to be able to download and install plug-ins.
+
+&gt;&gt;<i> * If MPD changes or Sonata changes, the plug-in interface should remain
+</I>&gt;&gt;<i> backward-compatible (within reason).
+</I>&gt;<i> 
+</I>&gt;<i> Are we too concerned about this? I thought we will be carrying most of
+</I>&gt;<i> the plugins in our code base so changing the API shouldn't be too much
+</I>&gt;<i> of a concern. I admit it's not pleasant, but we shouldn't contort the
+</I>&gt;<i> code for backwards compatibility.
+</I>
+Right - so maybe the more important requirement here is that we don't 
+want the ugly details of MPD and Sonata to taint the plug-in code :-)
+
+&gt;&gt;<i> Currently, a plug-in is a module with the required metadata magic. The
+</I>&gt;&gt;<i> capabilities of a plug-in are currently described in the metadata to
+</I>&gt;&gt;<i> meet a requirement:
+</I>&gt;&gt;<i>  * We may want to know the capabilities of a plug-in to decide when to
+</I>&gt;&gt;<i> load it.
+</I>&gt;<i> 
+</I>&gt;<i> I think if we go with the class style, we don't need to instantiate a
+</I>&gt;<i> class to inspect the class members.
+</I>
+To inspect the class members, we'd need to import the code -- &quot;load the 
+plug-in&quot;. A more concrete scenario I have in mind is that we may want 
+plug-ins to add command line options but at that point, they can't 
+import gtk.
+
+&gt;&gt;<i> The decorator *syntax* might help here.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks, I meant to say syntax (or semantics). It still feels like a
+</I>&gt;<i> pattern to me, but Wikipedia disagrees :-(
+</I>
+(In design patterns, the naming and details of the definition are 
+important. This is not *the* Decorator Pattern :-) Further, you 
+typically wouldn't call something provided by the language a design 
+pattern.)
+
+Just to expand on what I had in mind here, we could use the decorator 
+syntax to mark the capability implementations (instead of the 
+capabilities metadata):
+
+@pluginsystem.capability('tab')
+def construct_tab():
+     ...
+
+The implementation of pluginsystem.capability would need to refer to the 
+calling module somehow though (to add the capability to the right 
+plug-in). Further, I don't know how exactly this should work for objects.
+
+&gt;<i> I think we just need some more competing implementations and we'll get
+</I>&gt;<i> this all figured out ;-)
+</I>
+I'm not happy at the pace of my work, so new blood is definitely welcome.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001103.html">[Sonata-users] Notifications (and the plugin system in general)
+</A></li>
+	<LI>Next message: <A HREF="001105.html">[Sonata-users] [PATCH] playlists: make popup-menu more user-friendly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1104">[ date ]</a>
+              <a href="thread.html#1104">[ thread ]</a>
+              <a href="subject.html#1104">[ subject ]</a>
+              <a href="author.html#1104">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

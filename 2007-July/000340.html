@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Small bug with album names
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-July/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Small%20bug%20with%20album%20names&In-Reply-To=%3C802aab940707010728y38ab0348mb7923a09c7fd48e0%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000341.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Small bug with album names</H1>
+    <B>vEX</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Small%20bug%20with%20album%20names&In-Reply-To=%3C802aab940707010728y38ab0348mb7923a09c7fd48e0%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Small bug with album names">niechift.vex at gmail.com
+       </A><BR>
+    <I>Sun Jul  1 16:28:51 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000341.html">[Sonata-users] Small bug with album names
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#340">[ date ]</a>
+              <a href="thread.html#340">[ thread ]</a>
+              <a href="subject.html#340">[ subject ]</a>
+              <a href="author.html#340">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm not sure when I first noticed the bug, but it was some time ago.
+For some reason the last letter in album names with either &#197;, &#196; or &#214;
+in them would be missing the last character. I figured since you seem
+to be getting close to 1.2 release (not much left on TODO) it was time
+to start looking at why.
+
+After some poking around I found where the problem was, at the end of
+the parse_formatting_for_substring function; &quot;return
+text[1:len(text.decode('utf-8'))-1]&quot;.
+
+Now I'm not sure what's happening, but somehow the string length
+returned is one less after the conversion from utf8. I did some
+testing, like so:
+
+		if text.startswith(&quot;{&quot;) and text.endswith(&quot;}&quot;):
+			print &quot;t1: |&quot; + text + &quot;| t2: |&quot; +
+text[1:len(text.decode('utf-8'))-1] + &quot;| t3: |&quot; + text[1:-1] + &quot;|&quot;
+			print &quot;text: |&quot; + text + &quot;| text(decode_utf8): |&quot; +
+text.decode('utf-8') + &quot;|&quot;
+			print &quot;len(text): &quot; + str(len(text)) + &quot;, len(text(decode_utf8)): &quot;
++ str(len(text.decode('utf-8')))
+			#return text[1:len(text.decode('utf-8'))-1]
+			return text[1:-1]
+
+Playing a song with the album name containing &#228; gives me this output:
+
+t1: |{ from H&#195;&#164;r Och Nu}| t2: | from H&#195;&#164;r Och N| t3: | from H&#195;&#164;r Och Nu|
+text: |{ from H&#228;r Och Nu}| text(decode_utf8): |{ from H&#228;r Och Nu}|
+len(text): 19, len(text(decode_utf8)): 18
+
+A file with just A-z:
+
+t1: |{ from Alternative 4}| t2: | from Alternative 4| t3: | from Alternative 4|
+text: |{ from Alternative 4}| text(decode_utf8): |{ from Alternative 4}|
+len(text): 21, len(text(decode_utf8)): 21
+
+Using &quot;return text[1:-1]&quot; seems to work fine for me, though it could
+break stuff for others so it should be tested some.
+
+Also just noticed that somehow Sonata doesn't let me edit the tags for
+the first song, it just told me &quot;No music files with editable files
+found.&quot; and the file is an old MP3. I just saw why too, in the file
+info window the path starts with &quot;/&lt;album&gt;/&quot; and not the music dir
+first like all the other ones; ie &quot;&lt;music path&gt;/&lt;album&gt;/&quot;. Going to
+check that one out too now.
+
+Also also, this one (line 2873 and forward) can be &quot;simplified&quot; a bit;
+
+			if self.expanded:
+				self.cursonglabel1.set_markup('&lt;big&gt;&lt;b&gt;' + _('Stopped') + '&lt;/b&gt;&lt;/big&gt;')
+				self.cursonglabel2.set_markup('&lt;small&gt;' + _('Click to collapse') +
+'&lt;/small&gt;')
+			else:
+				self.cursonglabel1.set_markup('&lt;big&gt;&lt;b&gt;' + _('Stopped') + '&lt;/b&gt;&lt;/big&gt;')
+				self.cursonglabel2.set_markup('&lt;small&gt;' + _('Click to expand') + '&lt;/small&gt;')
+
+into this:
+
+			self.cursonglabel1.set_markup('&lt;big&gt;&lt;b&gt;' + _('Stopped') + '&lt;/b&gt;&lt;/big&gt;')
+			if self.expanded:
+				self.cursonglabel2.set_markup('&lt;small&gt;' + _('Click to collapse') +
+'&lt;/small&gt;')
+			else:
+				self.cursonglabel2.set_markup('&lt;small&gt;' + _('Click to expand') + '&lt;/small&gt;')
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000341.html">[Sonata-users] Small bug with album names
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#340">[ date ]</a>
+              <a href="thread.html#340">[ thread ]</a>
+              <a href="subject.html#340">[ subject ]</a>
+              <a href="author.html#340">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

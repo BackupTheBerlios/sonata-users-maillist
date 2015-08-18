@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Announcing Sonata 1.7a1
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2013-February/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Announcing%20Sonata%201.7a1&In-Reply-To=%3CCABxs9Vm081k_LXXinPDCEcyrGh4swwaqOTFAeoJKC%3D_-0kQf%2BA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001276.html">
+   <LINK REL="Next"  HREF="001278.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Announcing Sonata 1.7a1</H1>
+    <B>Liviu Andronic</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Announcing%20Sonata%201.7a1&In-Reply-To=%3CCABxs9Vm081k_LXXinPDCEcyrGh4swwaqOTFAeoJKC%3D_-0kQf%2BA%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Announcing Sonata 1.7a1">landronimirc at gmail.com
+       </A><BR>
+    <I>Fri Feb  8 23:09:52 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001276.html">[Sonata-users] Announcing Sonata 1.7a1
+</A></li>
+        <LI>Next message: <A HREF="001278.html">[Sonata-users] Announcing Sonata 1.7a1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1277">[ date ]</a>
+              <a href="thread.html#1277">[ thread ]</a>
+              <a href="subject.html#1277">[ subject ]</a>
+              <a href="author.html#1277">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Feb 8, 2013 at 10:08 PM, Jonathan Ballet &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">jon at multani.info</A>&gt; wrote:
+&gt;<i> Hi folks,
+</I>&gt;<i>
+</I>&gt;<i> Sonata's not dead yet and a few courageous people are still hacking a
+</I>&gt;<i> bit on it.
+</I>&gt;<i>
+</I>Yay!
+
+
+&gt;<i> It's my pleasure to announce a new pre-release of Sonata 1.7a1: as the
+</I>&gt;<i> version number indicates, this is still an alpha, for those brave enough
+</I>&gt;<i> to give it a try!
+</I>&gt;<i>
+</I>&gt;<i> Due to the numerous cleaning and refactoring to improve the readibility
+</I>&gt;<i> and simplify Sonata, this is mostly a developer release, but feel free to
+</I>&gt;<i> try it out nevertheless!
+</I>&gt;<i>
+</I>&gt;<i> Grab it while it's fresh at <A HREF="https://github.com/multani/sonata/">https://github.com/multani/sonata/</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> So, what do we have here?
+</I>&gt;<i>
+</I>&gt;<i> From Python 2/GTK 2 to Python 3/GTK 3
+</I>&gt;<i> -------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> The major change is definitively the port to Python 3 and Gtk 3: this is
+</I>&gt;<i> a great news for developers since this is a quite hard work to drop soon
+</I>&gt;<i> to-be-dead technologies but is has to be done one day, and they can now
+</I>&gt;<i> profit from a cleaner base. Python 2 is going to be phased out soon
+</I>&gt;<i> (some distributions already plan to ship only Python 3), Gtk 2 is is not
+</I>&gt;<i> going to receive anymore improvement in the future, as well as the Python
+</I>&gt;<i> binding to Gtk 2.
+</I>&gt;<i> As a consequence, Sonata now depends on PyGObject instead of PyGTK.
+</I>&gt;<i> PyGObject is still in constant development, and Sonata already discover
+</I>&gt;<i> some bugs in the binding. As a consequence, it is recommended, although
+</I>&gt;<i> not mandatory, to use the latest version of PyGObject (3.7.4 and above
+</I>&gt;<i> are known to work quite well). Earlier versions, such as 3.4.x shipped
+</I>&gt;<i> in most distributions *should* work in most cases.
+</I>&gt;<i>
+</I>&gt;<i> For end users, it doesn't change lot of things though: dependencies have
+</I>&gt;<i> changed and they are probably still a few bugs hidden here and there due
+</I>&gt;<i> to the port... If you don't feel like a tester, I would recommend to
+</I>&gt;<i> stay with Sonata 1.6.x, but bug reports are more than welcome!
+</I>&gt;<i>
+</I>&gt;<i> Those changes themselves are enough to justify a new release, but there
+</I>&gt;<i> are a few things more!
+</I>&gt;<i>
+</I>&gt;<i> Other goodies
+</I>&gt;<i> -------------
+</I>&gt;<i>
+</I>&gt;<i> Beside the Py3/Gtk3 port, this have been improved:
+</I>&gt;<i>
+</I>&gt;<i>   * lyrics and covers should work again
+</I>&gt;<i>   * better support for newer MPD releases
+</I>&gt;<i>   * better support for fullscreen mode
+</I>&gt;<i>   * slightly improved UI
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> From Sonata 1.6.x to Sonata 1.7a1
+</I>&gt;<i> ---------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Using the new version requires updating the list of depencendies:
+</I>&gt;<i>
+</I>&gt;<i>   * you don't the following anymore:
+</I>&gt;<i>     - Python 2
+</I>&gt;<i>     - PyGTK
+</I>&gt;<i>     - python-eggtrayicon
+</I>&gt;<i>
+</I>&gt;<i>   * .. but you will need the following:
+</I>&gt;<i>     - Python 3
+</I>&gt;<i>     - PyGObject
+</I>&gt;<i>     - python-mpd2
+</I>&gt;<i>
+</I>&gt;<i> Things currently planned for Sonata 1.7
+</I>&gt;<i> ---------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> * Restore the tagging plugin (there's no release yet with Python 3
+</I>&gt;<i>   support, although upstream already integrated our fixes).
+</I>&gt;<i> * Replace the current notification system to use the desktop
+</I>&gt;<i>   notifications instead. Hopefully, we'll still be able to propose the
+</I>&gt;<i>   old system as an alternative.
+</I>&gt;<i> * startup performance improvements
+</I>&gt;<i> * a &quot;favorites songs&quot; system
+</I>&gt;<i> * probably other things, want to get involved? :)
+</I>&gt;<i>
+</I>&gt;<i> Where to I get this already?
+</I>&gt;<i> ----------------------------
+</I>&gt;<i>
+</I>&gt;<i> The code can be find in the Git repository at
+</I>&gt;<i> <A HREF="https://github.com/multani/sonata">https://github.com/multani/sonata</A> or you can grab a tarball at the
+</I>&gt;<i> following address:
+</I>&gt;<i> <A HREF="https://github.com/multani/sonata/archive/v1.7a1.tar.gz">https://github.com/multani/sonata/archive/v1.7a1.tar.gz</A>
+</I>&gt;<i>
+</I>&gt;<i> Bugs should be preferably reported on Github at
+</I>&gt;<i> <A HREF="https://github.com/multani/sonata/issues">https://github.com/multani/sonata/issues</A> or here on the mailing-list.
+</I>&gt;<i>
+</I>&gt;<i> If you have patches which add new features, improve Sonata or fix bugs,
+</I>&gt;<i> you can submit them as pull requests on Github at
+</I>&gt;<i> <A HREF="https://github.com/multani/sonata/pulls">https://github.com/multani/sonata/pulls</A> or here on the mailing list.
+</I>&gt;<i>
+</I>&gt;<i> Final word
+</I>&gt;<i> ----------
+</I>&gt;<i>
+</I>&gt;<i> Hopefully, this is going to shake Sonata a bit and revive this great
+</I>&gt;<i> player.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for those who waited here, thanks for those who are going to try
+</I>&gt;<i> this new release, and special thanks to all the people who helped to
+</I>&gt;<i> make this new release out!
+</I>&gt;<i>
+</I>&gt;<i>  Jonathan
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>
+
+
+-- 
+Do you know how to read?
+<A HREF="http://www.alienetworks.com/srtest.cfm">http://www.alienetworks.com/srtest.cfm</A>
+<A HREF="http://goodies.xfce.org/projects/applications/xfce4-dict#speed-reader">http://goodies.xfce.org/projects/applications/xfce4-dict#speed-reader</A>
+Do you know how to write?
+<A HREF="http://garbl.home.comcast.net/~garbl/stylemanual/e.htm#e-mail">http://garbl.home.comcast.net/~garbl/stylemanual/e.htm#e-mail</A>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001276.html">[Sonata-users] Announcing Sonata 1.7a1
+</A></li>
+	<LI>Next message: <A HREF="001278.html">[Sonata-users] Announcing Sonata 1.7a1
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1277">[ date ]</a>
+              <a href="thread.html#1277">[ thread ]</a>
+              <a href="subject.html#1277">[ subject ]</a>
+              <a href="author.html#1277">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

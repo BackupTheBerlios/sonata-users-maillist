@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Sonata crashed suddenly
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-March/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20crashed%20suddenly&In-Reply-To=%3C47DA9D1B.1090603%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000575.html">
+   <LINK REL="Next"  HREF="000578.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Sonata crashed suddenly</H1>
+    <B>Fatih Arslan</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Sonata%20crashed%20suddenly&In-Reply-To=%3C47DA9D1B.1090603%40gmail.com%3E"
+       TITLE="[Sonata-users] Sonata crashed suddenly">sabutay at gmail.com
+       </A><BR>
+    <I>Fri Mar 14 16:43:23 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000575.html">[Sonata-users] Sonata crashed suddenly
+</A></li>
+        <LI>Next message: <A HREF="000578.html">[Sonata-users] Sonata crashed suddenly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#576">[ date ]</a>
+              <a href="thread.html#576">[ thread ]</a>
+              <a href="subject.html#576">[ subject ]</a>
+              <a href="author.html#576">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Scott Horowitz yazm&#305;&#351;:
+&gt;<i> On Thu, Mar 13, 2008 at 8:03 AM, Scott Horowitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A> 
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt;&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>     On Thu, Mar 13, 2008 at 11:43 PM, Fatih Arslan &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sabutay at gmail.com</A>
+</I>&gt;<i>     &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">sabutay at gmail.com</A>&gt;&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>         {'album': 'Romantizma', 'title': 'Ilgisizlik Hastaligi
+</I>&gt;<i>         (Skit)', 'track':
+</I>&gt;<i>         '5', 'artist': 'Sagopa Kajmer', 'pos': '0', 'genre': 'Rap',
+</I>&gt;<i>         'file':
+</I>&gt;<i>         'turkce/Sagopa Kajmer/Romantizma/Sagopa Kajmer - Ilgisizlik
+</I>&gt;<i>         Hastaligi
+</I>&gt;<i>         (Skit).mp3', 'time': '53', 'date': '2005', 'Id': '0'}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     Can you email me this file off the list? My first guess would be
+</I>&gt;<i>     that it's a bug in mpd..
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Thanks for the file, but it's apparently not specific to this file. I 
+</I>&gt;<i> found out that the mpd python interface sets every key to lowercase 
+</I>&gt;<i> using python's .lower(), so it's very odd that you are getting a 
+</I>&gt;<i> result with an uppercase &quot;Id&quot;. Since I'm running out of possible 
+</I>&gt;<i> causes for the bug, can you say what locale you're using with sonata? 
+</I>&gt;<i> And if it's not en_US.utf8, can you try that? (you can simply run 
+</I>&gt;<i> &quot;LC_ALL=en_US.utf8 sonata&quot;).
+</I>&gt;<i>
+</I>&gt;<i> Scott
+</I>&gt;<i> ------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Sonata-users mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">Sonata-users at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">https://lists.berlios.de/mailman/listinfo/sonata-users</A>
+</I>&gt;<i>   
+</I>I'm using Turkish, that means tr_TR.utf8 the locale output gives me:
+
+****************************
+LANG=tr_TR.UTF-8
+LC_CTYPE=tr_TR.UTF-8
+LC_NUMERIC=tr_TR.UTF-8
+LC_TIME=tr_TR.UTF-8
+LC_COLLATE=tr_TR.UTF-8
+LC_MONETARY=tr_TR.UTF-8
+LC_MESSAGES=tr_TR.UTF-8
+LC_PAPER=tr_TR.UTF-8
+LC_NAME=tr_TR.UTF-8
+LC_ADDRESS=tr_TR.UTF-8
+LC_TELEPHONE=tr_TR.UTF-8
+LC_MEASUREMENT=tr_TR.UTF-8
+LC_IDENTIFICATION=tr_TR.UTF-8
+LC_ALL=
+****************************
+
+If i try to open sonata with &quot;LC_ALL=en_US.utf8 sonata&quot;
+
+****************************
+(sonata:4161): Gtk-WARNING **: Locale not supported by C library.
+        Using the fallback 'C' locale.
+/usr/lib/python2.4/site-packages/sonata/main.py:1283: GtkWarning: locale 
+not supported by C library
+  gnome.init(&quot;sonata&quot;, __version__)
+Locale cannot be found; please set your system's locale. Aborting...
+****************************
+
+It seems that i don't have the english locale installed on my machine.
+In Turkish the I and &#304; are differents. There are 2 different cases, and 
+it is like that:
+
+&#304; and i
+
+I and I
+
+Now our language has 4 i's. The smaller i and the bigger I belongs to 
+english, but small &#305; anda big &#304; are especially for the turkish language. 
+I mean may be that causes this error ?
+
+-- 
+Fatih Arslan
+blog.arsln.org
+murekkep.org
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000575.html">[Sonata-users] Sonata crashed suddenly
+</A></li>
+	<LI>Next message: <A HREF="000578.html">[Sonata-users] Sonata crashed suddenly
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#576">[ date ]</a>
+              <a href="thread.html#576">[ thread ]</a>
+              <a href="subject.html#576">[ subject ]</a>
+              <a href="author.html#576">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%09for%20audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910110105p329bc195w67b79fa9a1919661%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001168.html">
+   <LINK REL="Next"  HREF="001170.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.</H1>
+    <B>John McNeil</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20%5BPATCH%5D%20Fix%20bad%20calculation%20of%20played%20song%20time%0A%09for%20audioscrobbling.&In-Reply-To=%3C1b1e5b0a0910110105p329bc195w67b79fa9a1919661%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] [PATCH] Fix bad calculation of played song time	for audioscrobbling.">usodag at gmail.com
+       </A><BR>
+    <I>Sun Oct 11 10:05:55 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001168.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+        <LI>Next message: <A HREF="001170.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1169">[ date ]</a>
+              <a href="thread.html#1169">[ thread ]</a>
+              <a href="subject.html#1169">[ subject ]</a>
+              <a href="author.html#1169">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Oct 11, 2009 at 2:10 AM, Stephen Boyd &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">bebarino at gmail.com</A>&gt; wrote:
+&gt;<i> I had to read this a few times but now I understand.
+</I>&gt;<i>
+</I>&gt;<i> Basically, scrobbler.iterate() is called every 0.5 seconds and
+</I>&gt;<i> scrobbler.handle_change_status() is called every 1 or 2 seconds. The
+</I>&gt;<i> math in scrobbler.handle_change_status() is entirely wrong, and is
+</I>&gt;<i> really calculating the time between scrobbler.iterate() and
+</I>&gt;<i> scrobbler.handle_change_status() which happens to come out to 0.5
+</I>&gt;<i> seconds or less usually. Therefore in the end we're adding 0.5 seconds
+</I>&gt;<i> per every status change totaling about half the time of the song when
+</I>&gt;<i> it's done playing.
+</I>&gt;<i>
+</I>&gt;<i> Is that any clearer?
+</I>Well, I thought the original was plenty clear, but I suppose that's
+just me. Yours is fine too.
+&gt;<i> Might be better to have
+</I>&gt;<i>
+</I>&gt;<i> prevstate = self.prevstatus['state'] if self.prevstatus else 'stop'
+</I>&gt;<i>
+</I>&gt;<i> as long as it's just one assignment in the if-else.
+</I>I originally considered that, but I wasn't sure if it was acceptable
+or if Sonata's trying to keep compatibility with older versions of
+Python like some projects. Grepping around I now see there's already a
+few usages of the if-else expression, so I guess I was being overly
+cautious.
+&gt;<i> Does this mean we update the time even when the song is paused? Consider
+</I>&gt;<i> the case where I change the volume while the song is paused. My
+</I>&gt;<i> scrobbler time goes up? Is this a bug currently when the song is stopped
+</I>&gt;<i> and I change the volume?
+</I>No, look down to where it updates scrob_playing_duration. It's only
+updated if the previous state isn't 'pause'. It's there to add
+whatever bit of playtime was left over when it's first paused. Though,
+looking over it again, it should've been &quot;if state != 'pause' or
+prevstate != 'pause'&quot; instead, as just checking prevstate will make it
+not count the first call after it resumes playing.
+&gt;<i> The rest looks fine, but I'm starting to wonder if we should take a
+</I>&gt;<i> different approach.
+</I>&gt;<i>
+</I>&gt;<i> Maybe it would be easier if we passed main's client (the mpd connection)
+</I>&gt;<i> to scrobbler's iterate(), and then did everything we needed in
+</I>&gt;<i> scrobbler.iterate() at half second intervals? We'd basically detect song
+</I>&gt;<i> changes, state changes, and update our elapsed time counter every call.
+</I>It might be easier to pass in the client instead of having a bunch of
+arguments for passing in stuff from it, but there's no need to do it
+at every iterate() call. It really only needs to run when there's a
+state transition, so calling it more often doesn't really offer any
+benefits.
+&gt;<i> Or we could split up scrobbler.handle_change_status() into functions for
+</I>&gt;<i> play, stop, etc. and then call those in main.py when we notice those
+</I>&gt;<i> state changes (lines 1430-1463, etc).
+</I>This is a good idea. You'd also need to move the code that detects
+when the same song is played twice in a row out into main.py and then
+have it call the stop function for the old song and start for the new
+one, as there'd be no way for it to be detected from within
+scrobbler.py with that sort of setup. Though with my patch I was
+really just going for the simplest thing that would work. Most of my
+library is in FLAC and with the most recent mpd update, mpd only seems
+to update the status for FLAC files at about ~1.5 second intervals, so
+it kinda pretty much completely broke last.fm support for me.
+&gt;<i> Either way, we need to do a few things:
+</I>&gt;<i>
+</I>&gt;<i> * Constantly update some clock source (at 0.5 seconds or 1 second or
+</I>&gt;<i> whatever) while the song is playing. In fact, you might not need to
+</I>&gt;<i> update the time more than when the song starts and when it's
+</I>&gt;<i> paused/changed.
+</I>Less &quot;might&quot; and more &quot;definitely&quot;. With the sort of edge-triggered
+setup like above, this comes naturally anyway.
+&gt;<i> * When the song stops, we should post the song if it hasn't been posted
+</I>&gt;<i> already and meets time requirements. Also reset the clock to zero, etc.
+</I>&gt;<i>
+</I>&gt;<i> * If the song changes, we should reset our clock and add the new song to
+</I>&gt;<i> audioscrobbler's cache.
+</I>Yeah, that's about all.
+
+I might hack on the code a bit, try out the edge-triggered idea, it
+shouldn't take too much effort to code. Also, apologies to anyone who
+tries to directly apply the patch in the original post; Gmail saw fit
+to murder it with word wrap. I'll make sure not to use Gmail's web
+client for sending patches in the future.
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001168.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+	<LI>Next message: <A HREF="001170.html">[Sonata-users] [PATCH] Fix bad calculation of played song time for audioscrobbling.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1169">[ date ]</a>
+              <a href="thread.html#1169">[ thread ]</a>
+              <a href="subject.html#1169">[ subject ]</a>
+              <a href="author.html#1169">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

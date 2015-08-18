@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2009-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%0A%09Sonata%09breadcrumbs&In-Reply-To=%3C20090405034021.M97962%40ronin-group.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001008.html">
+   <LINK REL="Next"  HREF="000982.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs</H1>
+    <B>michael.venables</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20feedback%20wanted%3A%20some%20thoughts%20about%0A%09Sonata%09breadcrumbs&In-Reply-To=%3C20090405034021.M97962%40ronin-group.org%3E"
+       TITLE="[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs">michael.venables at ronin-group.org
+       </A><BR>
+    <I>Sun Apr  5 05:41:07 CEST 2009</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="001008.html">[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+</A></li>
+        <LI>Next message: <A HREF="000982.html">[Sonata-users] library search broken in svn1150
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1009">[ date ]</a>
+              <a href="thread.html#1009">[ thread ]</a>
+              <a href="subject.html#1009">[ subject ]</a>
+              <a href="author.html#1009">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 05 Apr 2009 02:18:03 +0300, Tuukka Hastrup wrote
+&gt;<i> Tuukka Hastrup wrote:
+</I>&gt;<i> &gt; Now, how to best implement a dynamic layout like this in pygtk? We need 
+</I>&gt;<i> &gt; a left-aligned (mirror if the language is right-to-left) box layout 
+</I>&gt;<i> &gt; which can do ellipsis in the middle to fit its allocated width, plus 
+</I>&gt;<i> &gt; some constraints:
+</I>&gt;<i> &gt; * the minimum width is condensed root crumb + (condensed parent crumb if 
+</I>&gt;<i> &gt; any) + (ellipsis if any) + (condensed current crumb if any)
+</I>&gt;<i> &gt; * the natural width is all crumbs in full
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Start with the natural layout and continue until we fit in the allocated 
+</I>&gt;<i> &gt; width:
+</I>&gt;<i> &gt; 1. Condense the root crumb.
+</I>&gt;<i> &gt; 2. Replace an increasing amount of the crumbs after the root with the 
+</I>&gt;<i> &gt; ellipsis until right before the parent crumb.
+</I>&gt;<i> &gt; 3. Condense the parent crumb.
+</I>&gt;<i> &gt; 4. Truncate the current crumb to fit.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; At least it doesn't sound impossible...
+</I>&gt;<i> 
+</I>&gt;<i> I've just committed a first version of this to SVN. Known bugs:
+</I>&gt;<i> * When we need to truncate, the three dots &quot;...&quot; don't appear.
+</I>&gt;<i> * The condensing is done crudely, without taking the real icon size 
+</I>&gt;<i> into account.
+</I>&gt;<i> * Doesn't check whether the language is right-to-left.
+</I>
+
+NICE work, Tuukkah!
+
+I noticed a couple of things in playing with the nav system that I wanted to
+mention. Not sure how they relate to your list of bugs, but here they are...
+
+1) The Views button gets truncated. From your previous description, I didn't
+think that was the intention.
+
+2) In your commit, the Views button also has the dropdown &quot;v&quot; from the
+previous version -- is that necessary? I mean, we know it's a button, and as
+soon as you click it, you'll see that it drops down instead of doing anything
+else... Just a thought...
+
+3) With deep paths, the root crumb changes to &quot;...&quot; without being a button.
+
+4) The root crumb doesn't have an icon, but the subdirectory crumbs do. For
+the sake of consistency, shouldn't the root crumb also have an icon? Then when
+you truncate it, it truncates to the icon?
+
+5) Just an idea: Does it make sense to rename the &quot;Filesystem&quot; label to
+&quot;Files&quot;? It's shorter, and accurately expresses the view. (I like &quot;File
+System&quot; as a label, but it really is too long to be practical.)
+
+6) The parent crumb doesn't truncate to the icon alone. It truncates to the
+icon plus about half of the first letter.
+
+7) The current crumb doesn't ever truncate. It's always full size and
+truncates things that precede it.
+
+That's all I noticed.
+
+Keep up the good work!!
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="001008.html">[Sonata-users] feedback wanted: some thoughts about	Sonata	breadcrumbs
+</A></li>
+	<LI>Next message: <A HREF="000982.html">[Sonata-users] library search broken in svn1150
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1009">[ date ]</a>
+              <a href="thread.html#1009">[ thread ]</a>
+              <a href="subject.html#1009">[ subject ]</a>
+              <a href="author.html#1009">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

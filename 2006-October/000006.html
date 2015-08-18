@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Unfocus the volume button
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2006-October/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Unfocus%20the%20volume%20button&In-Reply-To=%3C20061001093842.51371e1d%40lapt0p%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Unfocus the volume button</H1>
+    <B>Mike Massonnet</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Unfocus%20the%20volume%20button&In-Reply-To=%3C20061001093842.51371e1d%40lapt0p%3E"
+       TITLE="[Sonata-users] Unfocus the volume button">mmassonnet at gmail.com
+       </A><BR>
+    <I>Sun Oct  1 09:38:42 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[Sonata-users] Unfocus the volume button
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Sonata-users] Unfocus the volume button
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sat, 30 Sep 2006 18:57:01 -0600 - &quot;Scott Horowitz&quot;
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote :
+
+&gt;<i> On 9/30/06, Mike Massonnet &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">mmassonnet at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Hi Scott,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   I noticed that the volume slider doesn't unfocus so I have looked
+</I>&gt;<i> &gt; around and I finished with the attached patch ;)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   For the record, it changes the volume window from popup to normal.
+</I>&gt;<i> 
+</I>&gt;<i> Hmm.. perhaps it's the terminology, but I'm not understanding the
+</I>&gt;<i> problem. Is it that the volume window sometimes doesn't disappear like
+</I>&gt;<i> it should? Because the volume window currently doesn't get focus, so
+</I>&gt;<i> I'm not sure why it would need to unfocus.
+</I>&gt;<i> 
+</I>
+  It never disappear until I click on the volume button again.  And you
+have already written a callback for the volumewindow to unfocus (oh!
+maybe that's Pygmy :P).  Well, I was wondering why it wasn't working,
+and it appears that is wasn't because the volumewindow is a popup.  I
+changed it to a normal window and it gets the unfocus signal.
+
+&gt;<i> Also, this patch breaks the behavior when you press the volume button
+</I>&gt;<i> to show and then hide the volume window - when trying to hide it, the
+</I>&gt;<i> windows pops back open. But regardless, first try to describe the
+</I>&gt;<i> problem in more detail so I can understand ;)
+</I>&gt;<i> 
+</I>
+  It doesn't behave like you describe here :/  I can still press the
+volumebutton to show/hide the volumewindow.  Furthermore when I focus
+another window, the desktop, or the playlist tab, the volumewindow
+disappears.  That's what I had like to expect.
+
+&gt;<i> Thanks,
+</I>&gt;<i> Scott
+</I>&gt;<i> 
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Regards,
+</I>&gt;<i> &gt; Mike
+</I>
+
+Mike
+-- 
+ <A HREF="http://massonnet.org/">http://massonnet.org/</A> Mike Massonnet (mmassonnet)        _
+                                                       ,_( ))___     (`
+ GnuPG 0--&quot; 0xF8C80F97                                  \'    _ `\    )
+ C4DA 431D 52F9 F930 3E5B  3E3D 546C 89D9 F8C8 0F97     =`---&lt;___/---' 
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20061001/24a89957/attachment.pgp">https://lists.berlios.de/pipermail/sonata-users/attachments/20061001/24a89957/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[Sonata-users] Unfocus the volume button
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Sonata-users] Unfocus the volume button
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20r797%20breaks%20mmkeys%20on%20gnome%20%3C%202.22&In-Reply-To=%3C47F51408.7060600%40gmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000599.html">
+   <LINK REL="Next"  HREF="000601.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22</H1>
+    <B>Florian Zeitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20r797%20breaks%20mmkeys%20on%20gnome%20%3C%202.22&In-Reply-To=%3C47F51408.7060600%40gmx.de%3E"
+       TITLE="[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22">florian.zeitz at gmx.de
+       </A><BR>
+    <I>Thu Apr  3 19:29:44 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000599.html">[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22
+</A></li>
+        <LI>Next message: <A HREF="000601.html">[Sonata-users] Sonata 1.5 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#600">[ date ]</a>
+              <a href="thread.html#600">[ thread ]</a>
+              <a href="subject.html#600">[ subject ]</a>
+              <a href="author.html#600">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Scott Horowitz schrieb:
+&gt;<i> On Thu, Apr 3, 2008 at 6:29 AM, Florian Zeitz &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">florian.zeitz at gmx.de</A>
+</I>&gt;<i> &lt;mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">florian.zeitz at gmx.de</A>&gt;&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i>     the fix for multimedia keys in svn (r797) actually breaks them at least
+</I>&gt;<i>     for Gnome 2.20, because:
+</I>&gt;<i>     &quot;&quot;&quot;
+</I>&gt;<i>     # mmkeys for gnome 2.22+
+</I>&gt;<i>     settingsDaemonObj = bus.get_object('org.gnome.SettingsDaemon',
+</I>&gt;<i>     '/org/gnome/SettingsDaemon/MediaKeys')
+</I>&gt;<i>     settingsDaemonInterface = dbus.Interface(settingsDaemonObj,
+</I>&gt;<i>     'org.gnome.SettingsDaemon.MediaKeys')
+</I>&gt;<i>     &quot;&quot;&quot;
+</I>&gt;<i>     doesn't raise an exception as the code expects.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for pointing this out. Can you see if r798 works for you?
+</I>&gt;<i> 
+</I>&gt;<i> Scott
+</I>&gt;<i> 
+</I>
+That works just fine, thanks for fixing the issue so fast.
+
+Florob
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFH9RP80JXcdjR+9YQRAl1pAJ4mWUrycTU8qYzW/DfJKHsD4zYcDACg2s2E
+BW8GPaaLMobJWZITT8EUl0M=
+=fIHW
+-----END PGP SIGNATURE-----
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000599.html">[Sonata-users] r797 breaks mmkeys on gnome &lt; 2.22
+</A></li>
+	<LI>Next message: <A HREF="000601.html">[Sonata-users] Sonata 1.5 Released
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#600">[ date ]</a>
+              <a href="thread.html#600">[ thread ]</a>
+              <a href="subject.html#600">[ subject ]</a>
+              <a href="author.html#600">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

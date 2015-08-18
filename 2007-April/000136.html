@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Little patch &quot;def browse(self, widget=None,	root='/')&quot;
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-April/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Little%20patch%20%22def%20browse%28self%2C%20widget%3DNone%2C%0A%09root%3D%27/%27%29%22&In-Reply-To=%3Cfc1945b20704121358t6ffcb8day11e3e6de8a18154d%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000134.html">
+   <LINK REL="Next"  HREF="000137.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Little patch &quot;def browse(self, widget=None,	root='/')&quot;</H1>
+    <B>MaTz!</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Little%20patch%20%22def%20browse%28self%2C%20widget%3DNone%2C%0A%09root%3D%27/%27%29%22&In-Reply-To=%3Cfc1945b20704121358t6ffcb8day11e3e6de8a18154d%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Little patch &quot;def browse(self, widget=None,	root='/')&quot;">matz.mz at gmail.com
+       </A><BR>
+    <I>Thu Apr 12 22:58:06 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000134.html">[Sonata-users] ID3 tag whitespace padding displays ugly
+</A></li>
+        <LI>Next message: <A HREF="000137.html">[Sonata-users] Little patch &quot;def browse(self, widget=None,	root='/')&quot;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have modified &quot;def browse(self, widget=None, root='/')&quot; to show the view
+of  album list  in a different way.
+
+With this little patch the entries in the album list have this format
+&quot;$artist - $album&quot;, if the album has different $artist it will be showed as
+&quot;V.A&quot;.
+The list is sorted by $artist and $album.
+
+                elif self.view == self.VIEW_ALBUM:
+                        items = []
+                        list_order = []
+                        if self.root == '/':
+                                if self.albums_root is None:
+                                        self.albums_root = []
+
+                                        for item in self.conn.do.list
+('album'):
+                                                self.albums_root.append(
+item.album)
+                                        (self.albums_root, i) =
+remove_list_duplicates(self.albums_root, [], False)
+                                        self.albums_root.sort(locale.strcoll
+)
+
+                                for item in self.albums_root:
+                                        count = 0
+                                        for i in self.browse_search_album
+(item):
+                                                current = getattr(i,
+'artist', '0')
+                                                if count == 0:
+                                                        prec = current
+                                                        count = 1
+                                                if current != prec:
+                                                        current = &quot;V.A.&quot;
+                                                        break
+                                        list_order.append((current + &quot; - &quot; +
+item,item))
+                                list_order.sort()
+                                for item_html,item in list_order:
+                                        self.browserdata.append(['album',item,
+escape_html(item_html)])
+                        else:
+                                self.browserdata.append([gtk.STOCK_HARDDISK,
+'/', '/'])
+                                self.browserdata.append([gtk.STOCK_OPEN,
+'..', '..'])
+                                for item in self.browse_search_album(root):
+                                        self.browserdata.append(['sonata',
+item.file, self.parse_formatting(self.libraryformat, item, True)])
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20070412/f9fd679c/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20070412/f9fd679c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000134.html">[Sonata-users] ID3 tag whitespace padding displays ugly
+</A></li>
+	<LI>Next message: <A HREF="000137.html">[Sonata-users] Little patch &quot;def browse(self, widget=None,	root='/')&quot;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#136">[ date ]</a>
+              <a href="thread.html#136">[ thread ]</a>
+              <a href="subject.html#136">[ subject ]</a>
+              <a href="author.html#136">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

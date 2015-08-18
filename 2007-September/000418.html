@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] No music with etitable tags found
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20No%20music%20with%20etitable%20tags%20found&In-Reply-To=%3C20070918061911.7D1F050464%40mail.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000417.html">
+   <LINK REL="Next"  HREF="000419.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] No music with etitable tags found</H1>
+    <B>Pavel Dobe&#353;</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20No%20music%20with%20etitable%20tags%20found&In-Reply-To=%3C20070918061911.7D1F050464%40mail.berlios.de%3E"
+       TITLE="[Sonata-users] No music with etitable tags found">dobes at lnx.cz
+       </A><BR>
+    <I>Tue Sep 18 08:22:35 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000417.html">[Sonata-users] No music with etitable tags found
+</A></li>
+        <LI>Next message: <A HREF="000419.html">[Sonata-users] No music with etitable tags found
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 17 Sep 2007 20:28:18 -0600
+&quot;Scott Horowitz&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">stonecrest at gmail.com</A>&gt; wrote:
+
+&gt;<i> On 9/17/07, Pavel Dobe&#353; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">dobes at lnx.cz</A>&gt; wrote:
+</I>&gt;<i> &gt; I have MP3 and OGG files in my mpd directory. All dirs and files are owned by me and mpd is runnig on localhost.
+</I>&gt;<i> 
+</I>&gt;<i> Hmm. Here's a very simple patch against 1.2.2. After you apply it, run
+</I>&gt;<i> sonata from a terminal and try to edit some tags. It will print out
+</I>&gt;<i> the paths of the files that Sonata is trying to edit. Lets see if
+</I>&gt;<i> there's any fishy there..
+</I>&gt;<i> 
+</I>
+Yes it works!
+
+trying: /home/pavel/media/audio/mp3/mp3/Red Hot Chilli Peppers/By the
+way/07 - Can't stop.mp3
+
+but right dir shall be /home/pavel/media/audio/mp3/Red Hot Chilli
+Peppers/By the way/07 - Can't stop.mp3
+
+So, the problem was that I have all music on /mnt/data/mp3 and
+in /var/lib/mpd/music I have symlink mp3 -&gt; /mnt/data/mp3.
+
+Sonata has configured symlink /home/pavel/media/audio/mp3 -&gt; /mnt/data/mp3 but it expected symlink to /var/lib/mpd/music directory (or similar).
+
+Sorry for wasting you time. Is possible to add message for taglib's file not found errors? This was really stupid configure error :-/ Once again sorry.
+
+Thanks
+Pavel
+
+&gt;<i> Scott
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000417.html">[Sonata-users] No music with etitable tags found
+</A></li>
+	<LI>Next message: <A HREF="000419.html">[Sonata-users] No music with etitable tags found
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#418">[ date ]</a>
+              <a href="thread.html#418">[ thread ]</a>
+              <a href="subject.html#418">[ subject ]</a>
+              <a href="author.html#418">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>

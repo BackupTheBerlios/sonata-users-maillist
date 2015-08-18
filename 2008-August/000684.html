@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Sonata-users] Disconnect/reconnect doesn't
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/sonata-users/2008-August/index.html" >
+   <LINK REL="made" HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Disconnect/reconnect%20doesn%27t&In-Reply-To=%3C35a6f8e30808190917j1abcd726r470d423741217617%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000683.html">
+   <LINK REL="Next"  HREF="000685.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Sonata-users] Disconnect/reconnect doesn't</H1>
+    <B>Scott Horowitz</B> 
+    <A HREF="mailto:sonata-users%40lists.berlios.de?Subject=Re%3A%20%5BSonata-users%5D%20Disconnect/reconnect%20doesn%27t&In-Reply-To=%3C35a6f8e30808190917j1abcd726r470d423741217617%40mail.gmail.com%3E"
+       TITLE="[Sonata-users] Disconnect/reconnect doesn't">stonecrest at gmail.com
+       </A><BR>
+    <I>Tue Aug 19 18:17:59 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000683.html">[Sonata-users] Disconnect/reconnect doesn't
+</A></li>
+        <LI>Next message: <A HREF="000685.html">[Sonata-users] Disconnect/reconnect doesn't
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#684">[ date ]</a>
+              <a href="thread.html#684">[ thread ]</a>
+              <a href="subject.html#684">[ subject ]</a>
+              <a href="author.html#684">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Aug 18, 2008 at 3:53 PM, Steve Greenland &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/sonata-users">steveg at moregruel.net</A>&gt;wrote:
+
+&gt;<i> If mpd restarts, or the mpd host restarts, or the network connection is
+</I>&gt;<i> dropped, and Sonata (running on a different machine) tries to access mpd
+</I>&gt;<i> during the outage, sonata more-or-less-permanently loses the connection
+</I>&gt;<i> until restarted. The progress bar shows &quot;No Read Permission&quot;. The
+</I>&gt;<i> library disappears completely. If I've run Sonata in a terminal window,
+</I>&gt;<i> I get a traceback ending in &quot;socket.error: (32, 'Broken pipe')&quot;, which
+</I>&gt;<i> is fair enough.
+</I>&gt;<i>
+</I>&gt;<i> I wrote &quot;more-or-less-permanently&quot; because sometimes I *can* re-connect
+</I>&gt;<i> without restarting. In particular, everytime I've caused this
+</I>&gt;<i> deliberately (by stopping and restarting mpd), I've been able to select
+</I>&gt;<i> &quot;Disconnect&quot; and &quot;Reconnect&quot; successfully. But othertimes, repeated
+</I>&gt;<i> disconnect/reconnect cycles have failed to reestablish the connection.
+</I>&gt;<i>
+</I>&gt;<i> My guess would be that the whether or not dis-/re- works depends on
+</I>&gt;<i> exactly what Sonata was doing when it trips the exception, but I don't
+</I>&gt;<i> have any traces to prove it. If you've got any debugging suggestions,
+</I>&gt;<i> I'd be glad to try them.
+</I>
+
+Hi Steve,
+
+Any chance you can try sonata svn? I recently committed a fix for a similar
+situation (where an external hard drive had spun down), and this may also
+improve your situation as well.
+
+Scott
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/sonata-users/attachments/20080819/e18086e8/attachment.html">https://lists.berlios.de/pipermail/sonata-users/attachments/20080819/e18086e8/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000683.html">[Sonata-users] Disconnect/reconnect doesn't
+</A></li>
+	<LI>Next message: <A HREF="000685.html">[Sonata-users] Disconnect/reconnect doesn't
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#684">[ date ]</a>
+              <a href="thread.html#684">[ thread ]</a>
+              <a href="subject.html#684">[ subject ]</a>
+              <a href="author.html#684">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/sonata-users">More information about the Sonata-users
+mailing list</a><br>
+</body></html>
